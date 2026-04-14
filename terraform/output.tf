@@ -1,15 +1,20 @@
 # outputs.tf
 output "bucket_name" {
-  value       = aws_s3_bucket.first.id
-  description = "Nom du bucket S3 cree"
+  value       = aws_s3_bucket.s3_bucket.id
+  description = "Nom du bucket S3"
 }
 
 output "bucket_arn" {
-  value       = aws_s3_bucket.first.arn
+  value       = aws_s3_bucket.s3_bucket.arn
   description = "ARN complet du bucket"
 }
 
-output "account_id" {
-  value       = data.aws_caller_identity.current.account_id
-  description = "ID du compte AWS"
+output "bucket_region" {
+  value       = aws_s3_bucket.s3_bucket.region
+  description = "Region AWS du bucket"
+}
+
+output "versioning_status" {
+  value       = aws_s3_bucket_versioning.main.versioning_configuration[0].status
+  description = "Statut du versioning"
 }
