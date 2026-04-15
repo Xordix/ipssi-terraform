@@ -20,9 +20,10 @@ provider "aws" {
   default_tags {
     tags = {
       Project     = "formation-terraform"
-      Module      = "05-premier-projet"
+      Module      = "tp01-s3-secure"
       ManagedBy   = "Terraform"
       Environment = "dev"
+      CostCenter  = "formation"
     }
   }
 }
