@@ -23,3 +23,19 @@ variable "owner" {
     error_message = "owner doit etre un email valide."
   }
 }
+
+variable "tag" {
+  type = map(string)
+  default = {
+    Owner      = "unknown"
+    ManagedBy  = "terraform"
+    CostCenter = "formation"
+  }
+}
+
+variable "project" {
+  type        = string
+  description = "Sujet du projet"
+
+  default = "formation-terraform"
+}

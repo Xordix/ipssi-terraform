@@ -8,16 +8,22 @@ resource "random_pet" "bucket_suffix" {
 }
 
 locals {
-  bucket_name = "${var.bucket_prefix}-${data.aws_caller_identity.current.account_id}-${random_pet.bucket_suffix.id}"
+  name_prefix = "${var.project}-${var.environment}"
+  bucket_name = "${local.name_prefix}-${data.aws_caller_identity.current.account_id}-${random_pet.bucket_suffix.id}"
 }
 
 # Le bucket S3
 resource "aws_s3_bucket" "s3_bucket" {
   bucket = local.bucket_name
 
-  tags = {
-    Owner = var.owner
-  }
+  tags = merge(
+    var.tag,
+    {
+      Name        = local.name_prefix
+      Environment = var.environment
+      Project     = var.project
+    }
+  )
 }
 
 resource "aws_s3_bucket_versioning" "main" {

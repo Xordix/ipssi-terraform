@@ -18,3 +18,10 @@ output "versioning_status" {
   value       = aws_s3_bucket_versioning.main.versioning_configuration[0].status
   description = "Statut du versioning"
 }
+
+output "aws_region" {
+  value       = data.aws_region.current.name
+  description = "region aws"
+}
+
+data "aws_region" "current" {}
