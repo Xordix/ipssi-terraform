@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP05 — Projet final en équipe : Nextcloud sur AWS</title>
+    
+    
+    
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');:root{--color-primary:#20a7c9;--color-primary-dark:#1a8ba8;--color-primary-light:#e0f4f8;--color-primary-gradient:linear-gradient(135deg,#20a7c9 0%,#1a8ba8 100%);--color-accent:#ff7f44;--color-accent-light:#fff4ef;--color-success:#22c55e;--color-success-light:#dcfce7;--color-warning:#eab308;--color-warning-light:#fef9c3;--color-danger:#ef4444;--color-danger-light:#fee2e2;--color-info:#3b82f6;--color-info-light:#dbeafe;--gray-50:#fafafa;--gray-100:#f4f4f5;--gray-200:#e4e4e7;--gray-300:#d4d4d8;--gray-400:#a1a1aa;--gray-500:#71717a;--gray-600:#52525b;--gray-700:#3f3f46;--gray-800:#27272a;--gray-900:#18181b;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Consolas',monospace;--content-max-width:80%;--content-padding:2.5rem;--radius-sm:6px;--radius-md:10px;--radius-lg:16px;--radius-xl:20px;--shadow-sm:0 1px 2px rgba(0,0,0,0.04);--shadow-md:0 4px 12px rgba(0,0,0,0.08);--shadow-lg:0 8px 30px rgba(0,0,0,0.12);--shadow-card:0 2px 8px rgba(0,0,0,0.06),0 0 1px rgba(0,0,0,0.1)}*,*::before,*::after{box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}body{font-family:var(--font-sans);font-size:1rem;line-height:1.75;color:var(--gray-800);background:linear-gradient(180deg,var(--gray-100) 0%,var(--gray-50) 100%);min-height:100vh;margin:0;padding:2.5rem 1rem}.markdown-body,article,main{max-width:var(--content-max-width);margin:0 auto;background:white;padding:var(--content-padding);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);border:1px solid var(--gray-200)}h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3;color:var(--gray-900);margin-top:2.5rem;margin-bottom:1rem}h1{font-size:2.25rem;font-weight:700;margin-top:0;padding-bottom:1rem;border-bottom:none;position:relative;color:var(--gray-900)}h1::after{content:'';position:absolute;bottom:0;left:0;width:80px;height:4px;background:var(--color-primary-gradient);border-radius:2px}h2{font-size:1.5rem;margin-top:3rem;padding:1rem 1.25rem;background:var(--gray-50);border-left:4px solid var(--color-primary);border-radius:0 var(--radius-md) var(--radius-md) 0;color:var(--gray-800)}h3{font-size:1.25rem;color:var(--gray-800);display:flex;align-items:center;gap:0.5rem}h3::before{content:'';width:8px;height:8px;background:var(--color-primary);border-radius:50%;flex-shrink:0}h4{font-size:1.1rem;color:var(--gray-700);border-bottom:1px dashed var(--gray-300);padding-bottom:0.5rem}h5,h6{font-size:0.9rem;color:var(--gray-600);text-transform:uppercase;letter-spacing:0.08em;font-weight:600}p{margin-bottom:1.25rem}strong,b{font-weight:600;color:var(--gray-900)}a{color:var(--color-primary);text-decoration:none;font-weight:500;transition:all 0.2s;border-bottom:1px solid transparent}a:hover{color:var(--color-primary-dark);border-bottom-color:var(--color-primary)}mark{background:linear-gradient(120deg,#fef08a 0%,#fde047 100%);padding:0.1em 0.4em;border-radius:4px}hr{border:none;height:1px;background:var(--gray-200);margin:3rem 0;position:relative}hr::before{content:'◆';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:white;color:var(--color-primary);padding:0 1rem;font-size:0.8rem}ul,ol{margin-bottom:1.25rem;padding-left:1.5rem}li{margin-bottom:0.5rem;position:relative}li > ul,li > ol{margin-top:0.5rem;margin-bottom:0}ul{list-style-type:none}ul > li::before{content:'▸';color:var(--color-primary);font-weight:bold;position:absolute;left:-1.25rem}ul ul > li::before{content:'○';font-size:0.7em}ol{list-style-type:decimal}img{display:block;max-width:100%;max-height:500px;height:auto;margin:2rem auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);border:1px solid var(--gray-200);transition:transform 0.2s,box-shadow 0.2s;object-fit:contain}img:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}img[src*="screenshot"],img[src*="superset.apache.org"]{max-height:400px;width:auto;object-fit:contain}img[src*="images/"]{max-height:450px;width:auto;object-fit:contain}h1 img,h2 img,h3 img,h4 img,h5 img,h6 img{display:inline-block;margin:0 0.5rem 0 0;vertical-align:middle;max-height:1.5em;border-radius:var(--radius-sm);box-shadow:none;border:none}td img,th img{display:inline-block;margin:0;vertical-align:middle;max-height:2em;border-radius:var(--radius-sm);box-shadow:none;border:none}figure{margin:2rem 0;text-align:center;background:var(--gray-50);padding:1.5rem;border-radius:var(--radius-lg);border:1px solid var(--gray-200)}figure img{margin:0 auto 1rem;box-shadow:none;border:none}figcaption{font-size:0.875rem;color:var(--gray-500);font-style:italic}code:not(pre code){font-family:var(--font-mono);font-size:0.85em;background:#fef3c7;color:#92400e;padding:0.2em 0.5em;border-radius:var(--radius-sm);font-weight:600;border:1px solid #fcd34d}pre code{background:transparent;color:inherit;padding:0;border:none;font-weight:inherit}pre{font-family:var(--font-mono);font-size:0.875rem;line-height:1.6;background:var(--gray-900);color:#e4e4e7;padding:1.5rem;border-radius:var(--radius-lg);overflow-x:auto;margin:1.5rem 0;box-shadow:var(--shadow-md);border:1px solid var(--gray-800);position:relative}pre::before{content:'';position:absolute;top:12px;left:16px;width:12px;height:12px;background:#ff5f56;border-radius:50%;box-shadow:20px 0 0 #ffbd2e,40px 0 0 #27ca40}pre code{background:transparent;color:inherit;padding:0;font-size:inherit;font-weight:normal}table{width:100%;border-collapse:separate;border-spacing:0;margin:1.5rem 0;font-size:0.9375rem;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);border:1px solid var(--gray-200)}thead{background:var(--color-primary-gradient);color:white}th{font-weight:600;text-align:left;padding:1rem 1.25rem;font-size:0.8125rem;text-transform:uppercase;letter-spacing:0.05em}td{padding:0.875rem 1.25rem;border-bottom:1px solid var(--gray-100);vertical-align:top}tbody tr:last-child td{border-bottom:none}tbody tr:nth-child(even){background:var(--gray-50)}tbody tr{transition:background 0.15s}tbody tr:hover{background:var(--color-primary-light)}blockquote{margin:2rem 0;padding:1.5rem 1.5rem 1.5rem 2rem;border-left:4px solid var(--color-primary);background:linear-gradient(135deg,var(--gray-50) 0%,white 100%);border-radius:0 var(--radius-lg) var(--radius-lg) 0;color:var(--gray-700);box-shadow:var(--shadow-sm);font-style:italic;position:relative}blockquote::before{content:'"';position:absolute;top:-10px;left:15px;font-size:4rem;color:var(--color-primary);opacity:0.2;font-family:Georgia,serif;line-height:1}blockquote p:last-child{margin-bottom:0}details{margin:1.5rem 0;padding:0;background:white;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);transition:box-shadow 0.2s}details:hover{box-shadow:var(--shadow-md)}details[open]{box-shadow:var(--shadow-md);padding:1rem 1.25rem}details[open] > summary{margin:-1rem -1.25rem 1rem -1.25rem}details > .highlight,details > pre{margin-left:-1.25rem;margin-right:-1.25rem;border-radius:0}details > .highlight pre{border-radius:0;margin:0}details > .highlight:last-child,details > pre:last-child{margin-bottom:-1rem}summary{font-weight:600;cursor:pointer;padding:1rem 1.25rem;list-style:none;display:flex;align-items:center;gap:0.75rem;color:var(--gray-800);background:var(--gray-50);border-bottom:1px solid transparent;transition:all 0.2s}details[open] summary{border-bottom-color:var(--gray-200);background:var(--color-primary-light);color:var(--color-primary-dark)}summary::-webkit-details-marker{display:none}summary::before{content:'▶';font-size:0.65rem;color:var(--color-primary);transition:transform 0.2s;flex-shrink:0}details[open] summary::before{transform:rotate(90deg)}summary:hover{background:var(--gray-100)}.mermaid,pre.mermaid{background:white;padding:2rem;margin:2rem 0;border-radius:var(--radius-lg);border:1px solid var(--gray-200);text-align:center;overflow-x:auto;box-shadow:var(--shadow-card)}.mermaid::before{display:none}.mermaid svg{max-width:100%;height:auto}.note,.info,.tip{padding:1.25rem;margin:1.5rem 0;border-radius:var(--radius-lg);border-left:4px solid var(--color-info);background:var(--color-info-light);box-shadow:var(--shadow-sm)}.warning,.attention{border-left-color:var(--color-warning);background:var(--color-warning-light)}.danger,.error{border-left-color:var(--color-danger);background:var(--color-danger-light)}.success{border-left-color:var(--color-success);background:var(--color-success-light)}h2 + p::first-letter{font-size:1.5em;font-weight:600;color:var(--color-primary);float:left;margin-right:0.1em;line-height:1}@media print{body{background:white;padding:0}.markdown-body,article,main{box-shadow:none;border:none;padding:0;max-width:100%}pre{background:var(--gray-100) !important;color:var(--gray-900) !important;box-shadow:none;border:1px solid var(--gray-300)}pre::before{display:none}a{color:var(--gray-900)}img{max-height:280px;page-break-inside:avoid;box-shadow:none}h1,h2,h3{page-break-after:avoid}table,pre,blockquote,details{page-break-inside:avoid}h2{background:none;padding-left:0}}@media (max-width:768px){body{padding:1rem 0.5rem}.markdown-body,article,main{padding:1.5rem;border-radius:var(--radius-lg)}h1{font-size:1.75rem}h2{font-size:1.25rem;padding:0.75rem 1rem}h3{font-size:1.1rem}table{display:block;overflow-x:auto}pre{padding:1rem;font-size:0.8rem}img{max-height:250px}blockquote::before{display:none}}img[src*="superset-logo"]{max-height:80px;margin:0 0 2rem 0;box-shadow:none;border:none}img[src*="superset-logo"]:hover{transform:none}.mermaid-wrapper{position:relative;display:inline-block;width:100%}.mermaid-expand-btn{position:absolute;top:12px;right:12px;width:36px;height:36px;border:none;border-radius:var(--radius-md);background:rgba(255,255,255,0.9);color:var(--gray-600);font-size:1.2rem;cursor:pointer;opacity:0;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);z-index:10}.mermaid-wrapper:hover .mermaid-expand-btn{opacity:1}.mermaid-expand-btn:hover{background:var(--color-primary);color:white;transform:scale(1.1)}.mermaid-lightbox{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;display:none}.mermaid-lightbox.active{display:flex;align-items:center;justify-content:center}.mermaid-lightbox-backdrop{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px)}.mermaid-lightbox-container{position:relative;width:100%;height:100%;overflow:hidden;cursor:grab;display:flex;align-items:center;justify-content:center}.mermaid-lightbox-content{transform-origin:center center;transition:transform 0.1s ease-out;padding:40px}.mermaid-lightbox-content svg{max-width:none !important;max-height:none !important;width:80vw !important;height:auto !important;min-width:800px;background:white;border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-lg)}.mermaid-lightbox.active svg{font-size:12px !important}.mermaid-lightbox.active svg text{white-space:nowrap !important}.mermaid-lightbox.active svg foreignObject{overflow:visible !important;text-align:left !important}.mermaid-lightbox.active svg foreignObject *{white-space:nowrap !important;overflow:visible !important;text-overflow:clip !important;width:auto !important;max-width:none !important;min-width:0 !important}.mermaid-lightbox-controls{position:absolute;top:20px;right:20px;display:flex;gap:8px;z-index:10001}.mermaid-lb-btn{width:44px;height:44px;border:none;border-radius:var(--radius-md);background:rgba(255,255,255,0.95);color:var(--gray-800);font-size:1.1rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;box-shadow:var(--shadow-md)}.mermaid-lb-zoom-reset{width:auto;padding:0 16px;font-size:0.9rem}.mermaid-lb-btn:hover{background:var(--color-primary);color:white;transform:scale(1.05)}.mermaid-lb-close:hover{background:#ef4444;color:white}.mermaid-lightbox::after{content:'Molette:zoom • Glisser:déplacer • Échap:fermer';position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.7);font-size:0.85rem;font-weight:500;background:rgba(0,0,0,0.5);padding:10px 20px;border-radius:var(--radius-lg)}
+    </style>
+    
+    <style>
+.mermaid-container{background:white;border:1px solid var(--color-gray-200);border-radius:var(--radius-lg);padding:var(--space-md);display:flex;justify-content:center;align-items:center;overflow:auto;flex:1;min-height:120px;max-height:600px;max-width:100%;width:100%}.mermaid-container--full{flex:1;min-height:0}.mermaid-container--compact{min-height:100px;max-height:350px;flex:0 0 auto}.mermaid-container--small{max-height:300px}.mermaid-container--medium{max-height:450px}.mermaid-container--large{max-height:700px}.mermaid-container--contained{overflow:hidden}.mermaid-container--contained .mermaid svg{max-height:100% !important}.mermaid,pre.mermaid{font-family:var(--font-display,'Inter',sans-serif);width:100%;display:flex;justify-content:center;align-items:center;background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:24px;margin:16px 0;text-align:center;max-height:60vh;overflow:hidden}.mermaid::before,.mermaid::after{display:none}.mermaid svg{max-width:100%;max-height:60vh;height:auto;width:auto}.mermaid svg[aria-roledescription="gantt"]{max-width:none !important;width:100% !important;min-width:800px !important;max-height:none !important;height:auto !important;flex:1 1 auto !important}.mermaid:has(svg[aria-roledescription="gantt"]){display:block !important;max-height:none !important;overflow-x:auto !important;overflow-y:visible !important;min-width:0 !important}.mermaid-container--scroll{overflow:auto}.mermaid .node rect,.mermaid .node polygon,.mermaid .node circle{stroke-width:2px !important}.mermaid .edgePath .path{stroke-width:2px !important}.mermaid .label{font-family:var(--font-display) !important;font-size:12px !important;overflow:visible !important}.mermaid .nodeLabel{font-size:12px !important;line-height:1.3 !important;overflow:visible !important;white-space:normal !important;text-overflow:clip !important}.mermaid .edgeLabel{font-size:11px !important;overflow:visible !important}.mermaid .node rect,.mermaid .node polygon{overflow:visible !important}.mermaid .cluster rect,.mermaid svg .cluster rect{rx:8px !important;ry:8px !important}.mermaid .cluster-label{font-size:14px !important;font-weight:700 !important;dominant-baseline:text-before-edge !important}.mermaid .cluster-label foreignObject{overflow:visible !important}.mermaid .cluster-label foreignObject div,.mermaid .cluster-label foreignObject p,.mermaid .cluster-label foreignObject span{padding-bottom:8px !important;margin-bottom:4px !important;line-height:1.4 !important}.mermaid .cluster .nodeLabel{margin-top:4px !important}.mermaid .cluster rect{fill:#f8fafc !important;stroke:#cbd5e1 !important;stroke-width:2px !important}.mermaid .cluster-label text,.mermaid .cluster-label tspan,.mermaid svg .cluster-label text{fill:#1e293b !important;color:#1e293b !important;font-weight:700 !important}.mermaid .actor,.mermaid svg .actor,.mermaid svg rect.actor,.mermaid .actor-top,.mermaid .actor-bottom,.mermaid svg .actor-top,.mermaid svg .actor-bottom{fill:#1e3a5f !important;stroke:#0c4a6e !important;stroke-width:2px !important}.mermaid .actor-man,.mermaid text.actor,.mermaid svg text.actor,.mermaid svg .actor-man{fill:#ffffff !important;color:#ffffff !important;font-size:14px !important;font-weight:600 !important}.mermaid text.actor tspan,.mermaid svg text.actor tspan,.mermaid .actor-man tspan{fill:#ffffff !important;color:#ffffff !important}.mermaid .actor-line,.mermaid svg .actor-line,.mermaid svg line.actor-line{stroke:#64748b !important;stroke-width:1.5px !important;stroke-dasharray:4,4 !important}.mermaid .messageLine0,.mermaid .messageLine1,.mermaid svg .messageLine0,.mermaid svg .messageLine1,.mermaid svg line.messageLine0,.mermaid svg line.messageLine1{stroke:#1e293b !important;stroke-width:2px !important}.mermaid .arrowhead,.mermaid svg .arrowhead{fill:#1e293b !important;stroke:#1e293b !important}.mermaid #arrowhead path,.mermaid marker path,.mermaid svg marker path,.mermaid svg #arrowhead path{fill:#1e293b !important;stroke:#1e293b !important}.mermaid .messageText,.mermaid svg .messageText,.mermaid svg text.messageText{fill:#0f172a !important;color:#0f172a !important;font-size:13px !important;font-weight:600 !important;stroke:none !important}.mermaid .messageText tspan,.mermaid svg .messageText tspan{fill:#0f172a !important;color:#0f172a !important}.mermaid .activation0,.mermaid .activation1,.mermaid .activation2,.mermaid svg .activation0,.mermaid svg .activation1,.mermaid svg .activation2{fill:#dbeafe !important;stroke:#3b82f6 !important;stroke-width:2px !important}.mermaid .loopLine,.mermaid svg .loopLine{stroke:#64748b !important;stroke-width:2px !important}.mermaid rect.loopBox,.mermaid .loopBox,.mermaid svg .loopBox{fill:#f8fafc !important;stroke:#64748b !important;stroke-width:1.5px !important}.mermaid .loopText,.mermaid .loopText tspan,.mermaid svg .loopText,.mermaid svg .loopText tspan{fill:#1e293b !important;color:#1e293b !important;font-size:12px !important;font-weight:700 !important}.mermaid .labelBox,.mermaid svg .labelBox{fill:#dcfce7 !important;stroke:#22c55e !important;stroke-width:1.5px !important}.mermaid .labelText,.mermaid .labelText tspan,.mermaid svg .labelText,.mermaid svg .labelText tspan{fill:#14532d !important;color:#14532d !important;font-size:12px !important;font-weight:700 !important}.mermaid .note,.mermaid svg .note,.mermaid rect.note{fill:#fef9c3 !important;stroke:#ca8a04 !important;stroke-width:2px !important}.mermaid .noteText,.mermaid .noteText tspan,.mermaid svg .noteText,.mermaid svg .noteText tspan{fill:#713f12 !important;color:#713f12 !important;font-size:12px !important;font-weight:500 !important}.mermaid .sequenceNumber,.mermaid svg .sequenceNumber{fill:#ffffff !important;color:#ffffff !important}.mermaid .sequenceNumber-rect,.mermaid svg rect.sequenceNumber-rect{fill:#374151 !important;stroke:#1f2937 !important}.mermaid .er.entityBox,.mermaid .entityBox,.mermaid svg .er.entityBox,.mermaid svg .entityBox,.mermaid svg rect.er{fill:#dbeafe !important;stroke:#3b82f6 !important;stroke-width:2px !important}.mermaid .er.entityLabel,.mermaid .entityLabel,.mermaid svg .er.entityLabel,.mermaid svg .entityLabel,.mermaid svg text.er{fill:#1e3a8a !important;color:#1e3a8a !important;font-weight:600 !important}.mermaid .er.attributeBoxEven,.mermaid svg .er.attributeBoxEven{fill:#f8fafc !important;stroke:#cbd5e1 !important}.mermaid .er.attributeBoxOdd,.mermaid svg .er.attributeBoxOdd{fill:#f1f5f9 !important;stroke:#cbd5e1 !important}.mermaid .er text,.mermaid svg g.er text,.mermaid svg .erDiagram text{fill:#1e293b !important;color:#1e293b !important}.mermaid .er.relationshipLine,.mermaid svg .er.relationshipLine{stroke:#64748b !important;stroke-width:1.5px !important}.mermaid .er.relationshipLabel,.mermaid svg .er.relationshipLabel{fill:#475569 !important}.mermaid .mindmap-node rect,.mermaid .mindmap-node circle,.mermaid .mindmap-node ellipse,.mermaid .mindmap-node polygon,.mermaid svg .mindmap-node rect,.mermaid svg .mindmap-node circle,.mermaid svg .mindmap-node ellipse{stroke-width:2px !important}.mermaid .mindmap-node:nth-child(7n+1) rect,.mermaid .mindmap-node:nth-child(7n+1) circle,.mermaid .mindmap-node:nth-child(7n+1) ellipse{fill:#dbeafe !important;stroke:#3b82f6 !important}.mermaid .mindmap-node:nth-child(7n+1) text,.mermaid .mindmap-node:nth-child(7n+1) .nodeLabel{fill:#1e3a8a !important;color:#1e3a8a !important}.mermaid .mindmap-node:nth-child(7n+2) rect,.mermaid .mindmap-node:nth-child(7n+2) circle,.mermaid .mindmap-node:nth-child(7n+2) ellipse{fill:#dcfce7 !important;stroke:#22c55e !important}.mermaid .mindmap-node:nth-child(7n+2) text,.mermaid .mindmap-node:nth-child(7n+2) .nodeLabel{fill:#14532d !important;color:#14532d !important}.mermaid .mindmap-node:nth-child(7n+3) rect,.mermaid .mindmap-node:nth-child(7n+3) circle,.mermaid .mindmap-node:nth-child(7n+3) ellipse{fill:#fef9c3 !important;stroke:#eab308 !important}.mermaid .mindmap-node:nth-child(7n+3) text,.mermaid .mindmap-node:nth-child(7n+3) .nodeLabel{fill:#713f12 !important;color:#713f12 !important}.mermaid .mindmap-node:nth-child(7n+4) rect,.mermaid .mindmap-node:nth-child(7n+4) circle,.mermaid .mindmap-node:nth-child(7n+4) ellipse{fill:#fce7f3 !important;stroke:#ec4899 !important}.mermaid .mindmap-node:nth-child(7n+4) text,.mermaid .mindmap-node:nth-child(7n+4) .nodeLabel{fill:#831843 !important;color:#831843 !important}.mermaid .mindmap-node:nth-child(7n+5) rect,.mermaid .mindmap-node:nth-child(7n+5) circle,.mermaid .mindmap-node:nth-child(7n+5) ellipse{fill:#f3e8ff !important;stroke:#a855f7 !important}.mermaid .mindmap-node:nth-child(7n+5) text,.mermaid .mindmap-node:nth-child(7n+5) .nodeLabel{fill:#581c87 !important;color:#581c87 !important}.mermaid .mindmap-node:nth-child(7n+6) rect,.mermaid .mindmap-node:nth-child(7n+6) circle,.mermaid .mindmap-node:nth-child(7n+6) ellipse{fill:#cffafe !important;stroke:#06b6d4 !important}.mermaid .mindmap-node:nth-child(7n+6) text,.mermaid .mindmap-node:nth-child(7n+6) .nodeLabel{fill:#164e63 !important;color:#164e63 !important}.mermaid .mindmap-node:nth-child(7n) rect,.mermaid .mindmap-node:nth-child(7n) circle,.mermaid .mindmap-node:nth-child(7n) ellipse{fill:#ffedd5 !important;stroke:#f97316 !important}.mermaid .mindmap-node:nth-child(7n) text,.mermaid .mindmap-node:nth-child(7n) .nodeLabel{fill:#7c2d12 !important;color:#7c2d12 !important}.mermaid .mindmap text,.mermaid svg [class*="mindmap"] text{font-weight:500 !important}.mermaid .mindmap-edge,.mermaid svg .mindmap-edge{stroke:#64748b !important;stroke-width:1.5px !important}.mermaid[data-processed="true"]{min-height:0 !important}.diagram{background:var(--color-gray-50);border:2px dashed var(--color-gray-300);border-radius:var(--radius-lg);padding:var(--space-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:150px;flex:1}.diagram--placeholder{background:linear-gradient(135deg,var(--color-gray-50) 0%,var(--color-gray-100) 100%)}.diagram .icon{font-size:48px;margin-bottom:var(--space-sm);opacity:0.6}.diagram .text{font-size:14px;color:var(--color-gray-500);font-weight:500}.arch-diagram{display:flex;flex-direction:column;gap:var(--space-md);width:100%}.arch-layer{display:flex;gap:var(--space-sm);justify-content:center}.arch-box{background:var(--color-gray-100);border:2px solid var(--color-gray-300);border-radius:var(--radius-md);padding:var(--space-sm) var(--space-md);font-size:12px;font-weight:500;color:var(--color-gray-700);text-align:center;min-width:100px}.arch-box--primary{background:rgba(14,165,233,0.15);border-color:var(--color-primary);color:var(--color-primary-dark)}.arch-box--accent{background:rgba(249,115,22,0.15);border-color:var(--color-accent);color:#c2410c}.arch-box--success{background:rgba(16,185,129,0.15);border-color:var(--color-success);color:#047857}.arch-box--info{background:rgba(99,102,241,0.15);border-color:var(--color-info);color:#4338ca}.arch-box--dark{background:var(--color-gray-800);border-color:var(--color-gray-700);color:white}.arch-connector{display:flex;justify-content:center;color:var(--color-gray-400);font-size:20px}.flow{display:flex;align-items:center;gap:var(--space-sm);flex-wrap:wrap;justify-content:center}.flow__item{background:var(--color-gray-100);border:1px solid var(--color-gray-300);border-radius:var(--radius-md);padding:var(--space-xs) var(--space-md);font-size:13px;font-weight:500;color:var(--color-gray-700)}.flow__item--highlight{background:var(--color-primary);border-color:var(--color-primary);color:white}.flow__arrow{color:var(--color-gray-400);font-size:18px}.timeline{display:flex;gap:var(--space-lg);align-items:stretch}.timeline__item{flex:1;display:flex;flex-direction:column;position:relative}.timeline__item:not(:last-child)::after{content:'→';position:absolute;right:calc(var(--space-lg) / -2 - 8px);top:50%;transform:translateY(-50%);color:var(--color-gray-400);font-size:20px}.timeline__number{width:28px;height:28px;background:var(--color-primary);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:var(--space-sm)}.timeline__title{font-size:13px;font-weight:600;color:var(--color-gray-900);margin-bottom:var(--space-xs)}.timeline__text{font-size:12px;color:var(--color-gray-600);line-height:1.4}.stat{text-align:center;padding:var(--space-md)}.stat__value{font-size:36px;font-weight:800;color:var(--color-primary);line-height:1}.stat__label{font-size:13px;color:var(--color-gray-600);margin-top:var(--space-xs)}.stat--small .stat__value{font-size:24px}.icon-box{width:48px;height:48px;min-width:48px;background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-primary-dark) 100%);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:white;font-size:24px;flex-shrink:0}.icon-box--sm{width:36px;height:36px;min-width:36px;font-size:18px}.icon-box--lg{width:64px;height:64px;min-width:64px;font-size:32px}.icon-box--accent{background:linear-gradient(135deg,var(--color-accent) 0%,#ea580c 100%)}.icon-box--success{background:linear-gradient(135deg,var(--color-success) 0%,#047857 100%)}.icon-box--info{background:linear-gradient(135deg,var(--color-info) 0%,#4338ca 100%)}.superset-logo{display:flex;align-items:center;gap:var(--space-md)}.superset-logo__icon{width:80px;height:80px}.superset-logo__icon svg{width:100%;height:100%}.superset-logo__text{font-size:32px;font-weight:700}.superset-logo__text span{color:var(--color-primary)}.comparison-table{font-size:12px}.comparison-table th{font-size:11px;padding:8px 10px}.comparison-table td{padding:6px 10px;vertical-align:middle}.comparison-table .product-name{font-weight:600;white-space:nowrap}.comparison-table .check{color:var(--color-success);font-weight:bold}.comparison-table .cross{color:var(--color-danger);font-weight:bold}.comparison-table .partial{color:var(--color-warning);font-weight:bold}.use-case{background:var(--color-gray-50);border:1px solid var(--color-gray-200);border-radius:var(--radius-lg);padding:var(--space-md);display:flex;flex-direction:column;gap:var(--space-sm)}.use-case--positive{border-color:var(--color-success);border-left-width:4px}.use-case--negative{border-color:var(--color-danger);border-left-width:4px}.use-case__number{font-size:24px;font-weight:800;color:var(--color-gray-300)}.use-case__title{font-size:14px;font-weight:600;color:var(--color-gray-900)}.use-case__text{font-size:12px;color:var(--color-gray-600);line-height:1.4}.stack-layer{display:flex;align-items:center;gap:var(--space-md);padding:var(--space-sm) var(--space-md);background:var(--color-gray-50);border-radius:var(--radius-md);margin-bottom:var(--space-sm)}.stack-layer__label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-gray-500);width:100px;flex-shrink:0}.stack-layer__items{display:flex;gap:var(--space-xs);flex-wrap:wrap}.stack-layer__item{background:white;border:1px solid var(--color-gray-300);border-radius:var(--radius-sm);padding:4px 10px;font-size:12px;font-weight:500;color:var(--color-gray-700)}.stack-layer__item--highlight{background:var(--color-accent);border-color:var(--color-accent);color:white}.permission-matrix{font-size:12px}.permission-matrix th:first-child{text-align:left}.permission-matrix td:not(:first-child),.permission-matrix th:not(:first-child){text-align:center;width:80px}.permission-matrix .action{font-weight:500;text-align:left}.sources{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md)}.source-group{display:flex;flex-direction:column;gap:var(--space-xs)}.source-group__title{font-size:13px;font-weight:600;color:var(--color-gray-900);padding-bottom:var(--space-xs);border-bottom:1px solid var(--color-gray-200);margin-bottom:var(--space-xs)}.source-link{font-size:12px;color:var(--color-primary);text-decoration:none;display:flex;align-items:center;gap:var(--space-xs)}.source-link:hover{text-decoration:underline}.source-link::before{content:'→';color:var(--color-gray-400)}@media print{.mermaid-container,.arch-diagram,.diagram{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important}.arch-box,.flow__item,.timeline__number,.icon-box,.stat__value{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}}.mermaid .node.pastel-blue rect,.mermaid .node.pastel-blue polygon{fill:#dbeafe !important;stroke:#3b82f6 !important}.mermaid .node.pastel-blue .nodeLabel{fill:#1e3a8a !important;color:#1e3a8a !important}.mermaid .node.pastel-green rect,.mermaid .node.pastel-green polygon{fill:#dcfce7 !important;stroke:#22c55e !important}.mermaid .node.pastel-green .nodeLabel{fill:#14532d !important;color:#14532d !important}.mermaid .node.pastel-yellow rect,.mermaid .node.pastel-yellow polygon{fill:#fef9c3 !important;stroke:#eab308 !important}.mermaid .node.pastel-yellow .nodeLabel{fill:#713f12 !important;color:#713f12 !important}.mermaid .node.pastel-orange rect,.mermaid .node.pastel-orange polygon{fill:#ffedd5 !important;stroke:#f97316 !important}.mermaid .node.pastel-orange .nodeLabel{fill:#7c2d12 !important;color:#7c2d12 !important}.mermaid .node.pastel-pink rect,.mermaid .node.pastel-pink polygon{fill:#fce7f3 !important;stroke:#ec4899 !important}.mermaid .node.pastel-pink .nodeLabel{fill:#831843 !important;color:#831843 !important}.mermaid .node.pastel-purple rect,.mermaid .node.pastel-purple polygon{fill:#f3e8ff !important;stroke:#a855f7 !important}.mermaid .node.pastel-purple .nodeLabel{fill:#581c87 !important;color:#581c87 !important}.mermaid .node.pastel-cyan rect,.mermaid .node.pastel-cyan polygon{fill:#cffafe !important;stroke:#06b6d4 !important}.mermaid .node.pastel-cyan .nodeLabel{fill:#164e63 !important;color:#164e63 !important}.mermaid .node.dark-blue rect,.mermaid .node.dark-blue polygon{fill:#1e3a5f !important;stroke:#0c4a6e !important}.mermaid .node.dark-blue .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-green rect,.mermaid .node.dark-green polygon{fill:#14532d !important;stroke:#166534 !important}.mermaid .node.dark-green .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-purple rect,.mermaid .node.dark-purple polygon{fill:#4c1d95 !important;stroke:#5b21b6 !important}.mermaid .node.dark-purple .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-gray rect,.mermaid .node.dark-gray polygon{fill:#374151 !important;stroke:#4b5563 !important}.mermaid .node.dark-gray .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-slate rect,.mermaid .node.dark-slate polygon{fill:#1e293b !important;stroke:#334155 !important}.mermaid .node.dark-slate .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid g[style*="fill:#"] .nodeLabel,.mermaid g[style*="fill:#"] .nodeLabel{text-shadow:none !important}.mermaid [style*="fill:#f"][style*="fill:#f"] .nodeLabel,.mermaid [style*="fill:#e"][style*="fill:#e"] .nodeLabel,.mermaid [style*="fill:#d"][style*="fill:#d"] .nodeLabel,.mermaid [style*="fill:#c"][style*="fill:#c"] .nodeLabel,.mermaid [style*="fill:rgb(2"][style*="fill:rgb(2"] .nodeLabel{fill:#1e293b !important;color:#1e293b !important}img[src*="images/"]{max-width:100%;max-height:450px;width:auto;height:auto;object-fit:contain;display:block;margin:1.5rem auto}img[src*="screenshot"],img[src*="superset.apache.org"],img[src*="capture"]{max-width:100%;max-height:400px;width:auto;height:auto;object-fit:contain;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:1px solid #e4e4e7}.content-image,.screenshot{max-width:100%;max-height:500px;object-fit:contain}
+    </style>
+    
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'default',
+                    securityLevel: 'loose',
+                    flowchart: {
+                        useMaxWidth: false,
+                        htmlLabels: true
+                    },
+                    sequence: {
+                        useMaxWidth: false
+                    }
+                });
+            }
+        });
+    </script>
+    
+    
+    <script>
+const PASTEL_COLORS={blue:{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'}, green:{bg: '#dcfce7', border: '#22c55e', text: '#14532d'}, yellow:{bg: '#fef9c3', border: '#eab308', text: '#713f12'}, orange:{bg: '#ffedd5', border: '#f97316', text: '#7c2d12'}, pink:{bg: '#fce7f3', border: '#ec4899', text: '#831843'}, purple:{bg: '#f3e8ff', border: '#a855f7', text: '#581c87'}, cyan:{bg: '#cffafe', border: '#06b6d4', text: '#164e63'}, gray:{bg: '#f4f4f5', border: '#71717a', text: '#27272a'}};const DARK_COLORS={blue:{bg: '#1e3a5f', border: '#0c4a6e', text: '#ffffff'}, green:{bg: '#14532d', border: '#166534', text: '#ffffff'}, purple:{bg: '#4c1d95', border: '#5b21b6', text: '#ffffff'}, gray:{bg: '#374151', border: '#4b5563', text: '#ffffff'}, slate:{bg: '#1e293b', border: '#334155', text: '#ffffff'}};function fixMermaidContrast(){function getLuminance(hex){let r, g, b;if(!hex || hex==='none' || hex==='transparent'){return 0.5;}if(hex.startsWith('rgb')){const match=hex.match(/\d+/g);if(match){r=parseInt(match[0]);g=parseInt(match[1]);b=parseInt(match[2]);}else{return 0.5;}}else{hex=hex.replace('#', '');if(hex.length===3){hex=hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];}if(hex.length !==6){return 0.5;}r=parseInt(hex.substr(0, 2), 16);g=parseInt(hex.substr(2, 2), 16);b=parseInt(hex.substr(4, 2), 16);}if(isNaN(r)|| isNaN(g)|| isNaN(b)){return 0.5;}const rsRGB=r / 255;const gsRGB=g / 255;const bsRGB=b / 255;const rLum=rsRGB <=0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055)/ 1.055, 2.4);const gLum=gsRGB <=0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055)/ 1.055, 2.4);const bLum=bsRGB <=0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055)/ 1.055, 2.4);return 0.2126 * rLum + 0.7152 * gLum + 0.0722 * bLum;}function getContrastColor(bgColor){const luminance=getLuminance(bgColor);return luminance > 0.35 ? '#1e293b' : '#ffffff';}function applyContrastToText(textEl, contrastColor){textEl.style.setProperty('color', contrastColor, 'important');textEl.style.setProperty('fill', contrastColor, 'important');textEl.setAttribute('fill', contrastColor);textEl.querySelectorAll('tspan').forEach(function(tspan){tspan.style.setProperty('fill', contrastColor, 'important');tspan.setAttribute('fill', contrastColor);});}document.querySelectorAll('.mermaid svg').forEach(function(svg){svg.querySelectorAll('.cluster').forEach(function(cluster){const label=cluster.querySelector('.cluster-label');const rect=cluster.querySelector('rect');if(label && rect){const labelBBox=label.getBBox ? label.getBBox(): null;const foreignObj=label.querySelector('foreignObject');if(foreignObj){const currentHeight=parseFloat(foreignObj.getAttribute('height'))|| 20;const textContent=foreignObj.textContent || '';if(textContent.length > 20 || textContent.includes('\n')){foreignObj.setAttribute('height', Math.max(currentHeight, 40));foreignObj.style.overflow='visible';}}label.querySelectorAll('text, span, div, p, tspan').forEach(function(textEl){textEl.style.setProperty('fill', '#1e293b', 'important');textEl.style.setProperty('color', '#1e293b', 'important');textEl.style.setProperty('font-weight', '700', 'important');});}});svg.querySelectorAll('.node rect, .node polygon, .node circle, .node ellipse').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.node');if(parent){parent.querySelectorAll('.nodeLabel, .label, text, foreignObject span, foreignObject p, foreignObject div').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.cluster rect, .cluster polygon').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.cluster');if(parent){parent.querySelectorAll('.cluster-label, .cluster-label span, .cluster-label text, .nodeLabel, text').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('[style*="fill"]').forEach(function(el){const style=el.getAttribute('style');if(style){const fillMatch=style.match(/fill:\s*([^;]+)/i);if(fillMatch){const fill=fillMatch[1].trim();if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const contrastColor=getContrastColor(fill);el.querySelectorAll('text, span, p, div, .nodeLabel, .label').forEach(function(textEl){applyContrastToText(textEl, contrastColor);});if(el.tagName.toLowerCase()==='g'){el.querySelectorAll('foreignObject *').forEach(function(fo){fo.style.setProperty('color', contrastColor, 'important');});}}}}});svg.querySelectorAll('g.node').forEach(function(node){const shape=node.querySelector('rect, polygon, circle, ellipse, path');if(shape){const fill=shape.getAttribute('fill')|| shape.style.fill || window.getComputedStyle(shape).fill;if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const contrastColor=getContrastColor(fill);node.querySelectorAll('.nodeLabel, .label, text, span, div, p').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.actor, rect.actor, .actor-top, .actor-bottom').forEach(function(rect){rect.style.setProperty('fill', DARK_COLORS.blue.bg, 'important');rect.style.setProperty('stroke', DARK_COLORS.blue.border, 'important');rect.setAttribute('fill', DARK_COLORS.blue.bg);rect.setAttribute('stroke', DARK_COLORS.blue.border);});svg.querySelectorAll('text.actor, .actor-man').forEach(function(text){applyContrastToText(text, DARK_COLORS.blue.text);});svg.querySelectorAll('.messageText').forEach(function(text){applyContrastToText(text, '#1e293b');text.style.setProperty('stroke', 'none', 'important');});svg.querySelectorAll('.messageLine0, .messageLine1').forEach(function(line){line.style.setProperty('stroke', '#334155', 'important');line.style.setProperty('stroke-width', '2px', 'important');line.setAttribute('stroke', '#334155');line.setAttribute('stroke-width', '2');});svg.querySelectorAll('.arrowhead path, marker path, #arrowhead path').forEach(function(arrow){arrow.style.setProperty('fill', '#334155', 'important');arrow.style.setProperty('stroke', '#334155', 'important');arrow.setAttribute('fill', '#334155');arrow.setAttribute('stroke', '#334155');});svg.querySelectorAll('marker').forEach(function(marker){marker.querySelectorAll('path, polygon').forEach(function(shape){shape.style.setProperty('fill', '#334155', 'important');shape.setAttribute('fill', '#334155');});});svg.querySelectorAll('.actor-line').forEach(function(line){line.style.setProperty('stroke', '#64748b', 'important');line.style.setProperty('stroke-width', '1.5px', 'important');line.setAttribute('stroke', '#64748b');});svg.querySelectorAll('.loopText, .labelText').forEach(function(text){text.style.setProperty('fill', '#334155', 'important');text.setAttribute('fill', '#334155');});svg.querySelectorAll('.loopText tspan, .labelText tspan').forEach(function(tspan){tspan.style.setProperty('fill', '#334155', 'important');tspan.setAttribute('fill', '#334155');});svg.querySelectorAll('.note rect, rect.note').forEach(function(rect){rect.style.setProperty('fill', PASTEL_COLORS.yellow.bg, 'important');rect.style.setProperty('stroke', PASTEL_COLORS.yellow.border, 'important');rect.setAttribute('fill', PASTEL_COLORS.yellow.bg);});svg.querySelectorAll('.noteText, .noteText tspan').forEach(function(text){applyContrastToText(text, PASTEL_COLORS.yellow.text);});svg.querySelectorAll('.sequenceNumber').forEach(function(text){applyContrastToText(text, '#1e293b');});svg.querySelectorAll('.classGroup rect, .classGroup polygon').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.classGroup');if(parent){parent.querySelectorAll('text, .classTitle, .classLabel, tspan').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.stateGroup rect, .statediagram-state rect').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.stateGroup, .statediagram-state');if(parent){parent.querySelectorAll('text, .stateLabel, tspan, span').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.er.entityBox, .entityBox, rect.er').forEach(function(shape){shape.style.setProperty('fill', '#dbeafe', 'important');shape.style.setProperty('stroke', '#3b82f6', 'important');shape.style.setProperty('stroke-width', '2px', 'important');shape.setAttribute('fill', '#dbeafe');shape.setAttribute('stroke', '#3b82f6');});svg.querySelectorAll('.er.entityLabel, .entityLabel, text.er').forEach(function(text){applyContrastToText(text, '#1e3a8a');});svg.querySelectorAll('.er.attributeBoxEven, .er.attributeBoxOdd').forEach(function(shape){const isEven=shape.classList.contains('attributeBoxEven');shape.style.setProperty('fill', isEven ? '#f8fafc' : '#f1f5f9', 'important');shape.style.setProperty('stroke', '#cbd5e1', 'important');});svg.querySelectorAll('g.er text, .erDiagram text').forEach(function(text){const fill=text.getAttribute('fill')|| text.style.fill;const lum=getLuminance(fill);if(lum > 0.6 || !fill || fill==='none'){applyContrastToText(text, '#1e293b');}});const mindmapColors=[{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'},{bg: '#dcfce7', border: '#22c55e', text: '#14532d'},{bg: '#fef9c3', border: '#eab308', text: '#713f12'},{bg: '#fce7f3', border: '#ec4899', text: '#831843'},{bg: '#f3e8ff', border: '#a855f7', text: '#581c87'},{bg: '#cffafe', border: '#06b6d4', text: '#164e63'},{bg: '#ffedd5', border: '#f97316', text: '#7c2d12'}];let colorIndex=0;svg.querySelectorAll('.mindmap-node').forEach(function(node){const shape=node.querySelector('rect, circle, ellipse, polygon, path');if(shape){const color=mindmapColors[colorIndex % mindmapColors.length];shape.style.setProperty('fill', color.bg, 'important');shape.style.setProperty('stroke', color.border, 'important');shape.style.setProperty('stroke-width', '2px', 'important');shape.setAttribute('fill', color.bg);shape.setAttribute('stroke', color.border);node.querySelectorAll('text, span, .nodeLabel, foreignObject *').forEach(function(label){applyContrastToText(label, color.text);});colorIndex++;}});svg.querySelectorAll('.mindmap text, [class*="mindmap"] text').forEach(function(text){const fill=text.getAttribute('fill')|| text.style.fill;const lum=getLuminance(fill);if(lum > 0.6 || !fill || fill==='none'){applyContrastToText(text, '#1e293b');}});svg.querySelectorAll('rect, polygon, circle, ellipse').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const luminance=getLuminance(fill);if(luminance < 0.35){const parent=shape.parentNode;if(parent){parent.querySelectorAll('text, .nodeLabel, .label, span, tspan').forEach(function(textEl){const textFill=textEl.getAttribute('fill')|| textEl.style.fill;const textLum=getLuminance(textFill);if(textLum < 0.5){applyContrastToText(textEl, '#ffffff');}});}}else if(luminance > 0.65){const parent=shape.parentNode;if(parent){parent.querySelectorAll('text, .nodeLabel, .label, span, tspan').forEach(function(textEl){const textFill=textEl.getAttribute('fill')|| textEl.style.fill;const textLum=getLuminance(textFill);if(textLum > 0.7){applyContrastToText(textEl, '#1e293b');}});}}}});});}if(typeof window !=='undefined'){window.fixMermaidContrast=fixMermaidContrast;window.MERMAID_PASTEL_COLORS=PASTEL_COLORS;window.MERMAID_DARK_COLORS=DARK_COLORS;}
+    </script>
+    
+    
+    
+    
+    
+    <style>
+        @media print {
+            body {
+                max-width: none;
+                padding: 20mm;
+            }
+            
+            pre, code {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+            
+            table, pre, blockquote, .mermaid {
+                page-break-inside: avoid;
+            }
+            
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    
+    <article class="markdown-body">
+        <h1 id="tp05-projet-final-en-equipe-nextcloud-sur-aws">TP05 — Projet final en équipe : Nextcloud sur AWS</h1>
+<p><strong>Format</strong> : Projet d'équipe noté (4 à 5 participants)
+<strong>Prérequis</strong> : Jour 1 et Jour 2 validés — TP01 (bucket S3 sécurisé) et TP02 (VPC complet) terminés</p>
+<p><img alt="Terraform" src="images/fwl_HashiCorp-Terraform.svg" /> <img alt="AWS" src="images/xet_AWS.svg" /> <img alt="Docker" src="images/ash_Docker.svg" /> <img alt="Nextcloud" src="images/aqh_Nextcloud_Logo.svg" /></p>
+<hr />
+<h2 id="objectif-pedagogique">Objectif pédagogique</h2>
+<p>Ce TP est la <strong>conclusion de la formation</strong> : vous allez déployer en équipe une application de production réelle sur AWS avec Terraform.</p>
+<ol>
+<li><strong>Réutiliser</strong> les briques vues jusqu'ici (HCL, variables, VPC, S3, sécurité de base).</li>
+<li><strong>Découvrir</strong> les concepts avancés nécessaires à un projet réel : modules organisés, backend S3, IAM instance profile, KMS, Secrets Manager, Load Balancer — <strong>tous expliqués dans les fiches rôles, pas besoin d'avoir fait J3/J4</strong>.</li>
+<li><strong>Travailler en équipe</strong> sur un monorepo Terraform, avec des contrats d'interface figés entre modules.</li>
+<li><strong>Déployer Nextcloud</strong> — le Dropbox/Drive open-source auto-hébergé, utilisé par des milliers d'organisations.</li>
+<li><strong>Livrer un dossier de rendu noté</strong> (template + zip) évalué sur 20 points.</li>
+</ol>
+<p>🔷 <strong>Ce TP est noté</strong> — voir le <a href="#template-de-rendu">Template de rendu</a> et le <a href="#bareme-apercu-etudiant">Barème</a> en fin de document.</p>
+<p>🔵 <strong>Un starter kit vous est fourni</strong> : <a href="../../corriges/jour5/tp05-starter/">corriges/jour5/tp05-starter/</a> contient l'arborescence complète, les interfaces de modules pré-écrites, et les providers déjà configurés. Vous <strong>n'avez qu'à remplir les corps des modules</strong>.</p>
+<hr />
+<h2 id="table-des-matieres">Table des matières</h2>
+<ul>
+<li><a href="#cahier-des-charges-fonctionnel">Cahier des charges fonctionnel</a></li>
+<li><a href="#cahier-des-charges-technique">Cahier des charges technique</a></li>
+<li><a href="#architecture-cible">Architecture cible</a></li>
+<li><a href="#arborescence-du-projet">Arborescence du projet</a></li>
+<li><a href="#decoupage-en-5-roles">Découpage en 5 rôles</a></li>
+<li><a href="#contrats-dinterface-entre-modules">Contrats d'interface entre modules</a></li>
+<li><a href="#concepts-cles-a-connaitre">Concepts clés à connaître</a></li>
+<li><a href="#planning-de-la-journee">Planning de la journée</a></li>
+<li><a href="#template-de-rendu">Template de rendu</a></li>
+<li><a href="#bareme-apercu-etudiant">Barème (aperçu étudiant)</a></li>
+<li><a href="#aide-et-ressources">Aide et ressources</a></li>
+</ul>
+<hr />
+<h2 id="cahier-des-charges-fonctionnel">Cahier des charges fonctionnel</h2>
+<h3 id="contexte-metier">Contexte métier</h3>
+<p><strong>"Kolab"</strong> est un cabinet d'avocats de 40 collaborateurs, spécialisé dans le droit des affaires. Jusqu'ici, les dossiers clients étaient partagés via une solution SaaS américaine, mais les contraintes RGPD + secret professionnel + souveraineté imposent de <strong>migrer vers une solution auto-hébergée dans l'UE</strong>.</p>
+<p>La DSI a tranché : <strong>Nextcloud</strong> (auto-hébergé sur AWS Irlande) pour le partage de fichiers, chiffrement au repos et en transit, authentification interne.</p>
+<h3 id="exigences-fonctionnelles">Exigences fonctionnelles</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Exigence</th>
+<th>Priorité</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>Interface web Nextcloud accessible en HTTPS</td>
+<td>🔴 Bloquant</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>Stockage des fichiers utilisateur chiffré et <strong>externalisé</strong> (pas sur l'EC2)</td>
+<td>🔴 Bloquant</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>Base de données PostgreSQL managée avec <strong>sauvegarde automatique quotidienne</strong></td>
+<td>🔴 Bloquant</td>
+</tr>
+<tr>
+<td>F4</td>
+<td>Administrateur initial pré-créé (compte <code>admin</code>, mot de passe généré aléatoirement)</td>
+<td>🔴 Bloquant</td>
+</tr>
+<tr>
+<td>F5</td>
+<td>Tolérance à la panne du serveur applicatif (redémarrage auto)</td>
+<td>🟠 Important</td>
+</tr>
+<tr>
+<td>F6</td>
+<td>Logs d'accès HTTP centralisés et conservés 30 jours</td>
+<td>🟠 Important</td>
+</tr>
+<tr>
+<td>F7</td>
+<td>Infrastructure reproductible sur un 2e environnement (staging)</td>
+<td>🟡 Bonus</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cahier-des-charges-technique">Cahier des charges technique</h2>
+<h3 id="exigences-techniques">Exigences techniques</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Exigence</th>
+<th>Priorité</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td><strong>AWS région eu-west-1</strong> (Irlande), conforme RGPD</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>T2</td>
+<td><strong>Terraform ≥ 1.10</strong> (backend S3 natif avec <code>use_lockfile</code>)</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>Code organisé en <strong>modules réutilisables</strong> + environnement <code>envs/dev/</code></td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>T4</td>
+<td><strong>State S3</strong> avec versioning + chiffrement KMS + locking natif</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>T5</td>
+<td><strong>Chiffrement KMS</strong> de toutes les ressources stateful (S3, RDS, Secrets)</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>T6</td>
+<td><strong>Pas de credentials AWS</strong> dans le code ou les EC2 — IAM Instance Profile uniquement</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>T7</td>
+<td><strong>Mots de passe</strong> (DB + admin Nextcloud) stockés dans <strong>AWS Secrets Manager</strong>, lus par l'EC2 au boot</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>T8</td>
+<td><strong>ALB</strong> public HTTPS (self-signed pour ce TP) → ASG d'EC2 privées</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>T9</td>
+<td><strong>RDS PostgreSQL Multi-AZ</strong> (db.t3.micro), subnet privé</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>T10</td>
+<td><strong>S3 primary storage</strong> Nextcloud + <strong>bucket de logs ALB</strong> séparés, chiffrés KMS</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>T11</td>
+<td><strong>Nextcloud dans un container Docker</strong> démarré par le user_data de l'EC2</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>T12</td>
+<td><strong>ASG</strong> <code>min=1 max=2 desired=1</code> — auto-recovery simple (pas de scaling horizontal, limité à 1 instance pour éviter file locking sans Redis)</td>
+<td>🟠</td>
+</tr>
+<tr>
+<td>T13</td>
+<td><strong>VPC Endpoints</strong> S3 et Secrets Manager pour éviter le trafic via NAT</td>
+<td>🟠</td>
+</tr>
+<tr>
+<td>T14</td>
+<td><strong>tfsec</strong> : 0 erreur HIGH ou CRITICAL sur le code final</td>
+<td>🟠</td>
+</tr>
+<tr>
+<td>T15</td>
+<td>Chaque module documenté avec <code>terraform-docs</code></td>
+<td>🟡 Bonus</td>
+</tr>
+<tr>
+<td>T16</td>
+<td>CI/CD GitHub Actions (plan on PR)</td>
+<td>🟡 Bonus</td>
+</tr>
+</tbody>
+</table>
+<h3 id="contraintes-de-budget">Contraintes de budget</h3>
+<ul>
+<li>🟡 <strong>Budget cible &lt; 150 € pour la journée</strong> (NAT + ALB + RDS + EC2 t3.small).</li>
+<li>🟥 <strong>Destroy obligatoire en fin de journée</strong> — un environnement qui tourne la nuit coûte ~10 € par jour, soit ~300 €/mois.</li>
+</ul>
+<hr />
+<h2 id="architecture-cible">Architecture cible</h2>
+<h3 id="schema-densemble">Schéma d'ensemble</h3>
+<pre class="mermaid">
+flowchart TB
+    t_user((Utilisateur<br/>avocat))
+
+    subgraph t_internet[Internet]
+        t_dns[DNS public ALB]
+    end
+
+    subgraph t_vpc[VPC 10.30.0.0/16 eu-west-1]
+        subgraph t_public[Subnets publics AZ-a AZ-b]
+            t_alb[ALB HTTPS 443<br/>self-signed cert]
+            t_nat[NAT Gateway]
+        end
+
+        subgraph t_private_app[Subnets prives AZ-a AZ-b]
+            t_asg[ASG single EC2<br/>Docker + Nextcloud]
+        end
+
+        subgraph t_private_db[Subnets DB AZ-a AZ-b]
+            t_rds[(RDS PostgreSQL<br/>Multi-AZ)]
+        end
+
+        t_vpce_s3[VPC Endpoint S3]
+        t_vpce_secrets[VPC Endpoint Secrets Manager]
+    end
+
+    subgraph t_aws[Services AWS regionaux]
+        t_s3_primary[S3 primary storage<br/>fichiers Nextcloud<br/>KMS]
+        t_s3_logs[S3 ALB logs<br/>30j retention<br/>KMS]
+        t_secrets[Secrets Manager<br/>db_pwd + admin_pwd]
+        t_kms[KMS CMK<br/>rotation activee]
+    end
+
+    t_user --> t_dns
+    t_dns --> t_alb
+    t_alb --> t_asg
+    t_asg --> t_rds
+    t_asg -->|IAM role| t_vpce_s3
+    t_vpce_s3 --> t_s3_primary
+    t_asg -->|IAM role| t_vpce_secrets
+    t_vpce_secrets --> t_secrets
+    t_alb -->|access logs| t_s3_logs
+    t_asg -->|egress updates| t_nat
+
+    t_kms -.chiffre.-> t_s3_primary
+    t_kms -.chiffre.-> t_s3_logs
+    t_kms -.chiffre.-> t_rds
+    t_kms -.chiffre.-> t_secrets
+
+    classDef alb fill:#fff3cd,stroke:#ffc107
+    classDef app fill:#d1e7dd,stroke:#198754
+    classDef data fill:#cfe2ff,stroke:#0d6efd
+    classDef sec fill:#f8d7da,stroke:#dc3545
+    class t_alb,t_dns alb
+    class t_asg,t_nat app
+    class t_rds,t_s3_primary,t_s3_logs data
+    class t_secrets,t_kms,t_vpce_s3,t_vpce_secrets sec
+</pre>
+
+<h3 id="flux-applicatif-nextcloud">Flux applicatif Nextcloud</h3>
+<pre class="mermaid">
+sequenceDiagram
+    participant t_u as Utilisateur
+    participant t_alb as ALB HTTPS
+    participant t_ec2 as EC2 + Docker
+    participant t_sec as Secrets Manager
+    participant t_rds as RDS PG
+    participant t_s3 as S3 primary
+
+    Note over t_ec2: Boot : user_data execute
+    t_ec2->>t_sec: GetSecretValue db_pwd + admin_pwd
+    t_sec-->>t_ec2: values
+    t_ec2->>t_ec2: docker run nextcloud avec env vars
+    t_ec2->>t_rds: initialisation schema + admin user
+
+    t_u->>t_alb: GET https://alb-dns
+    t_alb->>t_ec2: forward port 80 (interne)
+    t_ec2->>t_u: page login Nextcloud
+    t_u->>t_alb: POST login admin/password
+    t_alb->>t_ec2: forward
+    t_ec2->>t_rds: verifier credentials
+    t_rds-->>t_ec2: OK
+    t_ec2-->>t_u: dashboard
+
+    t_u->>t_alb: POST upload fichier.pdf
+    t_alb->>t_ec2: forward
+    t_ec2->>t_s3: PUT fichier.pdf (IAM role)
+    t_s3-->>t_ec2: 200 OK
+    t_ec2->>t_rds: INSERT metadata
+    t_ec2-->>t_u: 200 uploaded
+</pre>
+
+<h3 id="composants-synthese">Composants (synthèse)</h3>
+<table>
+<thead>
+<tr>
+<th>Couche</th>
+<th>Ressources AWS</th>
+<th>Module Terraform</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Network</strong></td>
+<td>VPC, 6 subnets (2 pub + 2 priv app + 2 priv db), IGW, NAT, route tables, 2 VPC endpoints</td>
+<td><code>modules/networking</code></td>
+<td>Rôle 2</td>
+</tr>
+<tr>
+<td><strong>Compute</strong></td>
+<td>ALB, target group, listener HTTPS (self-signed), ACM cert, launch template, ASG, EC2 bastion</td>
+<td><code>modules/compute</code></td>
+<td>Rôle 3</td>
+</tr>
+<tr>
+<td><strong>Data</strong></td>
+<td>RDS PG Multi-AZ, DB subnet group, 2 buckets S3 (primary + logs), bucket policies</td>
+<td><code>modules/data</code></td>
+<td>Rôle 4</td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td>SGs (ALB, app, db), KMS CMK, Secrets Manager (2 secrets), IAM role + instance profile + policies</td>
+<td><code>modules/security</code></td>
+<td>Rôle 5</td>
+</tr>
+<tr>
+<td><strong>Platform</strong></td>
+<td>Bucket S3 state + KMS + <code>global/iam-github-oidc/</code> + workflow CI, arborescence, intégration</td>
+<td><code>global/</code> + <code>envs/dev/</code></td>
+<td>Rôle 1</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="arborescence-du-projet">Arborescence du projet</h2>
+<p><strong>Structure à respecter impérativement</strong> (le barème vérifie cette organisation) :</p>
+<div class="highlight"><pre><span></span><code>tp05-nextcloud/
+├── README.md                              # Doc d equipe : scenario + demarrage
+├── .gitignore                             # Ignore .terraform/, *.tfstate, *.tfvars
+├── .pre-commit-config.yaml                # fmt + validate + tflint + tfsec
+├── ARCHITECTURE.md                        # Schemas Mermaid + decisions
+│
+├── bootstrap/                             # Role 1 : one-shot (hors Terraform)
+│   └── create-state-bucket.sh             # Cree bucket state + KMS key state
+│
+├── global/                                # Role 1 : ressources partagees multi-env
+│   └── iam-github-oidc/                   # (bonus) Role IAM pour GitHub Actions
+│       ├── main.tf
+│       ├── variables.tf
+│       ├── outputs.tf
+│       ├── providers.tf
+│       └── backend.tf                     # state : global/iam-github-oidc/
+│
+├── modules/                               # Modules reutilisables
+│   ├── networking/                        # Role 2
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   ├── outputs.tf
+│   │   ├── locals.tf
+│   │   ├── versions.tf
+│   │   └── README.md                      # genere par terraform-docs
+│   │
+│   ├── compute/                           # Role 3
+│   │   ├── main.tf
+│   │   ├── alb.tf                         # ALB + TG + listener + cert
+│   │   ├── asg.tf                         # launch template + ASG
+│   │   ├── variables.tf
+│   │   ├── outputs.tf
+│   │   ├── locals.tf
+│   │   ├── versions.tf
+│   │   ├── templates/
+│   │   │   └── nextcloud-user-data.sh.tftpl  # Docker run nextcloud
+│   │   └── README.md
+│   │
+│   ├── data/                              # Role 4
+│   │   ├── main.tf
+│   │   ├── rds.tf
+│   │   ├── s3.tf                          # primary + logs
+│   │   ├── variables.tf
+│   │   ├── outputs.tf
+│   │   ├── versions.tf
+│   │   └── README.md
+│   │
+│   └── security/                          # Role 5
+│       ├── main.tf
+│       ├── sg.tf                          # 3 SG : alb, app, db
+│       ├── kms.tf                         # CMK + alias
+│       ├── iam.tf                         # role app + instance profile + policies
+│       ├── secrets.tf                     # db_pwd + admin_pwd
+│       ├── variables.tf
+│       ├── outputs.tf
+│       ├── versions.tf
+│       └── README.md
+│
+├── envs/                                  # Role 1 : orchestre les modules
+│   └── dev/
+│       ├── backend.tf                     # S3 backend : envs/dev/terraform.tfstate
+│       ├── providers.tf
+│       ├── main.tf                        # 4 blocs module { source = ... }
+│       ├── variables.tf
+│       ├── outputs.tf
+│       ├── terraform.tfvars.example
+│       └── tests/
+│           └── smoke.tftest.hcl           # (bonus) terraform test
+│
+├── .github/                               # Role 1 (bonus)
+│   └── workflows/
+│       └── terraform-plan.yml             # Plan on PR via OIDC
+│
+└── docs/                                  # Livrables de rendu
+    ├── RENDU.md                           # Fichier a remplir (template)
+    └── screenshots/                       # Captures obligatoires
+        ├── 01-plan-dev.png
+        ├── 02-apply-success.png
+        ├── 03-nextcloud-login.png
+        ├── 04-file-in-s3.png
+        └── 05-destroy-success.png
+</code></pre></div>
+<p>🔷 <strong>Point clé à vérifier</strong> : le dossier <code>docs/</code> avec le RENDU.md + les screenshots est <strong>obligatoire</strong> pour la notation.</p>
+<hr />
+<h2 id="decoupage-en-5-roles">Découpage en 5 rôles</h2>
+<p>Chaque rôle pilote un module et produit un livrable individuel (variables + outputs + code + README). Le Rôle 1 orchestre l'intégration.</p>
+<h3 id="apercu-des-roles">Aperçu des rôles</h3>
+<table>
+<thead>
+<tr>
+<th>Rôle</th>
+<th>Nom</th>
+<th>Module livré</th>
+<th>Fiche détaillée</th>
+<th>% de la note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Platform Lead</strong></td>
+<td><code>bootstrap/</code> + <code>global/</code> + <code>envs/dev/</code></td>
+<td><a href="tp05-team-nextcloud/role-1-platform.md">role-1-platform.md</a></td>
+<td>20 %</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Network Engineer</strong></td>
+<td><code>modules/networking/</code></td>
+<td><a href="tp05-team-nextcloud/role-2-network.md">role-2-network.md</a></td>
+<td>20 %</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Compute Engineer</strong></td>
+<td><code>modules/compute/</code></td>
+<td><a href="tp05-team-nextcloud/role-3-compute.md">role-3-compute.md</a></td>
+<td>20 %</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Data Engineer</strong></td>
+<td><code>modules/data/</code></td>
+<td><a href="tp05-team-nextcloud/role-4-data.md">role-4-data.md</a></td>
+<td>20 %</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Security Engineer</strong></td>
+<td><code>modules/security/</code></td>
+<td><a href="tp05-team-nextcloud/role-5-security.md">role-5-security.md</a></td>
+<td>20 %</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🟤 <strong>Équipe à 4 personnes</strong> : Rôle 5 (Security) fusionne avec Rôle 1 (Platform).</p>
+</blockquote>
+<h3 id="graphe-des-dependances">Graphe des dépendances</h3>
+<pre class="mermaid">
+flowchart LR
+    t_r1[Role 1<br/>Platform] -->|IAM + state| t_all
+    t_r2[Role 2<br/>Network] -->|vpc_id + subnets| t_r3
+    t_r2 -->|vpc_id + subnets| t_r4
+    t_r2 -->|vpc_id| t_r5
+    t_r5[Role 5<br/>Security] -->|SGs + KMS + IAM + Secrets| t_r3
+    t_r5 -->|SG db + KMS| t_r4
+    t_r4[Role 4<br/>Data] -->|db_endpoint + s3_bucket| t_r3
+    t_r3[Role 3<br/>Compute] -->|URL ALB| t_demo((Demo finale))
+
+    t_all((Tous les modules))
+
+    classDef role fill:#cfe2ff,stroke:#0d6efd
+    class t_r1,t_r2,t_r3,t_r4,t_r5 role
+</pre>
+
+<p>🔷 <strong>Lecture</strong> : Rôle 2 (Network) peut démarrer seul. Rôle 5 (Security) démarre dès que le Rôle 2 a livré <code>vpc_id</code>. Rôle 4 (Data) attend Rôles 2 + 5. Rôle 3 (Compute) attend tous les autres. <strong>Le Rôle 1 libère les premiers blocs en 10 min</strong> (bootstrap bucket state).</p>
+<hr />
+<h2 id="contrats-dinterface-entre-modules">Contrats d'interface entre modules</h2>
+<p>🟥 <strong>Ces interfaces sont FIGÉES au Kick-off</strong>. Toute modification nécessite une PR + validation du Platform Lead.</p>
+<h3 id="modulesnetworking-outputs">modules/networking — outputs</h3>
+<div class="highlight"><pre><span></span><code><span class="kr">output</span><span class="w"> </span><span class="nv">&quot;vpc_id&quot;</span><span class="w">                 </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_vpc.main.id</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;vpc_cidr&quot;</span><span class="w">               </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_vpc.main.cidr_block</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;public_subnet_ids&quot;</span><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nb">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">k</span><span class="p">,</span><span class="w"> </span><span class="err">s</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="nv">aws_subnet.public</span><span class="w">      </span><span class="p">:</span><span class="w"> </span><span class="na">k</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="nv">s.id</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;private_app_subnet_ids&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">k</span><span class="p">,</span><span class="w"> </span><span class="err">s</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="nv">aws_subnet.private_app</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="na">k</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="nv">s.id</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;private_db_subnet_ids&quot;</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nb">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">k</span><span class="p">,</span><span class="w"> </span><span class="err">s</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="nv">aws_subnet.private_db</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="na">k</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="nv">s.id</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;nat_gateway_public_ip&quot;</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_eip.nat.public_ip</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<h3 id="modulessecurity-inputs-outputs">modules/security — inputs / outputs</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Inputs attendus</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;vpc_id&quot;</span><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;vpc_cidr&quot;</span><span class="w">              </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;s3_primary_bucket_arn&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span><span class="c1">   # fourni par data (late binding)</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;s3_logs_bucket_arn&quot;</span><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;allowed_admin_cidr&quot;</span><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span><span class="c1">   # IP formateur</span>
+
+<span class="c1"># Outputs fournis</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;alb_security_group_id&quot;</span><span class="w">           </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.alb.id</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;app_security_group_id&quot;</span><span class="w">           </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.app.id</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;db_security_group_id&quot;</span><span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.db.id</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;kms_key_id&quot;</span><span class="w">                      </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_kms_key.main.id</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;kms_key_arn&quot;</span><span class="w">                     </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_kms_key.main.arn</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;app_instance_profile_name&quot;</span><span class="w">       </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_instance_profile.app.name</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;app_iam_role_arn&quot;</span><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.app.arn</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;db_password_secret_arn&quot;</span><span class="w">          </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_secretsmanager_secret.db_password.arn</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;admin_password_secret_arn&quot;</span><span class="w">       </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_secretsmanager_secret.admin_password.arn</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<h3 id="modulesdata-inputs-outputs">modules/data — inputs / outputs</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Inputs attendus</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;vpc_id&quot;</span><span class="w">                 </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;private_db_subnet_ids&quot;</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;db_security_group_id&quot;</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;kms_key_arn&quot;</span><span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;db_password_secret_arn&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;project_name&quot;</span><span class="w">           </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;environment&quot;</span><span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1"># Outputs fournis</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;db_endpoint&quot;</span><span class="w">           </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_db_instance.nextcloud.address</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;db_port&quot;</span><span class="w">               </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_db_instance.nextcloud.port</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;db_name&quot;</span><span class="w">               </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_db_instance.nextcloud.db_name</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;db_username&quot;</span><span class="w">           </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_db_instance.nextcloud.username</span><span class="w"> </span><span class="p">}</span>
+<span class="err">output</span><span class="w"> </span><span class="s2">&quot;s3_primary_bucket_name&quot;</span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_s3_bucket.primary.bucket</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;s3_primary_bucket_arn&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_s3_bucket.primary.arn</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;s3_logs_bucket_name&quot;</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_s3_bucket.logs.bucket</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;s3_logs_bucket_arn&quot;</span><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_s3_bucket.logs.arn</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<h3 id="modulescompute-inputs-outputs">modules/compute — inputs / outputs</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Inputs attendus</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;vpc_id&quot;</span><span class="w">                        </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;public_subnet_ids&quot;</span><span class="w">             </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;private_app_subnet_ids&quot;</span><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;alb_security_group_id&quot;</span><span class="w">         </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;app_security_group_id&quot;</span><span class="w">         </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;app_instance_profile_name&quot;</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;db_endpoint&quot;</span><span class="w">                   </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;db_name&quot;</span><span class="w">                       </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;db_username&quot;</span><span class="w">                   </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;db_password_secret_arn&quot;</span><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;admin_password_secret_arn&quot;</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;s3_primary_bucket_name&quot;</span><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;s3_logs_bucket_name&quot;</span><span class="w">           </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;project_name&quot;</span><span class="w">                  </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;environment&quot;</span><span class="w">                   </span><span class="p">{</span><span class="w"> </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1"># Outputs fournis</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;alb_dns_name&quot;</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb.main.dns_name</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;alb_zone_id&quot;</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb.main.zone_id</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;asg_name&quot;</span><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_autoscaling_group.app.name</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;nextcloud_url&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://${aws_lb.main.dns_name}&quot;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<h3 id="envsdevmaintf-orchestration-role-1">envs/dev/main.tf — orchestration (Rôle 1)</h3>
+<div class="highlight"><pre><span></span><code><span class="kr">module</span><span class="w"> </span><span class="nv">&quot;networking&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/networking&quot;</span>
+<span class="w">  </span><span class="na">project_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab&quot;</span>
+<span class="w">  </span><span class="na">environment</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span>
+<span class="w">  </span><span class="na">vpc_cidr</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.30.0.0/16&quot;</span>
+<span class="w">  </span><span class="na">azs</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eu-west-1a&quot;, &quot;eu-west-1b&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="kr">module</span><span class="w"> </span><span class="nv">&quot;security&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w">                </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/security&quot;</span>
+<span class="w">  </span><span class="na">project_name</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab&quot;</span>
+<span class="w">  </span><span class="na">environment</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">                </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.vpc_id</span>
+<span class="w">  </span><span class="na">vpc_cidr</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.vpc_cidr</span>
+<span class="w">  </span><span class="na">allowed_admin_cidr</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">var.allowed_admin_cidr</span>
+<span class="w">  </span><span class="na">s3_primary_bucket_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.s3_primary_bucket_arn</span>
+<span class="w">  </span><span class="na">s3_logs_bucket_arn</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.s3_logs_bucket_arn</span>
+<span class="p">}</span>
+
+<span class="kr">module</span><span class="w"> </span><span class="nv">&quot;data&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/data&quot;</span>
+<span class="w">  </span><span class="na">project_name</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab&quot;</span>
+<span class="w">  </span><span class="na">environment</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.vpc_id</span>
+<span class="w">  </span><span class="na">private_db_subnet_ids</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.private_db_subnet_ids</span>
+<span class="w">  </span><span class="na">db_security_group_id</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.db_security_group_id</span>
+<span class="w">  </span><span class="na">kms_key_arn</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.kms_key_arn</span>
+<span class="w">  </span><span class="na">db_password_secret_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.db_password_secret_arn</span>
+<span class="p">}</span>
+
+<span class="kr">module</span><span class="w"> </span><span class="nv">&quot;compute&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/compute&quot;</span>
+<span class="w">  </span><span class="na">project_name</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab&quot;</span>
+<span class="w">  </span><span class="na">environment</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.vpc_id</span>
+<span class="w">  </span><span class="na">public_subnet_ids</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.public_subnet_ids</span>
+<span class="w">  </span><span class="na">private_app_subnet_ids</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.private_app_subnet_ids</span>
+<span class="w">  </span><span class="na">alb_security_group_id</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.alb_security_group_id</span>
+<span class="w">  </span><span class="na">app_security_group_id</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.app_security_group_id</span>
+<span class="w">  </span><span class="na">app_instance_profile_name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.app_instance_profile_name</span>
+<span class="w">  </span><span class="na">db_endpoint</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.db_endpoint</span>
+<span class="w">  </span><span class="na">db_name</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.db_name</span>
+<span class="w">  </span><span class="na">db_username</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.db_username</span>
+<span class="w">  </span><span class="na">db_password_secret_arn</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.db_password_secret_arn</span>
+<span class="w">  </span><span class="na">admin_password_secret_arn</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.admin_password_secret_arn</span>
+<span class="w">  </span><span class="na">s3_primary_bucket_name</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.s3_primary_bucket_name</span>
+<span class="w">  </span><span class="na">s3_logs_bucket_name</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.s3_logs_bucket_name</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🟡 <strong>Cycle détecté</strong> : <code>security</code> a besoin des ARN de <code>data</code> (pour la policy IAM scoped au bucket), et <code>data</code> a besoin du KMS de <code>security</code>. <strong>Solution choisie</strong> : <code>security</code> prend les ARN en input (variable), <code>data</code> prend le <code>kms_key_arn</code> en input. Pas de <code>depends_on</code> explicite — Terraform résout le graphe via les références d'outputs.</p>
+<hr />
+<h2 id="planning-de-la-journee">Planning de la journée</h2>
+<table>
+<thead>
+<tr>
+<th>Horaire</th>
+<th>Étape</th>
+<th>Format</th>
+<th>Durée</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9h00 - 9h30</td>
+<td><strong>Kick-off</strong> : lecture du CdC, attribution des rôles, revue du starter kit</td>
+<td>Plénière</td>
+<td>30 min</td>
+</tr>
+<tr>
+<td>9h30 - 10h00</td>
+<td><strong>Atelier design</strong> : schéma au tableau, revue interfaces figées, questions</td>
+<td>Plénière</td>
+<td>30 min</td>
+</tr>
+<tr>
+<td>10h00 - 12h30</td>
+<td><strong>Sprint 1 — Code module</strong> : chacun remplit son module dans le starter kit, <code>terraform validate</code> local</td>
+<td>Parallèle</td>
+<td>2h30</td>
+</tr>
+<tr>
+<td>12h30 - 13h30</td>
+<td>Pause déjeuner (hors temps TP)</td>
+<td></td>
+<td>1h</td>
+</tr>
+<tr>
+<td>13h30 - 14h30</td>
+<td><strong>Sprint 2 — Intégration PR</strong> : push branche + PR vers <code>main</code>, review croisée (1 approval minimum)</td>
+<td>Parallèle + revue</td>
+<td>1h</td>
+</tr>
+<tr>
+<td>14h30 - 15h30</td>
+<td><strong>Sprint 3 — Apply <code>envs/dev</code></strong> piloté par Platform Lead, debug collectif</td>
+<td>Plénière écran partagé</td>
+<td>1h</td>
+</tr>
+<tr>
+<td>15h30 - 16h00</td>
+<td><strong>Démo + Destroy + Rendu</strong> : login Nextcloud, upload fichier, screenshots, destroy, packaging zip</td>
+<td>Plénière</td>
+<td>30 min</td>
+</tr>
+</tbody>
+</table>
+<p>🟥 <strong>Gate critique à 15h30</strong> : si l'<code>apply</code> n'est pas terminé à 15h30, on coupe et on documente l'état partiel dans le RENDU.md — pas d'heure sup.</p>
+<p>🔵 <strong>Pourquoi le starter kit sauve 1h</strong> : vous n'avez pas à créer l'arborescence, écrire les interfaces des modules, configurer les providers ou le backend. Tout est pré-rempli. Vous vous concentrez sur le <strong>code métier</strong> — le cœur de votre apprentissage.</p>
+<hr />
+<h2 id="template-de-rendu">Template de rendu</h2>
+<h3 id="structure-du-zip-a-remettre">Structure du zip à remettre</h3>
+<p>À la fin du TP, chaque équipe livre <strong>un seul zip</strong> nommé <code>tp05-nextcloud-equipe&lt;N&gt;.zip</code> contenant :</p>
+<div class="highlight"><pre><span></span><code>tp05-nextcloud-equipe&lt;N&gt;.zip
+├── tp05-nextcloud/                  # Code Terraform complet
+│   ├── (arborescence ci-dessus)
+│   └── docs/
+│       ├── RENDU.md                 # Rempli avec les reponses
+│       └── screenshots/             # 5 captures obligatoires (png)
+└── .git/                            # Historique git (bonus : track contributions)
+</code></pre></div>
+<p>🔷 <strong>Avant de zipper</strong> : <code>terraform destroy</code> dans <code>envs/dev/</code> pour éviter de remettre un <code>terraform.tfstate</code> qui pointe sur des ressources vivantes. <strong>Commiter le <code>.terraform.lock.hcl</code></strong> mais pas le dossier <code>.terraform/</code>.</p>
+<h3 id="commande-de-packaging-linux-wsl">Commande de packaging (Linux / WSL)</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/formation-terraform/jour5
+
+<span class="c1"># Nettoyer les artefacts lourds avant zip</span>
+find<span class="w"> </span>tp05-nextcloud<span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;.terraform&quot;</span><span class="w"> </span>-exec<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="o">{}</span><span class="w"> </span>+
+find<span class="w"> </span>tp05-nextcloud<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;terraform.tfstate*&quot;</span><span class="w"> </span>-delete
+find<span class="w"> </span>tp05-nextcloud<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tfvars&quot;</span><span class="w"> </span>!<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tfvars.example&quot;</span><span class="w"> </span>-delete
+
+<span class="c1"># Zip</span>
+zip<span class="w"> </span>-r<span class="w"> </span>tp05-nextcloud-equipe&lt;N&gt;.zip<span class="w"> </span>tp05-nextcloud/
+</code></pre></div>
+<h3 id="fichier-docsrendumd-template-a-remplir">Fichier <code>docs/RENDU.md</code> — template à remplir</h3>
+<p>Le template détaillé est dans <a href="tp05-team-nextcloud/template-rendu.md">tp05-team-nextcloud/template-rendu.md</a>.</p>
+<p>Les <strong>sections obligatoires</strong> sont :</p>
+<ol>
+<li><strong>Identification équipe</strong> : membres + rôles attribués</li>
+<li><strong>Résumé architecture</strong> : 5 lignes max + un schéma Mermaid</li>
+<li><strong>Arbitrages techniques faits</strong> : 3 choix minimum avec justification (ex: pourquoi single EC2 au lieu de 2 ? pourquoi self-signed cert ?)</li>
+<li><strong>Retour sur les interfaces</strong> : ce qui a fonctionné, ce qui a bloqué</li>
+<li><strong>Tableau <code>terraform plan</code></strong> : copie du résumé <code>Plan: N to add, ...</code></li>
+<li><strong>Preuve de succès</strong> : 5 captures d'écran obligatoires (cf. sous-section)</li>
+<li><strong>Coût estimé via Infracost</strong> ou calcul manuel</li>
+<li><strong>Rétrospective</strong> : 3 choses qui ont marché, 3 qui ont bloqué, 3 améliorations</li>
+<li><strong>Per-rôle</strong> : chaque rôle ajoute un paragraphe "Ce que j'ai livré" + "Ce qui m'a surpris"</li>
+</ol>
+<h3 id="screenshots-obligatoires">Screenshots obligatoires</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Fichier</th>
+<th>Contenu attendu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>01-plan-dev.png</code></td>
+<td>Sortie de <code>terraform plan</code> montrant <code>Plan: N to add</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>02-apply-success.png</code></td>
+<td>Sortie <code>Apply complete! Resources: N added</code> avec les outputs</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>03-nextcloud-login.png</code></td>
+<td>Page de login Nextcloud affichée dans le navigateur (URL ALB visible)</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>04-file-in-s3.png</code></td>
+<td>Console AWS S3 montrant un fichier uploadé via Nextcloud, avec chiffrement KMS visible</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>05-destroy-success.png</code></td>
+<td>Sortie <code>Destroy complete! Resources: N destroyed</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="bareme-apercu-etudiant">Barème (aperçu étudiant)</h2>
+<p>Le barème détaillé est dans <a href="tp05-team-nextcloud/bareme-formateur.md">tp05-team-nextcloud/bareme-formateur.md</a>. Voici la vue d'ensemble que vous voyez en tant qu'étudiant :</p>
+<h3 id="total-20-points">Total : 20 points</h3>
+<table>
+<thead>
+<tr>
+<th>Catégorie</th>
+<th>Points</th>
+<th>Critères principaux</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Architecture et déploiement</strong></td>
+<td>6</td>
+<td>Infra déployée et fonctionnelle, Nextcloud accessible, fichier S3 fonctionnel</td>
+</tr>
+<tr>
+<td><strong>Qualité du code Terraform</strong></td>
+<td>4</td>
+<td>Structure modules + envs, variables typées, outputs cohérents, fmt, validate</td>
+</tr>
+<tr>
+<td><strong>Sécurité</strong></td>
+<td>4</td>
+<td>KMS sur toutes les ressources stateful, IAM moindre privilège, pas de secrets en dur, tfsec 0 HIGH/CRITICAL</td>
+</tr>
+<tr>
+<td><strong>Collaboration et documentation</strong></td>
+<td>3</td>
+<td>PRs avec reviews croisées, README par module, RENDU.md complet, ARCHITECTURE.md</td>
+</tr>
+<tr>
+<td><strong>Rigueur du rendu</strong></td>
+<td>2</td>
+<td>5 screenshots conformes, zip conforme, destroy effectué</td>
+</tr>
+<tr>
+<td><strong>Bonus</strong></td>
+<td>+2</td>
+<td>terraform-docs, terraform test, CI/CD OIDC, Infracost</td>
+</tr>
+</tbody>
+</table>
+<h3 id="regles-de-notation">Règles de notation</h3>
+<ul>
+<li>🔴 <strong>Pénalités fortes</strong> :</li>
+<li>-4 points si l'infra n'est pas détruite à la remise (coût pour l'entreprise + risque sécurité)</li>
+<li>-3 points si un secret (mot de passe) est committé en clair</li>
+<li>-2 points si les interfaces entre modules ont été modifiées en cours de route sans PR</li>
+<li>🟢 <strong>Bonus attribués séparément</strong> (plafonnés à +2 points totaux) :</li>
+<li>+1 : CI/CD GitHub Actions OIDC fonctionnel</li>
+<li>+1 : <code>terraform test</code> avec au moins 2 <code>run</code> blocks</li>
+<li>+1 : <code>terraform-docs</code> dans chaque module</li>
+<li>+1 : Infracost intégré dans la PR</li>
+</ul>
+<hr />
+<h2 id="concepts-cles-a-connaitre">Concepts clés à connaître</h2>
+<p>🔷 Ce TP introduit quelques concepts nouveaux par rapport aux TPs précédents. <strong>Chaque concept est ré-expliqué dans la fiche rôle qui en a besoin</strong> — vous n'avez pas à les maîtriser avant. Voici l'aperçu global :</p>
+<h3 id="deja-vus-j1-j2">Déjà vus (J1 - J2)</h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Rappel rapide</th>
+<th>Où c'est utilisé</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>HCL, <code>provider</code>, <code>resource</code></strong></td>
+<td>Syntaxe de base Terraform</td>
+<td>Partout</td>
+</tr>
+<tr>
+<td><strong><code>variable</code> + <code>output</code> + <code>data</code></strong></td>
+<td>Paramétrer et interroger</td>
+<td>Tous les modules</td>
+</tr>
+<tr>
+<td><strong>VPC, subnets, IGW, NAT, route tables</strong></td>
+<td>Réseau AWS privé (TP02)</td>
+<td>Rôle 2 Network</td>
+</tr>
+<tr>
+<td><strong>S3 bucket sécurisé</strong> (versioning + SSE + block public)</td>
+<td>TP01</td>
+<td>Rôle 4 Data</td>
+</tr>
+<tr>
+<td><strong><code>for_each</code> sur map</strong>, <code>cidrsubnet()</code></td>
+<td>Itération propre (TP02)</td>
+<td>Rôle 2, Rôle 5</td>
+</tr>
+<tr>
+<td><strong>Module local</strong> (<code>module "x" { source = "./..." }</code>)</td>
+<td>Introduit en J2 Module 09</td>
+<td>Rôle 1 (orchestration)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nouveaux-pour-ce-tp-tous-expliques-dans-les-fiches-roles">Nouveaux pour ce TP — tous expliqués dans les fiches rôles</h3>
+<h4 id="1-backend-s3-pour-le-state-role-1">1. Backend S3 pour le state (Rôle 1)</h4>
+<p><strong>Ce que c'est</strong> : par défaut, Terraform stocke son <code>terraform.tfstate</code> localement. Pour travailler en équipe, on le met dans un bucket S3 avec un <strong>verrou</strong> pour éviter les applys simultanés.</p>
+<p><strong>À quoi ça sert</strong> : partage du state entre coéquipiers, historique des versions, chiffrement des secrets stockés dans le state.</p>
+<p><strong>Exemple minimal</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="nb">terraform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">backend</span><span class="w"> </span><span class="nv">&quot;s3&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">bucket</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tf-state-kolab-formation&quot;</span>
+<span class="w">    </span><span class="na">key</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;envs/dev/terraform.tfstate&quot;</span>
+<span class="w">    </span><span class="na">region</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="w">    </span><span class="na">encrypt</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">    </span><span class="na">use_lockfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="c1">  # TF &gt;= 1.10, plus besoin de DynamoDB</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🔷 <strong>Bootstrap "chicken-and-egg"</strong> : le bucket state est lui-même de l'infra AWS, mais on ne peut pas le créer via Terraform (où stockerait-on son state ?). On le crée <strong>une seule fois</strong> via un script bash AWS CLI, c'est le rôle du Rôle 1.</p>
+<h4 id="2-modules-avec-interfaces-figees-roles-1-5">2. Modules avec interfaces figées (Rôles 1-5)</h4>
+<p><strong>Ce que c'est</strong> : un module = un dossier <code>.tf</code> qui déclare <code>variable</code> (inputs) et <code>output</code> (sorties). L'appelant passe des valeurs et récupère des outputs.</p>
+<p><strong>Règles</strong> :</p>
+<ul>
+<li>⚫ Un module <strong>ne déclare JAMAIS</strong> de <code>provider</code> (c'est l'appelant qui le fait).</li>
+<li>🟢 Les <code>variable</code> sont son interface <strong>publique</strong> — <strong>on ne les modifie pas en cours de route</strong>.</li>
+<li>🟢 Les <code>output</code> sont ce qu'il expose à l'appelant.</li>
+</ul>
+<p><strong>Exemple d'appel</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="kr">module</span><span class="w"> </span><span class="nv">&quot;networking&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/networking&quot;</span>
+<span class="w">  </span><span class="na">project_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab&quot;</span>
+<span class="w">  </span><span class="na">vpc_cidr</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.30.0.0/16&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">module</span><span class="w"> </span><span class="nv">&quot;compute&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/compute&quot;</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.vpc_id</span><span class="c1">   # consomme l&#39;output</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="3-iam-instance-profile-role-5-role-3">3. IAM Instance Profile (Rôle 5 + Rôle 3)</h4>
+<p><strong>Ce que c'est</strong> : un "bracelet de permissions" attaché à une instance EC2. Au lieu de stocker des clés AWS sur la machine (dangereux), on attache un <strong>rôle IAM</strong>, et le SDK AWS récupère automatiquement des credentials éphémères via l'IMDS (Instance Metadata Service).</p>
+<p><strong>À quoi ça sert</strong> : ici, les EC2 accèdent à S3 (stockage fichiers Nextcloud) et Secrets Manager (mots de passe) <strong>sans aucune clé en dur</strong>.</p>
+<p><strong>Exemple minimal</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_role&quot;</span><span class="w"> </span><span class="nv">&quot;app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">assume_role_policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">jsonencode</span><span class="p">({</span>
+<span class="w">    </span><span class="na">Version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span>
+<span class="w">    </span><span class="na">Statement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">      </span><span class="na">Effect</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span>
+<span class="w">      </span><span class="nb">Principal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">Service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ec2.amazonaws.com&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="na">Action</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;sts:AssumeRole&quot;</span>
+<span class="w">    </span><span class="p">}]</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_instance_profile&quot;</span><span class="w"> </span><span class="nv">&quot;app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;nextcloud-app-profile&quot;</span>
+<span class="w">  </span><span class="na">role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.app.name</span>
+<span class="p">}</span>
+
+<span class="c1"># Sur aws_instance :</span>
+<span class="c1">#   iam_instance_profile = aws_iam_instance_profile.app.name</span>
+</code></pre></div>
+<h4 id="4-kms-customer-managed-key-role-5">4. KMS Customer Managed Key (Rôle 5)</h4>
+<p><strong>Ce que c'est</strong> : AWS KMS = service de gestion de clés de chiffrement. Une <strong>CMK</strong> (Customer Managed Key) = une clé dont vous gérez la policy. On l'utilise pour chiffrer les ressources stateful (S3, RDS, Secrets).</p>
+<p><strong>Règle critique — key policy</strong> : le <strong>compte root</strong> doit toujours avoir tous les droits sur la clé. Sinon la clé est "brickée" et il faut 7-30 jours pour la récupérer.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_kms_key&quot;</span><span class="w"> </span><span class="nv">&quot;main&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;CMK pour Nextcloud&quot;</span>
+<span class="w">  </span><span class="na">enable_key_rotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="na">policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">jsonencode</span><span class="p">({</span>
+<span class="w">    </span><span class="na">Version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span>
+<span class="w">    </span><span class="na">Statement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">      </span><span class="na">Sid</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;EnableRootAccountAccess&quot;</span>
+<span class="w">      </span><span class="na">Effect</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span>
+<span class="w">      </span><span class="nb">Principal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">AWS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;arn:aws:iam::${data.aws_caller_identity.current.account_id}:root&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="na">Action</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kms:*&quot;</span>
+<span class="w">      </span><span class="na">Resource</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;*&quot;</span>
+<span class="w">    </span><span class="p">}]</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="5-secrets-manager-role-5-role-3-role-4">5. Secrets Manager (Rôle 5 + Rôle 3 + Rôle 4)</h4>
+<p><strong>Ce que c'est</strong> : service AWS qui stocke des secrets (mots de passe, tokens) chiffrés avec KMS, avec rotation, versioning, et accès contrôlé par IAM.</p>
+<p><strong>À quoi ça sert</strong> : le mot de passe de la DB PostgreSQL + le mot de passe admin de Nextcloud sont générés aléatoirement, stockés ici, et lus par l'EC2 au boot via <code>aws secretsmanager get-secret-value</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;random_password&quot;</span><span class="w"> </span><span class="nv">&quot;db&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">length</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="m">24</span>
+<span class="w">  </span><span class="na">special</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="c1">  # RDS PG refuse certains caracteres</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_secretsmanager_secret&quot;</span><span class="w"> </span><span class="nv">&quot;db_password&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab-dev-db-password&quot;</span>
+<span class="w">  </span><span class="na">kms_key_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_kms_key.main.arn</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_secretsmanager_secret_version&quot;</span><span class="w"> </span><span class="nv">&quot;db_password&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">secret_id</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_secretsmanager_secret.db_password.id</span>
+<span class="w">  </span><span class="na">secret_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">random_password.db.result</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="6-application-load-balancer-role-3">6. Application Load Balancer (Rôle 3)</h4>
+<p><strong>Ce que c'est</strong> : un load balancer HTTP/HTTPS géré par AWS. Il écoute sur un port public (443), termine le TLS, et route les requêtes vers un <strong>target group</strong> (ici, l'EC2 Nextcloud).</p>
+<p><strong>Composants</strong> :</p>
+<ul>
+<li><code>aws_lb</code> : le load balancer lui-même</li>
+<li><code>aws_lb_target_group</code> : le groupe cible (une ou plusieurs instances)</li>
+<li><code>aws_lb_target_group_attachment</code> : relie une instance à un target group</li>
+<li><code>aws_lb_listener</code> : le listener sur un port (80 ou 443)</li>
+<li><code>aws_acm_certificate</code> : le certificat TLS (ici self-signed pour le TP)</li>
+</ul>
+<h4 id="7-user_data-avec-templatefile-role-3">7. <code>user_data</code> avec <code>templatefile()</code> (Rôle 3)</h4>
+<p><strong>Ce que c'est</strong> : un script shell exécuté une seule fois au premier boot de l'EC2 (cloud-init). On interpole des variables Terraform dedans via <code>templatefile()</code>.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="na">user_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">templatefile</span><span class="p">(</span><span class="s2">&quot;${path.module}/templates/nextcloud.sh.tftpl&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">db_endpoint</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">var.db_endpoint</span>
+<span class="w">  </span><span class="na">db_password_secret_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.db_password_secret_arn</span>
+<span class="w">  </span><span class="na">s3_bucket</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="nv">var.s3_primary_bucket_name</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>Dans le template : <code>${db_endpoint}</code> sera remplacé par la valeur. Le shell <code>$VARIABLE</code> doit être échappé en <code>$$VARIABLE</code>.</p>
+<h4 id="8-rds-postgresql-avec-multi-az-role-4">8. RDS PostgreSQL avec Multi-AZ (Rôle 4)</h4>
+<p><strong>Ce que c'est</strong> : une base de données PostgreSQL managée par AWS. <strong>Multi-AZ</strong> = AWS maintient une réplique synchrone dans une autre AZ pour la haute disponibilité.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_db_instance&quot;</span><span class="w"> </span><span class="nv">&quot;nextcloud&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">engine</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;postgres&quot;</span>
+<span class="w">  </span><span class="na">engine_version</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;16.4&quot;</span>
+<span class="w">  </span><span class="na">instance_class</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;db.t3.micro&quot;</span>
+<span class="w">  </span><span class="na">allocated_storage</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="m">20</span>
+<span class="w">  </span><span class="na">storage_encrypted</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="na">kms_key_id</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="nv">var.kms_key_arn</span>
+<span class="w">  </span><span class="na">multi_az</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="na">db_name</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;nextcloud&quot;</span>
+<span class="w">  </span><span class="na">username</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;nextcloud&quot;</span>
+<span class="w">  </span><span class="na">password</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="nv">data.aws_secretsmanager_secret_version.db_password.secret_string</span>
+<span class="w">  </span><span class="na">db_subnet_group_name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_db_subnet_group.main.name</span>
+<span class="w">  </span><span class="na">vpc_security_group_ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nv">var.db_security_group_id</span><span class="p">]</span>
+<span class="w">  </span><span class="na">skip_final_snapshot</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="c1">  # dev uniquement</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="bonus-si-vous-voulez-aller-plus-loin">Bonus si vous voulez aller plus loin</h3>
+<ul>
+<li><strong><code>terraform test</code></strong> — tests natifs (TF 1.6+), <code>+1</code> point</li>
+<li><strong><code>terraform-docs</code></strong> — génération auto des README module, <code>+1</code> point</li>
+<li><strong>CI/CD GitHub Actions OIDC</strong> — plan automatique sur PR, <code>+1</code> point</li>
+<li><strong>Infracost</strong> — estimation coût sur PR, <code>+1</code> point</li>
+</ul>
+<hr />
+<h2 id="aide-et-ressources">Aide et ressources</h2>
+<h3 id="ressources-nextcloud">Ressources Nextcloud</h3>
+<ul>
+<li><a href="https://docs.nextcloud.com/server/latest/admin_manual/configuration_files/primary_storage.html">Documentation officielle Nextcloud — Primary Object Storage</a></li>
+<li><a href="https://hub.docker.com/_/nextcloud/">Image Docker officielle <code>nextcloud</code></a> — variables d'environnement supportées (<code>POSTGRES_HOST</code>, <code>OBJECTSTORE_S3_BUCKET</code>, etc.)</li>
+</ul>
+<h3 id="ressources-terraform-aws">Ressources Terraform AWS</h3>
+<ul>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance">AWS Provider docs — <code>aws_db_instance</code></a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb"><code>aws_lb</code>, <code>aws_lb_target_group</code>, <code>aws_lb_listener</code></a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_template"><code>aws_launch_template</code> + <code>aws_autoscaling_group</code></a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key"><code>aws_kms_key</code> + <code>aws_kms_alias</code></a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret"><code>aws_secretsmanager_secret</code> + <code>_version</code></a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile"><code>aws_iam_role</code> + <code>aws_iam_instance_profile</code></a></li>
+</ul>
+<h3 id="starter-kit-fourni">Starter kit fourni</h3>
+<p>Vous récupérez le starter kit via <code>cp -r</code> depuis le dossier formateur ou Git clone. Il est dans :</p>
+<div class="highlight"><pre><span></span><code>corriges/jour5/tp05-starter/
+</code></pre></div>
+<p>Contenu :</p>
+<ul>
+<li><strong>Arborescence complète</strong> : tous les dossiers créés (<code>bootstrap/</code>, <code>modules/{networking,security,data,compute}/</code>, <code>envs/dev/</code>, <code>docs/</code>).</li>
+<li><strong>Interfaces figées pré-écrites</strong> : <code>variables.tf</code> et <code>outputs.tf</code> de chaque module contiennent les contrats du TP. <strong>Ne pas les modifier</strong>.</li>
+<li><strong>Providers configurés</strong> : <code>versions.tf</code> de chaque module + <code>providers.tf</code> de <code>envs/dev/</code> déjà écrits.</li>
+<li><strong>Fichiers implémentation vides</strong> : <code>main.tf</code>, <code>sg.tf</code>, <code>kms.tf</code>, <code>rds.tf</code>, <code>s3.tf</code>, <code>alb.tf</code>, <code>ec2.tf</code> contiennent juste un en-tête et des <code># TODO</code> — <strong>c'est là que vous codez</strong>.</li>
+<li><strong>Script <code>bootstrap/create-state-bucket.sh</code></strong> : prêt à exécuter, crée le bucket state + la KMS key dédiée.</li>
+<li><strong><code>envs/dev/backend.tf</code></strong> : pré-configuré, vous n'avez qu'à adapter le suffixe du bucket à votre équipe.</li>
+<li><strong>Fichier <code>docs/RENDU.md</code></strong> : template vierge à remplir.</li>
+<li><strong><code>.gitignore</code>, <code>.pre-commit-config.yaml</code>, <code>README.md</code></strong> : prêts à l'emploi.</li>
+</ul>
+<p>🔷 <strong>Gain</strong> : ~1h de setup en moins au démarrage. Vous vous concentrez sur <strong>le code métier</strong>, pas sur l'arborescence.</p>
+<h3 id="demarrage-rapide-30-s">Démarrage rapide (30 s)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Recuperer le starter</span>
+cp<span class="w"> </span>-r<span class="w"> </span>/path/to/formation/corriges/jour5/tp05-starter<span class="w"> </span>~/formation-terraform/jour5/tp05-nextcloud
+<span class="nb">cd</span><span class="w"> </span>~/formation-terraform/jour5/tp05-nextcloud
+
+<span class="c1"># Initialiser Git (pour PRs + historique)</span>
+git<span class="w"> </span>init<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;initial: starter kit&quot;</span>
+
+<span class="c1"># Bootstrap du bucket state (adapter USERNAME dans le script d&#39;abord)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">AWS_PROFILE</span><span class="o">=</span>formation
+<span class="nb">export</span><span class="w"> </span><span class="nv">USERNAME</span><span class="o">=</span><span class="s2">&quot;equipe&lt;N&gt;&quot;</span><span class="w">  </span><span class="c1"># ex: equipe1</span>
+./bootstrap/create-state-bucket.sh
+
+<span class="c1"># Chacun cree sa branche de rôle</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>role-&lt;N&gt;-&lt;nom&gt;<span class="w">   </span><span class="c1"># ex: role-2-network</span>
+</code></pre></div>
+<h3 id="pattern-de-user_data-nextcloud-extrait-a-completer-par-le-role-3">Pattern de user_data Nextcloud (extrait — à compléter par le Rôle 3)</h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># user_data : recupere les secrets, lance Nextcloud en Docker.</span>
+<span class="nb">set</span><span class="w"> </span>-euxo<span class="w"> </span>pipefail
+
+<span class="c1"># 1. Install Docker</span>
+dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>docker
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>docker
+
+<span class="c1"># 2. Recuperer les secrets via IAM instance profile</span>
+<span class="nv">DB_PASSWORD</span><span class="o">=</span><span class="k">$(</span>aws<span class="w"> </span>secretsmanager<span class="w"> </span>get-secret-value<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--secret-id<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">db_password_secret_arn</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>SecretString<span class="w"> </span>--output<span class="w"> </span>text<span class="k">)</span>
+
+<span class="nv">ADMIN_PASSWORD</span><span class="o">=</span><span class="k">$(</span>aws<span class="w"> </span>secretsmanager<span class="w"> </span>get-secret-value<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--secret-id<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">admin_password_secret_arn</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>SecretString<span class="w"> </span>--output<span class="w"> </span>text<span class="k">)</span>
+
+<span class="c1"># 3. Lancer Nextcloud en Docker</span>
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>nextcloud<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--restart<span class="w"> </span>always<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="m">80</span>:80<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_HOST</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">db_endpoint</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_DB</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">db_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_USER</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">db_username</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DB_PASSWORD</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">NEXTCLOUD_ADMIN_USER</span><span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">NEXTCLOUD_ADMIN_PASSWORD</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$ADMIN_PASSWORD</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_BUCKET</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s3_primary_bucket_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_REGION</span><span class="o">=</span>eu-west-1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_USEPATH_STYLE</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_SSL</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_AUTOCREATE</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_USE_EC2_IAM</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">NEXTCLOUD_TRUSTED_DOMAINS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">trusted_domain</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>nextcloud:30-apache
+</code></pre></div>
+<h3 id="support-formateur">Support formateur</h3>
+<ul>
+<li>🔵 <strong>Canal Slack</strong> <code>#formation-terraform-tp05</code> : questions techniques pendant le sprint</li>
+<li>🔵 <strong>Paperboard</strong> : architecture dessinée en live pendant le kick-off</li>
+<li>🔵 <strong>10 min d'aide individuelle</strong> par rôle dans l'après-midi (demander au formateur)</li>
+</ul>
+<hr />
+<h2 id="checklist-de-fin-de-journee">Checklist de fin de journée</h2>
+<p><strong>Avant de rendre votre zip, vérifiez</strong> :</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>terraform destroy</code> a été exécuté dans <code>envs/dev/</code> (output montre <code>Destroy complete!</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Aucun <code>terraform.tfstate*</code> dans le zip</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Aucun <code>.tfvars</code> personnel dans le zip (sauf <code>.tfvars.example</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Aucun secret en clair dans le code (vérifier avec <code>grep -r "password" .</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 5 screenshots présents dans <code>docs/screenshots/</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>docs/RENDU.md</code> rempli complètement</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>ARCHITECTURE.md</code> avec schéma Mermaid</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> README.md par module (au moins titre + description + <code>terraform-docs</code> bonus)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>.github/workflows/terraform-plan.yml</code> présent (si bonus CI/CD tenté)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Zip nommé <code>tp05-nextcloud-equipe&lt;N&gt;.zip</code> remis au formateur</li>
+</ul>
+<p><strong>Félicitations</strong> — à la fin de ce TP, vous avez déployé en équipe une application de production réelle sur AWS en Terraform. C'est exactement le quotidien d'un Ops en entreprise.</p>
+<p><strong>Prochaine étape</strong> : passer la certification <a href="https://developer.hashicorp.com/terraform/tutorials/certification-003">HashiCorp Certified: Terraform Associate (003)</a> pour valoriser vos compétences.</p>
+    </article>
+
+    
+    
+    
+    <script>
+    (function() {
+        'use strict';
+        
+        function initMermaidLightbox() {
+            // Crée le conteneur lightbox
+            const lightbox = document.createElement('div');
+            lightbox.className = 'mermaid-lightbox';
+            lightbox.innerHTML = `
+                <div class="mermaid-lightbox-backdrop"></div>
+                <div class="mermaid-lightbox-container">
+                    <div class="mermaid-lightbox-content"></div>
+                </div>
+                <div class="mermaid-lightbox-controls">
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-in" title="Zoom +">+</button>
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-reset" title="Reset">100%</button>
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-out" title="Zoom -">−</button>
+                    <button class="mermaid-lb-btn mermaid-lb-close" title="Fermer">✕</button>
+                </div>
+            `;
+            document.body.appendChild(lightbox);
+
+            // Variables de zoom et pan
+            let scale = 1;
+            let translateX = 0;
+            let translateY = 0;
+            let isDragging = false;
+            let startX, startY;
+
+            const container = lightbox.querySelector('.mermaid-lightbox-container');
+            const content = lightbox.querySelector('.mermaid-lightbox-content');
+            const backdrop = lightbox.querySelector('.mermaid-lightbox-backdrop');
+
+            // Ajoute un bouton d'expansion à chaque diagramme Mermaid
+            document.querySelectorAll('.mermaid, pre.mermaid').forEach(diagram => {
+                const expandBtn = document.createElement('button');
+                expandBtn.className = 'mermaid-expand-btn';
+                expandBtn.innerHTML = '⛶';
+                expandBtn.title = 'Agrandir le diagramme';
+                expandBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openLightbox(diagram);
+                });
+                
+                // Wrapper pour positionner le bouton
+                const wrapper = document.createElement('div');
+                wrapper.className = 'mermaid-wrapper';
+                diagram.parentNode.insertBefore(wrapper, diagram);
+                wrapper.appendChild(diagram);
+                wrapper.appendChild(expandBtn);
+            });
+
+            function openLightbox(diagram) {
+                // Clone le contenu SVG
+                const svg = diagram.querySelector('svg');
+                if (svg) {
+                    content.innerHTML = '';
+                    const clonedSvg = svg.cloneNode(true);
+                    
+                    // Garder le viewBox pour les proportions
+                    if (!clonedSvg.hasAttribute('viewBox') && svg.viewBox && svg.viewBox.baseVal) {
+                        const vb = svg.viewBox.baseVal;
+                        if (vb.width && vb.height) {
+                            clonedSvg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.width} ${vb.height}`);
+                        }
+                    }
+                    
+                    // Le CSS gère les dimensions (80vw)
+                    clonedSvg.removeAttribute('width');
+                    clonedSvg.removeAttribute('height');
+                    
+                    // Agrandir les foreignObject pour éviter la troncature du texte
+                    clonedSvg.querySelectorAll('foreignObject').forEach(fo => {
+                        const currentWidth = parseFloat(fo.getAttribute('width')) || 100;
+                        const currentHeight = parseFloat(fo.getAttribute('height')) || 50;
+                        fo.setAttribute('width', currentWidth * 1.5);
+                        fo.setAttribute('height', currentHeight * 1.5);
+                    });
+                    
+                    content.appendChild(clonedSvg);
+                } else {
+                    content.innerHTML = diagram.innerHTML;
+                }
+                
+                // Reset zoom et position
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                applyTransform();
+                
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function applyTransform() {
+                content.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+                lightbox.querySelector('.mermaid-lb-zoom-reset').textContent = Math.round(scale * 100) + '%';
+            }
+
+            function zoomIn() {
+                scale = Math.min(scale * 1.25, 5);
+                applyTransform();
+            }
+
+            function zoomOut() {
+                scale = Math.max(scale / 1.25, 0.25);
+                applyTransform();
+            }
+
+            function zoomReset() {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                applyTransform();
+            }
+
+            // Événements des boutons
+            lightbox.querySelector('.mermaid-lb-close').addEventListener('click', closeLightbox);
+            lightbox.querySelector('.mermaid-lb-zoom-in').addEventListener('click', zoomIn);
+            lightbox.querySelector('.mermaid-lb-zoom-out').addEventListener('click', zoomOut);
+            lightbox.querySelector('.mermaid-lb-zoom-reset').addEventListener('click', zoomReset);
+            backdrop.addEventListener('click', closeLightbox);
+
+            // Fermer avec Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            // Zoom avec la molette
+            container.addEventListener('wheel', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                e.preventDefault();
+                
+                if (e.deltaY < 0) {
+                    scale = Math.min(scale * 1.1, 5);
+                } else {
+                    scale = Math.max(scale / 1.1, 0.25);
+                }
+                applyTransform();
+            });
+
+            // Pan avec la souris
+            container.addEventListener('mousedown', (e) => {
+                if (e.button !== 0) return;
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                container.style.cursor = 'grabbing';
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                applyTransform();
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                container.style.cursor = 'grab';
+            });
+
+            // Touch support pour mobile
+            let touchStartX, touchStartY;
+            container.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX - translateX;
+                    touchStartY = e.touches[0].clientY - translateY;
+                }
+            });
+
+            container.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1) {
+                    e.preventDefault();
+                    translateX = e.touches[0].clientX - touchStartX;
+                    translateY = e.touches[0].clientY - touchStartY;
+                    applyTransform();
+                }
+            });
+        }
+
+        // Initialise après le rendu de Mermaid
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof mermaid !== 'undefined') {
+                setTimeout(initMermaidLightbox, 600);
+            } else {
+                initMermaidLightbox();
+            }
+        });
+    })();
+    </script>
+
+</body>
+</html>

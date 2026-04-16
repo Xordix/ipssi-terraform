@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rôle 3 — Compute Engineer — TP05 Nextcloud</title>
+    
+    
+    
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');:root{--color-primary:#20a7c9;--color-primary-dark:#1a8ba8;--color-primary-light:#e0f4f8;--color-primary-gradient:linear-gradient(135deg,#20a7c9 0%,#1a8ba8 100%);--color-accent:#ff7f44;--color-accent-light:#fff4ef;--color-success:#22c55e;--color-success-light:#dcfce7;--color-warning:#eab308;--color-warning-light:#fef9c3;--color-danger:#ef4444;--color-danger-light:#fee2e2;--color-info:#3b82f6;--color-info-light:#dbeafe;--gray-50:#fafafa;--gray-100:#f4f4f5;--gray-200:#e4e4e7;--gray-300:#d4d4d8;--gray-400:#a1a1aa;--gray-500:#71717a;--gray-600:#52525b;--gray-700:#3f3f46;--gray-800:#27272a;--gray-900:#18181b;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Consolas',monospace;--content-max-width:80%;--content-padding:2.5rem;--radius-sm:6px;--radius-md:10px;--radius-lg:16px;--radius-xl:20px;--shadow-sm:0 1px 2px rgba(0,0,0,0.04);--shadow-md:0 4px 12px rgba(0,0,0,0.08);--shadow-lg:0 8px 30px rgba(0,0,0,0.12);--shadow-card:0 2px 8px rgba(0,0,0,0.06),0 0 1px rgba(0,0,0,0.1)}*,*::before,*::after{box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}body{font-family:var(--font-sans);font-size:1rem;line-height:1.75;color:var(--gray-800);background:linear-gradient(180deg,var(--gray-100) 0%,var(--gray-50) 100%);min-height:100vh;margin:0;padding:2.5rem 1rem}.markdown-body,article,main{max-width:var(--content-max-width);margin:0 auto;background:white;padding:var(--content-padding);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);border:1px solid var(--gray-200)}h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3;color:var(--gray-900);margin-top:2.5rem;margin-bottom:1rem}h1{font-size:2.25rem;font-weight:700;margin-top:0;padding-bottom:1rem;border-bottom:none;position:relative;color:var(--gray-900)}h1::after{content:'';position:absolute;bottom:0;left:0;width:80px;height:4px;background:var(--color-primary-gradient);border-radius:2px}h2{font-size:1.5rem;margin-top:3rem;padding:1rem 1.25rem;background:var(--gray-50);border-left:4px solid var(--color-primary);border-radius:0 var(--radius-md) var(--radius-md) 0;color:var(--gray-800)}h3{font-size:1.25rem;color:var(--gray-800);display:flex;align-items:center;gap:0.5rem}h3::before{content:'';width:8px;height:8px;background:var(--color-primary);border-radius:50%;flex-shrink:0}h4{font-size:1.1rem;color:var(--gray-700);border-bottom:1px dashed var(--gray-300);padding-bottom:0.5rem}h5,h6{font-size:0.9rem;color:var(--gray-600);text-transform:uppercase;letter-spacing:0.08em;font-weight:600}p{margin-bottom:1.25rem}strong,b{font-weight:600;color:var(--gray-900)}a{color:var(--color-primary);text-decoration:none;font-weight:500;transition:all 0.2s;border-bottom:1px solid transparent}a:hover{color:var(--color-primary-dark);border-bottom-color:var(--color-primary)}mark{background:linear-gradient(120deg,#fef08a 0%,#fde047 100%);padding:0.1em 0.4em;border-radius:4px}hr{border:none;height:1px;background:var(--gray-200);margin:3rem 0;position:relative}hr::before{content:'◆';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:white;color:var(--color-primary);padding:0 1rem;font-size:0.8rem}ul,ol{margin-bottom:1.25rem;padding-left:1.5rem}li{margin-bottom:0.5rem;position:relative}li > ul,li > ol{margin-top:0.5rem;margin-bottom:0}ul{list-style-type:none}ul > li::before{content:'▸';color:var(--color-primary);font-weight:bold;position:absolute;left:-1.25rem}ul ul > li::before{content:'○';font-size:0.7em}ol{list-style-type:decimal}img{display:block;max-width:100%;max-height:500px;height:auto;margin:2rem auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);border:1px solid var(--gray-200);transition:transform 0.2s,box-shadow 0.2s;object-fit:contain}img:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}img[src*="screenshot"],img[src*="superset.apache.org"]{max-height:400px;width:auto;object-fit:contain}img[src*="images/"]{max-height:450px;width:auto;object-fit:contain}h1 img,h2 img,h3 img,h4 img,h5 img,h6 img{display:inline-block;margin:0 0.5rem 0 0;vertical-align:middle;max-height:1.5em;border-radius:var(--radius-sm);box-shadow:none;border:none}td img,th img{display:inline-block;margin:0;vertical-align:middle;max-height:2em;border-radius:var(--radius-sm);box-shadow:none;border:none}figure{margin:2rem 0;text-align:center;background:var(--gray-50);padding:1.5rem;border-radius:var(--radius-lg);border:1px solid var(--gray-200)}figure img{margin:0 auto 1rem;box-shadow:none;border:none}figcaption{font-size:0.875rem;color:var(--gray-500);font-style:italic}code:not(pre code){font-family:var(--font-mono);font-size:0.85em;background:#fef3c7;color:#92400e;padding:0.2em 0.5em;border-radius:var(--radius-sm);font-weight:600;border:1px solid #fcd34d}pre code{background:transparent;color:inherit;padding:0;border:none;font-weight:inherit}pre{font-family:var(--font-mono);font-size:0.875rem;line-height:1.6;background:var(--gray-900);color:#e4e4e7;padding:1.5rem;border-radius:var(--radius-lg);overflow-x:auto;margin:1.5rem 0;box-shadow:var(--shadow-md);border:1px solid var(--gray-800);position:relative}pre::before{content:'';position:absolute;top:12px;left:16px;width:12px;height:12px;background:#ff5f56;border-radius:50%;box-shadow:20px 0 0 #ffbd2e,40px 0 0 #27ca40}pre code{background:transparent;color:inherit;padding:0;font-size:inherit;font-weight:normal}table{width:100%;border-collapse:separate;border-spacing:0;margin:1.5rem 0;font-size:0.9375rem;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);border:1px solid var(--gray-200)}thead{background:var(--color-primary-gradient);color:white}th{font-weight:600;text-align:left;padding:1rem 1.25rem;font-size:0.8125rem;text-transform:uppercase;letter-spacing:0.05em}td{padding:0.875rem 1.25rem;border-bottom:1px solid var(--gray-100);vertical-align:top}tbody tr:last-child td{border-bottom:none}tbody tr:nth-child(even){background:var(--gray-50)}tbody tr{transition:background 0.15s}tbody tr:hover{background:var(--color-primary-light)}blockquote{margin:2rem 0;padding:1.5rem 1.5rem 1.5rem 2rem;border-left:4px solid var(--color-primary);background:linear-gradient(135deg,var(--gray-50) 0%,white 100%);border-radius:0 var(--radius-lg) var(--radius-lg) 0;color:var(--gray-700);box-shadow:var(--shadow-sm);font-style:italic;position:relative}blockquote::before{content:'"';position:absolute;top:-10px;left:15px;font-size:4rem;color:var(--color-primary);opacity:0.2;font-family:Georgia,serif;line-height:1}blockquote p:last-child{margin-bottom:0}details{margin:1.5rem 0;padding:0;background:white;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);transition:box-shadow 0.2s}details:hover{box-shadow:var(--shadow-md)}details[open]{box-shadow:var(--shadow-md);padding:1rem 1.25rem}details[open] > summary{margin:-1rem -1.25rem 1rem -1.25rem}details > .highlight,details > pre{margin-left:-1.25rem;margin-right:-1.25rem;border-radius:0}details > .highlight pre{border-radius:0;margin:0}details > .highlight:last-child,details > pre:last-child{margin-bottom:-1rem}summary{font-weight:600;cursor:pointer;padding:1rem 1.25rem;list-style:none;display:flex;align-items:center;gap:0.75rem;color:var(--gray-800);background:var(--gray-50);border-bottom:1px solid transparent;transition:all 0.2s}details[open] summary{border-bottom-color:var(--gray-200);background:var(--color-primary-light);color:var(--color-primary-dark)}summary::-webkit-details-marker{display:none}summary::before{content:'▶';font-size:0.65rem;color:var(--color-primary);transition:transform 0.2s;flex-shrink:0}details[open] summary::before{transform:rotate(90deg)}summary:hover{background:var(--gray-100)}.mermaid,pre.mermaid{background:white;padding:2rem;margin:2rem 0;border-radius:var(--radius-lg);border:1px solid var(--gray-200);text-align:center;overflow-x:auto;box-shadow:var(--shadow-card)}.mermaid::before{display:none}.mermaid svg{max-width:100%;height:auto}.note,.info,.tip{padding:1.25rem;margin:1.5rem 0;border-radius:var(--radius-lg);border-left:4px solid var(--color-info);background:var(--color-info-light);box-shadow:var(--shadow-sm)}.warning,.attention{border-left-color:var(--color-warning);background:var(--color-warning-light)}.danger,.error{border-left-color:var(--color-danger);background:var(--color-danger-light)}.success{border-left-color:var(--color-success);background:var(--color-success-light)}h2 + p::first-letter{font-size:1.5em;font-weight:600;color:var(--color-primary);float:left;margin-right:0.1em;line-height:1}@media print{body{background:white;padding:0}.markdown-body,article,main{box-shadow:none;border:none;padding:0;max-width:100%}pre{background:var(--gray-100) !important;color:var(--gray-900) !important;box-shadow:none;border:1px solid var(--gray-300)}pre::before{display:none}a{color:var(--gray-900)}img{max-height:280px;page-break-inside:avoid;box-shadow:none}h1,h2,h3{page-break-after:avoid}table,pre,blockquote,details{page-break-inside:avoid}h2{background:none;padding-left:0}}@media (max-width:768px){body{padding:1rem 0.5rem}.markdown-body,article,main{padding:1.5rem;border-radius:var(--radius-lg)}h1{font-size:1.75rem}h2{font-size:1.25rem;padding:0.75rem 1rem}h3{font-size:1.1rem}table{display:block;overflow-x:auto}pre{padding:1rem;font-size:0.8rem}img{max-height:250px}blockquote::before{display:none}}img[src*="superset-logo"]{max-height:80px;margin:0 0 2rem 0;box-shadow:none;border:none}img[src*="superset-logo"]:hover{transform:none}.mermaid-wrapper{position:relative;display:inline-block;width:100%}.mermaid-expand-btn{position:absolute;top:12px;right:12px;width:36px;height:36px;border:none;border-radius:var(--radius-md);background:rgba(255,255,255,0.9);color:var(--gray-600);font-size:1.2rem;cursor:pointer;opacity:0;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);z-index:10}.mermaid-wrapper:hover .mermaid-expand-btn{opacity:1}.mermaid-expand-btn:hover{background:var(--color-primary);color:white;transform:scale(1.1)}.mermaid-lightbox{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;display:none}.mermaid-lightbox.active{display:flex;align-items:center;justify-content:center}.mermaid-lightbox-backdrop{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px)}.mermaid-lightbox-container{position:relative;width:100%;height:100%;overflow:hidden;cursor:grab;display:flex;align-items:center;justify-content:center}.mermaid-lightbox-content{transform-origin:center center;transition:transform 0.1s ease-out;padding:40px}.mermaid-lightbox-content svg{max-width:none !important;max-height:none !important;width:80vw !important;height:auto !important;min-width:800px;background:white;border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-lg)}.mermaid-lightbox.active svg{font-size:12px !important}.mermaid-lightbox.active svg text{white-space:nowrap !important}.mermaid-lightbox.active svg foreignObject{overflow:visible !important;text-align:left !important}.mermaid-lightbox.active svg foreignObject *{white-space:nowrap !important;overflow:visible !important;text-overflow:clip !important;width:auto !important;max-width:none !important;min-width:0 !important}.mermaid-lightbox-controls{position:absolute;top:20px;right:20px;display:flex;gap:8px;z-index:10001}.mermaid-lb-btn{width:44px;height:44px;border:none;border-radius:var(--radius-md);background:rgba(255,255,255,0.95);color:var(--gray-800);font-size:1.1rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;box-shadow:var(--shadow-md)}.mermaid-lb-zoom-reset{width:auto;padding:0 16px;font-size:0.9rem}.mermaid-lb-btn:hover{background:var(--color-primary);color:white;transform:scale(1.05)}.mermaid-lb-close:hover{background:#ef4444;color:white}.mermaid-lightbox::after{content:'Molette:zoom • Glisser:déplacer • Échap:fermer';position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.7);font-size:0.85rem;font-weight:500;background:rgba(0,0,0,0.5);padding:10px 20px;border-radius:var(--radius-lg)}
+    </style>
+    
+    <style>
+.mermaid-container{background:white;border:1px solid var(--color-gray-200);border-radius:var(--radius-lg);padding:var(--space-md);display:flex;justify-content:center;align-items:center;overflow:auto;flex:1;min-height:120px;max-height:600px;max-width:100%;width:100%}.mermaid-container--full{flex:1;min-height:0}.mermaid-container--compact{min-height:100px;max-height:350px;flex:0 0 auto}.mermaid-container--small{max-height:300px}.mermaid-container--medium{max-height:450px}.mermaid-container--large{max-height:700px}.mermaid-container--contained{overflow:hidden}.mermaid-container--contained .mermaid svg{max-height:100% !important}.mermaid,pre.mermaid{font-family:var(--font-display,'Inter',sans-serif);width:100%;display:flex;justify-content:center;align-items:center;background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:24px;margin:16px 0;text-align:center;max-height:60vh;overflow:hidden}.mermaid::before,.mermaid::after{display:none}.mermaid svg{max-width:100%;max-height:60vh;height:auto;width:auto}.mermaid svg[aria-roledescription="gantt"]{max-width:none !important;width:100% !important;min-width:800px !important;max-height:none !important;height:auto !important;flex:1 1 auto !important}.mermaid:has(svg[aria-roledescription="gantt"]){display:block !important;max-height:none !important;overflow-x:auto !important;overflow-y:visible !important;min-width:0 !important}.mermaid-container--scroll{overflow:auto}.mermaid .node rect,.mermaid .node polygon,.mermaid .node circle{stroke-width:2px !important}.mermaid .edgePath .path{stroke-width:2px !important}.mermaid .label{font-family:var(--font-display) !important;font-size:12px !important;overflow:visible !important}.mermaid .nodeLabel{font-size:12px !important;line-height:1.3 !important;overflow:visible !important;white-space:normal !important;text-overflow:clip !important}.mermaid .edgeLabel{font-size:11px !important;overflow:visible !important}.mermaid .node rect,.mermaid .node polygon{overflow:visible !important}.mermaid .cluster rect,.mermaid svg .cluster rect{rx:8px !important;ry:8px !important}.mermaid .cluster-label{font-size:14px !important;font-weight:700 !important;dominant-baseline:text-before-edge !important}.mermaid .cluster-label foreignObject{overflow:visible !important}.mermaid .cluster-label foreignObject div,.mermaid .cluster-label foreignObject p,.mermaid .cluster-label foreignObject span{padding-bottom:8px !important;margin-bottom:4px !important;line-height:1.4 !important}.mermaid .cluster .nodeLabel{margin-top:4px !important}.mermaid .cluster rect{fill:#f8fafc !important;stroke:#cbd5e1 !important;stroke-width:2px !important}.mermaid .cluster-label text,.mermaid .cluster-label tspan,.mermaid svg .cluster-label text{fill:#1e293b !important;color:#1e293b !important;font-weight:700 !important}.mermaid .actor,.mermaid svg .actor,.mermaid svg rect.actor,.mermaid .actor-top,.mermaid .actor-bottom,.mermaid svg .actor-top,.mermaid svg .actor-bottom{fill:#1e3a5f !important;stroke:#0c4a6e !important;stroke-width:2px !important}.mermaid .actor-man,.mermaid text.actor,.mermaid svg text.actor,.mermaid svg .actor-man{fill:#ffffff !important;color:#ffffff !important;font-size:14px !important;font-weight:600 !important}.mermaid text.actor tspan,.mermaid svg text.actor tspan,.mermaid .actor-man tspan{fill:#ffffff !important;color:#ffffff !important}.mermaid .actor-line,.mermaid svg .actor-line,.mermaid svg line.actor-line{stroke:#64748b !important;stroke-width:1.5px !important;stroke-dasharray:4,4 !important}.mermaid .messageLine0,.mermaid .messageLine1,.mermaid svg .messageLine0,.mermaid svg .messageLine1,.mermaid svg line.messageLine0,.mermaid svg line.messageLine1{stroke:#1e293b !important;stroke-width:2px !important}.mermaid .arrowhead,.mermaid svg .arrowhead{fill:#1e293b !important;stroke:#1e293b !important}.mermaid #arrowhead path,.mermaid marker path,.mermaid svg marker path,.mermaid svg #arrowhead path{fill:#1e293b !important;stroke:#1e293b !important}.mermaid .messageText,.mermaid svg .messageText,.mermaid svg text.messageText{fill:#0f172a !important;color:#0f172a !important;font-size:13px !important;font-weight:600 !important;stroke:none !important}.mermaid .messageText tspan,.mermaid svg .messageText tspan{fill:#0f172a !important;color:#0f172a !important}.mermaid .activation0,.mermaid .activation1,.mermaid .activation2,.mermaid svg .activation0,.mermaid svg .activation1,.mermaid svg .activation2{fill:#dbeafe !important;stroke:#3b82f6 !important;stroke-width:2px !important}.mermaid .loopLine,.mermaid svg .loopLine{stroke:#64748b !important;stroke-width:2px !important}.mermaid rect.loopBox,.mermaid .loopBox,.mermaid svg .loopBox{fill:#f8fafc !important;stroke:#64748b !important;stroke-width:1.5px !important}.mermaid .loopText,.mermaid .loopText tspan,.mermaid svg .loopText,.mermaid svg .loopText tspan{fill:#1e293b !important;color:#1e293b !important;font-size:12px !important;font-weight:700 !important}.mermaid .labelBox,.mermaid svg .labelBox{fill:#dcfce7 !important;stroke:#22c55e !important;stroke-width:1.5px !important}.mermaid .labelText,.mermaid .labelText tspan,.mermaid svg .labelText,.mermaid svg .labelText tspan{fill:#14532d !important;color:#14532d !important;font-size:12px !important;font-weight:700 !important}.mermaid .note,.mermaid svg .note,.mermaid rect.note{fill:#fef9c3 !important;stroke:#ca8a04 !important;stroke-width:2px !important}.mermaid .noteText,.mermaid .noteText tspan,.mermaid svg .noteText,.mermaid svg .noteText tspan{fill:#713f12 !important;color:#713f12 !important;font-size:12px !important;font-weight:500 !important}.mermaid .sequenceNumber,.mermaid svg .sequenceNumber{fill:#ffffff !important;color:#ffffff !important}.mermaid .sequenceNumber-rect,.mermaid svg rect.sequenceNumber-rect{fill:#374151 !important;stroke:#1f2937 !important}.mermaid .er.entityBox,.mermaid .entityBox,.mermaid svg .er.entityBox,.mermaid svg .entityBox,.mermaid svg rect.er{fill:#dbeafe !important;stroke:#3b82f6 !important;stroke-width:2px !important}.mermaid .er.entityLabel,.mermaid .entityLabel,.mermaid svg .er.entityLabel,.mermaid svg .entityLabel,.mermaid svg text.er{fill:#1e3a8a !important;color:#1e3a8a !important;font-weight:600 !important}.mermaid .er.attributeBoxEven,.mermaid svg .er.attributeBoxEven{fill:#f8fafc !important;stroke:#cbd5e1 !important}.mermaid .er.attributeBoxOdd,.mermaid svg .er.attributeBoxOdd{fill:#f1f5f9 !important;stroke:#cbd5e1 !important}.mermaid .er text,.mermaid svg g.er text,.mermaid svg .erDiagram text{fill:#1e293b !important;color:#1e293b !important}.mermaid .er.relationshipLine,.mermaid svg .er.relationshipLine{stroke:#64748b !important;stroke-width:1.5px !important}.mermaid .er.relationshipLabel,.mermaid svg .er.relationshipLabel{fill:#475569 !important}.mermaid .mindmap-node rect,.mermaid .mindmap-node circle,.mermaid .mindmap-node ellipse,.mermaid .mindmap-node polygon,.mermaid svg .mindmap-node rect,.mermaid svg .mindmap-node circle,.mermaid svg .mindmap-node ellipse{stroke-width:2px !important}.mermaid .mindmap-node:nth-child(7n+1) rect,.mermaid .mindmap-node:nth-child(7n+1) circle,.mermaid .mindmap-node:nth-child(7n+1) ellipse{fill:#dbeafe !important;stroke:#3b82f6 !important}.mermaid .mindmap-node:nth-child(7n+1) text,.mermaid .mindmap-node:nth-child(7n+1) .nodeLabel{fill:#1e3a8a !important;color:#1e3a8a !important}.mermaid .mindmap-node:nth-child(7n+2) rect,.mermaid .mindmap-node:nth-child(7n+2) circle,.mermaid .mindmap-node:nth-child(7n+2) ellipse{fill:#dcfce7 !important;stroke:#22c55e !important}.mermaid .mindmap-node:nth-child(7n+2) text,.mermaid .mindmap-node:nth-child(7n+2) .nodeLabel{fill:#14532d !important;color:#14532d !important}.mermaid .mindmap-node:nth-child(7n+3) rect,.mermaid .mindmap-node:nth-child(7n+3) circle,.mermaid .mindmap-node:nth-child(7n+3) ellipse{fill:#fef9c3 !important;stroke:#eab308 !important}.mermaid .mindmap-node:nth-child(7n+3) text,.mermaid .mindmap-node:nth-child(7n+3) .nodeLabel{fill:#713f12 !important;color:#713f12 !important}.mermaid .mindmap-node:nth-child(7n+4) rect,.mermaid .mindmap-node:nth-child(7n+4) circle,.mermaid .mindmap-node:nth-child(7n+4) ellipse{fill:#fce7f3 !important;stroke:#ec4899 !important}.mermaid .mindmap-node:nth-child(7n+4) text,.mermaid .mindmap-node:nth-child(7n+4) .nodeLabel{fill:#831843 !important;color:#831843 !important}.mermaid .mindmap-node:nth-child(7n+5) rect,.mermaid .mindmap-node:nth-child(7n+5) circle,.mermaid .mindmap-node:nth-child(7n+5) ellipse{fill:#f3e8ff !important;stroke:#a855f7 !important}.mermaid .mindmap-node:nth-child(7n+5) text,.mermaid .mindmap-node:nth-child(7n+5) .nodeLabel{fill:#581c87 !important;color:#581c87 !important}.mermaid .mindmap-node:nth-child(7n+6) rect,.mermaid .mindmap-node:nth-child(7n+6) circle,.mermaid .mindmap-node:nth-child(7n+6) ellipse{fill:#cffafe !important;stroke:#06b6d4 !important}.mermaid .mindmap-node:nth-child(7n+6) text,.mermaid .mindmap-node:nth-child(7n+6) .nodeLabel{fill:#164e63 !important;color:#164e63 !important}.mermaid .mindmap-node:nth-child(7n) rect,.mermaid .mindmap-node:nth-child(7n) circle,.mermaid .mindmap-node:nth-child(7n) ellipse{fill:#ffedd5 !important;stroke:#f97316 !important}.mermaid .mindmap-node:nth-child(7n) text,.mermaid .mindmap-node:nth-child(7n) .nodeLabel{fill:#7c2d12 !important;color:#7c2d12 !important}.mermaid .mindmap text,.mermaid svg [class*="mindmap"] text{font-weight:500 !important}.mermaid .mindmap-edge,.mermaid svg .mindmap-edge{stroke:#64748b !important;stroke-width:1.5px !important}.mermaid[data-processed="true"]{min-height:0 !important}.diagram{background:var(--color-gray-50);border:2px dashed var(--color-gray-300);border-radius:var(--radius-lg);padding:var(--space-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:150px;flex:1}.diagram--placeholder{background:linear-gradient(135deg,var(--color-gray-50) 0%,var(--color-gray-100) 100%)}.diagram .icon{font-size:48px;margin-bottom:var(--space-sm);opacity:0.6}.diagram .text{font-size:14px;color:var(--color-gray-500);font-weight:500}.arch-diagram{display:flex;flex-direction:column;gap:var(--space-md);width:100%}.arch-layer{display:flex;gap:var(--space-sm);justify-content:center}.arch-box{background:var(--color-gray-100);border:2px solid var(--color-gray-300);border-radius:var(--radius-md);padding:var(--space-sm) var(--space-md);font-size:12px;font-weight:500;color:var(--color-gray-700);text-align:center;min-width:100px}.arch-box--primary{background:rgba(14,165,233,0.15);border-color:var(--color-primary);color:var(--color-primary-dark)}.arch-box--accent{background:rgba(249,115,22,0.15);border-color:var(--color-accent);color:#c2410c}.arch-box--success{background:rgba(16,185,129,0.15);border-color:var(--color-success);color:#047857}.arch-box--info{background:rgba(99,102,241,0.15);border-color:var(--color-info);color:#4338ca}.arch-box--dark{background:var(--color-gray-800);border-color:var(--color-gray-700);color:white}.arch-connector{display:flex;justify-content:center;color:var(--color-gray-400);font-size:20px}.flow{display:flex;align-items:center;gap:var(--space-sm);flex-wrap:wrap;justify-content:center}.flow__item{background:var(--color-gray-100);border:1px solid var(--color-gray-300);border-radius:var(--radius-md);padding:var(--space-xs) var(--space-md);font-size:13px;font-weight:500;color:var(--color-gray-700)}.flow__item--highlight{background:var(--color-primary);border-color:var(--color-primary);color:white}.flow__arrow{color:var(--color-gray-400);font-size:18px}.timeline{display:flex;gap:var(--space-lg);align-items:stretch}.timeline__item{flex:1;display:flex;flex-direction:column;position:relative}.timeline__item:not(:last-child)::after{content:'→';position:absolute;right:calc(var(--space-lg) / -2 - 8px);top:50%;transform:translateY(-50%);color:var(--color-gray-400);font-size:20px}.timeline__number{width:28px;height:28px;background:var(--color-primary);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:var(--space-sm)}.timeline__title{font-size:13px;font-weight:600;color:var(--color-gray-900);margin-bottom:var(--space-xs)}.timeline__text{font-size:12px;color:var(--color-gray-600);line-height:1.4}.stat{text-align:center;padding:var(--space-md)}.stat__value{font-size:36px;font-weight:800;color:var(--color-primary);line-height:1}.stat__label{font-size:13px;color:var(--color-gray-600);margin-top:var(--space-xs)}.stat--small .stat__value{font-size:24px}.icon-box{width:48px;height:48px;min-width:48px;background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-primary-dark) 100%);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:white;font-size:24px;flex-shrink:0}.icon-box--sm{width:36px;height:36px;min-width:36px;font-size:18px}.icon-box--lg{width:64px;height:64px;min-width:64px;font-size:32px}.icon-box--accent{background:linear-gradient(135deg,var(--color-accent) 0%,#ea580c 100%)}.icon-box--success{background:linear-gradient(135deg,var(--color-success) 0%,#047857 100%)}.icon-box--info{background:linear-gradient(135deg,var(--color-info) 0%,#4338ca 100%)}.superset-logo{display:flex;align-items:center;gap:var(--space-md)}.superset-logo__icon{width:80px;height:80px}.superset-logo__icon svg{width:100%;height:100%}.superset-logo__text{font-size:32px;font-weight:700}.superset-logo__text span{color:var(--color-primary)}.comparison-table{font-size:12px}.comparison-table th{font-size:11px;padding:8px 10px}.comparison-table td{padding:6px 10px;vertical-align:middle}.comparison-table .product-name{font-weight:600;white-space:nowrap}.comparison-table .check{color:var(--color-success);font-weight:bold}.comparison-table .cross{color:var(--color-danger);font-weight:bold}.comparison-table .partial{color:var(--color-warning);font-weight:bold}.use-case{background:var(--color-gray-50);border:1px solid var(--color-gray-200);border-radius:var(--radius-lg);padding:var(--space-md);display:flex;flex-direction:column;gap:var(--space-sm)}.use-case--positive{border-color:var(--color-success);border-left-width:4px}.use-case--negative{border-color:var(--color-danger);border-left-width:4px}.use-case__number{font-size:24px;font-weight:800;color:var(--color-gray-300)}.use-case__title{font-size:14px;font-weight:600;color:var(--color-gray-900)}.use-case__text{font-size:12px;color:var(--color-gray-600);line-height:1.4}.stack-layer{display:flex;align-items:center;gap:var(--space-md);padding:var(--space-sm) var(--space-md);background:var(--color-gray-50);border-radius:var(--radius-md);margin-bottom:var(--space-sm)}.stack-layer__label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-gray-500);width:100px;flex-shrink:0}.stack-layer__items{display:flex;gap:var(--space-xs);flex-wrap:wrap}.stack-layer__item{background:white;border:1px solid var(--color-gray-300);border-radius:var(--radius-sm);padding:4px 10px;font-size:12px;font-weight:500;color:var(--color-gray-700)}.stack-layer__item--highlight{background:var(--color-accent);border-color:var(--color-accent);color:white}.permission-matrix{font-size:12px}.permission-matrix th:first-child{text-align:left}.permission-matrix td:not(:first-child),.permission-matrix th:not(:first-child){text-align:center;width:80px}.permission-matrix .action{font-weight:500;text-align:left}.sources{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md)}.source-group{display:flex;flex-direction:column;gap:var(--space-xs)}.source-group__title{font-size:13px;font-weight:600;color:var(--color-gray-900);padding-bottom:var(--space-xs);border-bottom:1px solid var(--color-gray-200);margin-bottom:var(--space-xs)}.source-link{font-size:12px;color:var(--color-primary);text-decoration:none;display:flex;align-items:center;gap:var(--space-xs)}.source-link:hover{text-decoration:underline}.source-link::before{content:'→';color:var(--color-gray-400)}@media print{.mermaid-container,.arch-diagram,.diagram{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important}.arch-box,.flow__item,.timeline__number,.icon-box,.stat__value{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}}.mermaid .node.pastel-blue rect,.mermaid .node.pastel-blue polygon{fill:#dbeafe !important;stroke:#3b82f6 !important}.mermaid .node.pastel-blue .nodeLabel{fill:#1e3a8a !important;color:#1e3a8a !important}.mermaid .node.pastel-green rect,.mermaid .node.pastel-green polygon{fill:#dcfce7 !important;stroke:#22c55e !important}.mermaid .node.pastel-green .nodeLabel{fill:#14532d !important;color:#14532d !important}.mermaid .node.pastel-yellow rect,.mermaid .node.pastel-yellow polygon{fill:#fef9c3 !important;stroke:#eab308 !important}.mermaid .node.pastel-yellow .nodeLabel{fill:#713f12 !important;color:#713f12 !important}.mermaid .node.pastel-orange rect,.mermaid .node.pastel-orange polygon{fill:#ffedd5 !important;stroke:#f97316 !important}.mermaid .node.pastel-orange .nodeLabel{fill:#7c2d12 !important;color:#7c2d12 !important}.mermaid .node.pastel-pink rect,.mermaid .node.pastel-pink polygon{fill:#fce7f3 !important;stroke:#ec4899 !important}.mermaid .node.pastel-pink .nodeLabel{fill:#831843 !important;color:#831843 !important}.mermaid .node.pastel-purple rect,.mermaid .node.pastel-purple polygon{fill:#f3e8ff !important;stroke:#a855f7 !important}.mermaid .node.pastel-purple .nodeLabel{fill:#581c87 !important;color:#581c87 !important}.mermaid .node.pastel-cyan rect,.mermaid .node.pastel-cyan polygon{fill:#cffafe !important;stroke:#06b6d4 !important}.mermaid .node.pastel-cyan .nodeLabel{fill:#164e63 !important;color:#164e63 !important}.mermaid .node.dark-blue rect,.mermaid .node.dark-blue polygon{fill:#1e3a5f !important;stroke:#0c4a6e !important}.mermaid .node.dark-blue .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-green rect,.mermaid .node.dark-green polygon{fill:#14532d !important;stroke:#166534 !important}.mermaid .node.dark-green .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-purple rect,.mermaid .node.dark-purple polygon{fill:#4c1d95 !important;stroke:#5b21b6 !important}.mermaid .node.dark-purple .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-gray rect,.mermaid .node.dark-gray polygon{fill:#374151 !important;stroke:#4b5563 !important}.mermaid .node.dark-gray .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-slate rect,.mermaid .node.dark-slate polygon{fill:#1e293b !important;stroke:#334155 !important}.mermaid .node.dark-slate .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid g[style*="fill:#"] .nodeLabel,.mermaid g[style*="fill:#"] .nodeLabel{text-shadow:none !important}.mermaid [style*="fill:#f"][style*="fill:#f"] .nodeLabel,.mermaid [style*="fill:#e"][style*="fill:#e"] .nodeLabel,.mermaid [style*="fill:#d"][style*="fill:#d"] .nodeLabel,.mermaid [style*="fill:#c"][style*="fill:#c"] .nodeLabel,.mermaid [style*="fill:rgb(2"][style*="fill:rgb(2"] .nodeLabel{fill:#1e293b !important;color:#1e293b !important}img[src*="images/"]{max-width:100%;max-height:450px;width:auto;height:auto;object-fit:contain;display:block;margin:1.5rem auto}img[src*="screenshot"],img[src*="superset.apache.org"],img[src*="capture"]{max-width:100%;max-height:400px;width:auto;height:auto;object-fit:contain;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:1px solid #e4e4e7}.content-image,.screenshot{max-width:100%;max-height:500px;object-fit:contain}
+    </style>
+    
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'default',
+                    securityLevel: 'loose',
+                    flowchart: {
+                        useMaxWidth: false,
+                        htmlLabels: true
+                    },
+                    sequence: {
+                        useMaxWidth: false
+                    }
+                });
+            }
+        });
+    </script>
+    
+    
+    <script>
+const PASTEL_COLORS={blue:{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'}, green:{bg: '#dcfce7', border: '#22c55e', text: '#14532d'}, yellow:{bg: '#fef9c3', border: '#eab308', text: '#713f12'}, orange:{bg: '#ffedd5', border: '#f97316', text: '#7c2d12'}, pink:{bg: '#fce7f3', border: '#ec4899', text: '#831843'}, purple:{bg: '#f3e8ff', border: '#a855f7', text: '#581c87'}, cyan:{bg: '#cffafe', border: '#06b6d4', text: '#164e63'}, gray:{bg: '#f4f4f5', border: '#71717a', text: '#27272a'}};const DARK_COLORS={blue:{bg: '#1e3a5f', border: '#0c4a6e', text: '#ffffff'}, green:{bg: '#14532d', border: '#166534', text: '#ffffff'}, purple:{bg: '#4c1d95', border: '#5b21b6', text: '#ffffff'}, gray:{bg: '#374151', border: '#4b5563', text: '#ffffff'}, slate:{bg: '#1e293b', border: '#334155', text: '#ffffff'}};function fixMermaidContrast(){function getLuminance(hex){let r, g, b;if(!hex || hex==='none' || hex==='transparent'){return 0.5;}if(hex.startsWith('rgb')){const match=hex.match(/\d+/g);if(match){r=parseInt(match[0]);g=parseInt(match[1]);b=parseInt(match[2]);}else{return 0.5;}}else{hex=hex.replace('#', '');if(hex.length===3){hex=hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];}if(hex.length !==6){return 0.5;}r=parseInt(hex.substr(0, 2), 16);g=parseInt(hex.substr(2, 2), 16);b=parseInt(hex.substr(4, 2), 16);}if(isNaN(r)|| isNaN(g)|| isNaN(b)){return 0.5;}const rsRGB=r / 255;const gsRGB=g / 255;const bsRGB=b / 255;const rLum=rsRGB <=0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055)/ 1.055, 2.4);const gLum=gsRGB <=0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055)/ 1.055, 2.4);const bLum=bsRGB <=0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055)/ 1.055, 2.4);return 0.2126 * rLum + 0.7152 * gLum + 0.0722 * bLum;}function getContrastColor(bgColor){const luminance=getLuminance(bgColor);return luminance > 0.35 ? '#1e293b' : '#ffffff';}function applyContrastToText(textEl, contrastColor){textEl.style.setProperty('color', contrastColor, 'important');textEl.style.setProperty('fill', contrastColor, 'important');textEl.setAttribute('fill', contrastColor);textEl.querySelectorAll('tspan').forEach(function(tspan){tspan.style.setProperty('fill', contrastColor, 'important');tspan.setAttribute('fill', contrastColor);});}document.querySelectorAll('.mermaid svg').forEach(function(svg){svg.querySelectorAll('.cluster').forEach(function(cluster){const label=cluster.querySelector('.cluster-label');const rect=cluster.querySelector('rect');if(label && rect){const labelBBox=label.getBBox ? label.getBBox(): null;const foreignObj=label.querySelector('foreignObject');if(foreignObj){const currentHeight=parseFloat(foreignObj.getAttribute('height'))|| 20;const textContent=foreignObj.textContent || '';if(textContent.length > 20 || textContent.includes('\n')){foreignObj.setAttribute('height', Math.max(currentHeight, 40));foreignObj.style.overflow='visible';}}label.querySelectorAll('text, span, div, p, tspan').forEach(function(textEl){textEl.style.setProperty('fill', '#1e293b', 'important');textEl.style.setProperty('color', '#1e293b', 'important');textEl.style.setProperty('font-weight', '700', 'important');});}});svg.querySelectorAll('.node rect, .node polygon, .node circle, .node ellipse').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.node');if(parent){parent.querySelectorAll('.nodeLabel, .label, text, foreignObject span, foreignObject p, foreignObject div').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.cluster rect, .cluster polygon').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.cluster');if(parent){parent.querySelectorAll('.cluster-label, .cluster-label span, .cluster-label text, .nodeLabel, text').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('[style*="fill"]').forEach(function(el){const style=el.getAttribute('style');if(style){const fillMatch=style.match(/fill:\s*([^;]+)/i);if(fillMatch){const fill=fillMatch[1].trim();if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const contrastColor=getContrastColor(fill);el.querySelectorAll('text, span, p, div, .nodeLabel, .label').forEach(function(textEl){applyContrastToText(textEl, contrastColor);});if(el.tagName.toLowerCase()==='g'){el.querySelectorAll('foreignObject *').forEach(function(fo){fo.style.setProperty('color', contrastColor, 'important');});}}}}});svg.querySelectorAll('g.node').forEach(function(node){const shape=node.querySelector('rect, polygon, circle, ellipse, path');if(shape){const fill=shape.getAttribute('fill')|| shape.style.fill || window.getComputedStyle(shape).fill;if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const contrastColor=getContrastColor(fill);node.querySelectorAll('.nodeLabel, .label, text, span, div, p').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.actor, rect.actor, .actor-top, .actor-bottom').forEach(function(rect){rect.style.setProperty('fill', DARK_COLORS.blue.bg, 'important');rect.style.setProperty('stroke', DARK_COLORS.blue.border, 'important');rect.setAttribute('fill', DARK_COLORS.blue.bg);rect.setAttribute('stroke', DARK_COLORS.blue.border);});svg.querySelectorAll('text.actor, .actor-man').forEach(function(text){applyContrastToText(text, DARK_COLORS.blue.text);});svg.querySelectorAll('.messageText').forEach(function(text){applyContrastToText(text, '#1e293b');text.style.setProperty('stroke', 'none', 'important');});svg.querySelectorAll('.messageLine0, .messageLine1').forEach(function(line){line.style.setProperty('stroke', '#334155', 'important');line.style.setProperty('stroke-width', '2px', 'important');line.setAttribute('stroke', '#334155');line.setAttribute('stroke-width', '2');});svg.querySelectorAll('.arrowhead path, marker path, #arrowhead path').forEach(function(arrow){arrow.style.setProperty('fill', '#334155', 'important');arrow.style.setProperty('stroke', '#334155', 'important');arrow.setAttribute('fill', '#334155');arrow.setAttribute('stroke', '#334155');});svg.querySelectorAll('marker').forEach(function(marker){marker.querySelectorAll('path, polygon').forEach(function(shape){shape.style.setProperty('fill', '#334155', 'important');shape.setAttribute('fill', '#334155');});});svg.querySelectorAll('.actor-line').forEach(function(line){line.style.setProperty('stroke', '#64748b', 'important');line.style.setProperty('stroke-width', '1.5px', 'important');line.setAttribute('stroke', '#64748b');});svg.querySelectorAll('.loopText, .labelText').forEach(function(text){text.style.setProperty('fill', '#334155', 'important');text.setAttribute('fill', '#334155');});svg.querySelectorAll('.loopText tspan, .labelText tspan').forEach(function(tspan){tspan.style.setProperty('fill', '#334155', 'important');tspan.setAttribute('fill', '#334155');});svg.querySelectorAll('.note rect, rect.note').forEach(function(rect){rect.style.setProperty('fill', PASTEL_COLORS.yellow.bg, 'important');rect.style.setProperty('stroke', PASTEL_COLORS.yellow.border, 'important');rect.setAttribute('fill', PASTEL_COLORS.yellow.bg);});svg.querySelectorAll('.noteText, .noteText tspan').forEach(function(text){applyContrastToText(text, PASTEL_COLORS.yellow.text);});svg.querySelectorAll('.sequenceNumber').forEach(function(text){applyContrastToText(text, '#1e293b');});svg.querySelectorAll('.classGroup rect, .classGroup polygon').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.classGroup');if(parent){parent.querySelectorAll('text, .classTitle, .classLabel, tspan').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.stateGroup rect, .statediagram-state rect').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.stateGroup, .statediagram-state');if(parent){parent.querySelectorAll('text, .stateLabel, tspan, span').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.er.entityBox, .entityBox, rect.er').forEach(function(shape){shape.style.setProperty('fill', '#dbeafe', 'important');shape.style.setProperty('stroke', '#3b82f6', 'important');shape.style.setProperty('stroke-width', '2px', 'important');shape.setAttribute('fill', '#dbeafe');shape.setAttribute('stroke', '#3b82f6');});svg.querySelectorAll('.er.entityLabel, .entityLabel, text.er').forEach(function(text){applyContrastToText(text, '#1e3a8a');});svg.querySelectorAll('.er.attributeBoxEven, .er.attributeBoxOdd').forEach(function(shape){const isEven=shape.classList.contains('attributeBoxEven');shape.style.setProperty('fill', isEven ? '#f8fafc' : '#f1f5f9', 'important');shape.style.setProperty('stroke', '#cbd5e1', 'important');});svg.querySelectorAll('g.er text, .erDiagram text').forEach(function(text){const fill=text.getAttribute('fill')|| text.style.fill;const lum=getLuminance(fill);if(lum > 0.6 || !fill || fill==='none'){applyContrastToText(text, '#1e293b');}});const mindmapColors=[{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'},{bg: '#dcfce7', border: '#22c55e', text: '#14532d'},{bg: '#fef9c3', border: '#eab308', text: '#713f12'},{bg: '#fce7f3', border: '#ec4899', text: '#831843'},{bg: '#f3e8ff', border: '#a855f7', text: '#581c87'},{bg: '#cffafe', border: '#06b6d4', text: '#164e63'},{bg: '#ffedd5', border: '#f97316', text: '#7c2d12'}];let colorIndex=0;svg.querySelectorAll('.mindmap-node').forEach(function(node){const shape=node.querySelector('rect, circle, ellipse, polygon, path');if(shape){const color=mindmapColors[colorIndex % mindmapColors.length];shape.style.setProperty('fill', color.bg, 'important');shape.style.setProperty('stroke', color.border, 'important');shape.style.setProperty('stroke-width', '2px', 'important');shape.setAttribute('fill', color.bg);shape.setAttribute('stroke', color.border);node.querySelectorAll('text, span, .nodeLabel, foreignObject *').forEach(function(label){applyContrastToText(label, color.text);});colorIndex++;}});svg.querySelectorAll('.mindmap text, [class*="mindmap"] text').forEach(function(text){const fill=text.getAttribute('fill')|| text.style.fill;const lum=getLuminance(fill);if(lum > 0.6 || !fill || fill==='none'){applyContrastToText(text, '#1e293b');}});svg.querySelectorAll('rect, polygon, circle, ellipse').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const luminance=getLuminance(fill);if(luminance < 0.35){const parent=shape.parentNode;if(parent){parent.querySelectorAll('text, .nodeLabel, .label, span, tspan').forEach(function(textEl){const textFill=textEl.getAttribute('fill')|| textEl.style.fill;const textLum=getLuminance(textFill);if(textLum < 0.5){applyContrastToText(textEl, '#ffffff');}});}}else if(luminance > 0.65){const parent=shape.parentNode;if(parent){parent.querySelectorAll('text, .nodeLabel, .label, span, tspan').forEach(function(textEl){const textFill=textEl.getAttribute('fill')|| textEl.style.fill;const textLum=getLuminance(textFill);if(textLum > 0.7){applyContrastToText(textEl, '#1e293b');}});}}}});});}if(typeof window !=='undefined'){window.fixMermaidContrast=fixMermaidContrast;window.MERMAID_PASTEL_COLORS=PASTEL_COLORS;window.MERMAID_DARK_COLORS=DARK_COLORS;}
+    </script>
+    
+    
+    
+    
+    
+    <style>
+        @media print {
+            body {
+                max-width: none;
+                padding: 20mm;
+            }
+            
+            pre, code {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+            
+            table, pre, blockquote, .mermaid {
+                page-break-inside: avoid;
+            }
+            
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    
+    <article class="markdown-body">
+        <h1 id="role-3-compute-engineer-tp05-nextcloud">Rôle 3 — Compute Engineer — TP05 Nextcloud</h1>
+<p><strong>Durée</strong> : 6h (journée complète)
+<strong>Module livré</strong> : <code>modules/compute/</code>
+<strong>% de la note</strong> : 20 %</p>
+<p>🔵 <strong>Starter kit</strong> : vous démarrez depuis <code>corriges/jour5/tp05-starter/</code> qui contient déjà l'arborescence, les interfaces figées (<code>variables.tf</code> + <code>outputs.tf</code>) et les providers. Vous remplissez les fichiers <code>.tf</code> vides avec des TODO.</p>
+<hr />
+<h2 id="votre-mission">Votre mission</h2>
+<ul>
+<li>Construire l'étage applicatif de Nextcloud : <strong>ALB public HTTPS</strong> + <strong>Auto Scaling Group</strong> d'EC2 privées qui lancent le container Docker Nextcloud au boot.</li>
+<li>Générer un <strong>certificat auto-signé</strong> via le provider <code>hashicorp/tls</code> et l'importer dans <strong>ACM</strong> pour que l'ALB puisse écouter en HTTPS sans acheter de domaine.</li>
+<li>Produire un <strong>user_data templatifié</strong> qui installe Docker, lit les secrets via Secrets Manager (IAM instance profile fourni par le Rôle 5) et démarre le container <code>nextcloud:30-apache</code> branché sur RDS + S3.</li>
+<li>Exposer les outputs figés du contrat : <code>alb_dns_name</code>, <code>alb_zone_id</code>, <code>asg_name</code>, <code>nextcloud_url</code> — que le Rôle 1 remontera dans <code>envs/dev/outputs.tf</code>.</li>
+<li>Activer les <strong>access logs ALB</strong> vers le bucket S3 créé par le Rôle 4 (vous consommez son <code>s3_logs_bucket_name</code>, vous ne créez pas le bucket).</li>
+</ul>
+<p>🟤 <strong>Contexte Kolab</strong> : le cabinet d'avocats ouvre Nextcloud uniquement en interne depuis le VPN du cabinet. Pour la formation on reste sur une ALB 100 % publique en HTTPS self-signed — les avocats cliqueront "Accepter le risque" une fois, point. Le scaling horizontal n'est <strong>pas</strong> demandé (sans Redis en cache de session, Nextcloud ne tolère pas 2 frontaux simultanés), l'ASG sert <strong>uniquement à l'auto-recovery</strong> si l'EC2 crash.</p>
+<hr />
+<h2 id="concepts-cles-pour-ce-role">Concepts clés pour ce rôle</h2>
+<p><strong>Déjà vus (J1 - J2)</strong> :</p>
+<ul>
+<li><a href="../../jour2/module07-variables-outputs-data.md">Module 07 — Variables / outputs / data</a> : data sources (<code>data "aws_ami"</code>), types de variables</li>
+<li><a href="../../jour2/module09-modules-vpc-custom-vs-registry.md">Module 09 — Modules custom vs registry</a> : ne jamais déclarer de <code>provider</code> dans un module, <code>for_each</code></li>
+</ul>
+<p><strong>Nouveaux pour ce rôle</strong> (ré-expliqués en contexte ci-dessous) :</p>
+<ul>
+<li><a href="../tp05-team-nextcloud.md#6-application-load-balancer-role-3">Application Load Balancer (ALB + target group + listener)</a></li>
+<li><a href="../tp05-team-nextcloud.md#concepts-cles-a-connaitre">Launch Template + ASG</a></li>
+<li><a href="../tp05-team-nextcloud.md#7-user_data-avec-templatefile-role-3"><code>user_data</code> avec <code>templatefile()</code></a></li>
+<li><a href="../tp05-team-nextcloud.md#concepts-cles-a-connaitre">Certificat self-signed via provider <code>tls</code></a></li>
+<li><a href="../tp05-team-nextcloud.md#3-iam-instance-profile-role-5--role-3">IAM Instance Profile (consommation côté EC2)</a></li>
+</ul>
+<p>🔵 <strong>Rappel concept : ALB + target group + listener</strong></p>
+<p>Un <strong>Application Load Balancer</strong> est un load balancer HTTP/HTTPS managé par AWS. Il écoute sur un port public (443), termine le TLS, et route les requêtes vers un <strong>target group</strong> (pool d'EC2). On configure 4 ressources :</p>
+<ul>
+<li><code>aws_lb</code> : le load balancer lui-même (dans les subnets publics)</li>
+<li><code>aws_lb_target_group</code> : le pool de cibles avec son health check</li>
+<li><code>aws_lb_listener</code> : la règle d'écoute sur un port (443 HTTPS, 80 redirect)</li>
+<li><code>aws_acm_certificate</code> : le certificat TLS (ici self-signed pour le TP)</li>
+</ul>
+<p>🔵 <strong>Rappel concept : Launch Template + Auto Scaling Group</strong></p>
+<p>Un <strong>launch template</strong> est la "recette" pour fabriquer une EC2 (AMI, instance type, user_data, SG, IAM profile). Un <strong>ASG</strong> (Auto Scaling Group) l'utilise pour maintenir N instances vivantes entre <code>min_size</code> et <code>max_size</code>. Si une EC2 crash, l'ASG en recrée une automatiquement. Ici : <code>min=1, max=2, desired=1</code> — auto-recovery, pas de scaling horizontal.</p>
+<p>🔵 <strong>Rappel concept : <code>user_data</code> avec <code>templatefile()</code></strong></p>
+<p>Le <code>user_data</code> est un script shell exécuté <strong>une seule fois</strong> au premier boot de l'EC2 (via cloud-init). On peut y interpoler des variables Terraform via la fonction <code>templatefile()</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="na">user_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">base64encode</span><span class="p">(</span><span class="nf">templatefile</span><span class="p">(</span><span class="s2">&quot;${path.module}/templates/nextcloud.sh.tftpl&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">db_endpoint</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">var.db_endpoint</span>
+<span class="w">  </span><span class="na">db_password_secret_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.db_password_secret_arn</span>
+<span class="p">}))</span>
+</code></pre></div>
+<p>Dans le template : <code>${db_endpoint}</code> est remplacé par la valeur Terraform. Pour garder une variable bash littérale (<code>$VARIABLE</code>), il faut échapper en <code>$${VARIABLE}</code>.</p>
+<p>🔵 <strong>Rappel concept : certificat self-signed via provider <code>tls</code></strong></p>
+<p>En prod on achète un vrai cert via ACM + validation DNS. Pour ce TP, on génère un cert auto-signé en mémoire Terraform (via le provider <code>hashicorp/tls</code>), puis on l'importe dans ACM pour que l'ALB puisse l'utiliser. Le navigateur affichera un avertissement "Connexion non privée" — on clique "Continuer".</p>
+<p>🔵 <strong>Rappel concept : IAM Instance Profile (côté consommation)</strong></p>
+<p>L'EC2 Nextcloud a besoin d'accéder à S3 (stockage fichiers) et Secrets Manager (passwords) <strong>sans aucune clé AWS en dur</strong>. Pour ça, elle "porte" un <strong>IAM role</strong> via un <strong>instance profile</strong> (fourni par le Rôle 5). Au boot, le SDK AWS récupère automatiquement des credentials éphémères via l'IMDS (Instance Metadata Service). Vous consommez <code>var.app_instance_profile_name</code> dans votre launch template.</p>
+<hr />
+<h2 id="interface-que-vous-devez-produire-inputs-outputs-figes">Interface que vous devez produire (inputs + outputs figés)</h2>
+<p>🟥 <strong>Ces signatures sont figées au kick-off.</strong> Toute modification passe par une PR validée par le Platform Lead.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># modules/compute/variables.tf</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;vpc_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ID du VPC (output du module networking)&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;public_subnet_ids&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Map AZ -&gt; subnet_id public (pour l ALB)&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;private_app_subnet_ids&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Map AZ -&gt; subnet_id prive (pour l ASG)&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;alb_security_group_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SG de l ALB (fourni par le module security)&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;app_security_group_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SG des EC2 applicatives (fourni par le module security)&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;app_instance_profile_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Instance profile IAM pour l ASG (fourni par security)&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;db_endpoint&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hostname RDS (output du module data)&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;db_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;db_username&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;db_password_secret_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN du secret Secrets Manager contenant le mot de passe DB&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;admin_password_secret_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN du secret du mot de passe admin Nextcloud&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;s3_primary_bucket_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Nom du bucket S3 primary storage Nextcloud&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;s3_logs_bucket_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Nom du bucket S3 pour les access logs ALB&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;project_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;environment&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;instance_type&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;t3.small&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;t3.small mini pour faire tourner Docker + Nextcloud confortablement&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># modules/compute/outputs.tf</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;alb_dns_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb.main.dns_name</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;DNS public de l ALB (cible du navigateur)&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;alb_zone_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb.main.zone_id</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Zone Route53 alias pour l ALB (utilise si vous branchez un domaine)&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;asg_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_autoscaling_group.app.name</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Nom de l ASG (pour cycler les instances manuellement si besoin)&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;nextcloud_url&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://${aws_lb.main.dns_name}&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;URL finale Nextcloud a ouvrir dans le navigateur&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🔷 <strong>Point clé à vérifier</strong> : un <code>terraform validate</code> sur le module seul (sans <code>envs/dev</code>) doit passer, <strong>même si les variables ne sont pas renseignées</strong>. Sinon, votre interface n'est pas clean.</p>
+<hr />
+<h2 id="ressources-terraform-a-creer">Ressources Terraform à créer</h2>
+<table>
+<thead>
+<tr>
+<th>Ressource</th>
+<th>Nombre</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tls_private_key.self_signed</code></td>
+<td>1</td>
+<td>Clé RSA 2048 pour le cert</td>
+</tr>
+<tr>
+<td><code>tls_self_signed_cert.alb</code></td>
+<td>1</td>
+<td>Certificat X509 auto-signé (1 an)</td>
+</tr>
+<tr>
+<td><code>aws_acm_certificate.self_signed</code></td>
+<td>1</td>
+<td>Import du cert dans ACM</td>
+</tr>
+<tr>
+<td><code>data.aws_ami.al2023</code></td>
+<td>1</td>
+<td>AMI Amazon Linux 2023 la plus récente</td>
+</tr>
+<tr>
+<td><code>aws_lb.main</code></td>
+<td>1</td>
+<td>ALB public cross-AZ</td>
+</tr>
+<tr>
+<td><code>aws_lb_target_group.app</code></td>
+<td>1</td>
+<td>TG HTTP/80 health check <code>/status.php</code></td>
+</tr>
+<tr>
+<td><code>aws_lb_listener.https</code></td>
+<td>1</td>
+<td>Listener 443 forward vers TG</td>
+</tr>
+<tr>
+<td><code>aws_lb_listener.http_redirect</code></td>
+<td>1</td>
+<td>Listener 80 redirect 443 (bonus UX)</td>
+</tr>
+<tr>
+<td><code>aws_launch_template.app</code></td>
+<td>1</td>
+<td>Template IMDSv2 + user_data Nextcloud</td>
+</tr>
+<tr>
+<td><code>aws_autoscaling_group.app</code></td>
+<td>1</td>
+<td>ASG min=1 max=2 desired=1</td>
+</tr>
+<tr>
+<td><code>aws_autoscaling_attachment.app_tg</code></td>
+<td>1</td>
+<td>Rattache l'ASG au target group</td>
+</tr>
+</tbody>
+</table>
+<p>🟡 <strong>Vous ne créez pas</strong> : les Security Groups, l'IAM role, l'instance profile, les buckets S3, le RDS, les secrets. Ils sont tous fournis en <strong>variables d'entrée</strong> par les Rôles 4 et 5.</p>
+<hr />
+<h2 id="schema-de-votre-perimetre">Schéma de votre périmètre</h2>
+<pre class="mermaid">
+flowchart TB
+    t_user((Utilisateur))
+
+    subgraph t_compute[Votre perimetre - module compute]
+        t_alb[ALB HTTPS 443<br/>cross-AZ public]
+        t_tg[Target Group<br/>HTTP 80<br/>health /status.php]
+        t_lt[Launch Template<br/>AL2023 + user_data<br/>IMDSv2 required]
+        t_asg[ASG min=1 max=2<br/>desired=1]
+        t_ec2[EC2 + Docker<br/>nextcloud:30-apache]
+        t_cert[ACM cert<br/>self-signed TLS]
+    end
+
+    subgraph t_in[Inputs d autres roles]
+        t_sg_alb[SG ALB<br/>Role 5]
+        t_sg_app[SG app<br/>Role 5]
+        t_prof[Instance profile<br/>Role 5]
+        t_rds[RDS endpoint<br/>Role 4]
+        t_s3_primary[S3 primary<br/>Role 4]
+        t_s3_logs[S3 access logs<br/>Role 4]
+        t_secrets[Secrets ARNs<br/>Role 5]
+        t_net[Subnets + VPC<br/>Role 2]
+    end
+
+    t_user -->|HTTPS 443| t_alb
+    t_cert -.cert import.-> t_alb
+    t_alb --> t_tg
+    t_tg --> t_ec2
+    t_asg -->|manage| t_ec2
+    t_lt -.template.-> t_asg
+
+    t_sg_alb -.attached.-> t_alb
+    t_sg_app -.attached.-> t_ec2
+    t_prof -.attached.-> t_ec2
+    t_ec2 -->|SQL 5432| t_rds
+    t_ec2 -->|S3 API| t_s3_primary
+    t_ec2 -->|GetSecret| t_secrets
+    t_alb -->|PutObject access logs| t_s3_logs
+    t_net -.subnets.-> t_alb
+    t_net -.subnets.-> t_asg
+
+    classDef mine fill:#d1e7dd,stroke:#198754
+    classDef ext fill:#cfe2ff,stroke:#0d6efd
+    class t_alb,t_tg,t_lt,t_asg,t_ec2,t_cert mine
+    class t_sg_alb,t_sg_app,t_prof,t_rds,t_s3_primary,t_s3_logs,t_secrets,t_net ext
+</pre>
+
+<hr />
+<h2 id="etapes-pas-a-pas-sprint-1">Étapes pas-à-pas (sprint 1)</h2>
+<h3 id="etape-1-arborescence-du-module-10-min">Étape 1 : Arborescence du module (10 min)</h3>
+<p><strong>Objectif</strong> : poser les fichiers vides qui respectent le contrat.</p>
+<p><strong>Contexte</strong> : un module bien structuré facilite la review. On sépare <code>alb.tf</code> / <code>asg.tf</code> / <code>tls.tf</code> pour que chaque reviewer aille vite à l'essentiel.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Depuis la racine du repo de l equipe</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>modules/compute/templates
+<span class="nb">cd</span><span class="w"> </span>modules/compute
+
+<span class="c1"># Fichiers vides prets a remplir</span>
+touch<span class="w"> </span>main.tf<span class="w"> </span>alb.tf<span class="w"> </span>asg.tf<span class="w"> </span>tls.tf<span class="w"> </span>locals.tf<span class="w"> </span>variables.tf<span class="w"> </span>outputs.tf<span class="w"> </span>versions.tf<span class="w"> </span>README.md
+touch<span class="w"> </span>templates/nextcloud-user-data.sh.tftpl
+</code></pre></div>
+<p><strong>Résultat attendu</strong> :</p>
+<div class="highlight"><pre><span></span><code>modules/compute/
+|-- main.tf
+|-- alb.tf
+|-- asg.tf
+|-- tls.tf
+|-- locals.tf
+|-- variables.tf
+|-- outputs.tf
+|-- versions.tf
+|-- README.md
+`-- templates/
+    `-- nextcloud-user-data.sh.tftpl
+</code></pre></div>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>ls modules/compute/</code> retourne exactement ces 9 fichiers + le dossier <code>templates/</code>.</p>
+<hr />
+<h3 id="etape-2-versionstf-et-localstf-10-min">Étape 2 : <code>versions.tf</code> et <code>locals.tf</code> (10 min)</h3>
+<p><strong>Objectif</strong> : figer les versions Terraform + provider, et centraliser les valeurs dérivées.</p>
+<p><strong>Contexte</strong> : le provider <code>tls</code> (non-AWS) est indispensable pour générer le cert auto-signé. C'est un provider que vous n'avez pas encore utilisé, pensez à le déclarer dans <code>versions.tf</code>.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># versions.tf</span>
+<span class="nb">terraform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">required_version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;= 1.10&quot;</span>
+
+<span class="w">  </span><span class="nb">required_providers</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">aws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">source</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hashicorp/aws&quot;</span>
+<span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;~&gt; 5.70&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="c1">    # Provider TLS pour generer la cle + le cert auto-signe</span>
+<span class="w">    </span><span class="nb">tls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">source</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hashicorp/tls&quot;</span>
+<span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;~&gt; 4.0&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># locals.tf</span>
+<span class="nb">locals</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name_prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${var.project_name}-${var.environment}&quot;</span>
+
+<span class="c1">  # Transformation map -&gt; list pour les ressources qui attendent une liste</span>
+<span class="c1">  # (ALB subnets, ASG vpc_zone_identifier).</span>
+<span class="w">  </span><span class="na">public_subnet_ids_list</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nf">values</span><span class="p">(</span><span class="nv">var.public_subnet_ids</span><span class="p">)</span>
+<span class="w">  </span><span class="na">private_app_subnet_ids_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">values</span><span class="p">(</span><span class="nv">var.private_app_subnet_ids</span><span class="p">)</span>
+
+<span class="w">  </span><span class="nb">common_tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Project</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.project_name</span>
+<span class="w">    </span><span class="na">Environment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span>
+<span class="w">    </span><span class="na">ManagedBy</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;terraform&quot;</span>
+<span class="w">    </span><span class="na">Module</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;compute&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>terraform init</code> dans le module <strong>seul</strong> doit télécharger 2 providers (<code>aws</code> et <code>tls</code>).</p>
+<hr />
+<h3 id="etape-3-certificat-auto-signe-import-acm-30-min">Étape 3 : Certificat auto-signé + import ACM (30 min)</h3>
+<p><strong>Objectif</strong> : avoir un certificat TLS valide (techniquement) pour que l'ALB puisse écouter en HTTPS.</p>
+<p><strong>Contexte</strong> : en prod, vous achèteriez un domaine et utiliseriez <code>aws_acm_certificate</code> avec validation DNS. Ici on triche : on génère une paire clé/cert <strong>dans Terraform</strong>, on l'importe dans ACM, et c'est ACM qui expose le cert à l'ALB. Le navigateur affichera un warning "Connexion non privée" — les utilisateurs cliquent "Continuer", c'est accepté pour la formation.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># tls.tf</span>
+
+<span class="c1"># 1. Cle privee RSA 2048 bits (generee en memoire Terraform)</span>
+<span class="c1"># ATTENTION : la cle privee finit dans le state. C est accepte ici car</span>
+<span class="c1"># le state est chiffre KMS (backend S3 + KMS). En prod pour un vrai</span>
+<span class="c1"># cert, vous n utiliseriez JAMAIS ce pattern.</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;tls_private_key&quot;</span><span class="w"> </span><span class="nv">&quot;self_signed&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">algorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;RSA&quot;</span>
+<span class="w">  </span><span class="na">rsa_bits</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="m">2048</span>
+<span class="p">}</span>
+
+<span class="c1"># 2. Certificat X509 auto-signe, valide 1 an</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;tls_self_signed_cert&quot;</span><span class="w"> </span><span class="nv">&quot;alb&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">private_key_pem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">tls_private_key.self_signed.private_key_pem</span>
+
+<span class="w">  </span><span class="nb">subject</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">common_name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}.kolab.local&quot;</span>
+<span class="w">    </span><span class="na">organization</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Kolab Cabinet Avocats&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="na">validity_period_hours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8760</span><span class="c1">  # 365 jours</span>
+
+<span class="c1">  # Usages autorises par le cert</span>
+<span class="w">  </span><span class="na">allowed_uses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;key_encipherment&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;digital_signature&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;server_auth&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">]</span>
+
+<span class="c1">  # DNS alternatif : on autorise n importe quel domaine ALB AWS</span>
+<span class="c1">  # (le DNS name de l ALB sera genere apres)</span>
+<span class="w">  </span><span class="na">dns_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;${local.name_prefix}.kolab.local&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;*.elb.amazonaws.com&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># 3. Import du cert dans ACM (c est ACM qui parle a l ALB)</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_acm_certificate&quot;</span><span class="w"> </span><span class="nv">&quot;self_signed&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">private_key</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">tls_private_key.self_signed.private_key_pem</span>
+<span class="w">  </span><span class="na">certificate_body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">tls_self_signed_cert.alb.cert_pem</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-alb-cert&quot;</span>
+<span class="w">  </span><span class="p">})</span>
+
+<span class="w">  </span><span class="nb">lifecycle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">create_before_destroy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Résultat attendu</strong> : <code>terraform plan</code> sur ce fichier seul crée 3 ressources : <code>tls_private_key.self_signed</code>, <code>tls_self_signed_cert.alb</code>, <code>aws_acm_certificate.self_signed</code>.</p>
+<hr />
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Complétez <code>tls.tf</code> pour que le certificat soit valide <strong>2 ans</strong> au lieu d'1 an et inclue en <code>dns_names</code> le nom prévisible de votre ALB (<code>${local.name_prefix}-alb.elb.amazonaws.com</code> en wildcard n'est pas possible — réfléchissez à une alternative via <code>aws_lb.main.dns_name</code> en post-hoc).</p>
+</blockquote>
+<p>Indice 1 : <code>validity_period_hours</code> prend un int, 2 ans = 17520.</p>
+<p>Indice 2 : vous ne pouvez pas référencer <code>aws_lb.main.dns_name</code> dans les <code>dns_names</code> du cert car cela créerait un cycle (l'ALB consomme le cert). Solution pragmatique : mettre un wildcard <code>*.elb.amazonaws.com</code> ou juste le <code>common_name</code>.</p>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>terraform plan</code> affiche bien <code>+ aws_acm_certificate.self_signed</code> avec un <code>status</code> qui passera à <code>ISSUED</code> dès <code>apply</code>.</p>
+<details>
+<summary>🟢 Voir la solution</summary>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;tls_self_signed_cert&quot;</span><span class="w"> </span><span class="nv">&quot;alb&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">private_key_pem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">tls_private_key.self_signed.private_key_pem</span>
+
+<span class="w">  </span><span class="nb">subject</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">common_name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}.kolab.local&quot;</span>
+<span class="w">    </span><span class="na">organization</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Kolab Cabinet Avocats&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="na">validity_period_hours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">17520</span><span class="c1">  # 2 ans</span>
+
+<span class="w">  </span><span class="na">allowed_uses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;key_encipherment&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;digital_signature&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;server_auth&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">]</span>
+
+<span class="w">  </span><span class="na">dns_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;${local.name_prefix}.kolab.local&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;*.elb.amazonaws.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;*.eu-west-1.elb.amazonaws.com&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🟤 En prod : <code>aws_acm_certificate</code> avec <code>validation_method = "DNS"</code> + un vrai domaine Route53 + <code>aws_acm_certificate_validation</code> pour attendre l'émission. Le renouvellement est automatique. Ce pattern self-signed ne sert <strong>que</strong> pour les POC/formations.</p>
+</details>
+<hr />
+<h3 id="etape-4-application-load-balancer-30-min">Étape 4 : Application Load Balancer (30 min)</h3>
+<p><strong>Objectif</strong> : créer l'ALB public + target group + listeners HTTPS/HTTP.</p>
+<p><strong>Contexte</strong> : l'ALB vit dans les subnets publics (2 AZ), il reçoit le trafic HTTPS et le forward en clair vers les EC2 privées sur le port 80 (Docker Nextcloud expose du HTTP en interne). Il écrit ses access logs dans le bucket S3 du Rôle 4.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># alb.tf</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Application Load Balancer (public, cross-AZ)</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_lb&quot;</span><span class="w"> </span><span class="nv">&quot;main&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-alb&quot;</span>
+<span class="w">  </span><span class="na">internal</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="no">false</span>
+<span class="w">  </span><span class="na">load_balancer_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;application&quot;</span>
+<span class="w">  </span><span class="na">security_groups</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nv">var.alb_security_group_id</span><span class="p">]</span>
+<span class="w">  </span><span class="na">subnets</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">local.public_subnet_ids_list</span>
+
+<span class="c1">  # Protection contre destruction accidentelle en prod</span>
+<span class="c1">  # FALSE en dev pour que terraform destroy fonctionne sans souci</span>
+<span class="w">  </span><span class="na">enable_deletion_protection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span>
+
+<span class="c1">  # Recommandations AWS / tfsec</span>
+<span class="w">  </span><span class="na">drop_invalid_header_fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="na">enable_http2</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+
+<span class="c1">  # Access logs : on ecrit dans le bucket fourni par le Role 4 (Data)</span>
+<span class="w">  </span><span class="nb">access_logs</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">bucket</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">var.s3_logs_bucket_name</span>
+<span class="w">    </span><span class="na">prefix</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;alb&quot;</span>
+<span class="w">    </span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-alb&quot;</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Target Group : les EC2 Nextcloud enregistrees par l ASG arriveront ici.</span>
+<span class="c1"># Health check sur /status.php, endpoint natif Nextcloud qui renvoie un JSON.</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_lb_target_group&quot;</span><span class="w"> </span><span class="nv">&quot;app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-tg&quot;</span>
+<span class="w">  </span><span class="na">port</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
+<span class="w">  </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;HTTP&quot;</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vpc_id</span>
+<span class="w">  </span><span class="na">target_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;instance&quot;</span>
+
+<span class="c1">  # Deregistration delay : temps avant retrait d une EC2 degradee</span>
+<span class="w">  </span><span class="na">deregistration_delay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span>
+
+<span class="w">  </span><span class="nb">health_check</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">enabled</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">    </span><span class="na">path</span><span class="w">                </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/status.php&quot;</span>
+<span class="w">    </span><span class="na">port</span><span class="w">                </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;traffic-port&quot;</span>
+<span class="w">    </span><span class="na">protocol</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;HTTP&quot;</span>
+<span class="w">    </span><span class="na">matcher</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;200&quot;</span>
+<span class="w">    </span><span class="na">interval</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="m">30</span>
+<span class="w">    </span><span class="na">timeout</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+<span class="w">    </span><span class="na">healthy_threshold</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>
+<span class="w">    </span><span class="na">unhealthy_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-tg&quot;</span>
+<span class="w">  </span><span class="p">})</span>
+
+<span class="c1">  # create_before_destroy : evite une fenetre sans TG si on renomme</span>
+<span class="w">  </span><span class="nb">lifecycle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">create_before_destroy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Listener HTTPS 443 : c est la porte d entree</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_lb_listener&quot;</span><span class="w"> </span><span class="nv">&quot;https&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">load_balancer_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb.main.arn</span>
+<span class="w">  </span><span class="na">port</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="m">443</span>
+<span class="w">  </span><span class="na">protocol</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;HTTPS&quot;</span>
+<span class="c1">  # Politique TLS moderne (TLS 1.2 et 1.3, pas de SSLv3/TLS1.0)</span>
+<span class="w">  </span><span class="na">ssl_policy</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ELBSecurityPolicy-TLS13-1-2-2021-06&quot;</span>
+<span class="w">  </span><span class="na">certificate_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_acm_certificate.self_signed.arn</span>
+
+<span class="w">  </span><span class="nb">default_action</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">type</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;forward&quot;</span>
+<span class="w">    </span><span class="na">target_group_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb_target_group.app.arn</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">local.common_tags</span>
+<span class="p">}</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Listener HTTP 80 : redirige tout vers 443 (UX + securite)</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_lb_listener&quot;</span><span class="w"> </span><span class="nv">&quot;http_redirect&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">load_balancer_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb.main.arn</span>
+<span class="w">  </span><span class="na">port</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
+<span class="w">  </span><span class="na">protocol</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;HTTP&quot;</span>
+
+<span class="w">  </span><span class="nb">default_action</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;redirect&quot;</span>
+<span class="w">    </span><span class="nb">redirect</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">port</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;443&quot;</span>
+<span class="w">      </span><span class="na">protocol</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;HTTPS&quot;</span>
+<span class="w">      </span><span class="na">status_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;HTTP_301&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">local.common_tags</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🟡 <strong>Piège courant</strong> : si vous oubliez <code>drop_invalid_header_fields = true</code>, tfsec remonte <code>aws-elb-drop-invalid-headers</code> en HIGH. Le rôle 5 fait un scan tfsec final, ne lui donnez pas de raison de vous renvoyer en PR.</p>
+<p>🔷 <strong>Point clé à vérifier</strong> : le plan affiche <code>+ aws_lb.main</code>, <code>+ aws_lb_target_group.app</code>, <code>+ aws_lb_listener.https</code>, <code>+ aws_lb_listener.http_redirect</code>.</p>
+<hr />
+<h3 id="etape-5-template-user_data-nextcloud-40-min">Étape 5 : Template user_data Nextcloud (40 min)</h3>
+<p><strong>Objectif</strong> : écrire le script bash qui installe Docker, récupère les secrets, lance Nextcloud.</p>
+<p><strong>Contexte</strong> : le user_data s'exécute <strong>une fois</strong> au boot de chaque EC2. Il doit être idempotent (si le boot échoue et qu'AWS relance l'instance, ça doit repartir proprement). On utilise <code>templatefile()</code> pour injecter les valeurs Terraform (endpoints, ARNs) dans le script.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># modules/compute/templates/nextcloud-user-data.sh.tftpl</span>
+<span class="c1">#!/bin/bash</span>
+<span class="c1"># User data Nextcloud - execute au boot EC2</span>
+<span class="c1"># Variables injectees par Terraform via templatefile() :</span>
+<span class="c1">#   $${db_endpoint}, $${db_name}, $${db_username},</span>
+<span class="c1">#   $${db_password_secret_arn}, $${admin_password_secret_arn},</span>
+<span class="c1">#   $${s3_primary_bucket_name}, $${alb_dns_name}, $${aws_region}</span>
+
+<span class="nb">set</span><span class="w"> </span>-euxo<span class="w"> </span>pipefail
+
+<span class="nb">exec</span><span class="w"> </span>&gt;<span class="w"> </span>&gt;<span class="o">(</span>tee<span class="w"> </span>/var/log/user-data.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>logger<span class="w"> </span>-t<span class="w"> </span>user-data<span class="w"> </span>-s<span class="w"> </span><span class="m">2</span>&gt;/dev/console<span class="o">)</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;===&gt; Update systeme + install Docker + AWS CLI&quot;</span>
+dnf<span class="w"> </span>update<span class="w"> </span>-y
+dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>docker
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>docker
+usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span>ec2-user
+
+<span class="c1"># AWS CLI v2 est preinstalle sur AL2023</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;===&gt; Attente que RDS reponde (jusqu a 5 min)&quot;</span>
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..30<span class="o">}</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span>timeout<span class="w"> </span><span class="m">3</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;cat &lt; /dev/tcp/</span><span class="si">${</span><span class="nv">db_endpoint</span><span class="si">}</span><span class="s2">/5432&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;RDS OK&quot;</span>
+<span class="w">    </span><span class="k">break</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;RDS pas encore pret, retry </span><span class="nv">$i</span><span class="s2">/30...&quot;</span>
+<span class="w">  </span>sleep<span class="w"> </span><span class="m">10</span>
+<span class="k">done</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;===&gt; Recuperation des secrets via IAM instance profile&quot;</span>
+<span class="nv">DB_PASSWORD</span><span class="o">=</span><span class="k">$(</span>aws<span class="w"> </span>secretsmanager<span class="w"> </span>get-secret-value<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span><span class="si">${</span><span class="nv">aws_region</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--secret-id<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">db_password_secret_arn</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--query<span class="w"> </span>SecretString<span class="w"> </span>--output<span class="w"> </span>text<span class="k">)</span>
+
+<span class="nv">ADMIN_PASSWORD</span><span class="o">=</span><span class="k">$(</span>aws<span class="w"> </span>secretsmanager<span class="w"> </span>get-secret-value<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span><span class="si">${</span><span class="nv">aws_region</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--secret-id<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">admin_password_secret_arn</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--query<span class="w"> </span>SecretString<span class="w"> </span>--output<span class="w"> </span>text<span class="k">)</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;===&gt; Pull + run Nextcloud container&quot;</span>
+docker<span class="w"> </span>pull<span class="w"> </span>nextcloud:30-apache
+
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>nextcloud<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--restart<span class="w"> </span>always<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="m">80</span>:80<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_HOST</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">db_endpoint</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_DB</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">db_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_USER</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">db_username</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$DB_PASSWORD</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">NEXTCLOUD_ADMIN_USER</span><span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">NEXTCLOUD_ADMIN_PASSWORD</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$ADMIN_PASSWORD</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_BUCKET</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s3_primary_bucket_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_REGION</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">aws_region</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_USEPATH_STYLE</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_SSL</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_AUTOCREATE</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_USE_EC2_IAM</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">NEXTCLOUD_TRUSTED_DOMAINS</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OVERWRITEPROTOCOL</span><span class="o">=</span>https<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>nextcloud:30-apache
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;===&gt; Nextcloud lance. Attente 30s pour bootstrap...&quot;</span>
+sleep<span class="w"> </span><span class="m">30</span>
+docker<span class="w"> </span>ps
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;===&gt; user-data termine avec succes&quot;</span>
+</code></pre></div>
+<p>🟤 <strong>Notes sur les variables template</strong> :</p>
+<ul>
+<li><code>$${VAR}</code> = variable <strong>bash</strong> (n'est pas remplacée par Terraform)</li>
+<li><code>${VAR}</code> = variable <strong>Terraform</strong> (remplacée par <code>templatefile()</code>)</li>
+<li><code>NEXTCLOUD_TRUSTED_DOMAINS="*"</code> : accepte n'importe quel Host: header — OK en dev uniquement pour contourner le chicken-and-egg ALB DNS. 🟡 En prod : lister explicitement les domaines.</li>
+<li><code>OVERWRITEPROTOCOL=https</code> : force Nextcloud à générer ses URLs internes en <code>https://</code>, sinon il voit le HTTP interne et casse les redirections.</li>
+</ul>
+<p>🔷 <strong>Point clé à vérifier</strong> : le fichier <code>templates/nextcloud-user-data.sh.tftpl</code> existe et ne contient <strong>aucun secret en clair</strong> — les mots de passe sont tirés via <code>aws secretsmanager get-secret-value</code> à l'exécution.</p>
+<hr />
+<h3 id="etape-6-ami-data-source-launch-template-30-min">Étape 6 : AMI data source + Launch Template (30 min)</h3>
+<p><strong>Objectif</strong> : template de machine reproductible avec IMDSv2 forcé, user_data, tags propagés.</p>
+<p><strong>Contexte</strong> : le Launch Template décrit comment fabriquer une EC2. L'ASG l'utilise pour créer 1 à 2 instances identiques. IMDSv2 obligatoire pour éviter le SSRF — c'est un point que tfsec vérifie.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># asg.tf (partie 1 : AMI + Launch Template)</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># AMI Amazon Linux 2023 (x86_64) la plus recente</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kr">data</span><span class="w"> </span><span class="nc">&quot;aws_ami&quot;</span><span class="w"> </span><span class="nv">&quot;al2023&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">most_recent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="na">owners</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;amazon&quot;</span><span class="p">]</span>
+
+<span class="w">  </span><span class="nb">filter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;name&quot;</span>
+<span class="w">    </span><span class="na">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;al2023-ami-*-x86_64&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nb">filter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;architecture&quot;</span>
+<span class="w">    </span><span class="na">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;x86_64&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nb">filter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;state&quot;</span>
+<span class="w">    </span><span class="na">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;available&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Launch Template : recette de construction d une EC2</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_launch_template&quot;</span><span class="w"> </span><span class="nv">&quot;app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name_prefix</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-lt-&quot;</span>
+<span class="w">  </span><span class="na">image_id</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">data.aws_ami.al2023.id</span>
+<span class="w">  </span><span class="na">instance_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.instance_type</span>
+
+<span class="c1">  # IAM instance profile fourni par le Role 5 (permet AWS CLI sur l EC2)</span>
+<span class="w">  </span><span class="nb">iam_instance_profile</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.app_instance_profile_name</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="c1">  # Security Group app : seul l ALB peut parler HTTP 80 a l EC2</span>
+<span class="w">  </span><span class="na">vpc_security_group_ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nv">var.app_security_group_id</span><span class="p">]</span>
+
+<span class="c1">  # IMDSv2 obligatoire (contre le SSRF et les vols de credentials)</span>
+<span class="w">  </span><span class="nb">metadata_options</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">http_tokens</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;required&quot;</span>
+<span class="w">    </span><span class="na">http_endpoint</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;enabled&quot;</span>
+<span class="w">    </span><span class="na">http_put_response_hop_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="c1">  # 2 pour que Docker container puisse acceder IMDS</span>
+<span class="w">    </span><span class="na">instance_metadata_tags</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;enabled&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="c1">  # Root volume chiffre par KMS (defaut AWS)</span>
+<span class="w">  </span><span class="nb">block_device_mappings</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">device_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/dev/xvda&quot;</span>
+<span class="w">    </span><span class="nb">ebs</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">volume_size</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="m">20</span>
+<span class="w">      </span><span class="na">volume_type</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;gp3&quot;</span>
+<span class="w">      </span><span class="na">encrypted</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">      </span><span class="na">delete_on_termination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="c1">  # user_data rendu par templatefile() avec les valeurs des autres modules</span>
+<span class="w">  </span><span class="na">user_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">base64encode</span><span class="p">(</span><span class="nf">templatefile</span><span class="p">(</span><span class="s2">&quot;${path.module}/templates/nextcloud-user-data.sh.tftpl&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">db_endpoint</span><span class="w">                </span><span class="o">=</span><span class="w"> </span><span class="nv">var.db_endpoint</span>
+<span class="w">    </span><span class="na">db_name</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="nv">var.db_name</span>
+<span class="w">    </span><span class="na">db_username</span><span class="w">                </span><span class="o">=</span><span class="w"> </span><span class="nv">var.db_username</span>
+<span class="w">    </span><span class="na">db_password_secret_arn</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.db_password_secret_arn</span>
+<span class="w">    </span><span class="na">admin_password_secret_arn</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">var.admin_password_secret_arn</span>
+<span class="w">    </span><span class="na">s3_primary_bucket_name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.s3_primary_bucket_name</span>
+<span class="w">    </span><span class="na">alb_dns_name</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb.main.dns_name</span>
+<span class="w">    </span><span class="na">aws_region</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="w">  </span><span class="p">}))</span>
+
+<span class="c1">  # Tags propages aux instances creees par l ASG</span>
+<span class="w">  </span><span class="nb">tag_specifications</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">resource_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;instance&quot;</span>
+<span class="w">    </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-app&quot;</span>
+<span class="w">      </span><span class="na">Role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;nextcloud-app&quot;</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nb">tag_specifications</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">resource_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;volume&quot;</span>
+<span class="w">    </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-app-volume&quot;</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-launch-template&quot;</span>
+<span class="w">  </span><span class="p">})</span>
+
+<span class="c1">  # Si on change l AMI ou le user_data, on veut un nouveau LT avant suppression</span>
+<span class="w">  </span><span class="nb">lifecycle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">create_before_destroy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🟡 <strong>Piège <code>http_put_response_hop_limit</code></strong> : la valeur par défaut (1) <strong>bloque</strong> les containers Docker qui veulent lire IMDS. On met 2 pour que Nextcloud puisse utiliser <code>OBJECTSTORE_S3_USE_EC2_IAM=true</code>. Sans ça, Nextcloud n'accède pas à S3 et Google ne vous aidera pas (erreur silencieuse côté Nextcloud).</p>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>terraform plan</code> sur le LT affiche <code>+ user_data = (known after apply)</code> — c'est normal, il dépend de <code>aws_lb.main.dns_name</code>.</p>
+<hr />
+<h3 id="etape-7-auto-scaling-group-30-min">Étape 7 : Auto Scaling Group (30 min)</h3>
+<p><strong>Objectif</strong> : l'ASG consomme le LT, maintient 1 instance vivante, s'attache au target group.</p>
+<p><strong>Contexte</strong> : l'ASG est le "superviseur" — si l'EC2 crash, il en recrée une. <code>health_check_type = "ELB"</code> délègue la décision au target group (si le <code>/status.php</code> renvoie un 5xx, l'ASG tue l'instance).</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># asg.tf (partie 2 : ASG)</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_autoscaling_group&quot;</span><span class="w"> </span><span class="nv">&quot;app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-asg&quot;</span>
+
+<span class="c1">  # Subnets prives (les EC2 ne sont JAMAIS exposees directement)</span>
+<span class="w">  </span><span class="na">vpc_zone_identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">local.private_app_subnet_ids_list</span>
+
+<span class="c1">  # Taille : 1 seule instance a la fois (file locking Nextcloud sans Redis)</span>
+<span class="w">  </span><span class="na">min_size</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="w">  </span><span class="na">max_size</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>
+<span class="w">  </span><span class="na">desired_capacity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+
+<span class="c1">  # Health check ELB : l ASG suit l avis du target group</span>
+<span class="w">  </span><span class="na">health_check_type</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ELB&quot;</span>
+<span class="w">  </span><span class="na">health_check_grace_period</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="c1">  # 5 min pour que Nextcloud finisse de booter</span>
+
+<span class="c1">  # Rattachement au Launch Template (toujours la derniere version)</span>
+<span class="w">  </span><span class="nb">launch_template</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">id</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_launch_template.app.id</span>
+<span class="w">    </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;$Latest&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="c1">  # Rolling refresh si le LT change : on cycle les instances une par une</span>
+<span class="w">  </span><span class="nb">instance_refresh</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Rolling&quot;</span>
+<span class="w">    </span><span class="nb">preferences</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">min_healthy_percentage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span>
+<span class="w">      </span><span class="na">instance_warmup</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="m">300</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="c1">  # Tags propages a chaque instance creee (separe du tag_specifications du LT</span>
+<span class="c1">  # pour etre sur que Name est bien propage).</span>
+<span class="w">  </span><span class="nb">tag</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">key</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Name&quot;</span>
+<span class="w">    </span><span class="na">value</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-app&quot;</span>
+<span class="w">    </span><span class="na">propagate_at_launch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nb">tag</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">key</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Environment&quot;</span>
+<span class="w">    </span><span class="na">value</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span>
+<span class="w">    </span><span class="na">propagate_at_launch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nb">tag</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">key</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Project&quot;</span>
+<span class="w">    </span><span class="na">value</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="nv">var.project_name</span>
+<span class="w">    </span><span class="na">propagate_at_launch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="c1">  # create_before_destroy pour zero-downtime si on renomme l ASG</span>
+<span class="w">  </span><span class="nb">lifecycle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">create_before_destroy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Rattachement ASG &lt;-&gt; Target Group (ressource separee en v5+)</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_autoscaling_attachment&quot;</span><span class="w"> </span><span class="nv">&quot;app_tg&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">autoscaling_group_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_autoscaling_group.app.name</span>
+<span class="w">  </span><span class="na">lb_target_group_arn</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb_target_group.app.arn</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🟡 <strong>Piège <code>health_check_grace_period</code></strong> : si vous mettez &lt; 180s, l'ASG tue l'instance avant que Nextcloud ait fini de démarrer (dnf install + docker pull + container up + DB init, ça prend 2-4 min). 300s est un bon défaut pour ce TP.</p>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>terraform plan</code> affiche <code>+ aws_autoscaling_group.app</code> avec <code>min_size = 1, desired_capacity = 1, max_size = 2</code>.</p>
+<hr />
+<h3 id="etape-8-outputs-10-min">Étape 8 : Outputs (10 min)</h3>
+<p><strong>Objectif</strong> : exposer ce que <code>envs/dev</code> va remonter à l'équipe.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># outputs.tf</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;alb_dns_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb.main.dns_name</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;DNS public de l ALB&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;alb_zone_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb.main.zone_id</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Zone Route53 alias de l ALB&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;asg_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_autoscaling_group.app.name</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Nom de l ASG applicatif&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;nextcloud_url&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://${aws_lb.main.dns_name}&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;URL Nextcloud a ouvrir dans le navigateur&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;launch_template_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_launch_template.app.id</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ID du Launch Template (utile pour debug ASG)&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;target_group_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb_target_group.app.arn</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN du target group (utile pour attacher d autres services)&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="etape-9-terraform-validate-tflint-tfsec-locaux-20-min">Étape 9 : <code>terraform validate</code> + <code>tflint</code> + <code>tfsec</code> locaux (20 min)</h3>
+<p><strong>Objectif</strong> : valider la qualité du module AVANT de push la PR.</p>
+<p><strong>Commandes</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>modules/compute
+
+<span class="c1"># Formatage</span>
+terraform<span class="w"> </span>fmt<span class="w"> </span>-recursive
+
+<span class="c1"># Validation syntaxique (sans backend)</span>
+terraform<span class="w"> </span>init<span class="w"> </span>-backend<span class="o">=</span><span class="nb">false</span>
+terraform<span class="w"> </span>validate
+
+<span class="c1"># Lint (regles de style)</span>
+tflint<span class="w"> </span>--init
+tflint
+
+<span class="c1"># Scan securite</span>
+tfsec<span class="w"> </span>.
+</code></pre></div>
+<p><strong>Résultat attendu</strong> :</p>
+<div class="highlight"><pre><span></span><code>Success! The configuration is valid.
+
+Result: 0 issue(s) found.
+
+0 potential problem(s) detected.
+</code></pre></div>
+<p>🟡 <strong>Piège tfsec</strong> : si vous laissez <code>drop_invalid_header_fields = false</code> (défaut) ou si vous oubliez <code>enable_deletion_protection</code>, tfsec remontera des findings HIGH. Corrigez avant la PR.</p>
+<p>🔷 <strong>Point clé à vérifier</strong> : aucun issue HIGH ou CRITICAL dans la sortie tfsec.</p>
+<hr />
+<h3 id="etape-10-readmemd-du-module-10-min">Étape 10 : README.md du module (10 min)</h3>
+<p><strong>Objectif</strong> : documenter inputs/outputs/exemple d'usage — <code>terraform-docs</code> peut le générer.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Generer automatiquement la doc (si terraform-docs installe)</span>
+terraform-docs<span class="w"> </span>markdown<span class="w"> </span>table<span class="w"> </span>--output-file<span class="w"> </span>README.md<span class="w"> </span>--output-mode<span class="w"> </span>inject<span class="w"> </span>modules/compute
+
+<span class="c1"># Sinon, README manuel minimal :</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>modules/compute/README.md<span class="w"> </span>&lt;&lt;<span class="w"> </span><span class="s1">&#39;EOF&#39;</span>
+<span class="c1"># Module compute</span>
+
+ALB<span class="w"> </span>+<span class="w"> </span>Auto<span class="w"> </span>Scaling<span class="w"> </span>Group<span class="w"> </span>+<span class="w"> </span>Launch<span class="w"> </span>Template<span class="w"> </span>pour<span class="w"> </span>Nextcloud<span class="w"> </span>en<span class="w"> </span>Docker.
+
+<span class="c1">## Usage</span>
+
+<span class="sb">```</span>hcl
+module<span class="w"> </span><span class="s2">&quot;compute&quot;</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nb">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/compute&quot;</span>
+
+<span class="w">  </span><span class="nv">project_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab&quot;</span>
+<span class="w">  </span><span class="nv">environment</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span>
+
+<span class="w">  </span><span class="nv">vpc_id</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span>module.networking.vpc_id
+<span class="w">  </span><span class="nv">public_subnet_ids</span><span class="w">         </span><span class="o">=</span><span class="w"> </span>module.networking.public_subnet_ids
+<span class="w">  </span><span class="nv">private_app_subnet_ids</span><span class="w">    </span><span class="o">=</span><span class="w"> </span>module.networking.private_app_subnet_ids
+<span class="w">  </span><span class="nv">alb_security_group_id</span><span class="w">     </span><span class="o">=</span><span class="w"> </span>module.security.alb_security_group_id
+<span class="w">  </span><span class="nv">app_security_group_id</span><span class="w">     </span><span class="o">=</span><span class="w"> </span>module.security.app_security_group_id
+<span class="w">  </span><span class="nv">app_instance_profile_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>module.security.app_instance_profile_name
+<span class="w">  </span><span class="nv">db_endpoint</span><span class="w">               </span><span class="o">=</span><span class="w"> </span>module.data.db_endpoint
+<span class="w">  </span><span class="nv">db_name</span><span class="w">                   </span><span class="o">=</span><span class="w"> </span>module.data.db_name
+<span class="w">  </span><span class="nv">db_username</span><span class="w">               </span><span class="o">=</span><span class="w"> </span>module.data.db_username
+<span class="w">  </span><span class="nv">db_password_secret_arn</span><span class="w">    </span><span class="o">=</span><span class="w"> </span>module.security.db_password_secret_arn
+<span class="w">  </span><span class="nv">admin_password_secret_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>module.security.admin_password_secret_arn
+<span class="w">  </span><span class="nv">s3_primary_bucket_name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span>module.data.s3_primary_bucket_name
+<span class="w">  </span><span class="nv">s3_logs_bucket_name</span><span class="w">       </span><span class="o">=</span><span class="w"> </span>module.data.s3_logs_bucket_name
+<span class="o">}</span>
+</code></pre></div>
+<h2 id="outputs">Outputs</h2>
+<ul>
+<li><code>alb_dns_name</code> : DNS ALB</li>
+<li><code>nextcloud_url</code> : URL HTTPS a ouvrir</li>
+<li><code>asg_name</code> : nom ASG (pour cycling manuel)
+EOF
+<div class="highlight"><pre><span></span><code>🔷 **Point clé à vérifier** : le README décrit au moins le `source`, les 14 variables d&#39;entrée, et les 4 outputs principaux.
+
+---
+
+## Sprint 2 — intégration
+
+### Votre bloc dans `envs/dev/main.tf`
+
+C&#39;est le Rôle 1 qui assemble, mais **vous lui fournissez le bloc déjà prêt** pour qu&#39;il copie-colle.
+
+```hcl
+# envs/dev/main.tf (extrait - votre contribution)
+module &quot;compute&quot; {
+  source = &quot;../../modules/compute&quot;
+
+  project_name = var.project_name
+  environment  = var.environment
+
+  # Inputs du module networking (Role 2)
+  vpc_id                 = module.networking.vpc_id
+  public_subnet_ids      = module.networking.public_subnet_ids
+  private_app_subnet_ids = module.networking.private_app_subnet_ids
+
+  # Inputs du module security (Role 5)
+  alb_security_group_id     = module.security.alb_security_group_id
+  app_security_group_id     = module.security.app_security_group_id
+  app_instance_profile_name = module.security.app_instance_profile_name
+  db_password_secret_arn    = module.security.db_password_secret_arn
+  admin_password_secret_arn = module.security.admin_password_secret_arn
+
+  # Inputs du module data (Role 4)
+  db_endpoint            = module.data.db_endpoint
+  db_name                = module.data.db_name
+  db_username            = module.data.db_username
+  s3_primary_bucket_name = module.data.s3_primary_bucket_name
+  s3_logs_bucket_name    = module.data.s3_logs_bucket_name
+}
+</code></pre></div></li>
+</ul>
+<h3 id="commandes-dintegration-sprint-3-pilote-par-platform-lead">Commandes d'intégration (Sprint 3, piloté par Platform Lead)</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>envs/dev
+
+terraform<span class="w"> </span>init
+terraform<span class="w"> </span>plan<span class="w"> </span>-out<span class="o">=</span>tfplan
+<span class="c1"># Relecture collective du plan : ~60 ressources attendues au total</span>
+terraform<span class="w"> </span>apply<span class="w"> </span>tfplan
+
+<span class="c1"># Recuperer l URL Nextcloud</span>
+terraform<span class="w"> </span>output<span class="w"> </span>nextcloud_url
+<span class="c1"># Exemple : &quot;https://kolab-dev-alb-1234567890.eu-west-1.elb.amazonaws.com&quot;</span>
+
+<span class="c1"># Ouvrir dans le navigateur - accepter le warning self-signed</span>
+</code></pre></div>
+<h3 id="ordre-de-deploiement-observe">Ordre de déploiement observé</h3>
+<ol>
+<li><code>networking</code> (VPC, subnets, NAT) — 2 min</li>
+<li><code>security</code> (SGs, KMS, IAM, secrets) — 1 min</li>
+<li><code>data</code> (RDS Multi-AZ) — <strong>7-10 min</strong> (RDS Multi-AZ est long)</li>
+<li><code>compute</code> (ALB, LT, ASG) — 4 min, <strong>mais</strong> l'EC2 derrière met encore 3-4 min à finir le boot + docker pull + container up</li>
+</ol>
+<p>🟡 <strong>Total réaliste : 15-20 min d'apply</strong>. Prévoir un café.</p>
+<p>🔷 <strong>Point clé à vérifier</strong> : après <code>apply</code>, <code>terraform output nextcloud_url</code> retourne une URL, et ouvrir cette URL dans Firefox/Chrome (après "Accepter le risque") affiche le formulaire de login Nextcloud.</p>
+<hr />
+<h2 id="troubleshooting-specifique-a-votre-role">Troubleshooting spécifique à votre rôle</h2>
+<table>
+<thead>
+<tr>
+<th>Erreur</th>
+<th>Cause probable</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidTarget: Target ... is not in the target group</code></td>
+<td>L'ASG vient de démarrer, la première EC2 n'a pas encore passé le health check</td>
+<td>Attendre 5-7 min après <code>apply</code>. Vérifier la console EC2 &gt; Target Groups &gt; Healthy targets</td>
+</tr>
+<tr>
+<td>Page blanche ou <code>502 Bad Gateway</code> dans le navigateur</td>
+<td>user_data a échoué, container Nextcloud pas démarré</td>
+<td>SSM Session Manager sur l'EC2 (<code>aws ssm start-session --target i-xxx</code>) puis <code>docker ps</code> et <code>tail /var/log/user-data.log</code></td>
+</tr>
+<tr>
+<td><code>ResourceInitializationError: ... UnauthorizedOperation</code> dans CloudTrail</td>
+<td>Instance profile mal permissionné (Rôle 5)</td>
+<td>Vérifier avec Rôle 5 que la policy autorise <code>secretsmanager:GetSecretValue</code> sur les 2 ARNs + <code>s3:*</code> sur le bucket primary</td>
+</tr>
+<tr>
+<td><code>aws_lb</code>: <code>You cannot specify an access log bucket without first enabling bucket logging permissions</code></td>
+<td>Bucket policy ALB logs manquante (Rôle 4)</td>
+<td>Rôle 4 doit poser <code>aws_s3_bucket_policy.logs</code> avec principal <code>aws_elb_service_account.main.arn</code></td>
+</tr>
+<tr>
+<td><code>certificate is not yet issued</code></td>
+<td>Rare sur cert auto-signé, mais ACM peut prendre 30s à valider</td>
+<td><code>terraform apply</code> une seconde fois, ou ajouter <code>depends_on</code> explicite dans le listener</td>
+</tr>
+<tr>
+<td><code>The metadata service endpoint is not reachable</code> depuis Docker</td>
+<td><code>http_put_response_hop_limit = 1</code> (défaut) bloque les containers</td>
+<td>Passer à 2 dans <code>metadata_options</code> du launch template (voir Étape 6)</td>
+</tr>
+<tr>
+<td>Nextcloud dit "Access through untrusted domain" dans le navigateur</td>
+<td><code>NEXTCLOUD_TRUSTED_DOMAINS</code> ne contient pas le DNS ALB</td>
+<td>Solution TP : <code>NEXTCLOUD_TRUSTED_DOMAINS="*"</code>. Solution prod : re-render user_data avec <code>aws_lb.main.dns_name</code></td>
+</tr>
+<tr>
+<td>ASG cycle les EC2 en boucle (kill puis recrée)</td>
+<td><code>health_check_grace_period</code> trop court</td>
+<td>Passer à 300s minimum</td>
+</tr>
+</tbody>
+</table>
+<h3 id="commande-ssm-session-manager-pas-besoin-de-ssh">Commande SSM Session Manager (pas besoin de SSH)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Lister les instances de votre ASG</span>
+aws<span class="w"> </span>ec2<span class="w"> </span>describe-instances<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--filters<span class="w"> </span><span class="s2">&quot;Name=tag:aws:autoscaling:groupName,Values=kolab-dev-asg&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--query<span class="w"> </span><span class="s1">&#39;Reservations[].Instances[].InstanceId&#39;</span><span class="w"> </span>--output<span class="w"> </span>text
+
+<span class="c1"># Se connecter sans SSH ni bastion (instance profile fourni par Role 5</span>
+<span class="c1"># doit avoir AmazonSSMManagedInstanceCore attache)</span>
+aws<span class="w"> </span>ssm<span class="w"> </span>start-session<span class="w"> </span>--target<span class="w"> </span>i-0abc123def456
+
+<span class="c1"># Une fois dedans :</span>
+sudo<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/user-data.log
+sudo<span class="w"> </span>docker<span class="w"> </span>ps
+sudo<span class="w"> </span>docker<span class="w"> </span>logs<span class="w"> </span>nextcloud
+</code></pre></div>
+<p>🟤 <strong>SSM ne fonctionne que si</strong> : l'EC2 a l'IAM policy <code>AmazonSSMManagedInstanceCore</code> + un VPC endpoint SSM <strong>ou</strong> un NAT (vous avez le NAT). Vérifiez avec le Rôle 5 que cette policy est attachée.</p>
+<hr />
+<h2 id="checklist-de-livraison-a-cocher-dans-le-rendumd">Checklist de livraison (à cocher dans le RENDU.md)</h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Arborescence <code>modules/compute/</code> conforme (9 fichiers + dossier <code>templates/</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>variables.tf</code> : toutes les 14 variables d'entrée du contrat sont déclarées avec <code>type</code> et <code>description</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>outputs.tf</code> : les 4 outputs du contrat (<code>alb_dns_name</code>, <code>alb_zone_id</code>, <code>asg_name</code>, <code>nextcloud_url</code>) sont présents</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Certificat auto-signé généré via <code>tls_private_key</code> + <code>tls_self_signed_cert</code> + <code>aws_acm_certificate</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Launch template avec <strong>IMDSv2 required</strong> (<code>http_tokens = "required"</code>) et <code>http_put_response_hop_limit = 2</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> ASG <code>min=1 max=2 desired=1</code> avec <code>health_check_type = "ELB"</code> et <code>grace_period &gt;= 300</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>terraform fmt</code> passé, <code>terraform validate</code> OK, <code>tflint</code> 0 erreur, <code>tfsec</code> 0 HIGH/CRITICAL</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> README.md du module avec exemple d'usage</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> PR ouverte vers <code>main</code> avec description du périmètre livré + 2 approvals reçus</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Après apply global : <code>curl -k https://$(terraform output -raw alb_dns_name)/status.php</code> retourne du JSON Nextcloud</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Screenshot <code>03-nextcloud-login.png</code> : page de login Nextcloud avec l'URL ALB visible dans la barre du navigateur</li>
+</ul>
+<hr />
+<h2 id="conseils-du-formateur">Conseils du formateur</h2>
+<p><strong>Attaquez le certificat self-signed en premier.</strong> C'est la ressource la plus "exotique" du module (provider <code>tls</code> que vous ne connaissez pas), et elle bloque le listener HTTPS. Une fois le cert dans ACM, vous êtes tranquille pour le reste de la journée. Beaucoup d'équipes perdent 40 min dessus en fin de matinée parce qu'elles l'ont gardée pour "après" — ne faites pas ça.</p>
+<p><strong>Le user_data est le point chaud du débogage.</strong> 80 % des "Nextcloud ne démarre pas" viennent d'une variable mal injectée dans le template (une <code>$${variable}</code> écrite <code>${variable}</code> par erreur, ou l'inverse). Pour débugger, récupérez le user_data rendu avant de lancer l'apply : <code>terraform console</code> → <code>templatefile(...)</code> — si le script rendu compile en bash, vous êtes bons. En cas de souci au boot, SSM Session Manager sur l'EC2 et <code>tail /var/log/user-data.log</code> vous dit tout. Ne cherchez <strong>jamais</strong> à déboguer en aveugle, l'EC2 vous donnera la réponse en 30 secondes.</p>
+<p><strong>Ne touchez pas aux Security Groups ni à l'IAM.</strong> Ils sont livrés par le Rôle 5. Si vous avez besoin d'un port ou d'une permission supplémentaire, vous ouvrez un ticket Slack vers le Rôle 5 et il ajoute la règle. Si vous créez un SG "pour aller plus vite", vous violez le contrat d'interface, et le module ne s'intègre plus proprement dans <code>envs/dev</code>. <strong>Respectez le périmètre.</strong></p>
+    </article>
+
+    
+    
+    
+    <script>
+    (function() {
+        'use strict';
+        
+        function initMermaidLightbox() {
+            // Crée le conteneur lightbox
+            const lightbox = document.createElement('div');
+            lightbox.className = 'mermaid-lightbox';
+            lightbox.innerHTML = `
+                <div class="mermaid-lightbox-backdrop"></div>
+                <div class="mermaid-lightbox-container">
+                    <div class="mermaid-lightbox-content"></div>
+                </div>
+                <div class="mermaid-lightbox-controls">
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-in" title="Zoom +">+</button>
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-reset" title="Reset">100%</button>
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-out" title="Zoom -">−</button>
+                    <button class="mermaid-lb-btn mermaid-lb-close" title="Fermer">✕</button>
+                </div>
+            `;
+            document.body.appendChild(lightbox);
+
+            // Variables de zoom et pan
+            let scale = 1;
+            let translateX = 0;
+            let translateY = 0;
+            let isDragging = false;
+            let startX, startY;
+
+            const container = lightbox.querySelector('.mermaid-lightbox-container');
+            const content = lightbox.querySelector('.mermaid-lightbox-content');
+            const backdrop = lightbox.querySelector('.mermaid-lightbox-backdrop');
+
+            // Ajoute un bouton d'expansion à chaque diagramme Mermaid
+            document.querySelectorAll('.mermaid, pre.mermaid').forEach(diagram => {
+                const expandBtn = document.createElement('button');
+                expandBtn.className = 'mermaid-expand-btn';
+                expandBtn.innerHTML = '⛶';
+                expandBtn.title = 'Agrandir le diagramme';
+                expandBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openLightbox(diagram);
+                });
+                
+                // Wrapper pour positionner le bouton
+                const wrapper = document.createElement('div');
+                wrapper.className = 'mermaid-wrapper';
+                diagram.parentNode.insertBefore(wrapper, diagram);
+                wrapper.appendChild(diagram);
+                wrapper.appendChild(expandBtn);
+            });
+
+            function openLightbox(diagram) {
+                // Clone le contenu SVG
+                const svg = diagram.querySelector('svg');
+                if (svg) {
+                    content.innerHTML = '';
+                    const clonedSvg = svg.cloneNode(true);
+                    
+                    // Garder le viewBox pour les proportions
+                    if (!clonedSvg.hasAttribute('viewBox') && svg.viewBox && svg.viewBox.baseVal) {
+                        const vb = svg.viewBox.baseVal;
+                        if (vb.width && vb.height) {
+                            clonedSvg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.width} ${vb.height}`);
+                        }
+                    }
+                    
+                    // Le CSS gère les dimensions (80vw)
+                    clonedSvg.removeAttribute('width');
+                    clonedSvg.removeAttribute('height');
+                    
+                    // Agrandir les foreignObject pour éviter la troncature du texte
+                    clonedSvg.querySelectorAll('foreignObject').forEach(fo => {
+                        const currentWidth = parseFloat(fo.getAttribute('width')) || 100;
+                        const currentHeight = parseFloat(fo.getAttribute('height')) || 50;
+                        fo.setAttribute('width', currentWidth * 1.5);
+                        fo.setAttribute('height', currentHeight * 1.5);
+                    });
+                    
+                    content.appendChild(clonedSvg);
+                } else {
+                    content.innerHTML = diagram.innerHTML;
+                }
+                
+                // Reset zoom et position
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                applyTransform();
+                
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function applyTransform() {
+                content.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+                lightbox.querySelector('.mermaid-lb-zoom-reset').textContent = Math.round(scale * 100) + '%';
+            }
+
+            function zoomIn() {
+                scale = Math.min(scale * 1.25, 5);
+                applyTransform();
+            }
+
+            function zoomOut() {
+                scale = Math.max(scale / 1.25, 0.25);
+                applyTransform();
+            }
+
+            function zoomReset() {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                applyTransform();
+            }
+
+            // Événements des boutons
+            lightbox.querySelector('.mermaid-lb-close').addEventListener('click', closeLightbox);
+            lightbox.querySelector('.mermaid-lb-zoom-in').addEventListener('click', zoomIn);
+            lightbox.querySelector('.mermaid-lb-zoom-out').addEventListener('click', zoomOut);
+            lightbox.querySelector('.mermaid-lb-zoom-reset').addEventListener('click', zoomReset);
+            backdrop.addEventListener('click', closeLightbox);
+
+            // Fermer avec Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            // Zoom avec la molette
+            container.addEventListener('wheel', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                e.preventDefault();
+                
+                if (e.deltaY < 0) {
+                    scale = Math.min(scale * 1.1, 5);
+                } else {
+                    scale = Math.max(scale / 1.1, 0.25);
+                }
+                applyTransform();
+            });
+
+            // Pan avec la souris
+            container.addEventListener('mousedown', (e) => {
+                if (e.button !== 0) return;
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                container.style.cursor = 'grabbing';
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                applyTransform();
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                container.style.cursor = 'grab';
+            });
+
+            // Touch support pour mobile
+            let touchStartX, touchStartY;
+            container.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX - translateX;
+                    touchStartY = e.touches[0].clientY - translateY;
+                }
+            });
+
+            container.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1) {
+                    e.preventDefault();
+                    translateX = e.touches[0].clientX - touchStartX;
+                    translateY = e.touches[0].clientY - touchStartY;
+                    applyTransform();
+                }
+            });
+        }
+
+        // Initialise après le rendu de Mermaid
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof mermaid !== 'undefined') {
+                setTimeout(initMermaidLightbox, 600);
+            } else {
+                initMermaidLightbox();
+            }
+        });
+    })();
+    </script>
+
+</body>
+</html>

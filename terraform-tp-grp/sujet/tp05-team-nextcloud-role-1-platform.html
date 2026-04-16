@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rôle 1 — Platform Lead — TP05 Nextcloud</title>
+    
+    
+    
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');:root{--color-primary:#20a7c9;--color-primary-dark:#1a8ba8;--color-primary-light:#e0f4f8;--color-primary-gradient:linear-gradient(135deg,#20a7c9 0%,#1a8ba8 100%);--color-accent:#ff7f44;--color-accent-light:#fff4ef;--color-success:#22c55e;--color-success-light:#dcfce7;--color-warning:#eab308;--color-warning-light:#fef9c3;--color-danger:#ef4444;--color-danger-light:#fee2e2;--color-info:#3b82f6;--color-info-light:#dbeafe;--gray-50:#fafafa;--gray-100:#f4f4f5;--gray-200:#e4e4e7;--gray-300:#d4d4d8;--gray-400:#a1a1aa;--gray-500:#71717a;--gray-600:#52525b;--gray-700:#3f3f46;--gray-800:#27272a;--gray-900:#18181b;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Consolas',monospace;--content-max-width:80%;--content-padding:2.5rem;--radius-sm:6px;--radius-md:10px;--radius-lg:16px;--radius-xl:20px;--shadow-sm:0 1px 2px rgba(0,0,0,0.04);--shadow-md:0 4px 12px rgba(0,0,0,0.08);--shadow-lg:0 8px 30px rgba(0,0,0,0.12);--shadow-card:0 2px 8px rgba(0,0,0,0.06),0 0 1px rgba(0,0,0,0.1)}*,*::before,*::after{box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}body{font-family:var(--font-sans);font-size:1rem;line-height:1.75;color:var(--gray-800);background:linear-gradient(180deg,var(--gray-100) 0%,var(--gray-50) 100%);min-height:100vh;margin:0;padding:2.5rem 1rem}.markdown-body,article,main{max-width:var(--content-max-width);margin:0 auto;background:white;padding:var(--content-padding);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);border:1px solid var(--gray-200)}h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3;color:var(--gray-900);margin-top:2.5rem;margin-bottom:1rem}h1{font-size:2.25rem;font-weight:700;margin-top:0;padding-bottom:1rem;border-bottom:none;position:relative;color:var(--gray-900)}h1::after{content:'';position:absolute;bottom:0;left:0;width:80px;height:4px;background:var(--color-primary-gradient);border-radius:2px}h2{font-size:1.5rem;margin-top:3rem;padding:1rem 1.25rem;background:var(--gray-50);border-left:4px solid var(--color-primary);border-radius:0 var(--radius-md) var(--radius-md) 0;color:var(--gray-800)}h3{font-size:1.25rem;color:var(--gray-800);display:flex;align-items:center;gap:0.5rem}h3::before{content:'';width:8px;height:8px;background:var(--color-primary);border-radius:50%;flex-shrink:0}h4{font-size:1.1rem;color:var(--gray-700);border-bottom:1px dashed var(--gray-300);padding-bottom:0.5rem}h5,h6{font-size:0.9rem;color:var(--gray-600);text-transform:uppercase;letter-spacing:0.08em;font-weight:600}p{margin-bottom:1.25rem}strong,b{font-weight:600;color:var(--gray-900)}a{color:var(--color-primary);text-decoration:none;font-weight:500;transition:all 0.2s;border-bottom:1px solid transparent}a:hover{color:var(--color-primary-dark);border-bottom-color:var(--color-primary)}mark{background:linear-gradient(120deg,#fef08a 0%,#fde047 100%);padding:0.1em 0.4em;border-radius:4px}hr{border:none;height:1px;background:var(--gray-200);margin:3rem 0;position:relative}hr::before{content:'◆';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:white;color:var(--color-primary);padding:0 1rem;font-size:0.8rem}ul,ol{margin-bottom:1.25rem;padding-left:1.5rem}li{margin-bottom:0.5rem;position:relative}li > ul,li > ol{margin-top:0.5rem;margin-bottom:0}ul{list-style-type:none}ul > li::before{content:'▸';color:var(--color-primary);font-weight:bold;position:absolute;left:-1.25rem}ul ul > li::before{content:'○';font-size:0.7em}ol{list-style-type:decimal}img{display:block;max-width:100%;max-height:500px;height:auto;margin:2rem auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);border:1px solid var(--gray-200);transition:transform 0.2s,box-shadow 0.2s;object-fit:contain}img:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}img[src*="screenshot"],img[src*="superset.apache.org"]{max-height:400px;width:auto;object-fit:contain}img[src*="images/"]{max-height:450px;width:auto;object-fit:contain}h1 img,h2 img,h3 img,h4 img,h5 img,h6 img{display:inline-block;margin:0 0.5rem 0 0;vertical-align:middle;max-height:1.5em;border-radius:var(--radius-sm);box-shadow:none;border:none}td img,th img{display:inline-block;margin:0;vertical-align:middle;max-height:2em;border-radius:var(--radius-sm);box-shadow:none;border:none}figure{margin:2rem 0;text-align:center;background:var(--gray-50);padding:1.5rem;border-radius:var(--radius-lg);border:1px solid var(--gray-200)}figure img{margin:0 auto 1rem;box-shadow:none;border:none}figcaption{font-size:0.875rem;color:var(--gray-500);font-style:italic}code:not(pre code){font-family:var(--font-mono);font-size:0.85em;background:#fef3c7;color:#92400e;padding:0.2em 0.5em;border-radius:var(--radius-sm);font-weight:600;border:1px solid #fcd34d}pre code{background:transparent;color:inherit;padding:0;border:none;font-weight:inherit}pre{font-family:var(--font-mono);font-size:0.875rem;line-height:1.6;background:var(--gray-900);color:#e4e4e7;padding:1.5rem;border-radius:var(--radius-lg);overflow-x:auto;margin:1.5rem 0;box-shadow:var(--shadow-md);border:1px solid var(--gray-800);position:relative}pre::before{content:'';position:absolute;top:12px;left:16px;width:12px;height:12px;background:#ff5f56;border-radius:50%;box-shadow:20px 0 0 #ffbd2e,40px 0 0 #27ca40}pre code{background:transparent;color:inherit;padding:0;font-size:inherit;font-weight:normal}table{width:100%;border-collapse:separate;border-spacing:0;margin:1.5rem 0;font-size:0.9375rem;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);border:1px solid var(--gray-200)}thead{background:var(--color-primary-gradient);color:white}th{font-weight:600;text-align:left;padding:1rem 1.25rem;font-size:0.8125rem;text-transform:uppercase;letter-spacing:0.05em}td{padding:0.875rem 1.25rem;border-bottom:1px solid var(--gray-100);vertical-align:top}tbody tr:last-child td{border-bottom:none}tbody tr:nth-child(even){background:var(--gray-50)}tbody tr{transition:background 0.15s}tbody tr:hover{background:var(--color-primary-light)}blockquote{margin:2rem 0;padding:1.5rem 1.5rem 1.5rem 2rem;border-left:4px solid var(--color-primary);background:linear-gradient(135deg,var(--gray-50) 0%,white 100%);border-radius:0 var(--radius-lg) var(--radius-lg) 0;color:var(--gray-700);box-shadow:var(--shadow-sm);font-style:italic;position:relative}blockquote::before{content:'"';position:absolute;top:-10px;left:15px;font-size:4rem;color:var(--color-primary);opacity:0.2;font-family:Georgia,serif;line-height:1}blockquote p:last-child{margin-bottom:0}details{margin:1.5rem 0;padding:0;background:white;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);transition:box-shadow 0.2s}details:hover{box-shadow:var(--shadow-md)}details[open]{box-shadow:var(--shadow-md);padding:1rem 1.25rem}details[open] > summary{margin:-1rem -1.25rem 1rem -1.25rem}details > .highlight,details > pre{margin-left:-1.25rem;margin-right:-1.25rem;border-radius:0}details > .highlight pre{border-radius:0;margin:0}details > .highlight:last-child,details > pre:last-child{margin-bottom:-1rem}summary{font-weight:600;cursor:pointer;padding:1rem 1.25rem;list-style:none;display:flex;align-items:center;gap:0.75rem;color:var(--gray-800);background:var(--gray-50);border-bottom:1px solid transparent;transition:all 0.2s}details[open] summary{border-bottom-color:var(--gray-200);background:var(--color-primary-light);color:var(--color-primary-dark)}summary::-webkit-details-marker{display:none}summary::before{content:'▶';font-size:0.65rem;color:var(--color-primary);transition:transform 0.2s;flex-shrink:0}details[open] summary::before{transform:rotate(90deg)}summary:hover{background:var(--gray-100)}.mermaid,pre.mermaid{background:white;padding:2rem;margin:2rem 0;border-radius:var(--radius-lg);border:1px solid var(--gray-200);text-align:center;overflow-x:auto;box-shadow:var(--shadow-card)}.mermaid::before{display:none}.mermaid svg{max-width:100%;height:auto}.note,.info,.tip{padding:1.25rem;margin:1.5rem 0;border-radius:var(--radius-lg);border-left:4px solid var(--color-info);background:var(--color-info-light);box-shadow:var(--shadow-sm)}.warning,.attention{border-left-color:var(--color-warning);background:var(--color-warning-light)}.danger,.error{border-left-color:var(--color-danger);background:var(--color-danger-light)}.success{border-left-color:var(--color-success);background:var(--color-success-light)}h2 + p::first-letter{font-size:1.5em;font-weight:600;color:var(--color-primary);float:left;margin-right:0.1em;line-height:1}@media print{body{background:white;padding:0}.markdown-body,article,main{box-shadow:none;border:none;padding:0;max-width:100%}pre{background:var(--gray-100) !important;color:var(--gray-900) !important;box-shadow:none;border:1px solid var(--gray-300)}pre::before{display:none}a{color:var(--gray-900)}img{max-height:280px;page-break-inside:avoid;box-shadow:none}h1,h2,h3{page-break-after:avoid}table,pre,blockquote,details{page-break-inside:avoid}h2{background:none;padding-left:0}}@media (max-width:768px){body{padding:1rem 0.5rem}.markdown-body,article,main{padding:1.5rem;border-radius:var(--radius-lg)}h1{font-size:1.75rem}h2{font-size:1.25rem;padding:0.75rem 1rem}h3{font-size:1.1rem}table{display:block;overflow-x:auto}pre{padding:1rem;font-size:0.8rem}img{max-height:250px}blockquote::before{display:none}}img[src*="superset-logo"]{max-height:80px;margin:0 0 2rem 0;box-shadow:none;border:none}img[src*="superset-logo"]:hover{transform:none}.mermaid-wrapper{position:relative;display:inline-block;width:100%}.mermaid-expand-btn{position:absolute;top:12px;right:12px;width:36px;height:36px;border:none;border-radius:var(--radius-md);background:rgba(255,255,255,0.9);color:var(--gray-600);font-size:1.2rem;cursor:pointer;opacity:0;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);z-index:10}.mermaid-wrapper:hover .mermaid-expand-btn{opacity:1}.mermaid-expand-btn:hover{background:var(--color-primary);color:white;transform:scale(1.1)}.mermaid-lightbox{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;display:none}.mermaid-lightbox.active{display:flex;align-items:center;justify-content:center}.mermaid-lightbox-backdrop{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px)}.mermaid-lightbox-container{position:relative;width:100%;height:100%;overflow:hidden;cursor:grab;display:flex;align-items:center;justify-content:center}.mermaid-lightbox-content{transform-origin:center center;transition:transform 0.1s ease-out;padding:40px}.mermaid-lightbox-content svg{max-width:none !important;max-height:none !important;width:80vw !important;height:auto !important;min-width:800px;background:white;border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-lg)}.mermaid-lightbox.active svg{font-size:12px !important}.mermaid-lightbox.active svg text{white-space:nowrap !important}.mermaid-lightbox.active svg foreignObject{overflow:visible !important;text-align:left !important}.mermaid-lightbox.active svg foreignObject *{white-space:nowrap !important;overflow:visible !important;text-overflow:clip !important;width:auto !important;max-width:none !important;min-width:0 !important}.mermaid-lightbox-controls{position:absolute;top:20px;right:20px;display:flex;gap:8px;z-index:10001}.mermaid-lb-btn{width:44px;height:44px;border:none;border-radius:var(--radius-md);background:rgba(255,255,255,0.95);color:var(--gray-800);font-size:1.1rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;box-shadow:var(--shadow-md)}.mermaid-lb-zoom-reset{width:auto;padding:0 16px;font-size:0.9rem}.mermaid-lb-btn:hover{background:var(--color-primary);color:white;transform:scale(1.05)}.mermaid-lb-close:hover{background:#ef4444;color:white}.mermaid-lightbox::after{content:'Molette:zoom • Glisser:déplacer • Échap:fermer';position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.7);font-size:0.85rem;font-weight:500;background:rgba(0,0,0,0.5);padding:10px 20px;border-radius:var(--radius-lg)}
+    </style>
+    
+    <style>
+.mermaid-container{background:white;border:1px solid var(--color-gray-200);border-radius:var(--radius-lg);padding:var(--space-md);display:flex;justify-content:center;align-items:center;overflow:auto;flex:1;min-height:120px;max-height:600px;max-width:100%;width:100%}.mermaid-container--full{flex:1;min-height:0}.mermaid-container--compact{min-height:100px;max-height:350px;flex:0 0 auto}.mermaid-container--small{max-height:300px}.mermaid-container--medium{max-height:450px}.mermaid-container--large{max-height:700px}.mermaid-container--contained{overflow:hidden}.mermaid-container--contained .mermaid svg{max-height:100% !important}.mermaid,pre.mermaid{font-family:var(--font-display,'Inter',sans-serif);width:100%;display:flex;justify-content:center;align-items:center;background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:24px;margin:16px 0;text-align:center;max-height:60vh;overflow:hidden}.mermaid::before,.mermaid::after{display:none}.mermaid svg{max-width:100%;max-height:60vh;height:auto;width:auto}.mermaid svg[aria-roledescription="gantt"]{max-width:none !important;width:100% !important;min-width:800px !important;max-height:none !important;height:auto !important;flex:1 1 auto !important}.mermaid:has(svg[aria-roledescription="gantt"]){display:block !important;max-height:none !important;overflow-x:auto !important;overflow-y:visible !important;min-width:0 !important}.mermaid-container--scroll{overflow:auto}.mermaid .node rect,.mermaid .node polygon,.mermaid .node circle{stroke-width:2px !important}.mermaid .edgePath .path{stroke-width:2px !important}.mermaid .label{font-family:var(--font-display) !important;font-size:12px !important;overflow:visible !important}.mermaid .nodeLabel{font-size:12px !important;line-height:1.3 !important;overflow:visible !important;white-space:normal !important;text-overflow:clip !important}.mermaid .edgeLabel{font-size:11px !important;overflow:visible !important}.mermaid .node rect,.mermaid .node polygon{overflow:visible !important}.mermaid .cluster rect,.mermaid svg .cluster rect{rx:8px !important;ry:8px !important}.mermaid .cluster-label{font-size:14px !important;font-weight:700 !important;dominant-baseline:text-before-edge !important}.mermaid .cluster-label foreignObject{overflow:visible !important}.mermaid .cluster-label foreignObject div,.mermaid .cluster-label foreignObject p,.mermaid .cluster-label foreignObject span{padding-bottom:8px !important;margin-bottom:4px !important;line-height:1.4 !important}.mermaid .cluster .nodeLabel{margin-top:4px !important}.mermaid .cluster rect{fill:#f8fafc !important;stroke:#cbd5e1 !important;stroke-width:2px !important}.mermaid .cluster-label text,.mermaid .cluster-label tspan,.mermaid svg .cluster-label text{fill:#1e293b !important;color:#1e293b !important;font-weight:700 !important}.mermaid .actor,.mermaid svg .actor,.mermaid svg rect.actor,.mermaid .actor-top,.mermaid .actor-bottom,.mermaid svg .actor-top,.mermaid svg .actor-bottom{fill:#1e3a5f !important;stroke:#0c4a6e !important;stroke-width:2px !important}.mermaid .actor-man,.mermaid text.actor,.mermaid svg text.actor,.mermaid svg .actor-man{fill:#ffffff !important;color:#ffffff !important;font-size:14px !important;font-weight:600 !important}.mermaid text.actor tspan,.mermaid svg text.actor tspan,.mermaid .actor-man tspan{fill:#ffffff !important;color:#ffffff !important}.mermaid .actor-line,.mermaid svg .actor-line,.mermaid svg line.actor-line{stroke:#64748b !important;stroke-width:1.5px !important;stroke-dasharray:4,4 !important}.mermaid .messageLine0,.mermaid .messageLine1,.mermaid svg .messageLine0,.mermaid svg .messageLine1,.mermaid svg line.messageLine0,.mermaid svg line.messageLine1{stroke:#1e293b !important;stroke-width:2px !important}.mermaid .arrowhead,.mermaid svg .arrowhead{fill:#1e293b !important;stroke:#1e293b !important}.mermaid #arrowhead path,.mermaid marker path,.mermaid svg marker path,.mermaid svg #arrowhead path{fill:#1e293b !important;stroke:#1e293b !important}.mermaid .messageText,.mermaid svg .messageText,.mermaid svg text.messageText{fill:#0f172a !important;color:#0f172a !important;font-size:13px !important;font-weight:600 !important;stroke:none !important}.mermaid .messageText tspan,.mermaid svg .messageText tspan{fill:#0f172a !important;color:#0f172a !important}.mermaid .activation0,.mermaid .activation1,.mermaid .activation2,.mermaid svg .activation0,.mermaid svg .activation1,.mermaid svg .activation2{fill:#dbeafe !important;stroke:#3b82f6 !important;stroke-width:2px !important}.mermaid .loopLine,.mermaid svg .loopLine{stroke:#64748b !important;stroke-width:2px !important}.mermaid rect.loopBox,.mermaid .loopBox,.mermaid svg .loopBox{fill:#f8fafc !important;stroke:#64748b !important;stroke-width:1.5px !important}.mermaid .loopText,.mermaid .loopText tspan,.mermaid svg .loopText,.mermaid svg .loopText tspan{fill:#1e293b !important;color:#1e293b !important;font-size:12px !important;font-weight:700 !important}.mermaid .labelBox,.mermaid svg .labelBox{fill:#dcfce7 !important;stroke:#22c55e !important;stroke-width:1.5px !important}.mermaid .labelText,.mermaid .labelText tspan,.mermaid svg .labelText,.mermaid svg .labelText tspan{fill:#14532d !important;color:#14532d !important;font-size:12px !important;font-weight:700 !important}.mermaid .note,.mermaid svg .note,.mermaid rect.note{fill:#fef9c3 !important;stroke:#ca8a04 !important;stroke-width:2px !important}.mermaid .noteText,.mermaid .noteText tspan,.mermaid svg .noteText,.mermaid svg .noteText tspan{fill:#713f12 !important;color:#713f12 !important;font-size:12px !important;font-weight:500 !important}.mermaid .sequenceNumber,.mermaid svg .sequenceNumber{fill:#ffffff !important;color:#ffffff !important}.mermaid .sequenceNumber-rect,.mermaid svg rect.sequenceNumber-rect{fill:#374151 !important;stroke:#1f2937 !important}.mermaid .er.entityBox,.mermaid .entityBox,.mermaid svg .er.entityBox,.mermaid svg .entityBox,.mermaid svg rect.er{fill:#dbeafe !important;stroke:#3b82f6 !important;stroke-width:2px !important}.mermaid .er.entityLabel,.mermaid .entityLabel,.mermaid svg .er.entityLabel,.mermaid svg .entityLabel,.mermaid svg text.er{fill:#1e3a8a !important;color:#1e3a8a !important;font-weight:600 !important}.mermaid .er.attributeBoxEven,.mermaid svg .er.attributeBoxEven{fill:#f8fafc !important;stroke:#cbd5e1 !important}.mermaid .er.attributeBoxOdd,.mermaid svg .er.attributeBoxOdd{fill:#f1f5f9 !important;stroke:#cbd5e1 !important}.mermaid .er text,.mermaid svg g.er text,.mermaid svg .erDiagram text{fill:#1e293b !important;color:#1e293b !important}.mermaid .er.relationshipLine,.mermaid svg .er.relationshipLine{stroke:#64748b !important;stroke-width:1.5px !important}.mermaid .er.relationshipLabel,.mermaid svg .er.relationshipLabel{fill:#475569 !important}.mermaid .mindmap-node rect,.mermaid .mindmap-node circle,.mermaid .mindmap-node ellipse,.mermaid .mindmap-node polygon,.mermaid svg .mindmap-node rect,.mermaid svg .mindmap-node circle,.mermaid svg .mindmap-node ellipse{stroke-width:2px !important}.mermaid .mindmap-node:nth-child(7n+1) rect,.mermaid .mindmap-node:nth-child(7n+1) circle,.mermaid .mindmap-node:nth-child(7n+1) ellipse{fill:#dbeafe !important;stroke:#3b82f6 !important}.mermaid .mindmap-node:nth-child(7n+1) text,.mermaid .mindmap-node:nth-child(7n+1) .nodeLabel{fill:#1e3a8a !important;color:#1e3a8a !important}.mermaid .mindmap-node:nth-child(7n+2) rect,.mermaid .mindmap-node:nth-child(7n+2) circle,.mermaid .mindmap-node:nth-child(7n+2) ellipse{fill:#dcfce7 !important;stroke:#22c55e !important}.mermaid .mindmap-node:nth-child(7n+2) text,.mermaid .mindmap-node:nth-child(7n+2) .nodeLabel{fill:#14532d !important;color:#14532d !important}.mermaid .mindmap-node:nth-child(7n+3) rect,.mermaid .mindmap-node:nth-child(7n+3) circle,.mermaid .mindmap-node:nth-child(7n+3) ellipse{fill:#fef9c3 !important;stroke:#eab308 !important}.mermaid .mindmap-node:nth-child(7n+3) text,.mermaid .mindmap-node:nth-child(7n+3) .nodeLabel{fill:#713f12 !important;color:#713f12 !important}.mermaid .mindmap-node:nth-child(7n+4) rect,.mermaid .mindmap-node:nth-child(7n+4) circle,.mermaid .mindmap-node:nth-child(7n+4) ellipse{fill:#fce7f3 !important;stroke:#ec4899 !important}.mermaid .mindmap-node:nth-child(7n+4) text,.mermaid .mindmap-node:nth-child(7n+4) .nodeLabel{fill:#831843 !important;color:#831843 !important}.mermaid .mindmap-node:nth-child(7n+5) rect,.mermaid .mindmap-node:nth-child(7n+5) circle,.mermaid .mindmap-node:nth-child(7n+5) ellipse{fill:#f3e8ff !important;stroke:#a855f7 !important}.mermaid .mindmap-node:nth-child(7n+5) text,.mermaid .mindmap-node:nth-child(7n+5) .nodeLabel{fill:#581c87 !important;color:#581c87 !important}.mermaid .mindmap-node:nth-child(7n+6) rect,.mermaid .mindmap-node:nth-child(7n+6) circle,.mermaid .mindmap-node:nth-child(7n+6) ellipse{fill:#cffafe !important;stroke:#06b6d4 !important}.mermaid .mindmap-node:nth-child(7n+6) text,.mermaid .mindmap-node:nth-child(7n+6) .nodeLabel{fill:#164e63 !important;color:#164e63 !important}.mermaid .mindmap-node:nth-child(7n) rect,.mermaid .mindmap-node:nth-child(7n) circle,.mermaid .mindmap-node:nth-child(7n) ellipse{fill:#ffedd5 !important;stroke:#f97316 !important}.mermaid .mindmap-node:nth-child(7n) text,.mermaid .mindmap-node:nth-child(7n) .nodeLabel{fill:#7c2d12 !important;color:#7c2d12 !important}.mermaid .mindmap text,.mermaid svg [class*="mindmap"] text{font-weight:500 !important}.mermaid .mindmap-edge,.mermaid svg .mindmap-edge{stroke:#64748b !important;stroke-width:1.5px !important}.mermaid[data-processed="true"]{min-height:0 !important}.diagram{background:var(--color-gray-50);border:2px dashed var(--color-gray-300);border-radius:var(--radius-lg);padding:var(--space-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:150px;flex:1}.diagram--placeholder{background:linear-gradient(135deg,var(--color-gray-50) 0%,var(--color-gray-100) 100%)}.diagram .icon{font-size:48px;margin-bottom:var(--space-sm);opacity:0.6}.diagram .text{font-size:14px;color:var(--color-gray-500);font-weight:500}.arch-diagram{display:flex;flex-direction:column;gap:var(--space-md);width:100%}.arch-layer{display:flex;gap:var(--space-sm);justify-content:center}.arch-box{background:var(--color-gray-100);border:2px solid var(--color-gray-300);border-radius:var(--radius-md);padding:var(--space-sm) var(--space-md);font-size:12px;font-weight:500;color:var(--color-gray-700);text-align:center;min-width:100px}.arch-box--primary{background:rgba(14,165,233,0.15);border-color:var(--color-primary);color:var(--color-primary-dark)}.arch-box--accent{background:rgba(249,115,22,0.15);border-color:var(--color-accent);color:#c2410c}.arch-box--success{background:rgba(16,185,129,0.15);border-color:var(--color-success);color:#047857}.arch-box--info{background:rgba(99,102,241,0.15);border-color:var(--color-info);color:#4338ca}.arch-box--dark{background:var(--color-gray-800);border-color:var(--color-gray-700);color:white}.arch-connector{display:flex;justify-content:center;color:var(--color-gray-400);font-size:20px}.flow{display:flex;align-items:center;gap:var(--space-sm);flex-wrap:wrap;justify-content:center}.flow__item{background:var(--color-gray-100);border:1px solid var(--color-gray-300);border-radius:var(--radius-md);padding:var(--space-xs) var(--space-md);font-size:13px;font-weight:500;color:var(--color-gray-700)}.flow__item--highlight{background:var(--color-primary);border-color:var(--color-primary);color:white}.flow__arrow{color:var(--color-gray-400);font-size:18px}.timeline{display:flex;gap:var(--space-lg);align-items:stretch}.timeline__item{flex:1;display:flex;flex-direction:column;position:relative}.timeline__item:not(:last-child)::after{content:'→';position:absolute;right:calc(var(--space-lg) / -2 - 8px);top:50%;transform:translateY(-50%);color:var(--color-gray-400);font-size:20px}.timeline__number{width:28px;height:28px;background:var(--color-primary);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:var(--space-sm)}.timeline__title{font-size:13px;font-weight:600;color:var(--color-gray-900);margin-bottom:var(--space-xs)}.timeline__text{font-size:12px;color:var(--color-gray-600);line-height:1.4}.stat{text-align:center;padding:var(--space-md)}.stat__value{font-size:36px;font-weight:800;color:var(--color-primary);line-height:1}.stat__label{font-size:13px;color:var(--color-gray-600);margin-top:var(--space-xs)}.stat--small .stat__value{font-size:24px}.icon-box{width:48px;height:48px;min-width:48px;background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-primary-dark) 100%);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:white;font-size:24px;flex-shrink:0}.icon-box--sm{width:36px;height:36px;min-width:36px;font-size:18px}.icon-box--lg{width:64px;height:64px;min-width:64px;font-size:32px}.icon-box--accent{background:linear-gradient(135deg,var(--color-accent) 0%,#ea580c 100%)}.icon-box--success{background:linear-gradient(135deg,var(--color-success) 0%,#047857 100%)}.icon-box--info{background:linear-gradient(135deg,var(--color-info) 0%,#4338ca 100%)}.superset-logo{display:flex;align-items:center;gap:var(--space-md)}.superset-logo__icon{width:80px;height:80px}.superset-logo__icon svg{width:100%;height:100%}.superset-logo__text{font-size:32px;font-weight:700}.superset-logo__text span{color:var(--color-primary)}.comparison-table{font-size:12px}.comparison-table th{font-size:11px;padding:8px 10px}.comparison-table td{padding:6px 10px;vertical-align:middle}.comparison-table .product-name{font-weight:600;white-space:nowrap}.comparison-table .check{color:var(--color-success);font-weight:bold}.comparison-table .cross{color:var(--color-danger);font-weight:bold}.comparison-table .partial{color:var(--color-warning);font-weight:bold}.use-case{background:var(--color-gray-50);border:1px solid var(--color-gray-200);border-radius:var(--radius-lg);padding:var(--space-md);display:flex;flex-direction:column;gap:var(--space-sm)}.use-case--positive{border-color:var(--color-success);border-left-width:4px}.use-case--negative{border-color:var(--color-danger);border-left-width:4px}.use-case__number{font-size:24px;font-weight:800;color:var(--color-gray-300)}.use-case__title{font-size:14px;font-weight:600;color:var(--color-gray-900)}.use-case__text{font-size:12px;color:var(--color-gray-600);line-height:1.4}.stack-layer{display:flex;align-items:center;gap:var(--space-md);padding:var(--space-sm) var(--space-md);background:var(--color-gray-50);border-radius:var(--radius-md);margin-bottom:var(--space-sm)}.stack-layer__label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-gray-500);width:100px;flex-shrink:0}.stack-layer__items{display:flex;gap:var(--space-xs);flex-wrap:wrap}.stack-layer__item{background:white;border:1px solid var(--color-gray-300);border-radius:var(--radius-sm);padding:4px 10px;font-size:12px;font-weight:500;color:var(--color-gray-700)}.stack-layer__item--highlight{background:var(--color-accent);border-color:var(--color-accent);color:white}.permission-matrix{font-size:12px}.permission-matrix th:first-child{text-align:left}.permission-matrix td:not(:first-child),.permission-matrix th:not(:first-child){text-align:center;width:80px}.permission-matrix .action{font-weight:500;text-align:left}.sources{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md)}.source-group{display:flex;flex-direction:column;gap:var(--space-xs)}.source-group__title{font-size:13px;font-weight:600;color:var(--color-gray-900);padding-bottom:var(--space-xs);border-bottom:1px solid var(--color-gray-200);margin-bottom:var(--space-xs)}.source-link{font-size:12px;color:var(--color-primary);text-decoration:none;display:flex;align-items:center;gap:var(--space-xs)}.source-link:hover{text-decoration:underline}.source-link::before{content:'→';color:var(--color-gray-400)}@media print{.mermaid-container,.arch-diagram,.diagram{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important}.arch-box,.flow__item,.timeline__number,.icon-box,.stat__value{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}}.mermaid .node.pastel-blue rect,.mermaid .node.pastel-blue polygon{fill:#dbeafe !important;stroke:#3b82f6 !important}.mermaid .node.pastel-blue .nodeLabel{fill:#1e3a8a !important;color:#1e3a8a !important}.mermaid .node.pastel-green rect,.mermaid .node.pastel-green polygon{fill:#dcfce7 !important;stroke:#22c55e !important}.mermaid .node.pastel-green .nodeLabel{fill:#14532d !important;color:#14532d !important}.mermaid .node.pastel-yellow rect,.mermaid .node.pastel-yellow polygon{fill:#fef9c3 !important;stroke:#eab308 !important}.mermaid .node.pastel-yellow .nodeLabel{fill:#713f12 !important;color:#713f12 !important}.mermaid .node.pastel-orange rect,.mermaid .node.pastel-orange polygon{fill:#ffedd5 !important;stroke:#f97316 !important}.mermaid .node.pastel-orange .nodeLabel{fill:#7c2d12 !important;color:#7c2d12 !important}.mermaid .node.pastel-pink rect,.mermaid .node.pastel-pink polygon{fill:#fce7f3 !important;stroke:#ec4899 !important}.mermaid .node.pastel-pink .nodeLabel{fill:#831843 !important;color:#831843 !important}.mermaid .node.pastel-purple rect,.mermaid .node.pastel-purple polygon{fill:#f3e8ff !important;stroke:#a855f7 !important}.mermaid .node.pastel-purple .nodeLabel{fill:#581c87 !important;color:#581c87 !important}.mermaid .node.pastel-cyan rect,.mermaid .node.pastel-cyan polygon{fill:#cffafe !important;stroke:#06b6d4 !important}.mermaid .node.pastel-cyan .nodeLabel{fill:#164e63 !important;color:#164e63 !important}.mermaid .node.dark-blue rect,.mermaid .node.dark-blue polygon{fill:#1e3a5f !important;stroke:#0c4a6e !important}.mermaid .node.dark-blue .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-green rect,.mermaid .node.dark-green polygon{fill:#14532d !important;stroke:#166534 !important}.mermaid .node.dark-green .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-purple rect,.mermaid .node.dark-purple polygon{fill:#4c1d95 !important;stroke:#5b21b6 !important}.mermaid .node.dark-purple .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-gray rect,.mermaid .node.dark-gray polygon{fill:#374151 !important;stroke:#4b5563 !important}.mermaid .node.dark-gray .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-slate rect,.mermaid .node.dark-slate polygon{fill:#1e293b !important;stroke:#334155 !important}.mermaid .node.dark-slate .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid g[style*="fill:#"] .nodeLabel,.mermaid g[style*="fill:#"] .nodeLabel{text-shadow:none !important}.mermaid [style*="fill:#f"][style*="fill:#f"] .nodeLabel,.mermaid [style*="fill:#e"][style*="fill:#e"] .nodeLabel,.mermaid [style*="fill:#d"][style*="fill:#d"] .nodeLabel,.mermaid [style*="fill:#c"][style*="fill:#c"] .nodeLabel,.mermaid [style*="fill:rgb(2"][style*="fill:rgb(2"] .nodeLabel{fill:#1e293b !important;color:#1e293b !important}img[src*="images/"]{max-width:100%;max-height:450px;width:auto;height:auto;object-fit:contain;display:block;margin:1.5rem auto}img[src*="screenshot"],img[src*="superset.apache.org"],img[src*="capture"]{max-width:100%;max-height:400px;width:auto;height:auto;object-fit:contain;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:1px solid #e4e4e7}.content-image,.screenshot{max-width:100%;max-height:500px;object-fit:contain}
+    </style>
+    
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'default',
+                    securityLevel: 'loose',
+                    flowchart: {
+                        useMaxWidth: false,
+                        htmlLabels: true
+                    },
+                    sequence: {
+                        useMaxWidth: false
+                    }
+                });
+            }
+        });
+    </script>
+    
+    
+    <script>
+const PASTEL_COLORS={blue:{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'}, green:{bg: '#dcfce7', border: '#22c55e', text: '#14532d'}, yellow:{bg: '#fef9c3', border: '#eab308', text: '#713f12'}, orange:{bg: '#ffedd5', border: '#f97316', text: '#7c2d12'}, pink:{bg: '#fce7f3', border: '#ec4899', text: '#831843'}, purple:{bg: '#f3e8ff', border: '#a855f7', text: '#581c87'}, cyan:{bg: '#cffafe', border: '#06b6d4', text: '#164e63'}, gray:{bg: '#f4f4f5', border: '#71717a', text: '#27272a'}};const DARK_COLORS={blue:{bg: '#1e3a5f', border: '#0c4a6e', text: '#ffffff'}, green:{bg: '#14532d', border: '#166534', text: '#ffffff'}, purple:{bg: '#4c1d95', border: '#5b21b6', text: '#ffffff'}, gray:{bg: '#374151', border: '#4b5563', text: '#ffffff'}, slate:{bg: '#1e293b', border: '#334155', text: '#ffffff'}};function fixMermaidContrast(){function getLuminance(hex){let r, g, b;if(!hex || hex==='none' || hex==='transparent'){return 0.5;}if(hex.startsWith('rgb')){const match=hex.match(/\d+/g);if(match){r=parseInt(match[0]);g=parseInt(match[1]);b=parseInt(match[2]);}else{return 0.5;}}else{hex=hex.replace('#', '');if(hex.length===3){hex=hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];}if(hex.length !==6){return 0.5;}r=parseInt(hex.substr(0, 2), 16);g=parseInt(hex.substr(2, 2), 16);b=parseInt(hex.substr(4, 2), 16);}if(isNaN(r)|| isNaN(g)|| isNaN(b)){return 0.5;}const rsRGB=r / 255;const gsRGB=g / 255;const bsRGB=b / 255;const rLum=rsRGB <=0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055)/ 1.055, 2.4);const gLum=gsRGB <=0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055)/ 1.055, 2.4);const bLum=bsRGB <=0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055)/ 1.055, 2.4);return 0.2126 * rLum + 0.7152 * gLum + 0.0722 * bLum;}function getContrastColor(bgColor){const luminance=getLuminance(bgColor);return luminance > 0.35 ? '#1e293b' : '#ffffff';}function applyContrastToText(textEl, contrastColor){textEl.style.setProperty('color', contrastColor, 'important');textEl.style.setProperty('fill', contrastColor, 'important');textEl.setAttribute('fill', contrastColor);textEl.querySelectorAll('tspan').forEach(function(tspan){tspan.style.setProperty('fill', contrastColor, 'important');tspan.setAttribute('fill', contrastColor);});}document.querySelectorAll('.mermaid svg').forEach(function(svg){svg.querySelectorAll('.cluster').forEach(function(cluster){const label=cluster.querySelector('.cluster-label');const rect=cluster.querySelector('rect');if(label && rect){const labelBBox=label.getBBox ? label.getBBox(): null;const foreignObj=label.querySelector('foreignObject');if(foreignObj){const currentHeight=parseFloat(foreignObj.getAttribute('height'))|| 20;const textContent=foreignObj.textContent || '';if(textContent.length > 20 || textContent.includes('\n')){foreignObj.setAttribute('height', Math.max(currentHeight, 40));foreignObj.style.overflow='visible';}}label.querySelectorAll('text, span, div, p, tspan').forEach(function(textEl){textEl.style.setProperty('fill', '#1e293b', 'important');textEl.style.setProperty('color', '#1e293b', 'important');textEl.style.setProperty('font-weight', '700', 'important');});}});svg.querySelectorAll('.node rect, .node polygon, .node circle, .node ellipse').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.node');if(parent){parent.querySelectorAll('.nodeLabel, .label, text, foreignObject span, foreignObject p, foreignObject div').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.cluster rect, .cluster polygon').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.cluster');if(parent){parent.querySelectorAll('.cluster-label, .cluster-label span, .cluster-label text, .nodeLabel, text').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('[style*="fill"]').forEach(function(el){const style=el.getAttribute('style');if(style){const fillMatch=style.match(/fill:\s*([^;]+)/i);if(fillMatch){const fill=fillMatch[1].trim();if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const contrastColor=getContrastColor(fill);el.querySelectorAll('text, span, p, div, .nodeLabel, .label').forEach(function(textEl){applyContrastToText(textEl, contrastColor);});if(el.tagName.toLowerCase()==='g'){el.querySelectorAll('foreignObject *').forEach(function(fo){fo.style.setProperty('color', contrastColor, 'important');});}}}}});svg.querySelectorAll('g.node').forEach(function(node){const shape=node.querySelector('rect, polygon, circle, ellipse, path');if(shape){const fill=shape.getAttribute('fill')|| shape.style.fill || window.getComputedStyle(shape).fill;if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const contrastColor=getContrastColor(fill);node.querySelectorAll('.nodeLabel, .label, text, span, div, p').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.actor, rect.actor, .actor-top, .actor-bottom').forEach(function(rect){rect.style.setProperty('fill', DARK_COLORS.blue.bg, 'important');rect.style.setProperty('stroke', DARK_COLORS.blue.border, 'important');rect.setAttribute('fill', DARK_COLORS.blue.bg);rect.setAttribute('stroke', DARK_COLORS.blue.border);});svg.querySelectorAll('text.actor, .actor-man').forEach(function(text){applyContrastToText(text, DARK_COLORS.blue.text);});svg.querySelectorAll('.messageText').forEach(function(text){applyContrastToText(text, '#1e293b');text.style.setProperty('stroke', 'none', 'important');});svg.querySelectorAll('.messageLine0, .messageLine1').forEach(function(line){line.style.setProperty('stroke', '#334155', 'important');line.style.setProperty('stroke-width', '2px', 'important');line.setAttribute('stroke', '#334155');line.setAttribute('stroke-width', '2');});svg.querySelectorAll('.arrowhead path, marker path, #arrowhead path').forEach(function(arrow){arrow.style.setProperty('fill', '#334155', 'important');arrow.style.setProperty('stroke', '#334155', 'important');arrow.setAttribute('fill', '#334155');arrow.setAttribute('stroke', '#334155');});svg.querySelectorAll('marker').forEach(function(marker){marker.querySelectorAll('path, polygon').forEach(function(shape){shape.style.setProperty('fill', '#334155', 'important');shape.setAttribute('fill', '#334155');});});svg.querySelectorAll('.actor-line').forEach(function(line){line.style.setProperty('stroke', '#64748b', 'important');line.style.setProperty('stroke-width', '1.5px', 'important');line.setAttribute('stroke', '#64748b');});svg.querySelectorAll('.loopText, .labelText').forEach(function(text){text.style.setProperty('fill', '#334155', 'important');text.setAttribute('fill', '#334155');});svg.querySelectorAll('.loopText tspan, .labelText tspan').forEach(function(tspan){tspan.style.setProperty('fill', '#334155', 'important');tspan.setAttribute('fill', '#334155');});svg.querySelectorAll('.note rect, rect.note').forEach(function(rect){rect.style.setProperty('fill', PASTEL_COLORS.yellow.bg, 'important');rect.style.setProperty('stroke', PASTEL_COLORS.yellow.border, 'important');rect.setAttribute('fill', PASTEL_COLORS.yellow.bg);});svg.querySelectorAll('.noteText, .noteText tspan').forEach(function(text){applyContrastToText(text, PASTEL_COLORS.yellow.text);});svg.querySelectorAll('.sequenceNumber').forEach(function(text){applyContrastToText(text, '#1e293b');});svg.querySelectorAll('.classGroup rect, .classGroup polygon').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.classGroup');if(parent){parent.querySelectorAll('text, .classTitle, .classLabel, tspan').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.stateGroup rect, .statediagram-state rect').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.stateGroup, .statediagram-state');if(parent){parent.querySelectorAll('text, .stateLabel, tspan, span').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.er.entityBox, .entityBox, rect.er').forEach(function(shape){shape.style.setProperty('fill', '#dbeafe', 'important');shape.style.setProperty('stroke', '#3b82f6', 'important');shape.style.setProperty('stroke-width', '2px', 'important');shape.setAttribute('fill', '#dbeafe');shape.setAttribute('stroke', '#3b82f6');});svg.querySelectorAll('.er.entityLabel, .entityLabel, text.er').forEach(function(text){applyContrastToText(text, '#1e3a8a');});svg.querySelectorAll('.er.attributeBoxEven, .er.attributeBoxOdd').forEach(function(shape){const isEven=shape.classList.contains('attributeBoxEven');shape.style.setProperty('fill', isEven ? '#f8fafc' : '#f1f5f9', 'important');shape.style.setProperty('stroke', '#cbd5e1', 'important');});svg.querySelectorAll('g.er text, .erDiagram text').forEach(function(text){const fill=text.getAttribute('fill')|| text.style.fill;const lum=getLuminance(fill);if(lum > 0.6 || !fill || fill==='none'){applyContrastToText(text, '#1e293b');}});const mindmapColors=[{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'},{bg: '#dcfce7', border: '#22c55e', text: '#14532d'},{bg: '#fef9c3', border: '#eab308', text: '#713f12'},{bg: '#fce7f3', border: '#ec4899', text: '#831843'},{bg: '#f3e8ff', border: '#a855f7', text: '#581c87'},{bg: '#cffafe', border: '#06b6d4', text: '#164e63'},{bg: '#ffedd5', border: '#f97316', text: '#7c2d12'}];let colorIndex=0;svg.querySelectorAll('.mindmap-node').forEach(function(node){const shape=node.querySelector('rect, circle, ellipse, polygon, path');if(shape){const color=mindmapColors[colorIndex % mindmapColors.length];shape.style.setProperty('fill', color.bg, 'important');shape.style.setProperty('stroke', color.border, 'important');shape.style.setProperty('stroke-width', '2px', 'important');shape.setAttribute('fill', color.bg);shape.setAttribute('stroke', color.border);node.querySelectorAll('text, span, .nodeLabel, foreignObject *').forEach(function(label){applyContrastToText(label, color.text);});colorIndex++;}});svg.querySelectorAll('.mindmap text, [class*="mindmap"] text').forEach(function(text){const fill=text.getAttribute('fill')|| text.style.fill;const lum=getLuminance(fill);if(lum > 0.6 || !fill || fill==='none'){applyContrastToText(text, '#1e293b');}});svg.querySelectorAll('rect, polygon, circle, ellipse').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const luminance=getLuminance(fill);if(luminance < 0.35){const parent=shape.parentNode;if(parent){parent.querySelectorAll('text, .nodeLabel, .label, span, tspan').forEach(function(textEl){const textFill=textEl.getAttribute('fill')|| textEl.style.fill;const textLum=getLuminance(textFill);if(textLum < 0.5){applyContrastToText(textEl, '#ffffff');}});}}else if(luminance > 0.65){const parent=shape.parentNode;if(parent){parent.querySelectorAll('text, .nodeLabel, .label, span, tspan').forEach(function(textEl){const textFill=textEl.getAttribute('fill')|| textEl.style.fill;const textLum=getLuminance(textFill);if(textLum > 0.7){applyContrastToText(textEl, '#1e293b');}});}}}});});}if(typeof window !=='undefined'){window.fixMermaidContrast=fixMermaidContrast;window.MERMAID_PASTEL_COLORS=PASTEL_COLORS;window.MERMAID_DARK_COLORS=DARK_COLORS;}
+    </script>
+    
+    
+    
+    
+    
+    <style>
+        @media print {
+            body {
+                max-width: none;
+                padding: 20mm;
+            }
+            
+            pre, code {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+            
+            table, pre, blockquote, .mermaid {
+                page-break-inside: avoid;
+            }
+            
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    
+    <article class="markdown-body">
+        <h1 id="role-1-platform-lead-tp05-nextcloud">Rôle 1 — Platform Lead — TP05 Nextcloud</h1>
+<p><strong>Durée</strong> : 6h (journée complète)
+<strong>Module livré</strong> : <code>bootstrap/</code> + <code>global/</code> + <code>envs/dev/</code> + fichiers racine (<code>README.md</code>, <code>.gitignore</code>, <code>.pre-commit-config.yaml</code>, <code>ARCHITECTURE.md</code>)
+<strong>% de la note</strong> : 20 %</p>
+<p>🔵 <strong>Starter kit</strong> : vous démarrez depuis <code>corriges/jour5/tp05-starter/</code> qui contient déjà l'arborescence, les interfaces figées (<code>variables.tf</code> + <code>outputs.tf</code>) et les providers. Vous remplissez les fichiers <code>.tf</code> vides avec des TODO.</p>
+<hr />
+<h2 id="votre-mission">Votre mission</h2>
+<ul>
+<li><strong>Débloquer l'équipe dès 9h45</strong> : bootstrap du bucket S3 de state + KMS CMK chiffrant ce state, en moins de 15 minutes. Sans cela, personne ne peut <code>terraform init</code>.</li>
+<li><strong>Figer l'arborescence et les interfaces</strong> : créer tous les dossiers du monorepo, poser les 4 blocks <code>module {}</code> dans <code>envs/dev/main.tf</code>, et verrouiller les noms de variables/outputs avec les 4 autres rôles.</li>
+<li><strong>Orchestrer l'intégration</strong> : recevoir les 4 PR des autres rôles, relire, merger, puis lancer <code>terraform init/plan/apply</code> en écran partagé devant l'équipe.</li>
+<li><strong>Livrer les fichiers transversaux</strong> : <code>README.md</code> racine (scénario Kolab + quickstart), <code>ARCHITECTURE.md</code> (schéma Mermaid + décisions), <code>.gitignore</code>, <code>.pre-commit-config.yaml</code>.</li>
+<li><strong>Piloter le destroy + le packaging zip</strong> en fin de journée et <strong>garantir la complétude du <code>RENDU.md</code></strong> (chaque rôle y contribue, mais vous êtes responsable du livrable final).</li>
+</ul>
+<p>🔷 <strong>Ce rôle est le chef d'orchestre</strong> : vous ne codez pas de ressources métier, mais vous bloquez ou débloquez toute l'équipe. Votre productivité se mesure en "nombre de blocages levés par heure".</p>
+<hr />
+<h2 id="concepts-cles-pour-ce-role">Concepts clés pour ce rôle</h2>
+<p><strong>Déjà vus (J1 - J2)</strong> :</p>
+<ul>
+<li><a href="../../jour1/module04-installation-environnement.md">Module 04 — Installation environnement</a> : AWS CLI v2, profil, <code>aws sts get-caller-identity</code></li>
+<li>Module local et arborescence <code>modules/</code> : <a href="../../jour2/module09-modules-vpc-custom-vs-registry.md">Module 09</a></li>
+</ul>
+<p><strong>Nouveaux pour ce rôle</strong> (ré-expliqués en contexte ci-dessous) :</p>
+<ul>
+<li><a href="../tp05-team-nextcloud.md#1-backend-s3-pour-le-state-role-1">Backend S3 + locking natif</a></li>
+<li><a href="../tp05-team-nextcloud.md#2-modules-avec-interfaces-figees-roles-1-5">Modules avec interfaces figées</a></li>
+</ul>
+<p>🔵 <strong>Rappel concept : backend S3</strong></p>
+<p>Par défaut, Terraform stocke son <code>terraform.tfstate</code> localement dans le dossier courant. Pour travailler en équipe, on met ce state dans un bucket S3 avec <strong>verrou</strong> (lock) : impossible d'avoir 2 <code>apply</code> simultanés. Depuis Terraform 1.10, le lock est natif via <code>use_lockfile = true</code> — plus besoin de DynamoDB.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">terraform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">backend</span><span class="w"> </span><span class="nv">&quot;s3&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">bucket</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tf-state-kolab&quot;</span>
+<span class="w">    </span><span class="na">key</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;envs/dev/terraform.tfstate&quot;</span>
+<span class="w">    </span><span class="na">region</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="w">    </span><span class="na">encrypt</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">    </span><span class="na">use_lockfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🔵 <strong>Rappel concept : bootstrap "chicken-and-egg"</strong></p>
+<p>Le bucket qui stocke le state est lui-même de l'infra AWS. On ne peut pas le créer via Terraform (où stockerait-on son state ?). Solution : script bash AWS CLI one-shot exécuté <strong>avant</strong> le premier <code>terraform init</code>. C'est l'objet de <code>bootstrap/create-state-bucket.sh</code>.</p>
+<p>🔵 <strong>Rappel concept : organisation <code>modules/</code> + <code>envs/</code></strong></p>
+<p>Un module Terraform = un dossier <code>.tf</code> avec des <code>variable</code> (inputs) + <code>output</code> (sorties). L'appelant passe des valeurs via <code>module "x" { source = "../../modules/x" ... }</code> et lit les résultats via <code>module.x.&lt;output_name&gt;</code>. Ici on sépare les modules réutilisables (dans <code>modules/</code>) de l'environnement qui les orchestre (dans <code>envs/dev/</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="kr">module</span><span class="w"> </span><span class="nv">&quot;networking&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/networking&quot;</span>
+<span class="w">  </span><span class="na">project_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab&quot;</span>
+<span class="w">  </span><span class="na">vpc_cidr</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.30.0.0/16&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">module</span><span class="w"> </span><span class="nv">&quot;compute&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/compute&quot;</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.vpc_id</span><span class="c1">   # consomme l&#39;output</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="interface-que-vous-devez-produire-inputs-outputs-figes">Interface que vous devez produire (inputs + outputs figés)</h2>
+<p>Vous ne produisez pas un module Terraform classique. Votre "interface" est <strong>l'arborescence du monorepo + les 4 blocks <code>module {}</code> de <code>envs/dev/main.tf</code></strong> qui consomment les outputs des 4 autres rôles.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># =============================================================================</span>
+<span class="c1"># envs/dev/variables.tf - ce que VOUS definissez comme entrees de l environnement</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;aws_region&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Region AWS cible. eu-west-1 (Irlande) impose par le CdC RGPD.&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;allowed_admin_cidr&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;CIDR IP source autorisee pour l acces HTTPS a l ALB (IP formateur).&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="c1">  # Exemple : &quot;203.0.113.42/32&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;project_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Nom de projet utilise pour tagger les ressources.&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;environment&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Nom de l environnement (dev, staging, prod).&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># =============================================================================</span>
+<span class="c1"># envs/dev/outputs.tf - outputs exposes par l environnement au formateur</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;alb_dns_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;DNS public de l ALB, a utiliser pour acceder a Nextcloud.&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">module.compute.alb_dns_name</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;nextcloud_url&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;URL complete HTTPS de Nextcloud (self-signed cert : avertissement navigateur).&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">module.compute.nextcloud_url</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;s3_primary_bucket_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Bucket S3 primary storage Nextcloud.&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.s3_primary_bucket_name</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="ressources-terraform-a-creer">Ressources Terraform à créer</h2>
+<table>
+<thead>
+<tr>
+<th>Ressource</th>
+<th>Nombre</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bucket S3 de state (hors Terraform, via bash)</td>
+<td>1</td>
+<td>Stocke le <code>terraform.tfstate</code> de tous les environnements</td>
+</tr>
+<tr>
+<td>KMS CMK pour chiffrer le state (hors Terraform, via bash)</td>
+<td>1</td>
+<td>CMK dédiée + alias <code>alias/tf-state-kolab</code></td>
+</tr>
+<tr>
+<td><code>envs/dev/backend.tf</code></td>
+<td>1 fichier</td>
+<td>Configure le backend S3 natif + <code>use_lockfile = true</code></td>
+</tr>
+<tr>
+<td><code>envs/dev/providers.tf</code></td>
+<td>1 fichier</td>
+<td>Provider <code>hashicorp/aws ~&gt; 5.0</code>, <code>default_tags</code> globaux</td>
+</tr>
+<tr>
+<td><code>envs/dev/main.tf</code></td>
+<td>1 fichier</td>
+<td>4 blocks <code>module {}</code> : <code>networking</code>, <code>security</code>, <code>data</code>, <code>compute</code></td>
+</tr>
+<tr>
+<td><code>envs/dev/variables.tf</code> + <code>outputs.tf</code> + <code>terraform.tfvars.example</code></td>
+<td>3 fichiers</td>
+<td>Entrées/sorties de l'environnement</td>
+</tr>
+<tr>
+<td><code>.gitignore</code> + <code>.pre-commit-config.yaml</code> + <code>README.md</code> + <code>ARCHITECTURE.md</code></td>
+<td>4 fichiers</td>
+<td>Fichiers racine</td>
+</tr>
+<tr>
+<td><code>global/iam-github-oidc/</code> (bonus)</td>
+<td>1 module</td>
+<td>GitHub OIDC provider + rôle IAM assumable</td>
+</tr>
+<tr>
+<td><code>.github/workflows/terraform-plan.yml</code> (bonus)</td>
+<td>1 workflow</td>
+<td>Plan on PR via OIDC</td>
+</tr>
+</tbody>
+</table>
+<p>🟤 <strong>Aucune ressource métier</strong> : vous orchestrez les modules des autres rôles. Votre code est de l'"infra glue".</p>
+<hr />
+<h2 id="schema-de-votre-perimetre">Schéma de votre périmètre</h2>
+<pre class="mermaid">
+flowchart TB
+    subgraph t_bootstrap[bootstrap - hors Terraform]
+        t_sh[create-state-bucket.sh]
+        t_sh -->|cree| t_bucket[S3 tf-state-kolab]
+        t_sh -->|cree| t_kms_state[KMS CMK state]
+    end
+
+    subgraph t_global[global/iam-github-oidc - bonus]
+        t_oidc[aws_iam_openid_connect_provider]
+        t_role[aws_iam_role GitHubActions]
+    end
+
+    subgraph t_envs[envs/dev - orchestration]
+        t_backend[backend.tf : S3 + KMS]
+        t_providers[providers.tf : aws 5.x]
+        t_main[main.tf : 4 blocks module]
+
+        t_main -->|consomme outputs| t_net
+        t_main -->|consomme outputs| t_sec
+        t_main -->|consomme outputs| t_data
+        t_main -->|consomme outputs| t_comp
+    end
+
+    subgraph t_modules[modules/ - livres par Roles 2 a 5]
+        t_net[networking - Role 2]
+        t_sec[security - Role 5]
+        t_data[data - Role 4]
+        t_comp[compute - Role 3]
+    end
+
+    t_bucket -.state chiffre.-> t_backend
+    t_kms_state -.chiffre.-> t_bucket
+    t_role -.assumable par workflow.-> t_envs
+
+    classDef boot fill:#fff3cd,stroke:#ffc107
+    classDef env fill:#d1e7dd,stroke:#198754
+    classDef mod fill:#cfe2ff,stroke:#0d6efd
+    classDef glob fill:#f8d7da,stroke:#dc3545
+    class t_sh,t_bucket,t_kms_state boot
+    class t_backend,t_providers,t_main env
+    class t_net,t_sec,t_data,t_comp mod
+    class t_oidc,t_role glob
+</pre>
+
+<p>🔷 <strong>Lecture</strong> : votre travail part de <code>bootstrap/</code> (bash), passe par <code>envs/dev/</code> (HCL), et consomme les modules livrés par les autres rôles. Le <code>global/</code> est optionnel (bonus CI/CD).</p>
+<hr />
+<h2 id="etapes-pas-a-pas-sprint-1">Étapes pas-à-pas (sprint 1)</h2>
+<h3 id="etape-1-cloner-le-boilerplate-et-poser-larborescence-15-min">Étape 1 : Cloner le boilerplate et poser l'arborescence (15 min)</h3>
+<p><strong>Objectif</strong> : disposer d'un repo Git initialisé avec tous les dossiers vides prêts à accueillir le code.</p>
+<p><strong>Contexte</strong> : le formateur vous a fourni un boilerplate (ou vous partez de zéro). La première chose à faire est de figer l'arborescence imposée par le CdC — un dossier manquant fait perdre des points sur la rigueur du rendu.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Creer l arborescence complete en une commande</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>tp05-nextcloud/<span class="o">{</span>bootstrap,global/iam-github-oidc,modules/<span class="o">{</span>networking,compute,data,security<span class="o">}</span>,envs/dev/tests,.github/workflows,docs/screenshots<span class="o">}</span>
+
+<span class="nb">cd</span><span class="w"> </span>tp05-nextcloud
+
+<span class="c1"># Initialiser le repo Git</span>
+git<span class="w"> </span>init<span class="w"> </span>-b<span class="w"> </span>main
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>--allow-empty<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;chore: initial empty structure&quot;</span>
+
+<span class="c1"># Verifier l arborescence</span>
+tree<span class="w"> </span>-L<span class="w"> </span><span class="m">3</span><span class="w"> </span>-a<span class="w"> </span>-I<span class="w"> </span><span class="s1">&#39;.git&#39;</span>
+</code></pre></div>
+<p><strong>Résultat attendu</strong> :</p>
+<div class="highlight"><pre><span></span><code>tp05-nextcloud/
+|-- .github/workflows/
+|-- bootstrap/
+|-- docs/screenshots/
+|-- envs/dev/tests/
+|-- global/iam-github-oidc/
+|-- modules/
+|   |-- compute/
+|   |-- data/
+|   |-- networking/
+|   `-- security/
+</code></pre></div>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Vérifiez que <strong>chaque sous-dossier existe</strong>, même vide. Les PR des autres rôles vont créer les fichiers dedans — s'ils doivent créer les dossiers eux-mêmes, vous aurez 4 PR qui entrent en conflit sur le même <code>git add</code>.</p>
+</blockquote>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>ls modules/ envs/ global/ bootstrap/ docs/</code> retourne tous les dossiers sans erreur.</p>
+<hr />
+<h3 id="etape-2-ecrire-le-script-bootstrap-bucket-state-kms-cmk-25-min">Étape 2 : Écrire le script bootstrap bucket state + KMS CMK (25 min)</h3>
+<p><strong>Objectif</strong> : créer le bucket S3 qui va stocker les states + une CMK KMS qui chiffre ce bucket. Opération one-shot hors Terraform (problème de "chicken and egg" — Terraform a besoin d'un backend pour s'initialiser, donc le backend doit exister avant le premier <code>init</code>).</p>
+<p>🔵 <strong>Rappel concept : KMS Customer Managed Key (CMK)</strong></p>
+<p>AWS KMS gère les clés de chiffrement. Une <strong>CMK</strong> (Customer Managed Key) est une clé dont <strong>vous</strong> gérez la policy (à la différence des clés AWS-managed comme <code>aws/s3</code>). Ici on crée une CMK dédiée au state Terraform, avec rotation annuelle activée. L'alias (<code>alias/tf-state-xxx</code>) est un nom humain plus simple que l'ID UUID.</p>
+<p><strong>Contexte</strong> : contrairement à TP01 qui utilisait SSE-S3 (AES256 managé par AWS), ici on impose KMS CMK avec rotation automatique — exigence T5 du CdC. La CMK doit être créée avant le bucket pour pouvoir chiffrer le bucket à sa création.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="c1"># bootstrap/create-state-bucket.sh</span>
+<span class="c1"># One-shot : cree la KMS CMK puis le bucket S3 de state.</span>
+
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="nv">USERNAME</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">USERNAME</span><span class="k">:-</span><span class="nv">kolab</span><span class="p">-team1</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">REGION</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGION</span><span class="k">:-</span><span class="nv">eu</span><span class="p">-west-1</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="nv">BUCKET</span><span class="o">=</span><span class="s2">&quot;tf-state-</span><span class="si">${</span><span class="nv">USERNAME</span><span class="si">}</span><span class="s2">-kolab&quot;</span>
+<span class="nv">KMS_ALIAS</span><span class="o">=</span><span class="s2">&quot;alias/tf-state-</span><span class="si">${</span><span class="nv">USERNAME</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== 1. Creation KMS CMK pour chiffrer le state ===&quot;</span>
+
+<span class="c1"># Creer la CMK si elle n existe pas deja</span>
+<span class="nv">KMS_KEY_ID</span><span class="o">=</span><span class="k">$(</span>aws<span class="w"> </span>kms<span class="w"> </span>list-aliases<span class="w"> </span>--region<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGION</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--query<span class="w"> </span><span class="s2">&quot;Aliases[?AliasName==&#39;</span><span class="si">${</span><span class="nv">KMS_ALIAS</span><span class="si">}</span><span class="s2">&#39;].TargetKeyId&quot;</span><span class="w"> </span>--output<span class="w"> </span>text<span class="k">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KMS_KEY_ID</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">KMS_KEY_ID</span><span class="o">=</span><span class="k">$(</span>aws<span class="w"> </span>kms<span class="w"> </span>create-key<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--region<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGION</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--description<span class="w"> </span><span class="s2">&quot;CMK chiffrement du state Terraform Kolab&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--key-usage<span class="w"> </span>ENCRYPT_DECRYPT<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--key-spec<span class="w"> </span>SYMMETRIC_DEFAULT<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--query<span class="w"> </span><span class="s1">&#39;KeyMetadata.KeyId&#39;</span><span class="w"> </span>--output<span class="w"> </span>text<span class="k">)</span>
+
+<span class="w">  </span><span class="c1"># Activer la rotation annuelle (exigence securite)</span>
+<span class="w">  </span>aws<span class="w"> </span>kms<span class="w"> </span>enable-key-rotation<span class="w"> </span>--region<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGION</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>--key-id<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KMS_KEY_ID</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="w">  </span><span class="c1"># Creer l alias pour s y referer facilement</span>
+<span class="w">  </span>aws<span class="w"> </span>kms<span class="w"> </span>create-alias<span class="w"> </span>--region<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGION</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--alias-name<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KMS_ALIAS</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--target-key-id<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KMS_KEY_ID</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;CMK </span><span class="si">${</span><span class="nv">KMS_ALIAS</span><span class="si">}</span><span class="s2"> existe deja.&quot;</span>
+<span class="k">fi</span>
+
+<span class="nv">KMS_KEY_ARN</span><span class="o">=</span><span class="k">$(</span>aws<span class="w"> </span>kms<span class="w"> </span>describe-key<span class="w"> </span>--region<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGION</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--key-id<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">KMS_KEY_ID</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span><span class="s1">&#39;KeyMetadata.Arn&#39;</span><span class="w"> </span>--output<span class="w"> </span>text<span class="k">)</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;KMS CMK ARN : </span><span class="si">${</span><span class="nv">KMS_KEY_ARN</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== 2. Creation bucket S3 state ===&quot;</span>
+
+<span class="k">if</span><span class="w"> </span>aws<span class="w"> </span>s3api<span class="w"> </span>head-bucket<span class="w"> </span>--bucket<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BUCKET</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Bucket </span><span class="si">${</span><span class="nv">BUCKET</span><span class="si">}</span><span class="s2"> existe deja.&quot;</span>
+<span class="k">else</span>
+<span class="w">  </span>aws<span class="w"> </span>s3api<span class="w"> </span>create-bucket<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--bucket<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BUCKET</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--region<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGION</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--create-bucket-configuration<span class="w"> </span><span class="s2">&quot;LocationConstraint=</span><span class="si">${</span><span class="nv">REGION</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># Versioning - indispensable pour recuperer un state corrompu</span>
+aws<span class="w"> </span>s3api<span class="w"> </span>put-bucket-versioning<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bucket<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BUCKET</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--versioning-configuration<span class="w"> </span><span class="nv">Status</span><span class="o">=</span>Enabled
+
+<span class="c1"># Chiffrement KMS CMK (et plus SSE-S3)</span>
+aws<span class="w"> </span>s3api<span class="w"> </span>put-bucket-encryption<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bucket<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BUCKET</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--server-side-encryption-configuration<span class="w"> </span><span class="s2">&quot;{</span>
+<span class="s2">    \&quot;Rules\&quot;: [{</span>
+<span class="s2">      \&quot;ApplyServerSideEncryptionByDefault\&quot;: {</span>
+<span class="s2">        \&quot;SSEAlgorithm\&quot;: \&quot;aws:kms\&quot;,</span>
+<span class="s2">        \&quot;KMSMasterKeyID\&quot;: \&quot;</span><span class="si">${</span><span class="nv">KMS_KEY_ARN</span><span class="si">}</span><span class="s2">\&quot;</span>
+<span class="s2">      },</span>
+<span class="s2">      \&quot;BucketKeyEnabled\&quot;: true</span>
+<span class="s2">    }]</span>
+<span class="s2">  }&quot;</span>
+
+<span class="c1"># Block Public Access complet</span>
+aws<span class="w"> </span>s3api<span class="w"> </span>put-public-access-block<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bucket<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BUCKET</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--public-access-block-configuration<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">&quot;BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true&quot;</span>
+
+<span class="c1"># Bucket policy : refuse tout acces non-HTTPS</span>
+aws<span class="w"> </span>s3api<span class="w"> </span>put-bucket-policy<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bucket<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BUCKET</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--policy<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<span class="s">{</span>
+<span class="s">  &quot;Version&quot;: &quot;2012-10-17&quot;,</span>
+<span class="s">  &quot;Statement&quot;: [{</span>
+<span class="s">    &quot;Sid&quot;: &quot;DenyInsecureTransport&quot;,</span>
+<span class="s">    &quot;Effect&quot;: &quot;Deny&quot;,</span>
+<span class="s">    &quot;Principal&quot;: &quot;*&quot;,</span>
+<span class="s">    &quot;Action&quot;: &quot;s3:*&quot;,</span>
+<span class="s">    &quot;Resource&quot;: [</span>
+<span class="s">      &quot;arn:aws:s3:::${BUCKET}&quot;,</span>
+<span class="s">      &quot;arn:aws:s3:::${BUCKET}/*&quot;</span>
+<span class="s">    ],</span>
+<span class="s">    &quot;Condition&quot;: { &quot;Bool&quot;: { &quot;aws:SecureTransport&quot;: &quot;false&quot; } }</span>
+<span class="s">  }]</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+<span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;===============================================&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot; Bootstrap OK.&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   Bucket : </span><span class="si">${</span><span class="nv">BUCKET</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   KMS    : </span><span class="si">${</span><span class="nv">KMS_ALIAS</span><span class="si">}</span><span class="s2"> (</span><span class="si">${</span><span class="nv">KMS_KEY_ARN</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot; Adapter envs/dev/backend.tf avec ces valeurs.&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;===============================================&quot;</span>
+</code></pre></div>
+<p><strong>Résultat attendu</strong> :</p>
+<div class="highlight"><pre><span></span><code>=== 1. Creation KMS CMK pour chiffrer le state ===
+KMS CMK ARN : arn:aws:kms:eu-west-1:123456789012:key/a1b2c3d4-...
+
+=== 2. Creation bucket S3 state ===
+
+===============================================
+ Bootstrap OK.
+   Bucket : tf-state-kolab-team1-kolab
+   KMS    : alias/tf-state-kolab-team1 (arn:aws:kms:...)
+===============================================
+</code></pre></div>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Écrivez le script <code>bootstrap/create-state-bucket.sh</code> en vous inspirant de l'exemple ci-dessus. Le starter kit fournit un squelette à compléter dans <code>bootstrap/</code>. Testez-le sur votre compte AWS formation avant de le pousser.</p>
+</blockquote>
+<p>Indices :</p>
+<ul>
+<li><code>aws kms create-key --key-usage ENCRYPT_DECRYPT --key-spec SYMMETRIC_DEFAULT</code></li>
+<li><code>aws kms enable-key-rotation --key-id ...</code> pour la rotation annuelle</li>
+<li><code>aws kms create-alias --alias-name alias/tf-state-&lt;username&gt;</code></li>
+<li>Dans <code>put-bucket-encryption</code>, <code>SSEAlgorithm=aws:kms</code> et <code>KMSMasterKeyID=&lt;arn&gt;</code> (et non plus <code>AES256</code>)</li>
+</ul>
+<blockquote>
+<p>🔷 <strong>Point clé à vérifier</strong> : après exécution, <code>aws kms describe-key --key-id alias/tf-state-&lt;username&gt;</code> retourne une clé <code>Enabled=true</code> avec <code>KeyRotationStatus=true</code>.</p>
+</blockquote>
+<hr />
+<h3 id="etape-3-envsdevbackendtf-providerstf-15-min">Étape 3 : <code>envs/dev/backend.tf</code> + <code>providers.tf</code> (15 min)</h3>
+<p><strong>Objectif</strong> : pointer le state sur le bucket créé à l'étape 2 et déclarer le provider AWS avec des tags par défaut.</p>
+<p>🔵 <strong>Rappel concept : <code>default_tags</code> du provider AWS</strong></p>
+<p>Le bloc <code>default_tags</code> dans <code>provider "aws" {}</code> applique automatiquement un jeu de tags à <strong>toutes</strong> les ressources AWS du state — indispensable pour le chargeback et le FinOps. Plus besoin de re-taguer chaque ressource individuellement.</p>
+<p><strong>Contexte</strong> : depuis Terraform 1.10, le backend S3 supporte le locking natif via <code>use_lockfile = true</code> (plus besoin de DynamoDB).</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># =============================================================================</span>
+<span class="c1"># envs/dev/backend.tf</span>
+<span class="c1"># Backend S3 natif avec locking. NE PAS committer le tfstate.</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="nb">terraform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">required_version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;= 1.10.0&quot;</span>
+
+<span class="w">  </span><span class="kr">backend</span><span class="w"> </span><span class="nv">&quot;s3&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">bucket</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tf-state-kolab-team1-kolab&quot;</span><span class="c1">  # &lt;- adapter au bucket cree</span>
+<span class="w">    </span><span class="na">key</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;envs/dev/terraform.tfstate&quot;</span>
+<span class="w">    </span><span class="na">region</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="w">    </span><span class="na">encrypt</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">    </span><span class="na">kms_key_id</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;alias/tf-state-kolab-team1&quot;</span><span class="c1">  # &lt;- adapter a votre alias</span>
+<span class="w">    </span><span class="na">use_lockfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="c1">                          # TF &gt;= 1.10 : locking natif</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># =============================================================================</span>
+<span class="c1"># envs/dev/providers.tf</span>
+<span class="c1"># Provider AWS avec default_tags pour taggage transversal.</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="nb">terraform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nb">required_providers</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">aws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">source</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hashicorp/aws&quot;</span>
+<span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;~&gt; 5.80&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">provider</span><span class="w"> </span><span class="nv">&quot;aws&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.aws_region</span>
+
+<span class="w">  </span><span class="nb">default_tags</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">Project</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.project_name</span>
+<span class="w">      </span><span class="na">Environment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span>
+<span class="w">      </span><span class="na">ManagedBy</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Terraform&quot;</span>
+<span class="w">      </span><span class="na">Team</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;TP05-equipe&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Créez ces deux fichiers en adaptant le nom du bucket et l'alias KMS à ceux que <strong>votre</strong> script bootstrap a créés. <strong>Ne committez jamais</strong> de vraies valeurs secrètes — ici ce sont des noms publics, donc c'est OK.</p>
+</blockquote>
+<p>Indices :</p>
+<ul>
+<li><code>use_lockfile = true</code> remplace <code>dynamodb_table</code> (TF ≥ 1.10)</li>
+<li><code>kms_key_id</code> accepte un ARN <strong>ou</strong> un alias</li>
+</ul>
+<p>🔷 <strong>Point clé à vérifier</strong> : à ce stade, <code>terraform init</code> <strong>ne fonctionne pas encore</strong> (il n'y a pas de <code>main.tf</code>). C'est normal — on init après l'étape 5.</p>
+<hr />
+<h3 id="etape-4-envsdevvariablestf-terraformtfvarsexample-10-min">Étape 4 : <code>envs/dev/variables.tf</code> + <code>terraform.tfvars.example</code> (10 min)</h3>
+<p><strong>Objectif</strong> : exposer les deux seules variables configurables de l'environnement : région + CIDR d'admin.</p>
+<p><strong>Contexte</strong> : un <code>envs/&lt;env&gt;</code> doit avoir <strong>le strict minimum</strong> de variables. Tout le reste (CIDR VPC, AZs, type d'instance) est dans les modules ou dans <code>locals</code>. Moins il y a de variables, moins il y a de risque de dérive entre dev et staging.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># =============================================================================</span>
+<span class="c1"># envs/dev/variables.tf</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;aws_region&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Region AWS (impose : eu-west-1 pour RGPD).&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+
+<span class="w">  </span><span class="nb">validation</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">condition</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.aws_region</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="w">    </span><span class="na">error_message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;La region doit etre eu-west-1 (exigence T1 du CdC).&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;allowed_admin_cidr&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;CIDR IP autorise a atteindre l ALB en HTTPS (IP formateur).&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+
+<span class="w">  </span><span class="nb">validation</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">condition</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nf">can</span><span class="p">(</span><span class="nf">cidrhost</span><span class="p">(</span><span class="nv">var.allowed_admin_cidr</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span>
+<span class="w">    </span><span class="na">error_message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Doit etre un CIDR IPv4 valide (ex: 203.0.113.42/32).&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;project_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Nom de projet pour le tagging.&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;environment&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Nom de l environnement.&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code># envs/dev/terraform.tfvars.example
+# Copier en terraform.tfvars (gitignored) et renseigner.
+
+allowed_admin_cidr = &quot;203.0.113.42/32&quot;
+</code></pre></div>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Ajoutez une <code>validation</code> sur <code>allowed_admin_cidr</code> qui refuse <code>0.0.0.0/0</code> (ouvrir au monde entier serait un anti-pattern pour un TP).</p>
+</blockquote>
+<p>Indices :</p>
+<ul>
+<li><code>condition = var.allowed_admin_cidr != "0.0.0.0/0"</code></li>
+</ul>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>terraform.tfvars.example</code> est committé, <code>terraform.tfvars</code> est dans <code>.gitignore</code>.</p>
+<hr />
+<h3 id="etape-5-envsdevmaintf-les-4-blocks-module-30-min">Étape 5 : <code>envs/dev/main.tf</code> — les 4 blocks module (30 min)</h3>
+<p><strong>Objectif</strong> : câbler les 4 modules entre eux en respectant les interfaces figées au kick-off.</p>
+<p><strong>Contexte</strong> : c'est <strong>le</strong> fichier qui matérialise l'architecture. Il doit être écrit <strong>avant</strong> que les autres rôles codent leur module — il sert de contrat. Chaque rôle a sa liste d'<code>input</code> à remplir et d'<code>output</code> à exposer. Tant que les <code>source = "../../modules/..."</code> n'existent pas, Terraform refuse de <code>init</code> — c'est normal, on débloque l'équipe en livrant ce fichier en premier.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># =============================================================================</span>
+<span class="c1"># envs/dev/main.tf</span>
+<span class="c1"># Orchestration des 4 modules. Interfaces FIGEES au kick-off.</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Role 2 : reseau (VPC, subnets, NAT, endpoints)</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kr">module</span><span class="w"> </span><span class="nv">&quot;networking&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/networking&quot;</span>
+
+<span class="w">  </span><span class="na">project_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.project_name</span>
+<span class="w">  </span><span class="na">environment</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span>
+<span class="w">  </span><span class="na">vpc_cidr</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.30.0.0/16&quot;</span>
+<span class="w">  </span><span class="na">azs</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eu-west-1a&quot;, &quot;eu-west-1b&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Role 5 : securite (SGs, KMS, IAM, Secrets Manager)</span>
+<span class="c1"># Note : consomme les ARN S3 de data (late binding).</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kr">module</span><span class="w"> </span><span class="nv">&quot;security&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/security&quot;</span>
+
+<span class="w">  </span><span class="na">project_name</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="nv">var.project_name</span>
+<span class="w">  </span><span class="na">environment</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">                </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.vpc_id</span>
+<span class="w">  </span><span class="na">vpc_cidr</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.vpc_cidr</span>
+<span class="w">  </span><span class="na">allowed_admin_cidr</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">var.allowed_admin_cidr</span>
+<span class="w">  </span><span class="na">s3_primary_bucket_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.s3_primary_bucket_arn</span>
+<span class="w">  </span><span class="na">s3_logs_bucket_arn</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.s3_logs_bucket_arn</span>
+<span class="p">}</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Role 4 : data (RDS PG Multi-AZ + 2 buckets S3 chiffres KMS)</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kr">module</span><span class="w"> </span><span class="nv">&quot;data&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/data&quot;</span>
+
+<span class="w">  </span><span class="na">project_name</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="nv">var.project_name</span>
+<span class="w">  </span><span class="na">environment</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.vpc_id</span>
+<span class="w">  </span><span class="na">private_db_subnet_ids</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.private_db_subnet_ids</span>
+<span class="w">  </span><span class="na">db_security_group_id</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.db_security_group_id</span>
+<span class="w">  </span><span class="na">kms_key_arn</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.kms_key_arn</span>
+<span class="w">  </span><span class="na">db_password_secret_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.db_password_secret_arn</span>
+<span class="p">}</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Role 3 : compute (ALB, ASG, EC2, user_data Nextcloud)</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kr">module</span><span class="w"> </span><span class="nv">&quot;compute&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;../../modules/compute&quot;</span>
+
+<span class="w">  </span><span class="na">project_name</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="nv">var.project_name</span>
+<span class="w">  </span><span class="na">environment</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">                       </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.vpc_id</span>
+<span class="w">  </span><span class="na">public_subnet_ids</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.public_subnet_ids</span>
+<span class="w">  </span><span class="na">private_app_subnet_ids</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">module.networking.private_app_subnet_ids</span>
+<span class="w">  </span><span class="na">alb_security_group_id</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.alb_security_group_id</span>
+<span class="w">  </span><span class="na">app_security_group_id</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.app_security_group_id</span>
+<span class="w">  </span><span class="na">app_instance_profile_name</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.app_instance_profile_name</span>
+<span class="w">  </span><span class="na">db_endpoint</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.db_endpoint</span>
+<span class="w">  </span><span class="na">db_name</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.db_name</span>
+<span class="w">  </span><span class="na">db_username</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.db_username</span>
+<span class="w">  </span><span class="na">db_password_secret_arn</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.db_password_secret_arn</span>
+<span class="w">  </span><span class="na">admin_password_secret_arn</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.admin_password_secret_arn</span>
+<span class="w">  </span><span class="na">s3_primary_bucket_name</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.s3_primary_bucket_name</span>
+<span class="w">  </span><span class="na">s3_logs_bucket_name</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="nv">module.data.s3_logs_bucket_name</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🟡 <strong>Cycle apparent security ↔ data</strong> : <code>security</code> lit <code>module.data.s3_primary_bucket_arn</code> et <code>data</code> lit <code>module.security.kms_key_arn</code>. Terraform résout ce graphe sans problème car les dépendances sont au niveau <strong>attribut</strong> (pas au niveau <strong>module entier</strong>). Pas de <code>depends_on</code> à ajouter.</p>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Copiez ce fichier tel quel. Si une interface change, <strong>c'est ici</strong> qu'il faut mettre à jour — et prévenir l'équipe par un message Slack <code>#formation-terraform-tp05</code>.</p>
+</blockquote>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>terraform init</code> échoue avec <code>Module not installed</code> tant que les 4 modules sont vides. Normal. Les 4 autres rôles vont les remplir.</p>
+<hr />
+<h3 id="etape-6-gitignore-pre-commit-configyaml-10-min">Étape 6 : <code>.gitignore</code> + <code>.pre-commit-config.yaml</code> (10 min)</h3>
+<p><strong>Objectif</strong> : protéger le repo des fichiers lourds/secrets et activer les hooks qualité.</p>
+<p><strong>Contexte</strong> : sans <code>.gitignore</code>, quelqu'un committera un <code>terraform.tfstate</code> (contient potentiellement des secrets) ou un <code>.terraform/</code> de 50 Mo. Sans pre-commit, un push cassera la CI.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code># .gitignore
+
+# Terraform
+.terraform/
+.terraform.lock.hcl.backup
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+
+# Variables locales (ne JAMAIS committer)
+*.tfvars
+!*.tfvars.example
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# OS / editeurs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Infracost
+infracost*.json
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># .pre-commit-config.yaml</span>
+<span class="c1"># Hooks qualite locaux. Installation : pip install pre-commit &amp;&amp; pre-commit install</span>
+
+<span class="nt">repos</span><span class="p">:</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/antonbabenko/pre-commit-terraform</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.96.2</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">terraform_fmt</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">terraform_validate</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">terraform_tflint</span>
+<span class="w">        </span><span class="nt">args</span><span class="p">:</span>
+
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--args=--minimum-failure-severity=warning</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">terraform_tfsec</span>
+<span class="w">        </span><span class="nt">args</span><span class="p">:</span>
+
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--args=--minimum-severity=MEDIUM</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">terraform_docs</span>
+<span class="w">        </span><span class="nt">args</span><span class="p">:</span>
+
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--hook-config=--path-to-file=README.md</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--hook-config=--add-to-existing-file=true</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--hook-config=--create-file-if-not-exist=true</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/pre-commit/pre-commit-hooks</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v5.0.0</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-merge-conflict</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">detect-private-key</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">end-of-file-fixer</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">trailing-whitespace</span>
+</code></pre></div>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Installez pre-commit localement : <code>pip install pre-commit &amp;&amp; pre-commit install</code>. Testez avec <code>pre-commit run --all-files</code> — les premiers runs échouent, c'est normal (il faut que les modules soient codés).</p>
+</blockquote>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>cat .gitignore | grep tfvars</code> retourne bien <code>*.tfvars</code> et <code>!*.tfvars.example</code>.</p>
+<hr />
+<h3 id="etape-7-readmemd-racine-architecturemd-20-min">Étape 7 : <code>README.md</code> racine + <code>ARCHITECTURE.md</code> (20 min)</h3>
+<p><strong>Objectif</strong> : donner à un nouvel arrivant 5 minutes de lecture pour comprendre le projet et le cloner.</p>
+<p><strong>Contexte</strong> : le <code>README.md</code> est <strong>la première chose</strong> que le formateur lit pour évaluer. S'il est vide ou bâclé, ça pénalise immédiatement la note "Collaboration et documentation".</p>
+<p><strong>Exemple</strong> (structure attendue du <code>README.md</code> — à adapter) :</p>
+<ul>
+<li><strong>Titre</strong> : <code># Kolab — Nextcloud sur AWS (TP05)</code></li>
+<li><strong>Contexte</strong> : 2 lignes rappelant le cabinet d'avocats Kolab (40 collaborateurs, migration RGPD).</li>
+<li><strong>Lien architecture</strong> : <code>Voir [ARCHITECTURE.md](./ARCHITECTURE.md).</code></li>
+<li><strong>Quick start</strong> (bloc bash) :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Prerequis : AWS CLI v2, Terraform &gt;= 1.10</span>
+aws<span class="w"> </span>sts<span class="w"> </span>get-caller-identity<span class="w">  </span><span class="c1"># verifier le profil</span>
+
+<span class="c1"># 2. Bootstrap bucket state (one-shot)</span>
+<span class="nv">USERNAME</span><span class="o">=</span><span class="s2">&quot;kolab-team1&quot;</span><span class="w"> </span>./bootstrap/create-state-bucket.sh
+
+<span class="c1"># 3. Adapter envs/dev/backend.tf avec le bucket cree</span>
+
+<span class="c1"># 4. Init + plan + apply</span>
+<span class="nb">cd</span><span class="w"> </span>envs/dev
+cp<span class="w"> </span>terraform.tfvars.example<span class="w"> </span>terraform.tfvars
+<span class="c1"># editer terraform.tfvars avec votre IP publique</span>
+terraform<span class="w"> </span>init
+terraform<span class="w"> </span>plan
+terraform<span class="w"> </span>apply
+</code></pre></div>
+<ul>
+<li><strong>Structure</strong> (liste à puces) :</li>
+<li><code>bootstrap/</code> : script one-shot bucket state + KMS CMK</li>
+<li><code>global/</code> : ressources partagees multi-env (OIDC GitHub, bonus)</li>
+<li><code>modules/networking</code> : VPC + subnets + NAT + endpoints (Role 2)</li>
+<li><code>modules/compute</code> : ALB + ASG + EC2 Nextcloud (Role 3)</li>
+<li><code>modules/data</code> : RDS PG + S3 (Role 4)</li>
+<li><code>modules/security</code> : SGs + KMS + IAM + Secrets (Role 5)</li>
+<li>
+<p><code>envs/dev</code> : orchestration de l environnement de dev (Role 1)</p>
+</li>
+<li>
+<p><strong>Equipe</strong> (tableau) : Role, Nom, Module. Une ligne par role.</p>
+</li>
+<li><strong>Destroy</strong> (bloc bash) :</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>envs/dev
+terraform<span class="w"> </span>destroy
+</code></pre></div>
+<ul>
+<li><strong>Verifications post-destroy</strong> : aucun NAT Gateway, aucune RDS, aucune EC2, aucun ALB ne doit rester.</li>
+</ul>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Écrivez <strong>aussi</strong> le <code>ARCHITECTURE.md</code> : copiez le schéma Mermaid d'ensemble du <a href="../tp05-team-nextcloud.md#architecture-cible">document maître</a>, ajoutez un court paragraphe "Décisions d'architecture" (3-5 lignes : pourquoi single NAT, pourquoi ASG de 1, pourquoi self-signed cert).</p>
+</blockquote>
+<p>🔷 <strong>Point clé à vérifier</strong> : le <code>README.md</code> ouvre en moins de 1 minute sur GitHub et contient <strong>au moins</strong> : contexte métier, arborescence, quick start, destroy.</p>
+<hr />
+<h3 id="etape-8-globaliam-github-oidc-bonus-30-min">Étape 8 : <code>global/iam-github-oidc/</code> (bonus — 30 min)</h3>
+<p><strong>Objectif</strong> : permettre à un workflow GitHub Actions d'assumer un rôle IAM AWS <strong>sans aucun secret stocké dans GitHub</strong> (ni clé d'accès, ni mot de passe). Le token OIDC émis par GitHub est échangé contre des credentials AWS temporaires (1h).</p>
+<p><strong>Contexte</strong> : dans une vraie équipe Ops, c'est la seule manière correcte d'avoir de la CI/CD AWS. Les <code>aws-access-key-id</code> dans les secrets GitHub sont un anti-pattern (rotation manuelle, risque de leak).</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># global/iam-github-oidc/main.tf</span>
+
+<span class="c1"># Provider OIDC GitHub - un seul par compte AWS</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_openid_connect_provider&quot;</span><span class="w"> </span><span class="nv">&quot;github&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">url</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://token.actions.githubusercontent.com&quot;</span>
+<span class="w">  </span><span class="na">client_id_list</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sts.amazonaws.com&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="na">thumbprint_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;6938fd4d98bab03faadb97b34396831e3780aea1&quot;</span><span class="p">]</span>
+
+<span class="w">  </span><span class="nb">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;github-actions-oidc&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Role assumable par le workflow du repo &lt;org&gt;/&lt;repo&gt;</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_role&quot;</span><span class="w"> </span><span class="nv">&quot;github_actions&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab-github-actions-tf-plan&quot;</span>
+
+<span class="w">  </span><span class="na">assume_role_policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">jsonencode</span><span class="p">({</span>
+<span class="w">    </span><span class="na">Version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span>
+<span class="w">    </span><span class="na">Statement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">      </span><span class="na">Effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span>
+<span class="w">      </span><span class="nb">Principal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="na">Federated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_openid_connect_provider.github.arn</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="na">Action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;sts:AssumeRoleWithWebIdentity&quot;</span>
+<span class="w">      </span><span class="nb">Condition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">StringEquals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="s2">&quot;token.actions.githubusercontent.com:aud&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;sts.amazonaws.com&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nb">StringLike</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">          # IMPORTANT : scoper le trust au repo pour eviter l abus</span>
+<span class="w">          </span><span class="s2">&quot;token.actions.githubusercontent.com:sub&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;repo:${var.github_org}/${var.github_repo}:*&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}]</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1"># Policy en lecture pour plan. Pour apply, creer un role separe avec droits etendus.</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_role_policy_attachment&quot;</span><span class="w"> </span><span class="nv">&quot;read_only&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">role</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.github_actions.name</span>
+<span class="w">  </span><span class="na">policy_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;arn:aws:iam::aws:policy/ReadOnlyAccess&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Ajoutez <code>variables.tf</code>, <code>outputs.tf</code> (expose <code>role_arn</code>), et <code>backend.tf</code> avec <code>key = "global/iam-github-oidc/terraform.tfstate"</code>. Appliquez ce module <strong>avant</strong> d'écrire le workflow — sinon le workflow échoue avec <code>could not assume role</code>.</p>
+</blockquote>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>terraform output role_arn</code> dans <code>global/iam-github-oidc/</code> retourne un ARN de la forme <code>arn:aws:iam::123456789012:role/kolab-github-actions-tf-plan</code>.</p>
+<hr />
+<h3 id="etape-9-githubworkflowsterraform-planyml-bonus-20-min">Étape 9 : <code>.github/workflows/terraform-plan.yml</code> (bonus — 20 min)</h3>
+<p><strong>Objectif</strong> : déclencher un <code>terraform plan</code> automatique sur chaque PR vers <code>main</code>, avec commentaire du diff sur la PR.</p>
+<p><strong>Contexte</strong> : c'est le minimum syndical d'une CI/CD Terraform en entreprise. L'<code>apply</code> automatique sur merge est possible mais hors scope de ce TP (risque trop élevé sur un TP).</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># .github/workflows/terraform-plan.yml</span>
+
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Terraform Plan</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;envs/dev/**&#39;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;modules/**&#39;</span>
+
+<span class="nt">permissions</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">id-token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span><span class="w">     </span><span class="c1"># indispensable pour OIDC</span>
+<span class="w">  </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+<span class="w">  </span><span class="nt">pull-requests</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">plan</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">defaults</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">working-directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envs/dev</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aws-actions/configure-aws-credentials@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">role-to-assume</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">arn:aws:iam::123456789012:role/kolab-github-actions-tf-plan</span>
+<span class="w">          </span><span class="nt">aws-region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eu-west-1</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hashicorp/setup-terraform@v3</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">terraform_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.10.3</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Terraform fmt</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">terraform fmt -check -recursive</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Terraform init</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">terraform init -input=false</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Terraform validate</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">terraform validate</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Terraform plan</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plan</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">terraform plan -no-color -input=false -out=tfplan</span>
+<span class="w">        </span><span class="nt">continue-on-error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment PR</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/github-script@v7</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">            </span><span class="no">const output = `### Terraform Plan</span>
+
+<span class="l l-Scalar l-Scalar-Plain">\`\`\`</span>
+<span class="l l-Scalar l-Scalar-Plain">${{ steps.plan.outputs.stdout }}</span>
+<span class="l l-Scalar l-Scalar-Plain">\`\`\`</span>
+<span class="err">`</span><span class="l l-Scalar l-Scalar-Plain">;</span>
+<span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">github.rest.issues.createComment({</span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">issue_number</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">context.issue.number,</span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">owner</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">context.repo.owner,</span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">repo</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">context.repo.repo,</span>
+<span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">body</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">output</span>
+<span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">});</span>
+</code></pre></div>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Adaptez <code>role-to-assume</code> avec l'ARN exporté par <code>global/iam-github-oidc/</code>. Ouvrez une PR vide pour tester — le workflow doit tourner en &lt; 2 minutes.</p>
+</blockquote>
+<p>🔷 <strong>Point clé à vérifier</strong> : sur l'onglet <strong>Actions</strong> de GitHub, le job <code>plan</code> est vert, et un commentaire est posté sur la PR avec le résumé du plan.</p>
+<hr />
+<h3 id="etape-10-integration-finale-et-apply-sprint-3-1h15">Étape 10 : Intégration finale et <code>apply</code> (sprint 3 — 1h15)</h3>
+<p><strong>Objectif</strong> : merger les 4 PR des autres rôles, lancer <code>init / plan / apply</code> sur <code>envs/dev</code>, et démontrer Nextcloud fonctionnel.</p>
+<p><strong>Contexte</strong> : vous êtes <strong>le</strong> pilote de cette étape. Vous ouvrez votre écran partagé. L'équipe regarde. Si une erreur tombe, vous lisez le message avec eux — ne pas se précipiter.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>envs/dev
+
+<span class="c1"># Init : doit telecharger 4 modules locaux + provider aws 5.x</span>
+terraform<span class="w"> </span>init
+
+<span class="c1"># Plan : on s attend a ~80 ressources</span>
+terraform<span class="w"> </span>plan<span class="w"> </span>-out<span class="o">=</span>tfplan
+
+<span class="c1"># Apply : duree ~8 a 12 min (RDS est le plus lent, ~8 min)</span>
+terraform<span class="w"> </span>apply<span class="w"> </span>tfplan
+
+<span class="c1"># Verifier les outputs</span>
+terraform<span class="w"> </span>output<span class="w"> </span>nextcloud_url
+<span class="c1"># =&gt; &quot;https://kolab-dev-alb-123456789.eu-west-1.elb.amazonaws.com&quot;</span>
+</code></pre></div>
+<p><strong>Résultat attendu</strong> :</p>
+<div class="highlight"><pre><span></span><code>Apply complete! Resources: 78 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+alb_dns_name = &quot;kolab-dev-alb-123456789.eu-west-1.elb.amazonaws.com&quot;
+nextcloud_url = &quot;https://kolab-dev-alb-123456789.eu-west-1.elb.amazonaws.com&quot;
+s3_primary_bucket_name = &quot;kolab-dev-nextcloud-primary-a1b2c3&quot;
+</code></pre></div>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Une fois <code>apply</code> réussi, <strong>attendez 3 minutes</strong> que Nextcloud démarre (le user_data Docker prend du temps), puis ouvrez l'URL dans un navigateur. Vous devriez voir la page de login Nextcloud.</p>
+<p>Capturez <code>02-apply-success.png</code> (sortie + outputs) et <code>03-nextcloud-login.png</code> (page login).</p>
+</blockquote>
+<p>🔷 <strong>Point clé à vérifier</strong> : l'URL <code>https://&lt;alb-dns&gt;</code> retourne la page de login Nextcloud. Si vous avez une erreur 502, l'EC2 n'est pas encore prête (user_data en cours) — attendez 1-2 minutes et rafraîchissez.</p>
+<hr />
+<h2 id="sprint-2-integration">Sprint 2 — intégration</h2>
+<p>Dans l'ordre :</p>
+<ol>
+<li><strong>Chaque rôle pousse sa branche</strong> <code>role-&lt;N&gt;/&lt;topic&gt;</code> et ouvre une PR vers <code>main</code>.</li>
+<li><strong>Vous (Platform Lead) faites la revue</strong> : fmt, validate, conformité à l'interface figée, pas de provider dans le module.</li>
+<li><strong>2 approbations minimum</strong> avant merge (1 Platform + 1 pair).</li>
+<li><strong>Merge dans l'ordre</strong> : networking, puis security, puis data, puis compute.</li>
+<li><strong>À chaque merge</strong>, <code>git pull</code> sur main localement et <code>terraform plan</code> dans <code>envs/dev</code> pour anticiper les cassures.</li>
+</ol>
+<p>🟡 <strong>Cas d'école de cassure</strong> : le Rôle 2 renomme <code>public_subnet_ids</code> en <code>public_subnets</code> au dernier moment. Votre <code>envs/dev/main.tf</code> casse. Solution : <strong>refuser la PR</strong> — l'interface est figée.</p>
+<p>🔷 <strong>Point clé à vérifier</strong> : après chaque merge, <code>terraform validate</code> passe dans <code>envs/dev/</code>. Si non, vous bloquez le prochain merge et demandez un fix.</p>
+<hr />
+<h2 id="troubleshooting-specifique-a-votre-role">Troubleshooting spécifique à votre rôle</h2>
+<table>
+<thead>
+<tr>
+<th>Erreur</th>
+<th>Cause probable</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Error: Failed to get existing workspaces: ... InvalidArn</code> sur <code>init</code></td>
+<td><code>kms_key_id</code> dans <code>backend.tf</code> pointe sur un alias qui n'existe pas</td>
+<td>Vérifier <code>aws kms list-aliases</code> — l'alias doit matcher celui créé par <code>create-state-bucket.sh</code></td>
+</tr>
+<tr>
+<td><code>Error: error locking state: ConditionalCheckFailedException</code></td>
+<td>Un collègue a lancé un <code>apply</code> en parallèle (lock déjà pris)</td>
+<td><code>terraform force-unlock &lt;LOCK_ID&gt;</code> — <strong>uniquement</strong> si vous êtes sûr que l'autre <code>apply</code> est terminé / crashé</td>
+</tr>
+<tr>
+<td><code>Module not installed</code> lors de <code>terraform plan</code></td>
+<td>Un rôle n'a pas encore livré son <code>modules/&lt;name&gt;/main.tf</code></td>
+<td>Attendre la PR du rôle concerné, ou créer un <code>main.tf</code> vide pour débloquer (ressource <code>null_resource</code> placeholder)</td>
+</tr>
+<tr>
+<td><code>Error: Bucket &lt;name&gt; already exists</code> lors du bootstrap</td>
+<td>Le nom de bucket est global AWS : collision avec un autre compte</td>
+<td>Changer <code>USERNAME</code> pour une valeur unique (ex: <code>kolab-team1-adrien</code>)</td>
+</tr>
+<tr>
+<td><code>Error: AccessDenied ... s3:PutObject</code> lors de <code>apply</code></td>
+<td>Votre utilisateur IAM n'a pas les droits sur le bucket state</td>
+<td>Vérifier la policy IAM de votre user — doit contenir <code>s3:*</code> sur le bucket state</td>
+</tr>
+<tr>
+<td><code>Error: creating IAM OIDC Provider: EntityAlreadyExists</code></td>
+<td>Un provider OIDC GitHub existe déjà sur le compte</td>
+<td>Importer l'existant : <code>terraform import aws_iam_openid_connect_provider.github &lt;arn&gt;</code></td>
+</tr>
+<tr>
+<td><code>could not assume role with OIDC</code> dans le workflow GitHub</td>
+<td>Trust policy mal scopée (mauvais <code>repo:org/repo:*</code>)</td>
+<td>Vérifier que <code>var.github_org</code> et <code>var.github_repo</code> correspondent bien à votre repo</td>
+</tr>
+<tr>
+<td><code>Error: operation error KMS: GenerateDataKey, https response error ... AccessDenied</code> sur <code>apply</code></td>
+<td>La CMK du state refuse votre user IAM</td>
+<td>Vérifier la <strong>key policy</strong> de la CMK : elle doit autoriser <code>kms:GenerateDataKey</code> + <code>kms:Decrypt</code> pour votre principal</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="checklist-de-livraison-a-cocher-dans-le-rendumd">Checklist de livraison (à cocher dans le RENDU.md)</h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>bootstrap/create-state-bucket.sh</code> exécutable et testé (bucket + CMK créés)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>envs/dev/backend.tf</code> avec <code>use_lockfile = true</code> et <code>kms_key_id</code> pointant sur la CMK</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>envs/dev/providers.tf</code> avec provider AWS ~&gt; 5.x + <code>default_tags</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>envs/dev/main.tf</code> avec les 4 blocks <code>module {}</code> conformes aux interfaces figées</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>envs/dev/variables.tf</code> avec au moins <code>aws_region</code> et <code>allowed_admin_cidr</code> (+ <code>validation</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>envs/dev/outputs.tf</code> exposant <code>alb_dns_name</code>, <code>nextcloud_url</code>, <code>s3_primary_bucket_name</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>.gitignore</code> excluant <code>.terraform/</code>, <code>*.tfstate</code>, <code>*.tfvars</code> (sauf <code>*.tfvars.example</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>.pre-commit-config.yaml</code> avec <code>terraform_fmt</code>, <code>validate</code>, <code>tflint</code>, <code>tfsec</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>README.md</code> racine avec contexte Kolab + quick start + arborescence + équipe</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>ARCHITECTURE.md</code> avec schéma Mermaid + 3-5 décisions documentées</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>terraform init</code> / <code>plan</code> / <code>apply</code> passent dans <code>envs/dev/</code> (preuve = screenshots 01 + 02)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>terraform destroy</code> exécuté en fin de journée (preuve = screenshot 05)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> (Bonus) <code>global/iam-github-oidc/</code> appliqué + workflow <code>terraform-plan.yml</code> vert sur une PR</li>
+</ul>
+<hr />
+<h2 id="conseils-du-formateur">Conseils du formateur</h2>
+<p><strong>Pièges typiques du Platform Lead</strong> — 3 choses qui font perdre du temps sur ce rôle. D'abord, la <strong>tentation de commencer par le code métier</strong>. Ne le faites pas. Votre valeur ajoutée est de livrer le bootstrap + l'arborescence + les interfaces figées <strong>dans l'heure qui suit le kick-off</strong>. Si vous commencez à coder un module, vous bloquez les 4 autres rôles. Ensuite, <strong>la modification tardive d'une interface</strong>. Si au milieu du sprint un rôle vous demande de renommer un output, <strong>refusez</strong> et proposez une PR séparée post-TP. Les interfaces figées, c'est figé. Enfin, <strong>ne pas tester le bootstrap sur votre propre compte AWS avant de le distribuer</strong>. Si votre script plante sur le compte du formateur, vous perdez 30 minutes que vous ne rattraperez pas.</p>
+<p><strong>Ordre recommandé</strong> — Étapes 1 → 2 → 3 → 5 → 4 → 6 → 7 pendant le sprint 1 (2h30), puis sprint 2 en revue de PR (1h). L'étape 5 (<code>main.tf</code> avec les 4 blocks module) <strong>avant</strong> les variables (étape 4) car c'est le fichier qui débloque les autres rôles — vous pouvez renseigner le nom des variables plus tard. Les étapes 8-9 (OIDC + CI) <strong>uniquement si vous avez terminé tout le reste</strong> à 14h, sinon vous risquez de ne pas finir les étapes critiques. Le packaging zip final se fait en toute fin de journée, pas avant — sinon vous zippez un state qui pointe sur des ressources vivantes.</p>
+<p><strong>Quand demander de l'aide</strong> — Vous avez droit à 10 minutes de support formateur. Gardez-les pour un cas <strong>vraiment</strong> bloquant : <code>AccessDenied</code> KMS que vous ne comprenez pas, ou trust policy OIDC qui refuse le token. Pas pour un <code>terraform fmt</code> qui ne passe pas — ça, vous le débuggez seul en lisant le message. Si un rôle est en retard et menace votre gate de fin de journée, <strong>escaladez tôt</strong> (avant 14h) au formateur pour qu'il aide ce rôle en priorité.</p>
+    </article>
+
+    
+    
+    
+    <script>
+    (function() {
+        'use strict';
+        
+        function initMermaidLightbox() {
+            // Crée le conteneur lightbox
+            const lightbox = document.createElement('div');
+            lightbox.className = 'mermaid-lightbox';
+            lightbox.innerHTML = `
+                <div class="mermaid-lightbox-backdrop"></div>
+                <div class="mermaid-lightbox-container">
+                    <div class="mermaid-lightbox-content"></div>
+                </div>
+                <div class="mermaid-lightbox-controls">
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-in" title="Zoom +">+</button>
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-reset" title="Reset">100%</button>
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-out" title="Zoom -">−</button>
+                    <button class="mermaid-lb-btn mermaid-lb-close" title="Fermer">✕</button>
+                </div>
+            `;
+            document.body.appendChild(lightbox);
+
+            // Variables de zoom et pan
+            let scale = 1;
+            let translateX = 0;
+            let translateY = 0;
+            let isDragging = false;
+            let startX, startY;
+
+            const container = lightbox.querySelector('.mermaid-lightbox-container');
+            const content = lightbox.querySelector('.mermaid-lightbox-content');
+            const backdrop = lightbox.querySelector('.mermaid-lightbox-backdrop');
+
+            // Ajoute un bouton d'expansion à chaque diagramme Mermaid
+            document.querySelectorAll('.mermaid, pre.mermaid').forEach(diagram => {
+                const expandBtn = document.createElement('button');
+                expandBtn.className = 'mermaid-expand-btn';
+                expandBtn.innerHTML = '⛶';
+                expandBtn.title = 'Agrandir le diagramme';
+                expandBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openLightbox(diagram);
+                });
+                
+                // Wrapper pour positionner le bouton
+                const wrapper = document.createElement('div');
+                wrapper.className = 'mermaid-wrapper';
+                diagram.parentNode.insertBefore(wrapper, diagram);
+                wrapper.appendChild(diagram);
+                wrapper.appendChild(expandBtn);
+            });
+
+            function openLightbox(diagram) {
+                // Clone le contenu SVG
+                const svg = diagram.querySelector('svg');
+                if (svg) {
+                    content.innerHTML = '';
+                    const clonedSvg = svg.cloneNode(true);
+                    
+                    // Garder le viewBox pour les proportions
+                    if (!clonedSvg.hasAttribute('viewBox') && svg.viewBox && svg.viewBox.baseVal) {
+                        const vb = svg.viewBox.baseVal;
+                        if (vb.width && vb.height) {
+                            clonedSvg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.width} ${vb.height}`);
+                        }
+                    }
+                    
+                    // Le CSS gère les dimensions (80vw)
+                    clonedSvg.removeAttribute('width');
+                    clonedSvg.removeAttribute('height');
+                    
+                    // Agrandir les foreignObject pour éviter la troncature du texte
+                    clonedSvg.querySelectorAll('foreignObject').forEach(fo => {
+                        const currentWidth = parseFloat(fo.getAttribute('width')) || 100;
+                        const currentHeight = parseFloat(fo.getAttribute('height')) || 50;
+                        fo.setAttribute('width', currentWidth * 1.5);
+                        fo.setAttribute('height', currentHeight * 1.5);
+                    });
+                    
+                    content.appendChild(clonedSvg);
+                } else {
+                    content.innerHTML = diagram.innerHTML;
+                }
+                
+                // Reset zoom et position
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                applyTransform();
+                
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function applyTransform() {
+                content.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+                lightbox.querySelector('.mermaid-lb-zoom-reset').textContent = Math.round(scale * 100) + '%';
+            }
+
+            function zoomIn() {
+                scale = Math.min(scale * 1.25, 5);
+                applyTransform();
+            }
+
+            function zoomOut() {
+                scale = Math.max(scale / 1.25, 0.25);
+                applyTransform();
+            }
+
+            function zoomReset() {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                applyTransform();
+            }
+
+            // Événements des boutons
+            lightbox.querySelector('.mermaid-lb-close').addEventListener('click', closeLightbox);
+            lightbox.querySelector('.mermaid-lb-zoom-in').addEventListener('click', zoomIn);
+            lightbox.querySelector('.mermaid-lb-zoom-out').addEventListener('click', zoomOut);
+            lightbox.querySelector('.mermaid-lb-zoom-reset').addEventListener('click', zoomReset);
+            backdrop.addEventListener('click', closeLightbox);
+
+            // Fermer avec Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            // Zoom avec la molette
+            container.addEventListener('wheel', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                e.preventDefault();
+                
+                if (e.deltaY < 0) {
+                    scale = Math.min(scale * 1.1, 5);
+                } else {
+                    scale = Math.max(scale / 1.1, 0.25);
+                }
+                applyTransform();
+            });
+
+            // Pan avec la souris
+            container.addEventListener('mousedown', (e) => {
+                if (e.button !== 0) return;
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                container.style.cursor = 'grabbing';
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                applyTransform();
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                container.style.cursor = 'grab';
+            });
+
+            // Touch support pour mobile
+            let touchStartX, touchStartY;
+            container.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX - translateX;
+                    touchStartY = e.touches[0].clientY - translateY;
+                }
+            });
+
+            container.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1) {
+                    e.preventDefault();
+                    translateX = e.touches[0].clientX - touchStartX;
+                    translateY = e.touches[0].clientY - touchStartY;
+                    applyTransform();
+                }
+            });
+        }
+
+        // Initialise après le rendu de Mermaid
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof mermaid !== 'undefined') {
+                setTimeout(initMermaidLightbox, 600);
+            } else {
+                initMermaidLightbox();
+            }
+        });
+    })();
+    </script>
+
+</body>
+</html>

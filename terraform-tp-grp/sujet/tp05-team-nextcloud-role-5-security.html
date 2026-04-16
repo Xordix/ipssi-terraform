@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rôle 5 — Security Engineer — TP05 Nextcloud</title>
+    
+    
+    
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');:root{--color-primary:#20a7c9;--color-primary-dark:#1a8ba8;--color-primary-light:#e0f4f8;--color-primary-gradient:linear-gradient(135deg,#20a7c9 0%,#1a8ba8 100%);--color-accent:#ff7f44;--color-accent-light:#fff4ef;--color-success:#22c55e;--color-success-light:#dcfce7;--color-warning:#eab308;--color-warning-light:#fef9c3;--color-danger:#ef4444;--color-danger-light:#fee2e2;--color-info:#3b82f6;--color-info-light:#dbeafe;--gray-50:#fafafa;--gray-100:#f4f4f5;--gray-200:#e4e4e7;--gray-300:#d4d4d8;--gray-400:#a1a1aa;--gray-500:#71717a;--gray-600:#52525b;--gray-700:#3f3f46;--gray-800:#27272a;--gray-900:#18181b;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Consolas',monospace;--content-max-width:80%;--content-padding:2.5rem;--radius-sm:6px;--radius-md:10px;--radius-lg:16px;--radius-xl:20px;--shadow-sm:0 1px 2px rgba(0,0,0,0.04);--shadow-md:0 4px 12px rgba(0,0,0,0.08);--shadow-lg:0 8px 30px rgba(0,0,0,0.12);--shadow-card:0 2px 8px rgba(0,0,0,0.06),0 0 1px rgba(0,0,0,0.1)}*,*::before,*::after{box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}body{font-family:var(--font-sans);font-size:1rem;line-height:1.75;color:var(--gray-800);background:linear-gradient(180deg,var(--gray-100) 0%,var(--gray-50) 100%);min-height:100vh;margin:0;padding:2.5rem 1rem}.markdown-body,article,main{max-width:var(--content-max-width);margin:0 auto;background:white;padding:var(--content-padding);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);border:1px solid var(--gray-200)}h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3;color:var(--gray-900);margin-top:2.5rem;margin-bottom:1rem}h1{font-size:2.25rem;font-weight:700;margin-top:0;padding-bottom:1rem;border-bottom:none;position:relative;color:var(--gray-900)}h1::after{content:'';position:absolute;bottom:0;left:0;width:80px;height:4px;background:var(--color-primary-gradient);border-radius:2px}h2{font-size:1.5rem;margin-top:3rem;padding:1rem 1.25rem;background:var(--gray-50);border-left:4px solid var(--color-primary);border-radius:0 var(--radius-md) var(--radius-md) 0;color:var(--gray-800)}h3{font-size:1.25rem;color:var(--gray-800);display:flex;align-items:center;gap:0.5rem}h3::before{content:'';width:8px;height:8px;background:var(--color-primary);border-radius:50%;flex-shrink:0}h4{font-size:1.1rem;color:var(--gray-700);border-bottom:1px dashed var(--gray-300);padding-bottom:0.5rem}h5,h6{font-size:0.9rem;color:var(--gray-600);text-transform:uppercase;letter-spacing:0.08em;font-weight:600}p{margin-bottom:1.25rem}strong,b{font-weight:600;color:var(--gray-900)}a{color:var(--color-primary);text-decoration:none;font-weight:500;transition:all 0.2s;border-bottom:1px solid transparent}a:hover{color:var(--color-primary-dark);border-bottom-color:var(--color-primary)}mark{background:linear-gradient(120deg,#fef08a 0%,#fde047 100%);padding:0.1em 0.4em;border-radius:4px}hr{border:none;height:1px;background:var(--gray-200);margin:3rem 0;position:relative}hr::before{content:'◆';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:white;color:var(--color-primary);padding:0 1rem;font-size:0.8rem}ul,ol{margin-bottom:1.25rem;padding-left:1.5rem}li{margin-bottom:0.5rem;position:relative}li > ul,li > ol{margin-top:0.5rem;margin-bottom:0}ul{list-style-type:none}ul > li::before{content:'▸';color:var(--color-primary);font-weight:bold;position:absolute;left:-1.25rem}ul ul > li::before{content:'○';font-size:0.7em}ol{list-style-type:decimal}img{display:block;max-width:100%;max-height:500px;height:auto;margin:2rem auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);border:1px solid var(--gray-200);transition:transform 0.2s,box-shadow 0.2s;object-fit:contain}img:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}img[src*="screenshot"],img[src*="superset.apache.org"]{max-height:400px;width:auto;object-fit:contain}img[src*="images/"]{max-height:450px;width:auto;object-fit:contain}h1 img,h2 img,h3 img,h4 img,h5 img,h6 img{display:inline-block;margin:0 0.5rem 0 0;vertical-align:middle;max-height:1.5em;border-radius:var(--radius-sm);box-shadow:none;border:none}td img,th img{display:inline-block;margin:0;vertical-align:middle;max-height:2em;border-radius:var(--radius-sm);box-shadow:none;border:none}figure{margin:2rem 0;text-align:center;background:var(--gray-50);padding:1.5rem;border-radius:var(--radius-lg);border:1px solid var(--gray-200)}figure img{margin:0 auto 1rem;box-shadow:none;border:none}figcaption{font-size:0.875rem;color:var(--gray-500);font-style:italic}code:not(pre code){font-family:var(--font-mono);font-size:0.85em;background:#fef3c7;color:#92400e;padding:0.2em 0.5em;border-radius:var(--radius-sm);font-weight:600;border:1px solid #fcd34d}pre code{background:transparent;color:inherit;padding:0;border:none;font-weight:inherit}pre{font-family:var(--font-mono);font-size:0.875rem;line-height:1.6;background:var(--gray-900);color:#e4e4e7;padding:1.5rem;border-radius:var(--radius-lg);overflow-x:auto;margin:1.5rem 0;box-shadow:var(--shadow-md);border:1px solid var(--gray-800);position:relative}pre::before{content:'';position:absolute;top:12px;left:16px;width:12px;height:12px;background:#ff5f56;border-radius:50%;box-shadow:20px 0 0 #ffbd2e,40px 0 0 #27ca40}pre code{background:transparent;color:inherit;padding:0;font-size:inherit;font-weight:normal}table{width:100%;border-collapse:separate;border-spacing:0;margin:1.5rem 0;font-size:0.9375rem;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);border:1px solid var(--gray-200)}thead{background:var(--color-primary-gradient);color:white}th{font-weight:600;text-align:left;padding:1rem 1.25rem;font-size:0.8125rem;text-transform:uppercase;letter-spacing:0.05em}td{padding:0.875rem 1.25rem;border-bottom:1px solid var(--gray-100);vertical-align:top}tbody tr:last-child td{border-bottom:none}tbody tr:nth-child(even){background:var(--gray-50)}tbody tr{transition:background 0.15s}tbody tr:hover{background:var(--color-primary-light)}blockquote{margin:2rem 0;padding:1.5rem 1.5rem 1.5rem 2rem;border-left:4px solid var(--color-primary);background:linear-gradient(135deg,var(--gray-50) 0%,white 100%);border-radius:0 var(--radius-lg) var(--radius-lg) 0;color:var(--gray-700);box-shadow:var(--shadow-sm);font-style:italic;position:relative}blockquote::before{content:'"';position:absolute;top:-10px;left:15px;font-size:4rem;color:var(--color-primary);opacity:0.2;font-family:Georgia,serif;line-height:1}blockquote p:last-child{margin-bottom:0}details{margin:1.5rem 0;padding:0;background:white;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);transition:box-shadow 0.2s}details:hover{box-shadow:var(--shadow-md)}details[open]{box-shadow:var(--shadow-md);padding:1rem 1.25rem}details[open] > summary{margin:-1rem -1.25rem 1rem -1.25rem}details > .highlight,details > pre{margin-left:-1.25rem;margin-right:-1.25rem;border-radius:0}details > .highlight pre{border-radius:0;margin:0}details > .highlight:last-child,details > pre:last-child{margin-bottom:-1rem}summary{font-weight:600;cursor:pointer;padding:1rem 1.25rem;list-style:none;display:flex;align-items:center;gap:0.75rem;color:var(--gray-800);background:var(--gray-50);border-bottom:1px solid transparent;transition:all 0.2s}details[open] summary{border-bottom-color:var(--gray-200);background:var(--color-primary-light);color:var(--color-primary-dark)}summary::-webkit-details-marker{display:none}summary::before{content:'▶';font-size:0.65rem;color:var(--color-primary);transition:transform 0.2s;flex-shrink:0}details[open] summary::before{transform:rotate(90deg)}summary:hover{background:var(--gray-100)}.mermaid,pre.mermaid{background:white;padding:2rem;margin:2rem 0;border-radius:var(--radius-lg);border:1px solid var(--gray-200);text-align:center;overflow-x:auto;box-shadow:var(--shadow-card)}.mermaid::before{display:none}.mermaid svg{max-width:100%;height:auto}.note,.info,.tip{padding:1.25rem;margin:1.5rem 0;border-radius:var(--radius-lg);border-left:4px solid var(--color-info);background:var(--color-info-light);box-shadow:var(--shadow-sm)}.warning,.attention{border-left-color:var(--color-warning);background:var(--color-warning-light)}.danger,.error{border-left-color:var(--color-danger);background:var(--color-danger-light)}.success{border-left-color:var(--color-success);background:var(--color-success-light)}h2 + p::first-letter{font-size:1.5em;font-weight:600;color:var(--color-primary);float:left;margin-right:0.1em;line-height:1}@media print{body{background:white;padding:0}.markdown-body,article,main{box-shadow:none;border:none;padding:0;max-width:100%}pre{background:var(--gray-100) !important;color:var(--gray-900) !important;box-shadow:none;border:1px solid var(--gray-300)}pre::before{display:none}a{color:var(--gray-900)}img{max-height:280px;page-break-inside:avoid;box-shadow:none}h1,h2,h3{page-break-after:avoid}table,pre,blockquote,details{page-break-inside:avoid}h2{background:none;padding-left:0}}@media (max-width:768px){body{padding:1rem 0.5rem}.markdown-body,article,main{padding:1.5rem;border-radius:var(--radius-lg)}h1{font-size:1.75rem}h2{font-size:1.25rem;padding:0.75rem 1rem}h3{font-size:1.1rem}table{display:block;overflow-x:auto}pre{padding:1rem;font-size:0.8rem}img{max-height:250px}blockquote::before{display:none}}img[src*="superset-logo"]{max-height:80px;margin:0 0 2rem 0;box-shadow:none;border:none}img[src*="superset-logo"]:hover{transform:none}.mermaid-wrapper{position:relative;display:inline-block;width:100%}.mermaid-expand-btn{position:absolute;top:12px;right:12px;width:36px;height:36px;border:none;border-radius:var(--radius-md);background:rgba(255,255,255,0.9);color:var(--gray-600);font-size:1.2rem;cursor:pointer;opacity:0;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);z-index:10}.mermaid-wrapper:hover .mermaid-expand-btn{opacity:1}.mermaid-expand-btn:hover{background:var(--color-primary);color:white;transform:scale(1.1)}.mermaid-lightbox{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;display:none}.mermaid-lightbox.active{display:flex;align-items:center;justify-content:center}.mermaid-lightbox-backdrop{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px)}.mermaid-lightbox-container{position:relative;width:100%;height:100%;overflow:hidden;cursor:grab;display:flex;align-items:center;justify-content:center}.mermaid-lightbox-content{transform-origin:center center;transition:transform 0.1s ease-out;padding:40px}.mermaid-lightbox-content svg{max-width:none !important;max-height:none !important;width:80vw !important;height:auto !important;min-width:800px;background:white;border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-lg)}.mermaid-lightbox.active svg{font-size:12px !important}.mermaid-lightbox.active svg text{white-space:nowrap !important}.mermaid-lightbox.active svg foreignObject{overflow:visible !important;text-align:left !important}.mermaid-lightbox.active svg foreignObject *{white-space:nowrap !important;overflow:visible !important;text-overflow:clip !important;width:auto !important;max-width:none !important;min-width:0 !important}.mermaid-lightbox-controls{position:absolute;top:20px;right:20px;display:flex;gap:8px;z-index:10001}.mermaid-lb-btn{width:44px;height:44px;border:none;border-radius:var(--radius-md);background:rgba(255,255,255,0.95);color:var(--gray-800);font-size:1.1rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;box-shadow:var(--shadow-md)}.mermaid-lb-zoom-reset{width:auto;padding:0 16px;font-size:0.9rem}.mermaid-lb-btn:hover{background:var(--color-primary);color:white;transform:scale(1.05)}.mermaid-lb-close:hover{background:#ef4444;color:white}.mermaid-lightbox::after{content:'Molette:zoom • Glisser:déplacer • Échap:fermer';position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.7);font-size:0.85rem;font-weight:500;background:rgba(0,0,0,0.5);padding:10px 20px;border-radius:var(--radius-lg)}
+    </style>
+    
+    <style>
+.mermaid-container{background:white;border:1px solid var(--color-gray-200);border-radius:var(--radius-lg);padding:var(--space-md);display:flex;justify-content:center;align-items:center;overflow:auto;flex:1;min-height:120px;max-height:600px;max-width:100%;width:100%}.mermaid-container--full{flex:1;min-height:0}.mermaid-container--compact{min-height:100px;max-height:350px;flex:0 0 auto}.mermaid-container--small{max-height:300px}.mermaid-container--medium{max-height:450px}.mermaid-container--large{max-height:700px}.mermaid-container--contained{overflow:hidden}.mermaid-container--contained .mermaid svg{max-height:100% !important}.mermaid,pre.mermaid{font-family:var(--font-display,'Inter',sans-serif);width:100%;display:flex;justify-content:center;align-items:center;background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:24px;margin:16px 0;text-align:center;max-height:60vh;overflow:hidden}.mermaid::before,.mermaid::after{display:none}.mermaid svg{max-width:100%;max-height:60vh;height:auto;width:auto}.mermaid svg[aria-roledescription="gantt"]{max-width:none !important;width:100% !important;min-width:800px !important;max-height:none !important;height:auto !important;flex:1 1 auto !important}.mermaid:has(svg[aria-roledescription="gantt"]){display:block !important;max-height:none !important;overflow-x:auto !important;overflow-y:visible !important;min-width:0 !important}.mermaid-container--scroll{overflow:auto}.mermaid .node rect,.mermaid .node polygon,.mermaid .node circle{stroke-width:2px !important}.mermaid .edgePath .path{stroke-width:2px !important}.mermaid .label{font-family:var(--font-display) !important;font-size:12px !important;overflow:visible !important}.mermaid .nodeLabel{font-size:12px !important;line-height:1.3 !important;overflow:visible !important;white-space:normal !important;text-overflow:clip !important}.mermaid .edgeLabel{font-size:11px !important;overflow:visible !important}.mermaid .node rect,.mermaid .node polygon{overflow:visible !important}.mermaid .cluster rect,.mermaid svg .cluster rect{rx:8px !important;ry:8px !important}.mermaid .cluster-label{font-size:14px !important;font-weight:700 !important;dominant-baseline:text-before-edge !important}.mermaid .cluster-label foreignObject{overflow:visible !important}.mermaid .cluster-label foreignObject div,.mermaid .cluster-label foreignObject p,.mermaid .cluster-label foreignObject span{padding-bottom:8px !important;margin-bottom:4px !important;line-height:1.4 !important}.mermaid .cluster .nodeLabel{margin-top:4px !important}.mermaid .cluster rect{fill:#f8fafc !important;stroke:#cbd5e1 !important;stroke-width:2px !important}.mermaid .cluster-label text,.mermaid .cluster-label tspan,.mermaid svg .cluster-label text{fill:#1e293b !important;color:#1e293b !important;font-weight:700 !important}.mermaid .actor,.mermaid svg .actor,.mermaid svg rect.actor,.mermaid .actor-top,.mermaid .actor-bottom,.mermaid svg .actor-top,.mermaid svg .actor-bottom{fill:#1e3a5f !important;stroke:#0c4a6e !important;stroke-width:2px !important}.mermaid .actor-man,.mermaid text.actor,.mermaid svg text.actor,.mermaid svg .actor-man{fill:#ffffff !important;color:#ffffff !important;font-size:14px !important;font-weight:600 !important}.mermaid text.actor tspan,.mermaid svg text.actor tspan,.mermaid .actor-man tspan{fill:#ffffff !important;color:#ffffff !important}.mermaid .actor-line,.mermaid svg .actor-line,.mermaid svg line.actor-line{stroke:#64748b !important;stroke-width:1.5px !important;stroke-dasharray:4,4 !important}.mermaid .messageLine0,.mermaid .messageLine1,.mermaid svg .messageLine0,.mermaid svg .messageLine1,.mermaid svg line.messageLine0,.mermaid svg line.messageLine1{stroke:#1e293b !important;stroke-width:2px !important}.mermaid .arrowhead,.mermaid svg .arrowhead{fill:#1e293b !important;stroke:#1e293b !important}.mermaid #arrowhead path,.mermaid marker path,.mermaid svg marker path,.mermaid svg #arrowhead path{fill:#1e293b !important;stroke:#1e293b !important}.mermaid .messageText,.mermaid svg .messageText,.mermaid svg text.messageText{fill:#0f172a !important;color:#0f172a !important;font-size:13px !important;font-weight:600 !important;stroke:none !important}.mermaid .messageText tspan,.mermaid svg .messageText tspan{fill:#0f172a !important;color:#0f172a !important}.mermaid .activation0,.mermaid .activation1,.mermaid .activation2,.mermaid svg .activation0,.mermaid svg .activation1,.mermaid svg .activation2{fill:#dbeafe !important;stroke:#3b82f6 !important;stroke-width:2px !important}.mermaid .loopLine,.mermaid svg .loopLine{stroke:#64748b !important;stroke-width:2px !important}.mermaid rect.loopBox,.mermaid .loopBox,.mermaid svg .loopBox{fill:#f8fafc !important;stroke:#64748b !important;stroke-width:1.5px !important}.mermaid .loopText,.mermaid .loopText tspan,.mermaid svg .loopText,.mermaid svg .loopText tspan{fill:#1e293b !important;color:#1e293b !important;font-size:12px !important;font-weight:700 !important}.mermaid .labelBox,.mermaid svg .labelBox{fill:#dcfce7 !important;stroke:#22c55e !important;stroke-width:1.5px !important}.mermaid .labelText,.mermaid .labelText tspan,.mermaid svg .labelText,.mermaid svg .labelText tspan{fill:#14532d !important;color:#14532d !important;font-size:12px !important;font-weight:700 !important}.mermaid .note,.mermaid svg .note,.mermaid rect.note{fill:#fef9c3 !important;stroke:#ca8a04 !important;stroke-width:2px !important}.mermaid .noteText,.mermaid .noteText tspan,.mermaid svg .noteText,.mermaid svg .noteText tspan{fill:#713f12 !important;color:#713f12 !important;font-size:12px !important;font-weight:500 !important}.mermaid .sequenceNumber,.mermaid svg .sequenceNumber{fill:#ffffff !important;color:#ffffff !important}.mermaid .sequenceNumber-rect,.mermaid svg rect.sequenceNumber-rect{fill:#374151 !important;stroke:#1f2937 !important}.mermaid .er.entityBox,.mermaid .entityBox,.mermaid svg .er.entityBox,.mermaid svg .entityBox,.mermaid svg rect.er{fill:#dbeafe !important;stroke:#3b82f6 !important;stroke-width:2px !important}.mermaid .er.entityLabel,.mermaid .entityLabel,.mermaid svg .er.entityLabel,.mermaid svg .entityLabel,.mermaid svg text.er{fill:#1e3a8a !important;color:#1e3a8a !important;font-weight:600 !important}.mermaid .er.attributeBoxEven,.mermaid svg .er.attributeBoxEven{fill:#f8fafc !important;stroke:#cbd5e1 !important}.mermaid .er.attributeBoxOdd,.mermaid svg .er.attributeBoxOdd{fill:#f1f5f9 !important;stroke:#cbd5e1 !important}.mermaid .er text,.mermaid svg g.er text,.mermaid svg .erDiagram text{fill:#1e293b !important;color:#1e293b !important}.mermaid .er.relationshipLine,.mermaid svg .er.relationshipLine{stroke:#64748b !important;stroke-width:1.5px !important}.mermaid .er.relationshipLabel,.mermaid svg .er.relationshipLabel{fill:#475569 !important}.mermaid .mindmap-node rect,.mermaid .mindmap-node circle,.mermaid .mindmap-node ellipse,.mermaid .mindmap-node polygon,.mermaid svg .mindmap-node rect,.mermaid svg .mindmap-node circle,.mermaid svg .mindmap-node ellipse{stroke-width:2px !important}.mermaid .mindmap-node:nth-child(7n+1) rect,.mermaid .mindmap-node:nth-child(7n+1) circle,.mermaid .mindmap-node:nth-child(7n+1) ellipse{fill:#dbeafe !important;stroke:#3b82f6 !important}.mermaid .mindmap-node:nth-child(7n+1) text,.mermaid .mindmap-node:nth-child(7n+1) .nodeLabel{fill:#1e3a8a !important;color:#1e3a8a !important}.mermaid .mindmap-node:nth-child(7n+2) rect,.mermaid .mindmap-node:nth-child(7n+2) circle,.mermaid .mindmap-node:nth-child(7n+2) ellipse{fill:#dcfce7 !important;stroke:#22c55e !important}.mermaid .mindmap-node:nth-child(7n+2) text,.mermaid .mindmap-node:nth-child(7n+2) .nodeLabel{fill:#14532d !important;color:#14532d !important}.mermaid .mindmap-node:nth-child(7n+3) rect,.mermaid .mindmap-node:nth-child(7n+3) circle,.mermaid .mindmap-node:nth-child(7n+3) ellipse{fill:#fef9c3 !important;stroke:#eab308 !important}.mermaid .mindmap-node:nth-child(7n+3) text,.mermaid .mindmap-node:nth-child(7n+3) .nodeLabel{fill:#713f12 !important;color:#713f12 !important}.mermaid .mindmap-node:nth-child(7n+4) rect,.mermaid .mindmap-node:nth-child(7n+4) circle,.mermaid .mindmap-node:nth-child(7n+4) ellipse{fill:#fce7f3 !important;stroke:#ec4899 !important}.mermaid .mindmap-node:nth-child(7n+4) text,.mermaid .mindmap-node:nth-child(7n+4) .nodeLabel{fill:#831843 !important;color:#831843 !important}.mermaid .mindmap-node:nth-child(7n+5) rect,.mermaid .mindmap-node:nth-child(7n+5) circle,.mermaid .mindmap-node:nth-child(7n+5) ellipse{fill:#f3e8ff !important;stroke:#a855f7 !important}.mermaid .mindmap-node:nth-child(7n+5) text,.mermaid .mindmap-node:nth-child(7n+5) .nodeLabel{fill:#581c87 !important;color:#581c87 !important}.mermaid .mindmap-node:nth-child(7n+6) rect,.mermaid .mindmap-node:nth-child(7n+6) circle,.mermaid .mindmap-node:nth-child(7n+6) ellipse{fill:#cffafe !important;stroke:#06b6d4 !important}.mermaid .mindmap-node:nth-child(7n+6) text,.mermaid .mindmap-node:nth-child(7n+6) .nodeLabel{fill:#164e63 !important;color:#164e63 !important}.mermaid .mindmap-node:nth-child(7n) rect,.mermaid .mindmap-node:nth-child(7n) circle,.mermaid .mindmap-node:nth-child(7n) ellipse{fill:#ffedd5 !important;stroke:#f97316 !important}.mermaid .mindmap-node:nth-child(7n) text,.mermaid .mindmap-node:nth-child(7n) .nodeLabel{fill:#7c2d12 !important;color:#7c2d12 !important}.mermaid .mindmap text,.mermaid svg [class*="mindmap"] text{font-weight:500 !important}.mermaid .mindmap-edge,.mermaid svg .mindmap-edge{stroke:#64748b !important;stroke-width:1.5px !important}.mermaid[data-processed="true"]{min-height:0 !important}.diagram{background:var(--color-gray-50);border:2px dashed var(--color-gray-300);border-radius:var(--radius-lg);padding:var(--space-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:150px;flex:1}.diagram--placeholder{background:linear-gradient(135deg,var(--color-gray-50) 0%,var(--color-gray-100) 100%)}.diagram .icon{font-size:48px;margin-bottom:var(--space-sm);opacity:0.6}.diagram .text{font-size:14px;color:var(--color-gray-500);font-weight:500}.arch-diagram{display:flex;flex-direction:column;gap:var(--space-md);width:100%}.arch-layer{display:flex;gap:var(--space-sm);justify-content:center}.arch-box{background:var(--color-gray-100);border:2px solid var(--color-gray-300);border-radius:var(--radius-md);padding:var(--space-sm) var(--space-md);font-size:12px;font-weight:500;color:var(--color-gray-700);text-align:center;min-width:100px}.arch-box--primary{background:rgba(14,165,233,0.15);border-color:var(--color-primary);color:var(--color-primary-dark)}.arch-box--accent{background:rgba(249,115,22,0.15);border-color:var(--color-accent);color:#c2410c}.arch-box--success{background:rgba(16,185,129,0.15);border-color:var(--color-success);color:#047857}.arch-box--info{background:rgba(99,102,241,0.15);border-color:var(--color-info);color:#4338ca}.arch-box--dark{background:var(--color-gray-800);border-color:var(--color-gray-700);color:white}.arch-connector{display:flex;justify-content:center;color:var(--color-gray-400);font-size:20px}.flow{display:flex;align-items:center;gap:var(--space-sm);flex-wrap:wrap;justify-content:center}.flow__item{background:var(--color-gray-100);border:1px solid var(--color-gray-300);border-radius:var(--radius-md);padding:var(--space-xs) var(--space-md);font-size:13px;font-weight:500;color:var(--color-gray-700)}.flow__item--highlight{background:var(--color-primary);border-color:var(--color-primary);color:white}.flow__arrow{color:var(--color-gray-400);font-size:18px}.timeline{display:flex;gap:var(--space-lg);align-items:stretch}.timeline__item{flex:1;display:flex;flex-direction:column;position:relative}.timeline__item:not(:last-child)::after{content:'→';position:absolute;right:calc(var(--space-lg) / -2 - 8px);top:50%;transform:translateY(-50%);color:var(--color-gray-400);font-size:20px}.timeline__number{width:28px;height:28px;background:var(--color-primary);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:var(--space-sm)}.timeline__title{font-size:13px;font-weight:600;color:var(--color-gray-900);margin-bottom:var(--space-xs)}.timeline__text{font-size:12px;color:var(--color-gray-600);line-height:1.4}.stat{text-align:center;padding:var(--space-md)}.stat__value{font-size:36px;font-weight:800;color:var(--color-primary);line-height:1}.stat__label{font-size:13px;color:var(--color-gray-600);margin-top:var(--space-xs)}.stat--small .stat__value{font-size:24px}.icon-box{width:48px;height:48px;min-width:48px;background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-primary-dark) 100%);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:white;font-size:24px;flex-shrink:0}.icon-box--sm{width:36px;height:36px;min-width:36px;font-size:18px}.icon-box--lg{width:64px;height:64px;min-width:64px;font-size:32px}.icon-box--accent{background:linear-gradient(135deg,var(--color-accent) 0%,#ea580c 100%)}.icon-box--success{background:linear-gradient(135deg,var(--color-success) 0%,#047857 100%)}.icon-box--info{background:linear-gradient(135deg,var(--color-info) 0%,#4338ca 100%)}.superset-logo{display:flex;align-items:center;gap:var(--space-md)}.superset-logo__icon{width:80px;height:80px}.superset-logo__icon svg{width:100%;height:100%}.superset-logo__text{font-size:32px;font-weight:700}.superset-logo__text span{color:var(--color-primary)}.comparison-table{font-size:12px}.comparison-table th{font-size:11px;padding:8px 10px}.comparison-table td{padding:6px 10px;vertical-align:middle}.comparison-table .product-name{font-weight:600;white-space:nowrap}.comparison-table .check{color:var(--color-success);font-weight:bold}.comparison-table .cross{color:var(--color-danger);font-weight:bold}.comparison-table .partial{color:var(--color-warning);font-weight:bold}.use-case{background:var(--color-gray-50);border:1px solid var(--color-gray-200);border-radius:var(--radius-lg);padding:var(--space-md);display:flex;flex-direction:column;gap:var(--space-sm)}.use-case--positive{border-color:var(--color-success);border-left-width:4px}.use-case--negative{border-color:var(--color-danger);border-left-width:4px}.use-case__number{font-size:24px;font-weight:800;color:var(--color-gray-300)}.use-case__title{font-size:14px;font-weight:600;color:var(--color-gray-900)}.use-case__text{font-size:12px;color:var(--color-gray-600);line-height:1.4}.stack-layer{display:flex;align-items:center;gap:var(--space-md);padding:var(--space-sm) var(--space-md);background:var(--color-gray-50);border-radius:var(--radius-md);margin-bottom:var(--space-sm)}.stack-layer__label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-gray-500);width:100px;flex-shrink:0}.stack-layer__items{display:flex;gap:var(--space-xs);flex-wrap:wrap}.stack-layer__item{background:white;border:1px solid var(--color-gray-300);border-radius:var(--radius-sm);padding:4px 10px;font-size:12px;font-weight:500;color:var(--color-gray-700)}.stack-layer__item--highlight{background:var(--color-accent);border-color:var(--color-accent);color:white}.permission-matrix{font-size:12px}.permission-matrix th:first-child{text-align:left}.permission-matrix td:not(:first-child),.permission-matrix th:not(:first-child){text-align:center;width:80px}.permission-matrix .action{font-weight:500;text-align:left}.sources{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md)}.source-group{display:flex;flex-direction:column;gap:var(--space-xs)}.source-group__title{font-size:13px;font-weight:600;color:var(--color-gray-900);padding-bottom:var(--space-xs);border-bottom:1px solid var(--color-gray-200);margin-bottom:var(--space-xs)}.source-link{font-size:12px;color:var(--color-primary);text-decoration:none;display:flex;align-items:center;gap:var(--space-xs)}.source-link:hover{text-decoration:underline}.source-link::before{content:'→';color:var(--color-gray-400)}@media print{.mermaid-container,.arch-diagram,.diagram{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important}.arch-box,.flow__item,.timeline__number,.icon-box,.stat__value{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}}.mermaid .node.pastel-blue rect,.mermaid .node.pastel-blue polygon{fill:#dbeafe !important;stroke:#3b82f6 !important}.mermaid .node.pastel-blue .nodeLabel{fill:#1e3a8a !important;color:#1e3a8a !important}.mermaid .node.pastel-green rect,.mermaid .node.pastel-green polygon{fill:#dcfce7 !important;stroke:#22c55e !important}.mermaid .node.pastel-green .nodeLabel{fill:#14532d !important;color:#14532d !important}.mermaid .node.pastel-yellow rect,.mermaid .node.pastel-yellow polygon{fill:#fef9c3 !important;stroke:#eab308 !important}.mermaid .node.pastel-yellow .nodeLabel{fill:#713f12 !important;color:#713f12 !important}.mermaid .node.pastel-orange rect,.mermaid .node.pastel-orange polygon{fill:#ffedd5 !important;stroke:#f97316 !important}.mermaid .node.pastel-orange .nodeLabel{fill:#7c2d12 !important;color:#7c2d12 !important}.mermaid .node.pastel-pink rect,.mermaid .node.pastel-pink polygon{fill:#fce7f3 !important;stroke:#ec4899 !important}.mermaid .node.pastel-pink .nodeLabel{fill:#831843 !important;color:#831843 !important}.mermaid .node.pastel-purple rect,.mermaid .node.pastel-purple polygon{fill:#f3e8ff !important;stroke:#a855f7 !important}.mermaid .node.pastel-purple .nodeLabel{fill:#581c87 !important;color:#581c87 !important}.mermaid .node.pastel-cyan rect,.mermaid .node.pastel-cyan polygon{fill:#cffafe !important;stroke:#06b6d4 !important}.mermaid .node.pastel-cyan .nodeLabel{fill:#164e63 !important;color:#164e63 !important}.mermaid .node.dark-blue rect,.mermaid .node.dark-blue polygon{fill:#1e3a5f !important;stroke:#0c4a6e !important}.mermaid .node.dark-blue .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-green rect,.mermaid .node.dark-green polygon{fill:#14532d !important;stroke:#166534 !important}.mermaid .node.dark-green .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-purple rect,.mermaid .node.dark-purple polygon{fill:#4c1d95 !important;stroke:#5b21b6 !important}.mermaid .node.dark-purple .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-gray rect,.mermaid .node.dark-gray polygon{fill:#374151 !important;stroke:#4b5563 !important}.mermaid .node.dark-gray .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-slate rect,.mermaid .node.dark-slate polygon{fill:#1e293b !important;stroke:#334155 !important}.mermaid .node.dark-slate .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid g[style*="fill:#"] .nodeLabel,.mermaid g[style*="fill:#"] .nodeLabel{text-shadow:none !important}.mermaid [style*="fill:#f"][style*="fill:#f"] .nodeLabel,.mermaid [style*="fill:#e"][style*="fill:#e"] .nodeLabel,.mermaid [style*="fill:#d"][style*="fill:#d"] .nodeLabel,.mermaid [style*="fill:#c"][style*="fill:#c"] .nodeLabel,.mermaid [style*="fill:rgb(2"][style*="fill:rgb(2"] .nodeLabel{fill:#1e293b !important;color:#1e293b !important}img[src*="images/"]{max-width:100%;max-height:450px;width:auto;height:auto;object-fit:contain;display:block;margin:1.5rem auto}img[src*="screenshot"],img[src*="superset.apache.org"],img[src*="capture"]{max-width:100%;max-height:400px;width:auto;height:auto;object-fit:contain;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:1px solid #e4e4e7}.content-image,.screenshot{max-width:100%;max-height:500px;object-fit:contain}
+    </style>
+    
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'default',
+                    securityLevel: 'loose',
+                    flowchart: {
+                        useMaxWidth: false,
+                        htmlLabels: true
+                    },
+                    sequence: {
+                        useMaxWidth: false
+                    }
+                });
+            }
+        });
+    </script>
+    
+    
+    <script>
+const PASTEL_COLORS={blue:{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'}, green:{bg: '#dcfce7', border: '#22c55e', text: '#14532d'}, yellow:{bg: '#fef9c3', border: '#eab308', text: '#713f12'}, orange:{bg: '#ffedd5', border: '#f97316', text: '#7c2d12'}, pink:{bg: '#fce7f3', border: '#ec4899', text: '#831843'}, purple:{bg: '#f3e8ff', border: '#a855f7', text: '#581c87'}, cyan:{bg: '#cffafe', border: '#06b6d4', text: '#164e63'}, gray:{bg: '#f4f4f5', border: '#71717a', text: '#27272a'}};const DARK_COLORS={blue:{bg: '#1e3a5f', border: '#0c4a6e', text: '#ffffff'}, green:{bg: '#14532d', border: '#166534', text: '#ffffff'}, purple:{bg: '#4c1d95', border: '#5b21b6', text: '#ffffff'}, gray:{bg: '#374151', border: '#4b5563', text: '#ffffff'}, slate:{bg: '#1e293b', border: '#334155', text: '#ffffff'}};function fixMermaidContrast(){function getLuminance(hex){let r, g, b;if(!hex || hex==='none' || hex==='transparent'){return 0.5;}if(hex.startsWith('rgb')){const match=hex.match(/\d+/g);if(match){r=parseInt(match[0]);g=parseInt(match[1]);b=parseInt(match[2]);}else{return 0.5;}}else{hex=hex.replace('#', '');if(hex.length===3){hex=hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];}if(hex.length !==6){return 0.5;}r=parseInt(hex.substr(0, 2), 16);g=parseInt(hex.substr(2, 2), 16);b=parseInt(hex.substr(4, 2), 16);}if(isNaN(r)|| isNaN(g)|| isNaN(b)){return 0.5;}const rsRGB=r / 255;const gsRGB=g / 255;const bsRGB=b / 255;const rLum=rsRGB <=0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055)/ 1.055, 2.4);const gLum=gsRGB <=0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055)/ 1.055, 2.4);const bLum=bsRGB <=0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055)/ 1.055, 2.4);return 0.2126 * rLum + 0.7152 * gLum + 0.0722 * bLum;}function getContrastColor(bgColor){const luminance=getLuminance(bgColor);return luminance > 0.35 ? '#1e293b' : '#ffffff';}function applyContrastToText(textEl, contrastColor){textEl.style.setProperty('color', contrastColor, 'important');textEl.style.setProperty('fill', contrastColor, 'important');textEl.setAttribute('fill', contrastColor);textEl.querySelectorAll('tspan').forEach(function(tspan){tspan.style.setProperty('fill', contrastColor, 'important');tspan.setAttribute('fill', contrastColor);});}document.querySelectorAll('.mermaid svg').forEach(function(svg){svg.querySelectorAll('.cluster').forEach(function(cluster){const label=cluster.querySelector('.cluster-label');const rect=cluster.querySelector('rect');if(label && rect){const labelBBox=label.getBBox ? label.getBBox(): null;const foreignObj=label.querySelector('foreignObject');if(foreignObj){const currentHeight=parseFloat(foreignObj.getAttribute('height'))|| 20;const textContent=foreignObj.textContent || '';if(textContent.length > 20 || textContent.includes('\n')){foreignObj.setAttribute('height', Math.max(currentHeight, 40));foreignObj.style.overflow='visible';}}label.querySelectorAll('text, span, div, p, tspan').forEach(function(textEl){textEl.style.setProperty('fill', '#1e293b', 'important');textEl.style.setProperty('color', '#1e293b', 'important');textEl.style.setProperty('font-weight', '700', 'important');});}});svg.querySelectorAll('.node rect, .node polygon, .node circle, .node ellipse').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.node');if(parent){parent.querySelectorAll('.nodeLabel, .label, text, foreignObject span, foreignObject p, foreignObject div').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.cluster rect, .cluster polygon').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.cluster');if(parent){parent.querySelectorAll('.cluster-label, .cluster-label span, .cluster-label text, .nodeLabel, text').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('[style*="fill"]').forEach(function(el){const style=el.getAttribute('style');if(style){const fillMatch=style.match(/fill:\s*([^;]+)/i);if(fillMatch){const fill=fillMatch[1].trim();if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const contrastColor=getContrastColor(fill);el.querySelectorAll('text, span, p, div, .nodeLabel, .label').forEach(function(textEl){applyContrastToText(textEl, contrastColor);});if(el.tagName.toLowerCase()==='g'){el.querySelectorAll('foreignObject *').forEach(function(fo){fo.style.setProperty('color', contrastColor, 'important');});}}}}});svg.querySelectorAll('g.node').forEach(function(node){const shape=node.querySelector('rect, polygon, circle, ellipse, path');if(shape){const fill=shape.getAttribute('fill')|| shape.style.fill || window.getComputedStyle(shape).fill;if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const contrastColor=getContrastColor(fill);node.querySelectorAll('.nodeLabel, .label, text, span, div, p').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.actor, rect.actor, .actor-top, .actor-bottom').forEach(function(rect){rect.style.setProperty('fill', DARK_COLORS.blue.bg, 'important');rect.style.setProperty('stroke', DARK_COLORS.blue.border, 'important');rect.setAttribute('fill', DARK_COLORS.blue.bg);rect.setAttribute('stroke', DARK_COLORS.blue.border);});svg.querySelectorAll('text.actor, .actor-man').forEach(function(text){applyContrastToText(text, DARK_COLORS.blue.text);});svg.querySelectorAll('.messageText').forEach(function(text){applyContrastToText(text, '#1e293b');text.style.setProperty('stroke', 'none', 'important');});svg.querySelectorAll('.messageLine0, .messageLine1').forEach(function(line){line.style.setProperty('stroke', '#334155', 'important');line.style.setProperty('stroke-width', '2px', 'important');line.setAttribute('stroke', '#334155');line.setAttribute('stroke-width', '2');});svg.querySelectorAll('.arrowhead path, marker path, #arrowhead path').forEach(function(arrow){arrow.style.setProperty('fill', '#334155', 'important');arrow.style.setProperty('stroke', '#334155', 'important');arrow.setAttribute('fill', '#334155');arrow.setAttribute('stroke', '#334155');});svg.querySelectorAll('marker').forEach(function(marker){marker.querySelectorAll('path, polygon').forEach(function(shape){shape.style.setProperty('fill', '#334155', 'important');shape.setAttribute('fill', '#334155');});});svg.querySelectorAll('.actor-line').forEach(function(line){line.style.setProperty('stroke', '#64748b', 'important');line.style.setProperty('stroke-width', '1.5px', 'important');line.setAttribute('stroke', '#64748b');});svg.querySelectorAll('.loopText, .labelText').forEach(function(text){text.style.setProperty('fill', '#334155', 'important');text.setAttribute('fill', '#334155');});svg.querySelectorAll('.loopText tspan, .labelText tspan').forEach(function(tspan){tspan.style.setProperty('fill', '#334155', 'important');tspan.setAttribute('fill', '#334155');});svg.querySelectorAll('.note rect, rect.note').forEach(function(rect){rect.style.setProperty('fill', PASTEL_COLORS.yellow.bg, 'important');rect.style.setProperty('stroke', PASTEL_COLORS.yellow.border, 'important');rect.setAttribute('fill', PASTEL_COLORS.yellow.bg);});svg.querySelectorAll('.noteText, .noteText tspan').forEach(function(text){applyContrastToText(text, PASTEL_COLORS.yellow.text);});svg.querySelectorAll('.sequenceNumber').forEach(function(text){applyContrastToText(text, '#1e293b');});svg.querySelectorAll('.classGroup rect, .classGroup polygon').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.classGroup');if(parent){parent.querySelectorAll('text, .classTitle, .classLabel, tspan').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.stateGroup rect, .statediagram-state rect').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.stateGroup, .statediagram-state');if(parent){parent.querySelectorAll('text, .stateLabel, tspan, span').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.er.entityBox, .entityBox, rect.er').forEach(function(shape){shape.style.setProperty('fill', '#dbeafe', 'important');shape.style.setProperty('stroke', '#3b82f6', 'important');shape.style.setProperty('stroke-width', '2px', 'important');shape.setAttribute('fill', '#dbeafe');shape.setAttribute('stroke', '#3b82f6');});svg.querySelectorAll('.er.entityLabel, .entityLabel, text.er').forEach(function(text){applyContrastToText(text, '#1e3a8a');});svg.querySelectorAll('.er.attributeBoxEven, .er.attributeBoxOdd').forEach(function(shape){const isEven=shape.classList.contains('attributeBoxEven');shape.style.setProperty('fill', isEven ? '#f8fafc' : '#f1f5f9', 'important');shape.style.setProperty('stroke', '#cbd5e1', 'important');});svg.querySelectorAll('g.er text, .erDiagram text').forEach(function(text){const fill=text.getAttribute('fill')|| text.style.fill;const lum=getLuminance(fill);if(lum > 0.6 || !fill || fill==='none'){applyContrastToText(text, '#1e293b');}});const mindmapColors=[{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'},{bg: '#dcfce7', border: '#22c55e', text: '#14532d'},{bg: '#fef9c3', border: '#eab308', text: '#713f12'},{bg: '#fce7f3', border: '#ec4899', text: '#831843'},{bg: '#f3e8ff', border: '#a855f7', text: '#581c87'},{bg: '#cffafe', border: '#06b6d4', text: '#164e63'},{bg: '#ffedd5', border: '#f97316', text: '#7c2d12'}];let colorIndex=0;svg.querySelectorAll('.mindmap-node').forEach(function(node){const shape=node.querySelector('rect, circle, ellipse, polygon, path');if(shape){const color=mindmapColors[colorIndex % mindmapColors.length];shape.style.setProperty('fill', color.bg, 'important');shape.style.setProperty('stroke', color.border, 'important');shape.style.setProperty('stroke-width', '2px', 'important');shape.setAttribute('fill', color.bg);shape.setAttribute('stroke', color.border);node.querySelectorAll('text, span, .nodeLabel, foreignObject *').forEach(function(label){applyContrastToText(label, color.text);});colorIndex++;}});svg.querySelectorAll('.mindmap text, [class*="mindmap"] text').forEach(function(text){const fill=text.getAttribute('fill')|| text.style.fill;const lum=getLuminance(fill);if(lum > 0.6 || !fill || fill==='none'){applyContrastToText(text, '#1e293b');}});svg.querySelectorAll('rect, polygon, circle, ellipse').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const luminance=getLuminance(fill);if(luminance < 0.35){const parent=shape.parentNode;if(parent){parent.querySelectorAll('text, .nodeLabel, .label, span, tspan').forEach(function(textEl){const textFill=textEl.getAttribute('fill')|| textEl.style.fill;const textLum=getLuminance(textFill);if(textLum < 0.5){applyContrastToText(textEl, '#ffffff');}});}}else if(luminance > 0.65){const parent=shape.parentNode;if(parent){parent.querySelectorAll('text, .nodeLabel, .label, span, tspan').forEach(function(textEl){const textFill=textEl.getAttribute('fill')|| textEl.style.fill;const textLum=getLuminance(textFill);if(textLum > 0.7){applyContrastToText(textEl, '#1e293b');}});}}}});});}if(typeof window !=='undefined'){window.fixMermaidContrast=fixMermaidContrast;window.MERMAID_PASTEL_COLORS=PASTEL_COLORS;window.MERMAID_DARK_COLORS=DARK_COLORS;}
+    </script>
+    
+    
+    
+    
+    
+    <style>
+        @media print {
+            body {
+                max-width: none;
+                padding: 20mm;
+            }
+            
+            pre, code {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+            
+            table, pre, blockquote, .mermaid {
+                page-break-inside: avoid;
+            }
+            
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    
+    <article class="markdown-body">
+        <h1 id="role-5-security-engineer-tp05-nextcloud">Rôle 5 — Security Engineer — TP05 Nextcloud</h1>
+<p><strong>Durée</strong> : 6h (journée complète)
+<strong>Module livré</strong> : <code>modules/security/</code>
+<strong>% de la note</strong> : 20 %</p>
+<p>🔵 <strong>Starter kit</strong> : vous démarrez depuis <code>corriges/jour5/tp05-starter/</code> qui contient déjà l'arborescence, les interfaces figées (<code>variables.tf</code> + <code>outputs.tf</code>) et les providers. Vous remplissez les fichiers <code>.tf</code> vides avec des TODO.</p>
+<hr />
+<h2 id="votre-mission">Votre mission</h2>
+<ul>
+<li>Créer le module <code>modules/security/</code> qui concentre <strong>tout ce qui protège</strong> l'infrastructure Nextcloud : Security Groups, KMS CMK, Secrets Manager et IAM.</li>
+<li>Livrer <strong>3 Security Groups</strong> (ALB, app, db) avec les règles <code>ingress</code>/<code>egress</code> en ressources séparées (syntaxe v5+).</li>
+<li>Livrer <strong>1 clé KMS customer-managed</strong> (CMK) avec rotation annuelle et alias, utilisée pour chiffrer S3, RDS et Secrets Manager.</li>
+<li>Livrer <strong>2 secrets</strong> dans Secrets Manager : mot de passe PostgreSQL (<code>db_password</code>) et mot de passe admin Nextcloud (<code>admin_password</code>), tous deux générés aléatoirement.</li>
+<li>Livrer <strong>1 rôle IAM + 1 instance profile</strong> pour les EC2 Nextcloud, avec 3 policies scopées (S3, Secrets, KMS) + 2 policies managées AWS (SSM + CloudWatch).</li>
+<li><strong>Tester</strong> : <code>tfsec</code> 0 erreur HIGH ou CRITICAL sur le module, <code>terraform validate</code> OK, toutes les policies IAM au format JSON valide.</li>
+</ul>
+<p>🔷 <strong>Vous êtes le gardien du moindre privilège.</strong> Chaque ARN doit être scopé, chaque action doit être justifiée. Une policy trop large vous coûtera des points.</p>
+<hr />
+<h2 id="concepts-cles-pour-ce-role">Concepts clés pour ce rôle</h2>
+<p><strong>Déjà vus (J1 - J2)</strong> :</p>
+<ul>
+<li><a href="../../jour1/module01-introduction-iac.md">Module 01 — IaC</a> : idempotence, état déclaratif</li>
+<li><a href="../../jour2/module07-variables-outputs-data.md">Module 07 — Variables / outputs / data</a> : contrats d'interface, <code>data "aws_caller_identity"</code></li>
+<li><a href="../../jour2/module09-modules-vpc-custom-vs-registry.md">Module 09 — Modules custom vs registry</a> : interface minimale, pas de <code>provider</code> dans le module</li>
+<li>Security Groups basiques (introduits dans TP02 — VPC)</li>
+</ul>
+<p><strong>Nouveaux pour ce rôle</strong> (ré-expliqués en contexte ci-dessous) :</p>
+<ul>
+<li><a href="../tp05-team-nextcloud.md#4-kms-customer-managed-key-role-5">KMS Customer Managed Key + key policy</a></li>
+<li><a href="../tp05-team-nextcloud.md#5-secrets-manager-role-5--role-3--role-4">Secrets Manager (génération + stockage)</a></li>
+<li><a href="../tp05-team-nextcloud.md#3-iam-instance-profile-role-5--role-3">IAM role assumable par EC2 + Instance Profile</a></li>
+<li>Syntaxe v5 des règles SG (<code>aws_vpc_security_group_ingress_rule</code>, <code>referenced_security_group_id</code>)</li>
+</ul>
+<p>🔵 <strong>Rappel concept : KMS CMK + key policy</strong></p>
+<p>AWS <strong>KMS</strong> gère les clés de chiffrement. Une <strong>CMK</strong> (Customer Managed Key) = clé dont <strong>vous</strong> gérez la policy (à la différence des clés AWS-managed type <code>aws/s3</code>). Elle chiffre ici S3, RDS et Secrets Manager.</p>
+<p>🟥 <strong>Règle d'or</strong> : la <strong>key policy</strong> doit <strong>toujours</strong> donner <code>kms:*</code> au compte root. Sinon la clé est <strong>brickée</strong> — aucun moyen de la récupérer, il faut attendre <code>deletion_window_in_days</code> (7 à 30 j).</p>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_kms_key&quot;</span><span class="w"> </span><span class="nv">&quot;main&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">enable_key_rotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="na">policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">jsonencode</span><span class="p">({</span>
+<span class="w">    </span><span class="na">Version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span>
+<span class="w">    </span><span class="na">Statement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">      </span><span class="na">Sid</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;EnableRootAccountAccess&quot;</span>
+<span class="w">      </span><span class="na">Effect</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span>
+<span class="w">      </span><span class="nb">Principal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">AWS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;arn:aws:iam::${data.aws_caller_identity.current.account_id}:root&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="na">Action</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kms:*&quot;</span>
+<span class="w">      </span><span class="na">Resource</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;*&quot;</span>
+<span class="w">    </span><span class="p">}]</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🔵 <strong>Rappel concept : Secrets Manager</strong></p>
+<p>Service AWS qui stocke des secrets (mots de passe, tokens) chiffrés avec KMS, avec versioning et accès contrôlé par IAM. Ici on génère le mot de passe avec <code>random_password</code> et on le stocke dans un <code>aws_secretsmanager_secret</code> chiffré avec votre CMK.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;random_password&quot;</span><span class="w"> </span><span class="nv">&quot;db&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">24</span><span class="p">,</span><span class="w"> </span><span class="na">special</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_secretsmanager_secret&quot;</span><span class="w"> </span><span class="nv">&quot;db_password&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab-dev-db-password&quot;</span>
+<span class="w">  </span><span class="na">kms_key_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_kms_key.main.arn</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_secretsmanager_secret_version&quot;</span><span class="w"> </span><span class="nv">&quot;db_password&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">secret_id</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_secretsmanager_secret.db_password.id</span>
+<span class="w">  </span><span class="na">secret_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">random_password.db.result</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🔵 <strong>Rappel concept : IAM role + Instance Profile</strong></p>
+<p>Un <strong>IAM role</strong> est un ensemble de permissions qui peut être "endossé" par un principal (service, user, autre role). Pour qu'une EC2 porte un role, on l'enrobe dans un <strong>instance profile</strong> :</p>
+<ul>
+<li>L'<code>assume_role_policy</code> autorise le service <code>ec2.amazonaws.com</code> à endosser le rôle</li>
+<li>Des <code>aws_iam_role_policy</code> y sont attachées (S3, Secrets, KMS scopées aux ARNs précis)</li>
+<li>L'<code>aws_iam_instance_profile</code> wrap le rôle et est consommé par le launch template du Rôle 3</li>
+</ul>
+<p>Résultat : l'EC2 accède à AWS <strong>sans aucune clé en dur</strong> — le SDK utilise l'IMDS pour récupérer des credentials éphémères.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_role&quot;</span><span class="w"> </span><span class="nv">&quot;app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">assume_role_policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">jsonencode</span><span class="p">({</span>
+<span class="w">    </span><span class="na">Version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span>
+<span class="w">    </span><span class="na">Statement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">      </span><span class="na">Effect</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span>
+<span class="w">      </span><span class="nb">Principal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="na">Service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ec2.amazonaws.com&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="na">Action</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;sts:AssumeRole&quot;</span>
+<span class="w">    </span><span class="p">}]</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_instance_profile&quot;</span><span class="w"> </span><span class="nv">&quot;app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;nextcloud-app-profile&quot;</span>
+<span class="w">  </span><span class="na">role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.app.name</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="interface-que-vous-devez-produire-inputs-outputs-figes">Interface que vous devez produire (inputs + outputs figés)</h2>
+<p>🟥 <strong>FIGÉ au Kick-off.</strong> Toute modification nécessite une PR + validation du Platform Lead.</p>
+<h3 id="inputs-variables">Inputs (variables)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># variables.tf</span>
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;project_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Nom du projet (prefixe de nommage)&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;environment&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Environnement (dev, staging, prod)&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;vpc_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ID du VPC (fourni par le module networking)&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;vpc_cidr&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;CIDR du VPC (fourni par le module networking)&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;s3_primary_bucket_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN du bucket S3 primary storage Nextcloud (fourni par le module data)&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;s3_logs_bucket_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN du bucket S3 logs ALB (fourni par le module data)&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;allowed_admin_cidr&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;CIDR autorise pour l acces admin (IP formateur)&quot;</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.0.0.0/0&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="outputs-figes">Outputs (figés)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># outputs.tf</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;alb_security_group_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Security Group ID pour l ALB&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.alb.id</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;app_security_group_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Security Group ID pour les EC2 app&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.app.id</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;db_security_group_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Security Group ID pour RDS&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.db.id</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;kms_key_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ID de la KMS CMK principale&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_kms_key.main.id</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;kms_key_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN de la KMS CMK principale&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_kms_key.main.arn</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;app_instance_profile_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Nom de l instance profile a attacher a l ASG&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_instance_profile.app.name</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;app_iam_role_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN du role IAM de l application&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.app.arn</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;db_password_secret_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN du secret Secrets Manager contenant le password RDS&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_secretsmanager_secret.db_password.arn</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;admin_password_secret_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN du secret Secrets Manager contenant le password admin Nextcloud&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_secretsmanager_secret.admin_password.arn</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🔷 <strong>Rappel</strong> : le module <code>data</code> a besoin de <code>kms_key_arn</code> et <code>db_password_secret_arn</code>. Le module <code>compute</code> a besoin de <code>alb_security_group_id</code>, <code>app_security_group_id</code>, <code>app_instance_profile_name</code>, <code>db_password_secret_arn</code>, <code>admin_password_secret_arn</code>. <strong>Si un output est absent ou mal nommé, l'intégration casse.</strong></p>
+<hr />
+<h2 id="ressources-terraform-a-creer">Ressources Terraform à créer</h2>
+<table>
+<thead>
+<tr>
+<th>Catégorie</th>
+<th>Ressource</th>
+<th>Nombre</th>
+<th>Fichier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KMS</td>
+<td><code>aws_kms_key</code></td>
+<td>1</td>
+<td><code>kms.tf</code></td>
+</tr>
+<tr>
+<td>KMS</td>
+<td><code>aws_kms_alias</code></td>
+<td>1</td>
+<td><code>kms.tf</code></td>
+</tr>
+<tr>
+<td>Security Group</td>
+<td><code>aws_security_group</code></td>
+<td>3</td>
+<td><code>sg.tf</code></td>
+</tr>
+<tr>
+<td>SG rule</td>
+<td><code>aws_vpc_security_group_ingress_rule</code></td>
+<td>3</td>
+<td><code>sg.tf</code></td>
+</tr>
+<tr>
+<td>SG rule</td>
+<td><code>aws_vpc_security_group_egress_rule</code></td>
+<td>3</td>
+<td><code>sg.tf</code></td>
+</tr>
+<tr>
+<td>Secrets</td>
+<td><code>random_password</code></td>
+<td>2</td>
+<td><code>secrets.tf</code></td>
+</tr>
+<tr>
+<td>Secrets</td>
+<td><code>aws_secretsmanager_secret</code></td>
+<td>2</td>
+<td><code>secrets.tf</code></td>
+</tr>
+<tr>
+<td>Secrets</td>
+<td><code>aws_secretsmanager_secret_version</code></td>
+<td>2</td>
+<td><code>secrets.tf</code></td>
+</tr>
+<tr>
+<td>IAM</td>
+<td><code>aws_iam_role</code></td>
+<td>1</td>
+<td><code>iam.tf</code></td>
+</tr>
+<tr>
+<td>IAM</td>
+<td><code>aws_iam_role_policy</code></td>
+<td>3 (s3, secrets, kms)</td>
+<td><code>iam.tf</code></td>
+</tr>
+<tr>
+<td>IAM</td>
+<td><code>aws_iam_role_policy_attachment</code></td>
+<td>2 (SSM + CloudWatch)</td>
+<td><code>iam.tf</code></td>
+</tr>
+<tr>
+<td>IAM</td>
+<td><code>aws_iam_instance_profile</code></td>
+<td>1</td>
+<td><code>iam.tf</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total</strong> : ~21 ressources dans le module.</p>
+<hr />
+<h2 id="schema-de-votre-perimetre">Schéma de votre périmètre</h2>
+<pre class="mermaid">
+flowchart TB
+    subgraph t_internet[Internet]
+        t_user((Utilisateur))
+    end
+
+    subgraph t_sec[Votre perimetre Security]
+        t_sg_alb[SG ALB<br/>ingress 443 0.0.0.0/0<br/>ingress 80 0.0.0.0/0<br/>egress ALL]
+        t_sg_app[SG app<br/>ingress 80 from SG ALB<br/>egress ALL]
+        t_sg_db[SG db<br/>ingress 5432 from SG app<br/>pas d egress]
+
+        t_kms[(KMS CMK<br/>rotation annuelle<br/>alias/kolab-dev-main)]
+
+        t_secret_db[Secret db_password<br/>random 24 chars]
+        t_secret_admin[Secret admin_password<br/>random 20 chars]
+
+        t_role[IAM Role app<br/>3 policies scopees]
+        t_profile[Instance Profile app]
+    end
+
+    subgraph t_ext[Ressources externes<br/>consomment vos outputs]
+        t_alb_res[ALB Role 3]
+        t_ec2_res[EC2 ASG Role 3]
+        t_rds_res[(RDS Role 4)]
+        t_s3_res[S3 primary Role 4]
+    end
+
+    t_user -->|HTTPS 443| t_sg_alb
+    t_sg_alb -->|HTTP 80| t_sg_app
+    t_sg_app -->|PostgreSQL 5432| t_sg_db
+
+    t_sg_alb -.attache.-> t_alb_res
+    t_sg_app -.attache.-> t_ec2_res
+    t_sg_db -.attache.-> t_rds_res
+
+    t_kms -.chiffre.-> t_rds_res
+    t_kms -.chiffre.-> t_s3_res
+    t_kms -.chiffre.-> t_secret_db
+    t_kms -.chiffre.-> t_secret_admin
+
+    t_role -->|s3:GetObject PutObject| t_s3_res
+    t_role -->|secretsmanager:GetSecretValue| t_secret_db
+    t_role -->|secretsmanager:GetSecretValue| t_secret_admin
+    t_role -->|kms:Decrypt| t_kms
+
+    t_profile -.contient.-> t_role
+    t_profile -.attache via launch template.-> t_ec2_res
+
+    classDef sg fill:#fff3cd,stroke:#ffc107
+    classDef kms fill:#f8d7da,stroke:#dc3545
+    classDef secret fill:#d1e7dd,stroke:#198754
+    classDef iam fill:#cfe2ff,stroke:#0d6efd
+    classDef ext fill:#e2e3e5,stroke:#6c757d,stroke-dasharray: 5 5
+    class t_sg_alb,t_sg_app,t_sg_db sg
+    class t_kms kms
+    class t_secret_db,t_secret_admin secret
+    class t_role,t_profile iam
+    class t_alb_res,t_ec2_res,t_rds_res,t_s3_res ext
+</pre>
+
+<p>🔷 <strong>Lecture du schéma</strong> :</p>
+<ul>
+<li>En <strong>jaune</strong> : les 3 SGs qui régulent le trafic réseau (ingress par référence SG-to-SG, pas par CIDR).</li>
+<li>En <strong>rouge</strong> : la KMS CMK, hub de chiffrement partagé par toutes les ressources stateful.</li>
+<li>En <strong>vert</strong> : les 2 secrets, tous deux chiffrés avec la CMK.</li>
+<li>En <strong>bleu</strong> : l'IAM role + instance profile, consommé par le launch template du Rôle 3.</li>
+<li>En <strong>gris pointillé</strong> : les ressources externes qui consomment vos outputs (vous ne les créez pas).</li>
+</ul>
+<hr />
+<h2 id="etapes-pas-a-pas-sprint-1">Étapes pas-à-pas (sprint 1)</h2>
+<h3 id="etape-1-arborescence-du-module-10-min">Étape 1 : Arborescence du module <em>(10 min)</em></h3>
+<p><strong>Objectif</strong> : poser la structure de fichiers avant de coder.</p>
+<p><strong>Explication</strong> :</p>
+<p>Un module Terraform bien structuré découpe les ressources par domaine fonctionnel (un fichier par type : <code>kms.tf</code>, <code>sg.tf</code>, <code>iam.tf</code>, <code>secrets.tf</code>). Ça facilite la review et la recherche. Tous ces fichiers appartiennent au <strong>même module</strong> — Terraform les concatène en interne.</p>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Créez l'arborescence suivante sous <code>modules/security/</code> :</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>modules/security/
+├── main.tf         # data sources + resources generiques
+├── kms.tf          # aws_kms_key + alias
+├── sg.tf           # 3 SG + 6 regles ingress/egress
+├── iam.tf          # role + 3 policies + 2 attachments + instance profile
+├── secrets.tf      # 2 random_password + 2 secrets
+├── variables.tf    # inputs du module
+├── outputs.tf      # outputs du module
+├── versions.tf     # required_providers
+└── README.md       # documentation (terraform-docs en bonus)
+</code></pre></div>
+<blockquote>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>terraform init</code> dans <code>envs/dev/</code> doit résoudre <code>source = "../../modules/security"</code> sans erreur.</p>
+</blockquote>
+<p><strong>Correction / Solution</strong> :</p>
+<details>
+<summary>🟢 Voir le contenu de versions.tf</summary>
+<div class="highlight"><pre><span></span><code><span class="c1"># versions.tf</span>
+<span class="c1"># Contraintes de version : module reutilisable, donc on ne fixe pas strictement.</span>
+<span class="nb">terraform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">required_version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;= 1.10&quot;</span>
+
+<span class="w">  </span><span class="nb">required_providers</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">aws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">source</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hashicorp/aws&quot;</span>
+<span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;~&gt; 5.0&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nb">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">source</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hashicorp/random&quot;</span>
+<span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;~&gt; 3.6&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<hr />
+<h3 id="etape-2-variablestf-et-data-sources-15-min">Étape 2 : variables.tf et data sources <em>(15 min)</em></h3>
+<p><strong>Objectif</strong> : définir les inputs et récupérer l'account ID + la partition AWS pour les key policies.</p>
+<p><strong>Contexte</strong> :</p>
+<p>Pour écrire une <strong>key policy KMS</strong> correcte, il faut connaître l'ARN du root account du compte courant (<code>arn:aws:iam::ACCOUNT_ID:root</code>). On l'obtient via <code>data "aws_caller_identity"</code>. La <code>data "aws_partition"</code> permet de rester portable (aws vs aws-cn vs aws-us-gov).</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># main.tf</span>
+<span class="c1"># Recupere l account ID courant (pour les key policies)</span>
+<span class="kr">data</span><span class="w"> </span><span class="nc">&quot;aws_caller_identity&quot;</span><span class="w"> </span><span class="nv">&quot;current&quot;</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="c1"># Partition AWS (aws, aws-cn, aws-us-gov) - rend le code portable</span>
+<span class="kr">data</span><span class="w"> </span><span class="nc">&quot;aws_partition&quot;</span><span class="w"> </span><span class="nv">&quot;current&quot;</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="c1"># Nom commun prefixe pour tout le module : ex &quot;kolab-dev&quot;</span>
+<span class="nb">locals</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name_prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${var.project_name}-${var.environment}&quot;</span>
+
+<span class="w">  </span><span class="nb">common_tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Project</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.project_name</span>
+<span class="w">    </span><span class="na">Environment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span>
+<span class="w">    </span><span class="na">ManagedBy</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Terraform&quot;</span>
+<span class="w">    </span><span class="na">Module</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;security&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Résultat attendu</strong> :</p>
+<p><code>terraform validate</code> ne remonte aucune erreur une fois <code>variables.tf</code> + <code>main.tf</code> créés (mais il manquera les ressources des étapes suivantes pour un plan complet).</p>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Remplissez <code>variables.tf</code> avec les 7 variables listées dans la section "Interface". Ajoutez une description claire à chaque variable (obligatoire pour <code>terraform-docs</code>).</p>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>terraform console</code> → tapez <code>local.name_prefix</code> → doit afficher <code>kolab-dev</code>.</p>
+</blockquote>
+<hr />
+<h3 id="etape-3-kms-cmk-alias-25-min">Étape 3 : KMS CMK + alias <em>(25 min)</em></h3>
+<p><strong>Objectif</strong> : créer la clé KMS customer-managed qui chiffrera S3, RDS et Secrets Manager.</p>
+<p><strong>Contexte</strong> :</p>
+<p>La <strong>KMS CMK</strong> est la pièce maîtresse. Si la <strong>key policy</strong> est mal écrite :</p>
+<ul>
+<li>Le root account est bloqué → la clé est <strong>brickée</strong> (aucun moyen de la récupérer, il faut attendre le <code>deletion_window</code>).</li>
+<li>Le rôle app ne peut pas déchiffrer les secrets → Nextcloud spinne à l'infini au boot.</li>
+<li>RDS ne peut pas chiffrer son storage → l'instance RDS échoue à démarrer.</li>
+</ul>
+<p>🟥 <strong>Règle d'or</strong> : toujours donner <strong>tous les droits au root account</strong> dans la key policy. C'est le seul moyen de récupérer la main si on se trompe ailleurs.</p>
+<p><strong>Explication — pattern de key policy</strong> :</p>
+<pre class="mermaid">
+flowchart LR
+    t_root[Root account<br/>kms:*]
+    t_app[Role app runtime<br/>kms:Decrypt<br/>kms:DescribeKey]
+    t_services[Services AWS<br/>s3 rds secretsmanager<br/>via IAM policies]
+
+    t_policy{Key policy}
+
+    t_root --> t_policy
+    t_app --> t_policy
+    t_services -.via grants.-> t_policy
+
+    t_policy --> t_key[(KMS CMK)]
+
+    classDef root fill:#fff3cd,stroke:#ffc107
+    classDef app fill:#d1e7dd,stroke:#198754
+    classDef svc fill:#cfe2ff,stroke:#0d6efd
+    class t_root root
+    class t_app app
+    class t_services svc
+</pre>
+
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># kms.tf</span>
+<span class="c1"># CMK principale : chiffre S3, RDS, Secrets Manager pour cet environnement.</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_kms_key&quot;</span><span class="w"> </span><span class="nv">&quot;main&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;CMK principale ${local.name_prefix} - chiffrement S3 RDS Secrets&quot;</span>
+<span class="w">  </span><span class="na">deletion_window_in_days</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+<span class="w">  </span><span class="na">enable_key_rotation</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="c1">   # Rotation annuelle automatique (obligatoire en prod)</span>
+
+<span class="c1">  # Key policy : qui peut faire quoi avec cette cle.</span>
+<span class="c1">  # IMPORTANT : le root account doit avoir kms:* sinon la cle est brickee.</span>
+<span class="w">  </span><span class="na">policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">jsonencode</span><span class="p">({</span>
+<span class="w">    </span><span class="na">Version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span>
+<span class="w">    </span><span class="na">Statement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="na">Sid</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;EnableRootAccountAccess&quot;</span>
+<span class="w">        </span><span class="na">Effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span>
+<span class="w">        </span><span class="nb">Principal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="na">AWS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="na">Action</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kms:*&quot;</span>
+<span class="w">        </span><span class="na">Resource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;*&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="na">Sid</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;AllowAppRoleUsage&quot;</span>
+<span class="w">        </span><span class="na">Effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span>
+<span class="w">        </span><span class="nb">Principal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="na">AWS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.app.arn</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="na">Action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="s2">&quot;kms:Decrypt&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="s2">&quot;kms:DescribeKey&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="s2">&quot;kms:GenerateDataKey&quot;</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">        </span><span class="na">Resource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;*&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">})</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-main-kms&quot;</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1"># Alias : nom humain pour la cle (plus simple a reperer dans la console)</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_kms_alias&quot;</span><span class="w"> </span><span class="nv">&quot;main&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;alias/${local.name_prefix}-main&quot;</span>
+<span class="w">  </span><span class="na">target_key_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_kms_key.main.key_id</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🟡 <strong>Dépendance circulaire apparente</strong> : <code>aws_kms_key.main.policy</code> référence <code>aws_iam_role.app.arn</code>, et les <code>aws_iam_role_policy.app_kms</code> référencent <code>aws_kms_key.main.arn</code>. Terraform résout l'ordre via le graphe — <strong>pas de problème</strong> tant qu'on ne met pas le rôle app dans le <code>Principal</code> avec <code>kms:*</code>.</p>
+<p><strong>Résultat attendu</strong> :</p>
+<div class="highlight"><pre><span></span><code># terraform plan doit montrer :
+# + aws_kms_key.main
+# + aws_kms_alias.main
+</code></pre></div>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Créez <code>kms.tf</code>. Le rôle app n'existe pas encore (étape 6), vous aurez une erreur <code>aws_iam_role.app.arn not found</code> pour l'instant — <strong>c'est normal</strong>. Codez d'abord tout, lancez <code>terraform validate</code> après avoir fini <code>iam.tf</code>.</p>
+<p>🔷 <strong>Point clé à vérifier</strong> :
+- <code>deletion_window_in_days = 10</code> (pas le défaut de 30 : on est en dev, on veut pouvoir détruire vite).
+- <code>enable_key_rotation = true</code> (tfsec AVD-AWS-0065 le check).</p>
+</blockquote>
+<hr />
+<h3 id="etape-4-security-groups-3-30-min">Étape 4 : Security Groups (3) <em>(30 min)</em></h3>
+<p><strong>Objectif</strong> : créer les 3 SGs avec leurs règles en <strong>ressources séparées</strong> (syntaxe v5+ du provider AWS).</p>
+<p><strong>Contexte</strong> :</p>
+<p>Depuis le provider AWS v5, les règles <code>ingress</code>/<code>egress</code> inline dans <code>aws_security_group</code> sont <strong>dépréciées</strong> au profit de ressources séparées :</p>
+<ul>
+<li><code>aws_vpc_security_group_ingress_rule</code></li>
+<li><code>aws_vpc_security_group_egress_rule</code></li>
+</ul>
+<p>🔹 <strong>Pourquoi</strong> : les règles inline sont rafraîchies en bloc à chaque apply (risque de drift invisible). Les ressources séparées ont leur propre cycle de vie et un state ID dédié.</p>
+<p><strong>Règle clé</strong> : pour référencer un autre SG en source d'une règle, on utilise <code>referenced_security_group_id</code> (pas <code>cidr_ipv4</code>).</p>
+<p><strong>Schéma des flux réseau</strong> :</p>
+<pre class="mermaid">
+flowchart LR
+    t_internet((0.0.0.0/0)) -->|443 TCP| t_sg_alb[SG alb]
+    t_internet -->|80 TCP redirect| t_sg_alb
+    t_sg_alb -->|80 TCP| t_sg_app[SG app]
+    t_sg_app -->|5432 TCP| t_sg_db[SG db]
+    t_sg_app -->|ALL egress| t_internet_out((NAT + Internet))
+
+    classDef pub fill:#fff3cd,stroke:#ffc107
+    classDef app fill:#d1e7dd,stroke:#198754
+    classDef db fill:#cfe2ff,stroke:#0d6efd
+    class t_sg_alb pub
+    class t_sg_app app
+    class t_sg_db db
+</pre>
+
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># sg.tf</span>
+<span class="c1">#############################################</span>
+<span class="c1"># SG ALB - accepte HTTPS et HTTP depuis Internet</span>
+<span class="c1">#############################################</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_security_group&quot;</span><span class="w"> </span><span class="nv">&quot;alb&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-alb&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SG pour l ALB public Nextcloud&quot;</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vpc_id</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-alb&quot;</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1"># Ingress 443 depuis tout Internet (HTTPS)</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc_security_group_ingress_rule&quot;</span><span class="w"> </span><span class="nv">&quot;alb_https&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">security_group_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.alb.id</span>
+<span class="w">  </span><span class="na">description</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;HTTPS from Internet&quot;</span>
+<span class="w">  </span><span class="na">cidr_ipv4</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.0.0.0/0&quot;</span>
+<span class="w">  </span><span class="na">from_port</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="m">443</span>
+<span class="w">  </span><span class="na">to_port</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="m">443</span>
+<span class="w">  </span><span class="na">ip_protocol</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># Ingress 80 depuis tout Internet (pour redirect 80 -&gt; 443)</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc_security_group_ingress_rule&quot;</span><span class="w"> </span><span class="nv">&quot;alb_http_redirect&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">security_group_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.alb.id</span>
+<span class="w">  </span><span class="na">description</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;HTTP from Internet (redirect to HTTPS)&quot;</span>
+<span class="w">  </span><span class="na">cidr_ipv4</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.0.0.0/0&quot;</span>
+<span class="w">  </span><span class="na">from_port</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
+<span class="w">  </span><span class="na">to_port</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
+<span class="w">  </span><span class="na">ip_protocol</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># Egress ALL (l ALB doit pouvoir atteindre les cibles)</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc_security_group_egress_rule&quot;</span><span class="w"> </span><span class="nv">&quot;alb_all&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">security_group_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.alb.id</span>
+<span class="w">  </span><span class="na">description</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow all egress&quot;</span>
+<span class="w">  </span><span class="na">cidr_ipv4</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.0.0.0/0&quot;</span>
+<span class="w">  </span><span class="na">ip_protocol</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;-1&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">#############################################</span>
+<span class="c1"># SG app - accepte uniquement depuis le SG ALB</span>
+<span class="c1">#############################################</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_security_group&quot;</span><span class="w"> </span><span class="nv">&quot;app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-app&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SG pour les EC2 Nextcloud derriere l ALB&quot;</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vpc_id</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-app&quot;</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1"># Ingress 80 depuis le SG ALB UNIQUEMENT (pas de CIDR)</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc_security_group_ingress_rule&quot;</span><span class="w"> </span><span class="nv">&quot;app_http_from_alb&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">security_group_id</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.app.id</span>
+<span class="w">  </span><span class="na">description</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;HTTP from ALB only&quot;</span>
+<span class="w">  </span><span class="na">referenced_security_group_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.alb.id</span>
+<span class="w">  </span><span class="na">from_port</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
+<span class="w">  </span><span class="na">to_port</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>
+<span class="w">  </span><span class="na">ip_protocol</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># Egress ALL (dnf update, Docker pull, RDS, S3, Secrets Manager)</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc_security_group_egress_rule&quot;</span><span class="w"> </span><span class="nv">&quot;app_all&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">security_group_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.app.id</span>
+<span class="w">  </span><span class="na">description</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow all egress for updates Docker pull RDS S3&quot;</span>
+<span class="w">  </span><span class="na">cidr_ipv4</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.0.0.0/0&quot;</span>
+<span class="w">  </span><span class="na">ip_protocol</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;-1&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">#############################################</span>
+<span class="c1"># SG db - accepte uniquement PostgreSQL depuis SG app</span>
+<span class="c1">#############################################</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_security_group&quot;</span><span class="w"> </span><span class="nv">&quot;db&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-db&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SG pour RDS PostgreSQL Nextcloud&quot;</span>
+<span class="w">  </span><span class="na">vpc_id</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vpc_id</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-db&quot;</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1"># Ingress 5432 TCP depuis le SG app UNIQUEMENT</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc_security_group_ingress_rule&quot;</span><span class="w"> </span><span class="nv">&quot;db_pg_from_app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">security_group_id</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.db.id</span>
+<span class="w">  </span><span class="na">description</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;PostgreSQL from app only&quot;</span>
+<span class="w">  </span><span class="na">referenced_security_group_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.app.id</span>
+<span class="w">  </span><span class="na">from_port</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="m">5432</span>
+<span class="w">  </span><span class="na">to_port</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="m">5432</span>
+<span class="w">  </span><span class="na">ip_protocol</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># Pas d egress par defaut (RDS n a pas besoin d initier de connexion sortante).</span>
+<span class="c1"># Si tfsec rale : on ajoute un egress minimal vers le VPC CIDR.</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc_security_group_egress_rule&quot;</span><span class="w"> </span><span class="nv">&quot;db_minimal&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">security_group_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.db.id</span>
+<span class="w">  </span><span class="na">description</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Minimal egress within VPC&quot;</span>
+<span class="w">  </span><span class="na">cidr_ipv4</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="nv">var.vpc_cidr</span>
+<span class="w">  </span><span class="na">ip_protocol</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;-1&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🟡 <strong>Piège courant</strong> : mettre <code>cidr_ipv4 = "0.0.0.0/0"</code> sur le SG db au lieu de <code>referenced_security_group_id = aws_security_group.app.id</code>. <strong>tfsec AVD-AWS-0107</strong> détecte immédiatement une base de données exposée à Internet.</p>
+<p><strong>Résultat attendu</strong> :</p>
+<div class="highlight"><pre><span></span><code># terraform plan doit montrer :
+# + aws_security_group.alb
+# + aws_security_group.app
+# + aws_security_group.db
+# + aws_vpc_security_group_ingress_rule.alb_https
+# + aws_vpc_security_group_ingress_rule.alb_http_redirect
+# + aws_vpc_security_group_ingress_rule.app_http_from_alb
+# + aws_vpc_security_group_ingress_rule.db_pg_from_app
+# + aws_vpc_security_group_egress_rule.alb_all
+# + aws_vpc_security_group_egress_rule.app_all
+# + aws_vpc_security_group_egress_rule.db_minimal
+</code></pre></div>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Codez <code>sg.tf</code> en partant de l'exemple ci-dessus. <strong>Vérifiez les 3 noms</strong> dans <code>name</code> : doivent correspondre à <code>${local.name_prefix}-alb</code>, <code>-app</code>, <code>-db</code>.</p>
+<p>🔷 <strong>Point clé à vérifier</strong> :
+- <code>tfsec modules/security/</code> → 0 erreur HIGH/CRITICAL sur ce fichier.
+- <code>aws_security_group</code> <strong>sans</strong> bloc <code>ingress</code>/<code>egress</code> inline (règles en ressources séparées).</p>
+</blockquote>
+<hr />
+<h3 id="etape-5-secrets-manager-2-random_password-25-min">Étape 5 : Secrets Manager (2) + random_password <em>(25 min)</em></h3>
+<p><strong>Objectif</strong> : générer 2 mots de passe aléatoires et les stocker dans Secrets Manager (chiffrés par la KMS CMK).</p>
+<p><strong>Contexte</strong> :</p>
+<p>Au boot de l'EC2 Nextcloud, le user_data lira ces secrets via l'IAM role (pas d'AccessKey, pas de secret en dur dans le launch template). Les mots de passe sont <strong>générés par Terraform</strong> avec <code>random_password</code> — une ressource stateful de <code>hashicorp/random</code>.</p>
+<p>🟡 <strong>Attention aux caractères spéciaux</strong> :</p>
+<ul>
+<li><strong>RDS PostgreSQL</strong> n'accepte pas tous les caractères (<code>/</code>, <code>@</code>, <code>"</code>, espace). → <code>special = false</code> pour <code>db_password</code>.</li>
+<li><strong>Nextcloud admin</strong> accepte tout (c'est une app web). → <code>special = true</code> OK.</li>
+</ul>
+<p>🟡 <strong>Attention <code>recovery_window_in_days</code></strong> :</p>
+<ul>
+<li><strong>Défaut AWS</strong> : 30 jours — le secret reste "soft deleted" pendant 30 jours et empêche de recréer un secret du même nom.</li>
+<li><strong>En dev</strong> : mettez <code>0</code> pour destroy immédiat. Sinon vous allez lutter à chaque <code>terraform destroy</code> suivi de <code>terraform apply</code>.</li>
+</ul>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># secrets.tf</span>
+<span class="c1">#############################################</span>
+<span class="c1"># Secret 1 : mot de passe PostgreSQL RDS</span>
+<span class="c1">#############################################</span>
+
+<span class="c1"># Generation du password - pas de caracteres speciaux (RDS PG pointilleux)</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;random_password&quot;</span><span class="w"> </span><span class="nv">&quot;db&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">length</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="m">24</span>
+<span class="w">  </span><span class="na">special</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span>
+<span class="w">  </span><span class="na">upper</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="na">lower</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="w">  </span><span class="na">numeric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="p">}</span>
+
+<span class="c1"># Secret Manager - chiffre avec la CMK</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_secretsmanager_secret&quot;</span><span class="w"> </span><span class="nv">&quot;db_password&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}/db/password&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Password PostgreSQL pour Nextcloud&quot;</span>
+<span class="w">  </span><span class="na">kms_key_id</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_kms_key.main.arn</span>
+
+<span class="c1">  # En dev : 0 pour destroy/recreate immediat. En prod : 30 (defaut).</span>
+<span class="w">  </span><span class="na">recovery_window_in_days</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="m">30</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-db-password&quot;</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1"># Version du secret - stocke la valeur generee</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_secretsmanager_secret_version&quot;</span><span class="w"> </span><span class="nv">&quot;db_password&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">secret_id</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_secretsmanager_secret.db_password.id</span>
+<span class="w">  </span><span class="na">secret_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">random_password.db.result</span>
+<span class="p">}</span>
+
+<span class="c1">#############################################</span>
+<span class="c1"># Secret 2 : mot de passe admin Nextcloud</span>
+<span class="c1">#############################################</span>
+
+<span class="c1"># Generation du password - caracteres speciaux OK (app web)</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;random_password&quot;</span><span class="w"> </span><span class="nv">&quot;admin&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">length</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="m">20</span>
+<span class="w">  </span><span class="na">special</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
+<span class="c1">  # Caracteres speciaux limites pour eviter les soucis dans les env vars Docker</span>
+<span class="w">  </span><span class="na">override_special</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;!@#%^&amp;*()-_=+&quot;</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_secretsmanager_secret&quot;</span><span class="w"> </span><span class="nv">&quot;admin_password&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}/nextcloud/admin-password&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Password admin Nextcloud initial&quot;</span>
+<span class="w">  </span><span class="na">kms_key_id</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_kms_key.main.arn</span>
+
+<span class="w">  </span><span class="na">recovery_window_in_days</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="m">30</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-admin-password&quot;</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_secretsmanager_secret_version&quot;</span><span class="w"> </span><span class="nv">&quot;admin_password&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">secret_id</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_secretsmanager_secret.admin_password.id</span>
+<span class="w">  </span><span class="na">secret_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">random_password.admin.result</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🔹 <strong>Bonne pratique production</strong> : utiliser <code>manage_master_user_password = true</code> sur <code>aws_db_instance</code> (AWS provider 5.x+) — AWS génère et rotation le secret automatiquement. Ici, on fait la version manuelle pour comprendre le pattern.</p>
+<p><strong>Résultat attendu</strong> :</p>
+<div class="highlight"><pre><span></span><code># terraform plan :
+# + random_password.db
+# + random_password.admin
+# + aws_secretsmanager_secret.db_password
+# + aws_secretsmanager_secret.admin_password
+# + aws_secretsmanager_secret_version.db_password
+# + aws_secretsmanager_secret_version.admin_password
+</code></pre></div>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Complétez <code>secrets.tf</code>. <strong>N'oubliez pas</strong> le <code>kms_key_id = aws_kms_key.main.arn</code> — sinon Secrets Manager utilise <code>aws/secretsmanager</code> par défaut (pas customer-managed).</p>
+<p>🔷 <strong>Point clé à vérifier</strong> :
+- Après apply, dans la console AWS Secrets Manager → cliquez sur le secret → "Encryption key" doit afficher votre alias <code>alias/kolab-dev-main</code> et <strong>pas</strong> <code>aws/secretsmanager</code>.
+- <code>recovery_window_in_days = 0</code> en dev — vérifiez que <code>terraform destroy</code> puis <code>terraform apply</code> marchent d'affilée sans erreur <code>ResourceAlreadyExists</code>.</p>
+</blockquote>
+<hr />
+<h3 id="etape-6-iam-role-instance-profile-3-policies-scopees-40-min">Étape 6 : IAM role + instance profile + 3 policies scopées <em>(40 min)</em></h3>
+<p><strong>Objectif</strong> : créer le rôle IAM runtime pour les EC2 Nextcloud, avec <strong>3 policies scopées</strong> aux ressources précises (pas de wildcard).</p>
+<p><strong>Contexte</strong> :</p>
+<p>L'EC2 Nextcloud a besoin de :</p>
+<ol>
+<li><strong>Lire 2 secrets</strong> (db_password, admin_password) → <code>secretsmanager:GetSecretValue</code> sur 2 ARN précis.</li>
+<li><strong>Déchiffrer</strong> les valeurs des secrets → <code>kms:Decrypt</code> sur l'ARN de la CMK.</li>
+<li><strong>Lire/écrire</strong> sur le bucket S3 primary (fichiers Nextcloud) → actions S3 sur 2 ARN (bucket + bucket/*).</li>
+<li><strong>Bonus</strong> : <code>AmazonSSMManagedInstanceCore</code> pour SSM Session Manager (debug sans SSH) + <code>CloudWatchAgentServerPolicy</code> pour pousser les métriques.</li>
+</ol>
+<p>🔴 <strong>Anti-pattern</strong> : <code>Action = "s3:*"</code> + <code>Resource = "*"</code>. tfsec le détecte (AVD-AWS-0057 "IAM policy allows wildcard action"). <strong>Scopez</strong> les actions ET les ressources.</p>
+<p><strong>Schéma des droits IAM</strong> :</p>
+<pre class="mermaid">
+flowchart LR
+    t_role[IAM Role<br/>kolab-dev-app]
+
+    subgraph t_inline[Policies inline scopees]
+        t_p_s3[app_s3<br/>s3:GetObject PutObject ...<br/>sur bucket primary uniquement]
+        t_p_sec[app_secrets<br/>secretsmanager:GetSecretValue<br/>sur 2 ARN precis]
+        t_p_kms[app_kms<br/>kms:Decrypt DescribeKey<br/>sur KMS CMK]
+    end
+
+    subgraph t_managed[Policies managees AWS bonus]
+        t_ssm[AmazonSSMManagedInstanceCore]
+        t_cw[CloudWatchAgentServerPolicy]
+    end
+
+    t_role --> t_p_s3
+    t_role --> t_p_sec
+    t_role --> t_p_kms
+    t_role --> t_ssm
+    t_role --> t_cw
+
+    t_profile[Instance Profile<br/>kolab-dev-app] --> t_role
+    t_asg[ASG launch template<br/>Role 3] -.consomme.-> t_profile
+
+    classDef role fill:#cfe2ff,stroke:#0d6efd
+    classDef inline fill:#d1e7dd,stroke:#198754
+    classDef managed fill:#fff3cd,stroke:#ffc107
+    class t_role,t_profile role
+    class t_p_s3,t_p_sec,t_p_kms inline
+    class t_ssm,t_cw managed
+</pre>
+
+<p><strong>Explication — <code>data "aws_iam_policy_document"</code></strong> :</p>
+<p>Plus lisible que <code>jsonencode</code> et plus sûr que les HEREDOC. Le provider valide la syntaxe IAM à la compilation et génère le JSON final.</p>
+<p><strong>Exemple</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># iam.tf</span>
+<span class="c1">#############################################</span>
+<span class="c1"># 1. Assume role policy : qui peut assumer ce role ?</span>
+<span class="c1">#############################################</span>
+<span class="kr">data</span><span class="w"> </span><span class="nc">&quot;aws_iam_policy_document&quot;</span><span class="w"> </span><span class="nv">&quot;app_assume_role&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nb">statement</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">effect</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span>
+<span class="w">    </span><span class="na">actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sts:AssumeRole&quot;</span><span class="p">]</span>
+
+<span class="w">    </span><span class="nb">principals</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Service&quot;</span>
+<span class="w">      </span><span class="na">identifiers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ec2.amazonaws.com&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">#############################################</span>
+<span class="c1"># 2. Role IAM runtime pour les EC2 Nextcloud</span>
+<span class="c1">#############################################</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_role&quot;</span><span class="w"> </span><span class="nv">&quot;app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-app&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Role runtime pour EC2 Nextcloud (via instance profile)&quot;</span>
+<span class="w">  </span><span class="na">assume_role_policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">data.aws_iam_policy_document.app_assume_role.json</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-app-role&quot;</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">#############################################</span>
+<span class="c1"># 3a. Policy S3 scopee au bucket primary UNIQUEMENT</span>
+<span class="c1">#############################################</span>
+<span class="kr">data</span><span class="w"> </span><span class="nc">&quot;aws_iam_policy_document&quot;</span><span class="w"> </span><span class="nv">&quot;app_s3&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">  # Actions sur les OBJETS du bucket</span>
+<span class="w">  </span><span class="nb">statement</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">sid</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;NextcloudS3Objects&quot;</span>
+<span class="w">    </span><span class="na">effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span>
+<span class="w">    </span><span class="na">actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;s3:PutObject&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;s3:DeleteObject&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;s3:GetObjectVersion&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;s3:AbortMultipartUpload&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">    </span><span class="na">resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;${var.s3_primary_bucket_arn}/*&quot;</span><span class="c1">   # &lt;- scope aux objets du bucket primary</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="c1">  # Actions sur le BUCKET lui-meme (list)</span>
+<span class="w">  </span><span class="nb">statement</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">sid</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;NextcloudS3Bucket&quot;</span>
+<span class="w">    </span><span class="na">effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span>
+<span class="w">    </span><span class="na">actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;s3:ListBucket&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;s3:GetBucketLocation&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;s3:ListBucketMultipartUploads&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">    </span><span class="na">resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="nv">var.s3_primary_bucket_arn</span><span class="c1">          # &lt;- scope au bucket primary</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_role_policy&quot;</span><span class="w"> </span><span class="nv">&quot;app_s3&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-app-s3&quot;</span>
+<span class="w">  </span><span class="na">role</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.app.id</span>
+<span class="w">  </span><span class="na">policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">data.aws_iam_policy_document.app_s3.json</span>
+<span class="p">}</span>
+
+<span class="c1">#############################################</span>
+<span class="c1"># 3b. Policy Secrets Manager scopee aux 2 ARN UNIQUEMENT</span>
+<span class="c1">#############################################</span>
+<span class="kr">data</span><span class="w"> </span><span class="nc">&quot;aws_iam_policy_document&quot;</span><span class="w"> </span><span class="nv">&quot;app_secrets&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nb">statement</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">sid</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;NextcloudSecrets&quot;</span>
+<span class="w">    </span><span class="na">effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span>
+<span class="w">    </span><span class="na">actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;secretsmanager:GetSecretValue&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;secretsmanager:DescribeSecret&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">    </span><span class="na">resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="nv">aws_secretsmanager_secret.db_password.arn</span><span class="p">,</span>
+<span class="w">      </span><span class="nv">aws_secretsmanager_secret.admin_password.arn</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_role_policy&quot;</span><span class="w"> </span><span class="nv">&quot;app_secrets&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-app-secrets&quot;</span>
+<span class="w">  </span><span class="na">role</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.app.id</span>
+<span class="w">  </span><span class="na">policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">data.aws_iam_policy_document.app_secrets.json</span>
+<span class="p">}</span>
+
+<span class="c1">#############################################</span>
+<span class="c1"># 3c. Policy KMS : dechiffrer les secrets</span>
+<span class="c1">#############################################</span>
+<span class="kr">data</span><span class="w"> </span><span class="nc">&quot;aws_iam_policy_document&quot;</span><span class="w"> </span><span class="nv">&quot;app_kms&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nb">statement</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">sid</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;NextcloudKmsDecrypt&quot;</span>
+<span class="w">    </span><span class="na">effect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span>
+<span class="w">    </span><span class="na">actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;kms:Decrypt&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;kms:DescribeKey&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">    </span><span class="na">resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="nv">aws_kms_key.main.arn</span><span class="c1">     # &lt;- scope a la CMK du projet uniquement</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_role_policy&quot;</span><span class="w"> </span><span class="nv">&quot;app_kms&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-app-kms&quot;</span>
+<span class="w">  </span><span class="na">role</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.app.id</span>
+<span class="w">  </span><span class="na">policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">data.aws_iam_policy_document.app_kms.json</span>
+<span class="p">}</span>
+
+<span class="c1">#############################################</span>
+<span class="c1"># 4. Policies managees AWS (bonus) : SSM + CloudWatch</span>
+<span class="c1">#############################################</span>
+
+<span class="c1"># SSM Session Manager : permet de se connecter a l EC2 via la console AWS,</span>
+<span class="c1"># sans SSH, sans key pair. Tres utile pour debug.</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_role_policy_attachment&quot;</span><span class="w"> </span><span class="nv">&quot;app_ssm&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">role</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.app.name</span>
+<span class="w">  </span><span class="na">policy_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;arn:${data.aws_partition.current.partition}:iam::aws:policy/AmazonSSMManagedInstanceCore&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># CloudWatch Agent : permet de pousser logs + metriques depuis l EC2.</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_role_policy_attachment&quot;</span><span class="w"> </span><span class="nv">&quot;app_cloudwatch&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">role</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.app.name</span>
+<span class="w">  </span><span class="na">policy_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;arn:${data.aws_partition.current.partition}:iam::aws:policy/CloudWatchAgentServerPolicy&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">#############################################</span>
+<span class="c1"># 5. Instance Profile : wrapper pour attacher le role a l EC2</span>
+<span class="c1">#############################################</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_iam_instance_profile&quot;</span><span class="w"> </span><span class="nv">&quot;app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-app&quot;</span>
+<span class="w">  </span><span class="na">role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.app.name</span>
+
+<span class="w">  </span><span class="na">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="nv">local.common_tags</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="na">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}-app-profile&quot;</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>🔹 <strong>Bonne pratique</strong> : les policies scopées aux ARN exacts (pas de <code>*</code>) rendent votre infra <strong>prêt pour une revue de sécurité</strong> (ISO 27001, SOC 2). C'est ce que font les boîtes qui passent des audits.</p>
+<p><strong>Résultat attendu</strong> :</p>
+<div class="highlight"><pre><span></span><code># terraform plan :
+# + aws_iam_role.app
+# + aws_iam_role_policy.app_s3
+# + aws_iam_role_policy.app_secrets
+# + aws_iam_role_policy.app_kms
+# + aws_iam_role_policy_attachment.app_ssm
+# + aws_iam_role_policy_attachment.app_cloudwatch
+# + aws_iam_instance_profile.app
+</code></pre></div>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Codez <code>iam.tf</code> en suivant l'exemple. <strong>Surveillez</strong> les 3 scopes :</p>
+<ol>
+<li>Policy S3 : <code>resources = [var.s3_primary_bucket_arn, "${var.s3_primary_bucket_arn}/*"]</code> — <strong>pas</strong> <code>"*"</code>.</li>
+<li>Policy Secrets : <code>resources = [secret1_arn, secret2_arn]</code> — <strong>pas</strong> <code>"*"</code>.</li>
+<li>Policy KMS : <code>resources = [aws_kms_key.main.arn]</code> — <strong>pas</strong> <code>"*"</code>.</li>
+</ol>
+<p>🔷 <strong>Point clé à vérifier</strong> :
+- <code>tfsec modules/security/</code> → 0 erreur "IAM policy allows wildcard".
+- <code>aws iam get-role-policy --role-name kolab-dev-app --policy-name kolab-dev-app-s3</code> → JSON avec des ARN précis, pas de <code>*</code> dans <code>Resource</code>.</p>
+</blockquote>
+<hr />
+<h3 id="etape-7-outputstf-readmemd-validation-15-min">Étape 7 : outputs.tf + README.md + validation <em>(15 min)</em></h3>
+<p><strong>Objectif</strong> : écrire tous les outputs du contrat d'interface et valider le module.</p>
+<p><strong>À vous !</strong></p>
+<blockquote>
+<p>Créez <code>outputs.tf</code> avec les 10 outputs listés dans la section "Interface que vous devez produire". <strong>Copiez-les tels quels</strong> — les noms sont figés.</p>
+<p>Lancez dans l'ordre :</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1"># Depuis modules/security/</span>
+<span class="nb">cd</span><span class="w"> </span>modules/security/
+
+<span class="c1"># 1. Valider la syntaxe HCL</span>
+terraform<span class="w"> </span>init<span class="w"> </span>-backend<span class="o">=</span><span class="nb">false</span>
+terraform<span class="w"> </span>validate
+
+<span class="c1"># 2. Formatter</span>
+terraform<span class="w"> </span>fmt<span class="w"> </span>-recursive
+
+<span class="c1"># 3. Scan tfsec</span>
+tfsec<span class="w"> </span>.
+
+<span class="c1"># 4. (Bonus) generer README.md</span>
+terraform-docs<span class="w"> </span>markdown<span class="w"> </span>table<span class="w"> </span>--output-file<span class="w"> </span>README.md<span class="w"> </span>.
+</code></pre></div>
+<blockquote>
+<p>🔷 <strong>Point clé à vérifier</strong> :
+- <code>terraform validate</code> → <code>Success! The configuration is valid.</code>
+- <code>tfsec .</code> → <code>0 potential problems detected</code> ou uniquement des LOW/MEDIUM acceptables.
+- <code>terraform fmt -check</code> → pas d'erreur.</p>
+</blockquote>
+<p><strong>Correction / Solution</strong> :</p>
+<details>
+<summary>🟢 Voir le outputs.tf complet</summary>
+<div class="highlight"><pre><span></span><code><span class="c1"># outputs.tf</span>
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;alb_security_group_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Security Group ID pour l ALB (consomme par module compute)&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.alb.id</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;app_security_group_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Security Group ID pour les EC2 app (consomme par module compute)&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.app.id</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;db_security_group_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Security Group ID pour RDS (consomme par module data)&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.db.id</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;kms_key_id&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ID de la KMS CMK principale&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_kms_key.main.id</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;kms_key_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN de la KMS CMK principale (consomme par module data)&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_kms_key.main.arn</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;app_instance_profile_name&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Nom de l instance profile (consomme par launch template module compute)&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_instance_profile.app.name</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;app_iam_role_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN du role IAM de l app (utile pour debug)&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_iam_role.app.arn</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;db_password_secret_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN du secret db_password (consomme par module data + compute user_data)&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_secretsmanager_secret.db_password.arn</span>
+<span class="p">}</span>
+
+<span class="kr">output</span><span class="w"> </span><span class="nv">&quot;admin_password_secret_arn&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ARN du secret admin_password (consomme par module compute user_data)&quot;</span>
+<span class="w">  </span><span class="na">value</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_secretsmanager_secret.admin_password.arn</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<hr />
+<h2 id="sprint-2-integration">Sprint 2 — intégration</h2>
+<h3 id="point-de-synchronisation-avec-les-autres-roles">Point de synchronisation avec les autres rôles</h3>
+<p>À partir de 13h30, vous devez <strong>intégrer</strong> votre module dans <code>envs/dev/</code>. Voici ce qui vous concerne :</p>
+<pre class="mermaid">
+sequenceDiagram
+    participant t_r2 as Role 2 Network
+    participant t_r5 as Role 5 Security (vous)
+    participant t_r4 as Role 4 Data
+    participant t_r3 as Role 3 Compute
+    participant t_r1 as Role 1 Platform
+
+    t_r2->>t_r5: vpc_id + vpc_cidr (outputs)
+    t_r5->>t_r4: db_security_group_id + kms_key_arn + db_password_secret_arn
+    t_r4->>t_r5: s3_primary_bucket_arn + s3_logs_bucket_arn (late binding)
+    t_r5->>t_r3: alb_sg_id + app_sg_id + instance_profile + secrets ARN
+    t_r1->>t_r1: terraform plan dans envs/dev/
+    t_r1-->>t_r5: remonte erreurs eventuelles
+</pre>
+
+<h3 id="technique-le-cycle-apparent-security-data">Technique : le cycle apparent security ↔ data</h3>
+<p>Le module <code>security</code> dépend des ARN des buckets S3 du module <code>data</code>, et <code>data</code> dépend de votre <code>kms_key_arn</code> + <code>db_password_secret_arn</code>.</p>
+<p>🔷 <strong>Solution</strong> : ce n'est <strong>pas</strong> un cycle. <code>security</code> attend 2 valeurs de <code>data</code> (les ARN), <code>data</code> attend 3 valeurs de <code>security</code> (KMS ARN, SG db, secret ARN) — mais Terraform résout le graphe via les <strong>outputs</strong> (pas les modules en bloc). Tant que <code>aws_secretsmanager_secret.db_password</code> ne référence pas <code>aws_s3_bucket.primary.arn</code> directement, Terraform trouve un ordre valide.</p>
+<h3 id="pour-tester-votre-module-en-isolation-sprint-1-avant-lintegration">Pour tester votre module en isolation (sprint 1, avant l'intégration)</h3>
+<p>Vous pouvez définir des <strong>ARN factices</strong> temporaires pour débloquer votre dev avant que le Rôle 4 n'ait livré :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># envs/dev/terraform.tfvars (temporaire sprint 1 uniquement !)</span>
+<span class="na">s3_primary_bucket_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::fake-primary-bucket&quot;</span>
+<span class="na">s3_logs_bucket_arn</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::fake-logs-bucket&quot;</span>
+<span class="na">allowed_admin_cidr</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.2.3.4/32&quot;</span>
+</code></pre></div>
+<p>🟡 <strong>Ne pas committer ces valeurs factices.</strong> Swap au sprint 2 avec les vrais outputs de <code>module.data</code>.</p>
+<h3 id="checklist-dintegration-14h-14h30">Checklist d'intégration (14h-14h30)</h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Votre module compile : <code>terraform init &amp;&amp; terraform validate</code> dans <code>envs/dev/</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Vos 10 outputs sont accessibles : <code>terraform console</code> → <code>module.security.kms_key_arn</code> retourne un ARN.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Le Platform Lead a validé votre PR (2 approvals minimum).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> tfsec sur <code>envs/dev/</code> → 0 erreur HIGH/CRITICAL.</li>
+</ul>
+<hr />
+<h2 id="troubleshooting-specifique-securite">Troubleshooting spécifique sécurité</h2>
+<h3 id="erreur-n1-kms-key-brickee-key-policy-sans-root">🟥 Erreur n°1 : KMS key brickée (key policy sans root)</h3>
+<p><strong>Symptôme</strong> : après <code>terraform apply</code>, impossible d'utiliser la clé. Erreur <code>AccessDeniedException: The ciphertext refers to a customer master key that does not exist...</code></p>
+<p><strong>Cause</strong> : vous avez écrit une key policy qui ne donne pas <code>kms:*</code> au root account.</p>
+<p><strong>Solution</strong> : <strong>toujours</strong> inclure le statement <code>EnableRootAccountAccess</code> avec <code>Principal = { AWS = "arn:aws:iam::ACCOUNT_ID:root" }</code> et <code>Action = "kms:*"</code>. Si la clé est brickée, il n'y a <strong>aucun moyen</strong> de la récupérer : il faut attendre <code>deletion_window_in_days</code> et la supprimer. D'où l'importance des 10 jours en dev (pas 30).</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verifier la key policy actuelle</span>
+aws<span class="w"> </span>kms<span class="w"> </span>get-key-policy<span class="w"> </span>--key-id<span class="w"> </span>alias/kolab-dev-main<span class="w"> </span>--policy-name<span class="w"> </span>default
+</code></pre></div>
+<hr />
+<h3 id="erreur-n2-accessdenied-sur-secretsmanagergetsecretvalue-depuis-lec2">🟠 Erreur n°2 : AccessDenied sur <code>secretsmanager:GetSecretValue</code> depuis l'EC2</h3>
+<p><strong>Symptôme</strong> : dans <code>/var/log/cloud-init-output.log</code> sur l'EC2 :</p>
+<div class="highlight"><pre><span></span><code>An error occurred (AccessDeniedException) when calling the GetSecretValue operation:
+User: arn:aws:sts::039497794217:assumed-role/kolab-dev-app/i-0abc... is not authorized to perform:
+secretsmanager:GetSecretValue on resource: arn:aws:secretsmanager:eu-west-1:039497794217:secret:kolab-dev/db/password-XXXXX
+</code></pre></div>
+<p><strong>Causes possibles</strong> :</p>
+<ol>
+<li><strong>L'instance profile n'est pas attaché</strong> au launch template (Rôle 3 l'a oublié).</li>
+<li><strong>La policy <code>app_secrets</code> manque un ARN</strong> (par exemple vous avez mis <code>aws_secretsmanager_secret.db_password.arn</code> mais pas <code>aws_secretsmanager_secret.admin_password.arn</code>).</li>
+<li><strong>La policy KMS manque <code>kms:Decrypt</code></strong> → GetSecretValue retourne bien le chiffré mais pas le clair.</li>
+</ol>
+<p><strong>Solution</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Verifier que le role est bien attache a l EC2</span>
+aws<span class="w"> </span>ec2<span class="w"> </span>describe-instances<span class="w"> </span>--instance-ids<span class="w"> </span>i-0abc...<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--query<span class="w"> </span><span class="s1">&#39;Reservations[0].Instances[0].IamInstanceProfile&#39;</span>
+
+<span class="c1"># 2. Verifier les policies attachees au role</span>
+aws<span class="w"> </span>iam<span class="w"> </span>list-role-policies<span class="w"> </span>--role-name<span class="w"> </span>kolab-dev-app
+aws<span class="w"> </span>iam<span class="w"> </span>list-attached-role-policies<span class="w"> </span>--role-name<span class="w"> </span>kolab-dev-app
+
+<span class="c1"># 3. Simuler la policy</span>
+aws<span class="w"> </span>iam<span class="w"> </span>simulate-principal-policy<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--policy-source-arn<span class="w"> </span>arn:aws:iam::039497794217:role/kolab-dev-app<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--action-names<span class="w"> </span>secretsmanager:GetSecretValue<span class="w"> </span>kms:Decrypt<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--resource-arns<span class="w"> </span>&lt;secret_arn&gt;
+</code></pre></div>
+<hr />
+<h3 id="erreur-n3-rds-ne-demarre-pas-kms_key_id-mal-reference">🟠 Erreur n°3 : RDS ne démarre pas (<code>kms_key_id</code> mal référencé)</h3>
+<p><strong>Symptôme</strong> : Rôle 4 lance l'apply et RDS reste en status <code>failed</code> avec <code>InvalidParameterCombination: KMS key not found</code>.</p>
+<p><strong>Cause</strong> : dans <code>envs/dev/main.tf</code>, le Rôle 4 a référencé <code>module.security.kms_key_id</code> au lieu de <code>module.security.kms_key_arn</code>. RDS veut un <strong>ARN</strong> complet.</p>
+<p><strong>Solution</strong> : vérifier dans <code>envs/dev/main.tf</code> que <code>module.data</code> reçoit bien :</p>
+<div class="highlight"><pre><span></span><code><span class="kr">module</span><span class="w"> </span><span class="nv">&quot;data&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">kms_key_arn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">module.security.kms_key_arn</span><span class="c1">   # &lt;- ARN complet, pas .id</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="erreur-n4-tfsec-avd-aws-xxxx-iam-policy-allows-wildcard-action">🟡 Erreur n°4 : tfsec AVD-AWS-xxxx "IAM policy allows wildcard action"</h3>
+<p><strong>Symptôme</strong> : tfsec remonte :</p>
+<div class="highlight"><pre><span></span><code>Result #1 HIGH Resource &#39;aws_iam_role_policy.app_s3&#39; defines a policy with wildcarded actions.
+  Resource: &quot;s3:*&quot;
+  Action should not be wildcarded.
+</code></pre></div>
+<p><strong>Cause</strong> : vous avez écrit <code>Action = "s3:*"</code> ou <code>Resource = "*"</code> dans une policy inline.</p>
+<p><strong>Solution</strong> : <strong>scoper</strong> les actions et ressources. Remplacer :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 🔴 Mauvais</span>
+<span class="na">actions</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;s3:*&quot;</span><span class="p">]</span>
+<span class="na">resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">]</span>
+
+<span class="c1"># 🟢 Bon</span>
+<span class="na">actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;s3:PutObject&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;s3:DeleteObject&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;s3:ListBucket&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="na">resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nv">var.s3_primary_bucket_arn</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;${var.s3_primary_bucket_arn}/*&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+<hr />
+<h3 id="erreur-n5-sg-db-ouvert-a-00000-sur-5432-tfsec-avd-aws-0107">🟥 Erreur n°5 : SG db ouvert à 0.0.0.0/0 sur 5432 (tfsec AVD-AWS-0107)</h3>
+<p><strong>Symptôme</strong> :</p>
+<div class="highlight"><pre><span></span><code>CRITICAL Security group rule allows ingress from public internet on database port.
+</code></pre></div>
+<p><strong>Cause</strong> : vous avez écrit <code>cidr_ipv4 = "0.0.0.0/0"</code> sur le SG db au lieu de <code>referenced_security_group_id</code>.</p>
+<p><strong>Solution</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 🔴 Mauvais</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc_security_group_ingress_rule&quot;</span><span class="w"> </span><span class="nv">&quot;db_pg&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">security_group_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.db.id</span>
+<span class="w">  </span><span class="na">cidr_ipv4</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.0.0.0/0&quot;</span><span class="c1">   # RDS exposee a Internet !</span>
+<span class="w">  </span><span class="na">from_port</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="m">5432</span>
+<span class="w">  </span><span class="na">to_port</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="m">5432</span>
+<span class="w">  </span><span class="na">ip_protocol</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># 🟢 Bon</span>
+<span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc_security_group_ingress_rule&quot;</span><span class="w"> </span><span class="nv">&quot;db_pg_from_app&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">security_group_id</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.db.id</span>
+<span class="w">  </span><span class="na">referenced_security_group_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_security_group.app.id</span><span class="c1">   # SG-to-SG</span>
+<span class="w">  </span><span class="na">from_port</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="m">5432</span>
+<span class="w">  </span><span class="na">to_port</span><span class="w">                      </span><span class="o">=</span><span class="w"> </span><span class="m">5432</span>
+<span class="w">  </span><span class="na">ip_protocol</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="erreur-n6-resourceexistsexception-au-2e-apply-apres-destroy">🟡 Erreur n°6 : <code>ResourceExistsException</code> au 2e apply après destroy</h3>
+<p><strong>Symptôme</strong> : après un <code>terraform destroy</code> puis <code>terraform apply</code> rapide :</p>
+<div class="highlight"><pre><span></span><code>Error: creating Secrets Manager Secret: InvalidRequestException:
+You can&#39;t create this secret because a secret with this name is already scheduled for deletion.
+</code></pre></div>
+<p><strong>Cause</strong> : <code>recovery_window_in_days = 30</code> par défaut → le secret reste en "pending deletion" 30 jours et bloque la création d'un nouveau secret du même nom.</p>
+<p><strong>Solution</strong> : mettre <code>recovery_window_in_days = 0</code> en dev.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_secretsmanager_secret&quot;</span><span class="w"> </span><span class="nv">&quot;db_password&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="na">name</span><span class="w">                    </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${local.name_prefix}/db/password&quot;</span>
+<span class="w">  </span><span class="na">recovery_window_in_days</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="m">30</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Si vous êtes déjà coincé, forcer la suppression :</p>
+<div class="highlight"><pre><span></span><code>aws<span class="w"> </span>secretsmanager<span class="w"> </span>delete-secret<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--secret-id<span class="w"> </span>kolab-dev/db/password<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--force-delete-without-recovery<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span>eu-west-1
+</code></pre></div>
+<hr />
+<h3 id="erreur-n7-nextcloud-spinne-a-linfini-au-boot-kms-policy-incomplete">🟠 Erreur n°7 : Nextcloud spinne à l'infini au boot (KMS policy incomplète)</h3>
+<p><strong>Symptôme</strong> : l'EC2 démarre, le user_data s'exécute, mais Nextcloud ne répond pas. Dans <code>/var/log/cloud-init-output.log</code> :</p>
+<div class="highlight"><pre><span></span><code>An error occurred (AccessDeniedException) when calling the Decrypt operation:
+The ciphertext refers to a customer master key that does not exist, does not exist in this region,
+or you are not allowed to access.
+</code></pre></div>
+<p><strong>Cause</strong> : la policy <code>app_kms</code> ne donne pas <code>kms:Decrypt</code> sur la CMK, ou la key policy KMS ne laisse pas le rôle app l'utiliser.</p>
+<p><strong>Solution</strong> : vérifier les 2 côtés de la relation :</p>
+<ol>
+<li><strong>Côté IAM role</strong> (<code>iam.tf</code>) : policy <code>app_kms</code> avec <code>actions = ["kms:Decrypt", "kms:DescribeKey"]</code> + <code>resources = [aws_kms_key.main.arn]</code>.</li>
+<li><strong>Côté key policy</strong> (<code>kms.tf</code>) : statement <code>AllowAppRoleUsage</code> avec <code>Principal = { AWS = aws_iam_role.app.arn }</code> + <code>Action = ["kms:Decrypt", "kms:DescribeKey", "kms:GenerateDataKey"]</code>.</li>
+</ol>
+<p>🔷 Les deux policies <strong>doivent être alignées</strong> — KMS est un service "double-veto" : IAM + key policy, les deux doivent autoriser.</p>
+<hr />
+<h2 id="checklist-de-livraison">Checklist de livraison</h2>
+<p>À la fin de la journée, votre module doit cocher <strong>toutes</strong> ces cases :</p>
+<h3 id="code">Code</h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>modules/security/</code> contient : <code>main.tf</code>, <code>kms.tf</code>, <code>sg.tf</code>, <code>iam.tf</code>, <code>secrets.tf</code>, <code>variables.tf</code>, <code>outputs.tf</code>, <code>versions.tf</code>, <code>README.md</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 3 Security Groups créés (<code>alb</code>, <code>app</code>, <code>db</code>).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 6 règles SG en ressources séparées (<code>aws_vpc_security_group_ingress_rule</code> + <code>_egress_rule</code>).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 1 KMS CMK avec <code>enable_key_rotation = true</code> et <code>deletion_window_in_days = 10</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 1 KMS alias (<code>alias/kolab-dev-main</code>).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 2 secrets Secrets Manager (<code>db_password</code>, <code>admin_password</code>) chiffrés avec la CMK.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 2 <code>random_password</code> pour les 2 secrets.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 1 IAM role <code>app</code> avec assume role policy EC2.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 3 <code>aws_iam_role_policy</code> inline scopées (s3, secrets, kms).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 2 <code>aws_iam_role_policy_attachment</code> bonus (SSM + CloudWatch).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 1 <code>aws_iam_instance_profile</code>.</li>
+</ul>
+<h3 id="qualite">Qualité</h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>terraform fmt -check</code> : OK.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>terraform validate</code> : OK.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>tflint</code> : 0 erreur.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>tfsec .</code> : 0 erreur HIGH ou CRITICAL.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Toutes les ressources taggées (<code>local.common_tags</code>).</li>
+</ul>
+<h3 id="interface">Interface</h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 10 outputs conformes au contrat (noms + types exacts).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 7 variables conformes au contrat.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> README.md généré par <code>terraform-docs</code> (bonus).</li>
+</ul>
+<h3 id="apply-reussi">Apply réussi</h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Secret visible dans la console AWS Secrets Manager, avec encryption key = <code>alias/kolab-dev-main</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> SG db <strong>non</strong> exposé à Internet (ingress via referenced_security_group_id).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> IAM role <code>kolab-dev-app</code> visible dans IAM console, 3 policies inline + 2 managed.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Instance profile <code>kolab-dev-app</code> existe et référence le rôle.</li>
+</ul>
+<h3 id="destroy">Destroy</h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>terraform destroy</code> fonctionne d'affilée après <code>terraform apply</code> (grâce à <code>recovery_window_in_days = 0</code>).</li>
+</ul>
+<hr />
+<h2 id="conseils-du-formateur">Conseils du formateur</h2>
+<p>🔹 <strong>Commencez par <code>variables.tf</code> et <code>outputs.tf</code></strong> avant même de coder les ressources. Ça bloque le contrat — si vous changez les noms d'outputs en cours de route, vous cassez les 3 autres rôles.</p>
+<p>🔹 <strong>Utilisez <code>data "aws_iam_policy_document"</code></strong> plutôt que <code>jsonencode</code> ou HEREDOC. Plus lisible, valide la syntaxe IAM à la compilation, et génère le JSON optimisé.</p>
+<p>🔹 <strong>Testez les policies en isolation</strong> avec <code>aws iam simulate-principal-policy</code> avant même que Nextcloud soit déployé. Vous pouvez déjà valider que le rôle a bien <code>secretsmanager:GetSecretValue</code> sur le bon ARN.</p>
+<p>🔹 <strong>Schématisez vos flux réseau au brouillon</strong> avant de coder les SGs. 3 SGs = 6 règles — une erreur et c'est l'heure qui part en debug.</p>
+<p>🔹 <strong>La KMS key policy est le chemin critique</strong> : si vous vous trompez, vous perdez 1h à attendre la deletion window. Copiez le pattern <code>EnableRootAccountAccess</code> depuis l'encadré "Rappel concept : KMS CMK + key policy" en haut de cette fiche — ne réinventez pas.</p>
+<p>🔹 <strong>tfsec est votre ami</strong>, lancez-le <strong>après chaque fichier</strong> pendant le dev. Mieux vaut 6 passes de 10s que découvrir 15 erreurs à 16h30.</p>
+<p>🔹 <strong>En production réelle</strong>, vous utiliseriez plutôt <code>manage_master_user_password = true</code> sur <code>aws_db_instance</code> (AWS gère rotation + stockage). Ici on fait la version manuelle pour comprendre le pattern — c'est pédagogique.</p>
+<p>🔹 <strong>Les 2 policies managées AWS bonus</strong> (SSM + CloudWatch) sont <strong>hautement recommandées</strong> : SSM Session Manager vous sauvera la vie quand Nextcloud plantera et que vous n'aurez pas de SSH.</p>
+<hr />
+<h2 id="recap">Récap</h2>
+<p>🟢 <strong>Ce que vous savez maintenant faire</strong> :</p>
+<ul>
+<li>Créer une KMS CMK avec key policy correcte (root + app role)</li>
+<li>Écrire 3 SGs avec les nouvelles ressources v5+ (<code>ingress_rule</code> / <code>egress_rule</code>)</li>
+<li>Scoper des policies IAM aux ARN exacts (ni wildcard action, ni wildcard resource)</li>
+<li>Générer et stocker des secrets via <code>random_password</code> + Secrets Manager</li>
+<li>Lier rôle IAM → instance profile → EC2 sans access key</li>
+</ul>
+<p>🟡 <strong>Pièges à retenir</strong> :</p>
+<ul>
+<li>Key policy KMS sans root = clé brickée, attendez la deletion window</li>
+<li><code>s3:*</code> ou <code>Resource = "*"</code> = tfsec HIGH + perte de points</li>
+<li>SG db avec <code>cidr_ipv4 = "0.0.0.0/0"</code> = faille critique</li>
+<li><code>recovery_window_in_days = 30</code> en dev = bloqué au 2e apply</li>
+<li>IAM seule n'est pas suffisante pour KMS — aligner key policy ET IAM policy</li>
+</ul>
+<p>🔷 <strong>Points clés à retenir</strong> :</p>
+<ul>
+<li>KMS : 1 CMK, rotation activée, alias explicite, key policy minimale mais complète</li>
+<li>SG : référence SG-to-SG via <code>referenced_security_group_id</code>, jamais via CIDR</li>
+<li>IAM : moindre privilège = ARN exacts, actions nommées</li>
+<li>Secrets : Secrets Manager + KMS customer-managed, jamais en clair</li>
+</ul>
+<p><strong>Prochaine étape</strong> : synchronisez-vous avec le Platform Lead à 13h30 pour l'intégration dans <code>envs/dev/</code>. Votre module doit compiler <strong>seul</strong> avant l'intégration.</p>
+    </article>
+
+    
+    
+    
+    <script>
+    (function() {
+        'use strict';
+        
+        function initMermaidLightbox() {
+            // Crée le conteneur lightbox
+            const lightbox = document.createElement('div');
+            lightbox.className = 'mermaid-lightbox';
+            lightbox.innerHTML = `
+                <div class="mermaid-lightbox-backdrop"></div>
+                <div class="mermaid-lightbox-container">
+                    <div class="mermaid-lightbox-content"></div>
+                </div>
+                <div class="mermaid-lightbox-controls">
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-in" title="Zoom +">+</button>
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-reset" title="Reset">100%</button>
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-out" title="Zoom -">−</button>
+                    <button class="mermaid-lb-btn mermaid-lb-close" title="Fermer">✕</button>
+                </div>
+            `;
+            document.body.appendChild(lightbox);
+
+            // Variables de zoom et pan
+            let scale = 1;
+            let translateX = 0;
+            let translateY = 0;
+            let isDragging = false;
+            let startX, startY;
+
+            const container = lightbox.querySelector('.mermaid-lightbox-container');
+            const content = lightbox.querySelector('.mermaid-lightbox-content');
+            const backdrop = lightbox.querySelector('.mermaid-lightbox-backdrop');
+
+            // Ajoute un bouton d'expansion à chaque diagramme Mermaid
+            document.querySelectorAll('.mermaid, pre.mermaid').forEach(diagram => {
+                const expandBtn = document.createElement('button');
+                expandBtn.className = 'mermaid-expand-btn';
+                expandBtn.innerHTML = '⛶';
+                expandBtn.title = 'Agrandir le diagramme';
+                expandBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openLightbox(diagram);
+                });
+                
+                // Wrapper pour positionner le bouton
+                const wrapper = document.createElement('div');
+                wrapper.className = 'mermaid-wrapper';
+                diagram.parentNode.insertBefore(wrapper, diagram);
+                wrapper.appendChild(diagram);
+                wrapper.appendChild(expandBtn);
+            });
+
+            function openLightbox(diagram) {
+                // Clone le contenu SVG
+                const svg = diagram.querySelector('svg');
+                if (svg) {
+                    content.innerHTML = '';
+                    const clonedSvg = svg.cloneNode(true);
+                    
+                    // Garder le viewBox pour les proportions
+                    if (!clonedSvg.hasAttribute('viewBox') && svg.viewBox && svg.viewBox.baseVal) {
+                        const vb = svg.viewBox.baseVal;
+                        if (vb.width && vb.height) {
+                            clonedSvg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.width} ${vb.height}`);
+                        }
+                    }
+                    
+                    // Le CSS gère les dimensions (80vw)
+                    clonedSvg.removeAttribute('width');
+                    clonedSvg.removeAttribute('height');
+                    
+                    // Agrandir les foreignObject pour éviter la troncature du texte
+                    clonedSvg.querySelectorAll('foreignObject').forEach(fo => {
+                        const currentWidth = parseFloat(fo.getAttribute('width')) || 100;
+                        const currentHeight = parseFloat(fo.getAttribute('height')) || 50;
+                        fo.setAttribute('width', currentWidth * 1.5);
+                        fo.setAttribute('height', currentHeight * 1.5);
+                    });
+                    
+                    content.appendChild(clonedSvg);
+                } else {
+                    content.innerHTML = diagram.innerHTML;
+                }
+                
+                // Reset zoom et position
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                applyTransform();
+                
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function applyTransform() {
+                content.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+                lightbox.querySelector('.mermaid-lb-zoom-reset').textContent = Math.round(scale * 100) + '%';
+            }
+
+            function zoomIn() {
+                scale = Math.min(scale * 1.25, 5);
+                applyTransform();
+            }
+
+            function zoomOut() {
+                scale = Math.max(scale / 1.25, 0.25);
+                applyTransform();
+            }
+
+            function zoomReset() {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                applyTransform();
+            }
+
+            // Événements des boutons
+            lightbox.querySelector('.mermaid-lb-close').addEventListener('click', closeLightbox);
+            lightbox.querySelector('.mermaid-lb-zoom-in').addEventListener('click', zoomIn);
+            lightbox.querySelector('.mermaid-lb-zoom-out').addEventListener('click', zoomOut);
+            lightbox.querySelector('.mermaid-lb-zoom-reset').addEventListener('click', zoomReset);
+            backdrop.addEventListener('click', closeLightbox);
+
+            // Fermer avec Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            // Zoom avec la molette
+            container.addEventListener('wheel', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                e.preventDefault();
+                
+                if (e.deltaY < 0) {
+                    scale = Math.min(scale * 1.1, 5);
+                } else {
+                    scale = Math.max(scale / 1.1, 0.25);
+                }
+                applyTransform();
+            });
+
+            // Pan avec la souris
+            container.addEventListener('mousedown', (e) => {
+                if (e.button !== 0) return;
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                container.style.cursor = 'grabbing';
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                applyTransform();
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                container.style.cursor = 'grab';
+            });
+
+            // Touch support pour mobile
+            let touchStartX, touchStartY;
+            container.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX - translateX;
+                    touchStartY = e.touches[0].clientY - translateY;
+                }
+            });
+
+            container.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1) {
+                    e.preventDefault();
+                    translateX = e.touches[0].clientX - touchStartX;
+                    translateY = e.touches[0].clientY - touchStartY;
+                    applyTransform();
+                }
+            });
+        }
+
+        // Initialise après le rendu de Mermaid
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof mermaid !== 'undefined') {
+                setTimeout(initMermaidLightbox, 600);
+            } else {
+                initMermaidLightbox();
+            }
+        });
+    })();
+    </script>
+
+</body>
+</html>
