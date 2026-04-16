@@ -35,7 +35,7 @@
 | Mylène RODRIGUES DOS SANTOS | Platform Lead (Rôle 1) | `prenom.nom@domaine.fr` | `@ghuser` |
 | Yassine BOUMRA | Network Engineer (Rôle 2) | | |
 | Yann SALAÏ | Compute Engineer (Rôle 3) | | |
-| Ayoub Bentoumia | Data Engineer (Rôle 4) | | |
+| Ayoub Bentoumia | Data Engineer (Rôle 4) |bentoumia.ayoub13@gmail.com | Ben-Ayoub|
 | Clément DUCROCQ | Security Engineer (Rôle 5) | clement.d80150@gmail.com | ClementD |
 
 > 🔷 Équipe à 4 personnes : indiquez qui a fusionné le rôle Security dans le rôle Platform.
