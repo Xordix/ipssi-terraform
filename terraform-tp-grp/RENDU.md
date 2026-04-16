@@ -147,10 +147,13 @@ Collez ici les **résumés** (pas les sorties complètes) des commandes finales 
 ### `terraform plan` final
 
 ```
-Terraform will perform the following actions:
-  ...
+Plan: 28 to add, 2 to change, 3 to destroy.
 
-Plan: <!-- N --> to add, <!-- N --> to change, <!-- N --> to destroy.
+Changes to Outputs:
+  + admin_password_secret_arn = (known after apply)
+  + asg_name                  = (known after apply)
+  + db_endpoint               = (known after apply)
+  + db_password_secret_arn    = (known after apply)
 ```
 
 ### `terraform apply` final
@@ -178,7 +181,9 @@ db_endpoint   = "<!-- remplir -->"
 
 Les captures doivent être dans `docs/screenshots/` au format PNG. Cochez chaque case quand le fichier est présent ET lisible.
 
-- [ ] `01-plan-dev.png` — sortie de `terraform plan` avec la ligne `Plan: N to add, ...` visible
+- [X] `01-plan-dev.png` — sortie de `terraform plan` avec la ligne `Plan: N to add, ...` visible
+  ![Image Terraform Plan](images_rendu/terraformPlan.png)
+
 - [ ] `02-apply-success.png` — sortie `Apply complete! Resources: N added.` + les outputs visibles
 - [ ] `03-nextcloud-login.png` — page de login Nextcloud dans le navigateur avec l'URL ALB visible dans la barre d'adresse
 - [ ] `04-file-in-s3.png` — console AWS S3 montrant un fichier uploadé depuis Nextcloud, avec le chiffrement KMS visible dans les propriétés
@@ -196,28 +201,36 @@ Estimez le coût de l'infrastructure pour 24h de fonctionnement (dev). Utilisez 
 
 | Ressource | Quantité | Prix unitaire (USD) | Sous-total 24h (USD) |
 |---|---|---|---|
-| EC2 t3.small | 2 | 14.31$/mois | `<!-- $ -->` |
-| ALB | 1 | `<!-- $/h -->` | `<!-- $ -->` |
-| NAT Gateway | 2 | `<!-- $/h -->` | `<!-- $ -->` |
-| RDS db.t3.micro Multi-AZ | 1 | `<!-- $/h -->` | `<!-- $ -->` |
-| EBS RDS gp3 | `<!-- GB -->` | `<!-- $/GB-mois -->` | `<!-- $ -->` |
-| S3 primary + logs | `<!-- GB -->` | `<!-- $/GB-mois -->` | `<!-- $ -->` |
-| KMS CMK | 1 | `1.00 / mois` | `<!-- $ -->` |
-| Secrets Manager | 2 | `0.40 / secret / mois` | `<!-- $ -->` |
-| VPC Endpoints | 2 | `<!-- $/h -->` | `<!-- $ -->` |
-| **Total 24h** | | | `<!-- $ -->` |
-| **Extrapolation 30 jours** | | | 281.40$/mois |
+| EC2 t3.small | 2 | $0.0263/h | $1.26 |
+| ALB | 1 | $0.0252/h + $0.008/LCU-h (~1 LCU) | $0.80 |
+| NAT Gateway | 2 | $0.048/h | $2.30 |
+| RDS db.t3.micro Multi-AZ | 1 | $0.036/h | $0.86 |
+| EBS RDS gp3 | 20 GB | $0.115/GB-mois | $0.08 |
+| S3 primary + logs | ~1 GB | $0.023/GB-mois | ~$0.023 |
+| KMS CMK | 1 | $1.00/mois | $0.03 |
+| Secrets Manager | 2 | $0.40/secret/mois | $0.03 |
+| VPC Endpoints (Interface) | 2 | $0.011/h/AZ | $0.53 |
+| **Total 24h** | | | **~$5.89** |
+| **Extrapolation 30 jours** | | | **~$176.70** |
 
-> *Exemple : Total 24h ~= 6.10 USD, extrapolation 30 jours ~= 183 USD.*
 
-**Méthode utilisée** : calculator AWS
+
+**Méthode utilisée** : calcul manuel a partir des tarifs officiels AWS eu-west-3
 
 
 **Commentaire** :
 
 > *Exemple : le NAT Gateway seul représente ~35% du coût — on pourrait le supprimer après le boot initial de Nextcloud en `dev` puisque l'instance n'a plus besoin de sortir d'Internet.*
 
-Le VPC avec les 2 IPv4 - NAT - et Load-Balancer représentent 80% du coût
+Hypotheses retenues :
+
+- 1 seule EC2 `t3.small` car l'ASG est configure avec `desired_capacity = 1`
+- 1 seul NAT Gateway car le module `networking` n'en cree qu'un
+- 2 VPC Endpoint-hours factures pour Secrets Manager, car l'endpoint `Interface` est deploye sur 2 subnets/AZ
+- 20 GB pour `S3 primary + logs` a titre d'hypothese de dev
+- total calcule hors trafic variable : LCU ALB, data processing NAT Gateway, data processing VPC Endpoint, requetes S3/KMS/Secrets Manager
+
+Le NAT Gateway, l'ALB et les VPC endpoints representent la plus grande part du cout fixe en environnement `dev`.
 
 ---
 
@@ -226,26 +239,21 @@ Le VPC avec les 2 IPv4 - NAT - et Load-Balancer représentent 80% du coût
 ### 🟢 3 choses qui ont bien marché
 
 1. On a rempli tous les modules comme indiquer par les différents guides selon les roles.
-2. Les terraforms validate sont valide au sein de chaque modules
-3. On a créé une branche pour chaque roles et on a pu les merges au sein de la main.
-
-> *Exemple : "Le fait de figer les interfaces au kick-off nous a permis de travailler en parallèle sans se marcher dessus."*
+2. On a créé une branche pour chaque roles et on a pu les merges au sein de la main.
+3. Le `terraform plan` fonctionne dans envs/dev$
+![Image Terraform Plan](images_rendu/terraformPlan.png)
 
 ### 🔴 3 choses qui ont bloqué
 
-1. On a eu du retard pour la maise en commun causé par des problèmes dans la gestion et l'utilisation de git
-2. 
-3. `<!-- remplir -->`
-
-> *Exemple : "Cycle de dépendance entre security et data — perdu 45 min avant de comprendre qu'il fallait passer les ARN en variable plutôt que `depends_on`."*
+1. On a eu du retard pour la mise en commun causé par des problèmes dans la gestion et l'utilisation de git
+2. Des problèmes de cohérence dans les noms de varibales entre modules 
+3. `terraform apply`échoue à cause de droit IAM manquant (iam:CreateRole)
+![Image Terraform Apply Error Iam Role](images_rendu/errorIamRole.png)
 
 ### 🔷 3 améliorations pour la prochaine fois
 
-1. `<!-- remplir -->`
-2. `<!-- remplir -->`
-3. `<!-- remplir -->`
-
-> *Exemple : "Installer tfsec dans le pre-commit dès le matin aurait évité 3 HIGH détectés en fin de journée."*
+1. Meilleur compréhensio de Git
+2. Ajout des droits IAM pour la création de roles
 
 ---
 
@@ -264,95 +272,55 @@ Le VPC avec les 2 IPv4 - NAT - et Load-Balancer représentent 80% du coût
 **Ce que j'ai livré** :
 - `bootstrap/create-state-bucket.sh`
 - `envs/dev/backend.tf, providers.tf, main.tf`
-- `<!-- ex: revue de toutes les PRs avec au moins 1 approval -->`
-- `<!-- ex: orchestration du terraform apply collectif à 14h30 -->`
-
-**Ce qui m'a surpris ou frustré** :
-
-> *Exemple : "J'ai sous-estimé le temps de bootstrap du bucket state — 15 min à cause d'une IAM policy S3 manquante pour KMS."*
-
-<!-- remplir ici -->
-
-**Ce que j'ai appris** :
-
-> *Exemple : "La feature `use_lockfile` du backend S3 natif en 1.10 remplace complètement DynamoDB — plus simple et moins cher."*
-
-<!-- remplir ici -->
-
-**Hash du dernier commit significatif que j'ai fait** : `<!-- ex: a1b2c3d -->`
+- `Revue d'une PR pour le merge d'une branche`
+- `Complétion du RENDU.md`
 
 ---
 
 ### Rôle 2 — Network Engineer
 
-**Membre** : `<!-- Prénom Nom -->`
+**Membre** : `Yassine BOUMRA`
 
 **Ce que j'ai livré** :
-- `<!-- ex: modules/networking/main.tf — VPC + 6 subnets + IGW + NAT -->`
-- `<!-- ex: route tables publiques et privées avec associations -->`
-- `<!-- ex: VPC endpoints Gateway S3 + Interface Secrets Manager -->`
-- `<!-- ex: outputs vpc_id, public_subnet_ids, private_app_subnet_ids, private_db_subnet_ids -->`
-- `<!-- ex: README.md du module généré via terraform-docs -->`
-
-**Ce qui m'a surpris ou frustré** :
-
-> *Exemple : "La différence entre VPC endpoint Gateway (S3, DynamoDB, gratuit) et Interface (Secrets Manager, payant à l'heure) — j'ai failli mettre Interface pour S3."*
-
-<!-- remplir ici -->
-
-**Ce que j'ai appris** :
-
-<!-- remplir ici -->
-
-**Hash du dernier commit significatif que j'ai fait** : `<!-- ex: a1b2c3d -->`
+- `modules/networking/main.tf — VPC + 6 subnets + IGW + NAT`
+- `route tables publiques et privées avec associations`
+- `VPC endpoints Gateway S3 + Interface Secrets Manager`
+- `outputs vpc_id, public_subnet_ids, private_app_subnet_ids, private_db_subnet_ids`
+- `Complétion du RENDU.md`
 
 ---
 
 ### Rôle 3 — Compute Engineer
 
-**Membre** : `<!-- Prénom Nom -->`
+**Membre** : `Yann Salaï`
 
 **Ce que j'ai livré** :
-- `<!-- ex: modules/compute/alb.tf — ALB + TG + listener HTTPS self-signed -->`
-- `<!-- ex: modules/compute/asg.tf — launch template + ASG single -->`
-- `<!-- ex: templates/nextcloud-user-data.sh.tftpl — script Docker run Nextcloud -->`
-- `<!-- ex: outputs alb_dns_name, nextcloud_url, asg_name -->`
+- `modules/compute/alb.tf`
+- `modules/compute/asg.tf — launch template + ASG single`
+- `templates/nextcloud-user-data.sh.tftpl — script Docker run Nextcloud`
+- `outputs alb_dns_name, nextcloud_url, asg_name`
+- `création et validation des PR`
+- `Complétion du RENDU.md`
 
 **Ce qui m'a surpris ou frustré** :
 
-> *Exemple : "Le user_data a mis 4 minutes à finir — il faut attendre l'install Docker + pull de l'image Nextcloud avant que le health check ALB passe."*
-
-<!-- remplir ici -->
+Comprendre les configurations qui pouvait bloquer le plan et apply une fois tout les modules mergés.
 
 **Ce que j'ai appris** :
 
-<!-- remplir ici -->
-
-**Hash du dernier commit significatif que j'ai fait** : `<!-- ex: a1b2c3d -->`
+La mise en place de certificat TLS ainsi que l'utilisation des ASG avec les templates.
 
 ---
 
 ### Rôle 4 — Data Engineer
 
-**Membre** : `<!-- Ayoub Bentoumia -->`
+**Membre** : `Ayoub Bentoumia`
 
 **Ce que j'ai livré** :
-- `<!-- ex: modules/data/rds.tf — RDS PG Multi-AZ, subnet group, parameter group -->`
-- `<!-- ex: modules/data/s3.tf — bucket primary + bucket logs avec SSE-KMS, block public, versioning, bucket policy ALB -->`
-- `<!-- ex: outputs db_endpoint, db_name, s3_primary_bucket_name, s3_logs_bucket_name -->`
-- `<!-- ex: README.md du module -->`
-
-**Ce qui m'a surpris ou frustré** :
-
-> *Exemple : "La bucket policy pour laisser l'ALB écrire ses access logs — il faut utiliser le service principal correct et autoriser PutObject."*
-
-<!-- remplir ici -->
-
-**Ce que j'ai appris** :
-
-<!-- remplir ici -->
-
-**Hash du dernier commit significatif que j'ai fait** : `<!-- ex: a1b2c3d -->`
+- `modules/data/rds.tf — RDS PG Multi-AZ, subnet group, parameter group`
+- `modules/data/s3.tf — bucket primary + bucket logs avec SSE-KMS, block public, versioning, bucket policy ALB`
+- `outputs db_endpoint, db_name, s3_primary_bucket_name, s3_logs_bucket_name`
+- `README.md du module`
 
 ---
 
@@ -367,17 +335,6 @@ Le VPC avec les 2 IPv4 - NAT - et Load-Balancer représentent 80% du coût
 - modules/security/iam.tf — IAM role EC2 + instance profile + policies scoped S3/Secrets
 - modules/security/secrets.tf — 2 secrets (db_password, admin_password) générés via random_password
 
-**Ce qui m'a surpris ou frustré** :
-
-> *Exemple : "La policy IAM avec `Resource` scoped au bucket ARN exact + `${arn}/*` pour les objets — tfsec flag tous les `Resource = *`."*
-
-
-
-**Ce que j'ai appris** :
-
-J'ai appris à faire des réfrences entre plusieurs fichiers terraform pour sécuriser au mieux l'infra
-
-**Hash du dernier commit significatif que j'ai fait** : 1b038ce
 ---
 
 ## Section 10 — Checklist finale avant remise
