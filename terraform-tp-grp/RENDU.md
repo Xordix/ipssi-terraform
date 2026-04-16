@@ -398,7 +398,7 @@ La mise en place de certificat TLS ainsi que l'utilisation des ASG avec les temp
 - [ ] La commande `grep -rE "(password|secret|AKIA)" --include="*.tf" . | grep -v example` retourne 0 ligne
 - [ ] Les 5 screenshots obligatoires sont dans `docs/screenshots/`
 - [ ] Le fichier `docs/RENDU.md` (ce fichier) est rempli à 100 % — plus aucun `<!-- remplir -->` ni `TODO` résiduel
-- [ ] Le fichier `ARCHITECTURE.md` contient un schéma Mermaid à jour
+- [x] Le fichier `ARCHITECTURE.md` contient un schéma Mermaid à jour
 - [X] Chaque module dans `modules/` a son `README.md` (minimum : titre + description + inputs/outputs)
 - [ ] Le fichier `.terraform.lock.hcl` est committé (mais pas `.terraform/`)
 - [X] Les commits git sont tracés par auteur (pour la notation individuelle)
