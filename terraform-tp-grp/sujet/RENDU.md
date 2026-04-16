@@ -24,9 +24,9 @@
 
 ## Section 1 — Identification de l'équipe
 
-**Numéro d'équipe** : `TODO`
+**Numéro d'équipe** : `Groupe 3`
 **Nom de code de l'équipe** *(optionnel)* : `TODO`
-**Date de rendu** : `YYYY-MM-DD`
+**Date de rendu** : `16/04/2026`
 
 ### Membres
 
@@ -34,8 +34,8 @@
 |------------|--------------|-------|---------------|
 | Mylène RODRIGUES DOS SANTOS | Platform Lead (Rôle 1) | `prenom.nom@domaine.fr` | `@ghuser` |
 | Yassine BOUMRA | Network Engineer (Rôle 2) | | |
-| Ayoub BENTOUMIA | Compute Engineer (Rôle 3) | | |
-| Yann SALAÏ | Data Engineer (Rôle 4) | | |
+| Yann SALAÏ | Compute Engineer (Rôle 3) | | |
+| Ayoub Bentoumia | Data Engineer (Rôle 4) | | |
 | Clément DUCROCQ | Security Engineer (Rôle 5) | clement.d80150@gmail.com | ClementD |
 
 > 🔷 Équipe à 4 personnes : indiquez qui a fusionné le rôle Security dans le rôle Platform.
