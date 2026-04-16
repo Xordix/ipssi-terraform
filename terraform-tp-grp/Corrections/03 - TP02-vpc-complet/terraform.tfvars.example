@@ -1,0 +1,12 @@
+# Copier en terraform.tfvars si vous voulez surcharger les defaults.
+# Toutes ces variables ont un default dans variables.tf, donc ce fichier
+# est optionnel.
+
+# aws_region   = "eu-west-1"
+# project_name = "formation"
+# environment  = "dev"
+# vpc_cidr     = "10.0.0.0/16"
+# azs          = ["eu-west-1a", "eu-west-1b"]
+
+# En prod : toujours restreindre a votre IP publique (/32) ou CIDR VPN.
+# bastion_allowed_cidr = "203.0.113.42/32"

@@ -1,0 +1,16 @@
+# Copier ce fichier en terraform.tfvars et renseigner les valeurs.
+# terraform.tfvars est ignore par Git (secrets potentiels).
+
+# Obligatoire : pas de default dans variables.tf
+owner = "votre-email@example.com"
+
+# Optionnels : decommenter pour surcharger les defaults
+# project     = "mon-projet"
+# environment = "dev"
+# aws_region  = "eu-west-1"
+
+# Tags additionnels (merges avec les default_tags)
+# tags = {
+#   CostCenter = "formation"
+#   Team       = "ops"
+# }
