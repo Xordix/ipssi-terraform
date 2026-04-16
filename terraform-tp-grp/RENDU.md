@@ -34,7 +34,7 @@
 |------------|--------------|-------|---------------|
 | Mylène RODRIGUES DOS SANTOS | Platform Lead (Rôle 1) | `m.rodrigues-dos-santos@ecole-ipssi.net` | `MyleneRDS` |
 | Yassine BOUMRA | Network Engineer (Rôle 2) | | |
-| Yann SALAÏ | Compute Engineer (Rôle 3) | | |
+| Yann SALAÏ | Compute Engineer (Rôle 3) | yann.salai89@gmail.com | Xordix|
 | Ayoub Bentoumia | Data Engineer (Rôle 4) |bentoumia.ayoub13@gmail.com | Ben-Ayoub|
 | Clément DUCROCQ | Security Engineer (Rôle 5) | clement.d80150@gmail.com | ClementD |
 
