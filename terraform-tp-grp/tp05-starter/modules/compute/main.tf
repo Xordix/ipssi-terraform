@@ -10,28 +10,53 @@
 #   - templates/nextcloud-user-data.sh.tftpl : script user_data
 #
 # Ce fichier main.tf contient :
-#   - data "aws_ami" "al2023"                        -> AMI Amazon Linux 2023
 #   - resource "tls_private_key" "cert"              -> cle privee RSA 4096
 #   - resource "tls_self_signed_cert" "cert"         -> cert auto-signe
 #   - resource "aws_acm_certificate" "cert"          -> import du cert dans ACM
 # =============================================================================
 
-# TODO(role-3) : data "aws_ami" "al2023"
-#   Filtres : name = al2023-ami-*-x86_64 ; architecture = x86_64 ;
-#             state = available ; most_recent = true ; owners = ["amazon"]
+resource "tls_private_key" "self_signed" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
 
-# TODO(role-3) : tls_private_key "cert"
-#   algorithm = "RSA" ; rsa_bits = 4096
+resource "tls_self_signed_cert" "alb" {
+  private_key_pem = tls_private_key.self_signed.private_key_pem
 
-# TODO(role-3) : tls_self_signed_cert "cert"
-#   private_key_pem       = tls_private_key.cert.private_key_pem
-#   subject { common_name = "nextcloud-${var.environment}.kolab.local" ; organization = "Kolab" }
-#   validity_period_hours = 8760  # 1 an
-#   allowed_uses          = ["digital_signature", "key_encipherment", "server_auth"]
+  subject {
+    common_name  = "${local.name_prefix}.kolab.local"
+    organization = "Kolab Cabinet Avocats"
+  }
 
-# TODO(role-3) : aws_acm_certificate "cert"
-#   private_key      = tls_private_key.cert.private_key_pem
-#   certificate_body = tls_self_signed_cert.cert.cert_pem
+  validity_period_hours = 17520 # 2 ans
 
+  # Usages autorises par le cert
+  allowed_uses = [
+    "key_encipherment",
+    "digital_signature",
+    "server_auth",
+  ]
+
+  # DNS alternatif : on autorise n importe quel domaine ALB AWS
+  # (le DNS name de l ALB sera genere apres)
+  dns_names = [
+    "${local.name_prefix}.kolab.local",
+    "*.elb.amazonaws.com",
+    "*.eu-west-3.elb.amazonaws.com",
+  ]
+}
+
+resource "aws_acm_certificate" "self_signed" {
+  private_key      = tls_private_key.self_signed.private_key_pem
+  certificate_body = tls_self_signed_cert.alb.cert_pem
+
+  tags = merge(local.common_tags, {
+    Name = "${local.name_prefix}-alb-cert"
+  })
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
 
 data "aws_region" "current" {}
