@@ -1,1 +1,17 @@
-terraform.tfvars
+# -----------------------------------------------------------------------------
+# envs/dev/terraform.tfvars.example
+#
+# Copier en terraform.tfvars (gitignore) et renseigner.
+#
+# 🔷 Obtenir votre IP publique :
+#   curl -s ifconfig.me
+#   # puis completer avec /32
+# -----------------------------------------------------------------------------
+
+# 🔴 Ne PAS mettre 0.0.0.0/0 : la validation refuse (anti-pattern TP).
+allowed_admin_cidr = "88.173.192.70/32"
+
+# Defaut OK, override si besoin.
+aws_region   = "eu-west-3"
+project_name = "kolab"
+environment  = "dev"
