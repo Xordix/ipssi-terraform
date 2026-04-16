@@ -32,3 +32,6 @@
 # TODO(role-3) : aws_acm_certificate "cert"
 #   private_key      = tls_private_key.cert.private_key_pem
 #   certificate_body = tls_self_signed_cert.cert.cert_pem
+
+
+data "aws_region" "current" {}

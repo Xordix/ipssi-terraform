@@ -8,55 +8,55 @@ variable "public_subnet_ids" {
   type        = map(string)
 }
 
-# variable "private_app_subnet_ids" {
-#   description = "Map AZ -> subnet_id prive (pour l ASG)."
-#   type        = map(string)
-# }
+variable "private_app_subnet_ids" {
+  description = "Map AZ -> subnet_id prive (pour l ASG)."
+  type        = map(string)
+}
 
 variable "alb_security_group_id" {
   description = "SG de l ALB (fourni par le module security)."
   type        = string
 }
 
-# variable "app_security_group_id" {
-#   description = "SG des EC2 applicatives (fourni par le module security)."
-#   type        = string
-# }
+variable "app_security_group_id" {
+  description = "SG des EC2 applicatives (fourni par le module security)."
+  type        = string
+}
 
-# variable "app_instance_profile_name" {
-#   description = "Instance profile IAM pour l ASG (fourni par security)."
-#   type        = string
-# }
+variable "app_instance_profile_name" {
+  description = "Instance profile IAM pour l ASG (fourni par security)."
+  type        = string
+}
 
-# variable "db_endpoint" {
-#   description = "Hostname RDS (output du module data)."
-#   type        = string
-# }
+variable "db_endpoint" {
+  description = "Hostname RDS (output du module data)."
+  type        = string
+}
 
-# variable "db_name" {
-#   description = "Nom base logique RDS."
-#   type        = string
-# }
+variable "db_name" {
+  description = "Nom base logique RDS."
+  type        = string
+}
 
-# variable "db_username" {
-#   description = "User master RDS."
-#   type        = string
-# }
+variable "db_username" {
+  description = "User master RDS."
+  type        = string
+}
 
-# variable "db_password_secret_arn" {
-#   description = "ARN du secret Secrets Manager contenant le password DB."
-#   type        = string
-# }
+variable "db_password_secret_arn" {
+  description = "ARN du secret Secrets Manager contenant le password DB."
+  type        = string
+}
 
-# variable "admin_password_secret_arn" {
-#   description = "ARN du secret du password admin Nextcloud."
-#   type        = string
-# }
+variable "admin_password_secret_arn" {
+  description = "ARN du secret du password admin Nextcloud."
+  type        = string
+}
 
-# variable "s3_primary_bucket_name" {
-#   description = "Nom du bucket S3 primary storage Nextcloud."
-#   type        = string
-# }
+variable "s3_primary_bucket_name" {
+  description = "Nom du bucket S3 primary storage Nextcloud."
+  type        = string
+}
 
 variable "s3_logs_bucket_name" {
   description = "Nom du bucket S3 pour les access logs ALB."
