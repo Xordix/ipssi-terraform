@@ -1,1 +1,29 @@
 terraform.tfvars
+# Terraform
+.terraform/
+.terraform.lock.hcl.backup
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+
+# Variables locales (ne JAMAIS committer)
+*.tfvars
+!*.tfvars.example
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# OS / editeurs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Infracost
+infracost*.json
