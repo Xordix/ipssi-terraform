@@ -30,5 +30,5 @@ output "nat_gateway_public_ip" {
 
 output "vpc_endpoints_security_group_id" {
   description = "SG attache aux VPC endpoints (autorise 443 depuis VPC CIDR)."
-  value       = aws_security_group.vpc_endpoints.id
+  value       = aws_security_group.endpoints.id
 }
