@@ -86,7 +86,7 @@ const PASTEL_COLORS={blue:{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'}, g
 <hr />
 <h2 id="votre-mission">Votre mission</h2>
 <ul>
-<li><strong>Poser les fondations réseau</strong> : VPC <code>10.30.0.0/16</code> en <code>eu-west-1</code>, 6 subnets répartis sur 2 AZ (publics, privés app, privés DB), IGW, NAT Gateway <strong>single AZ</strong> pour contenir le coût.</li>
+<li><strong>Poser les fondations réseau</strong> : VPC <code>10.30.0.0/16</code> en <code>eu-west-3</code>, 6 subnets répartis sur 2 AZ (publics, privés app, privés DB), IGW, NAT Gateway <strong>single AZ</strong> pour contenir le coût.</li>
 <li><strong>Livrer les outputs réseau dès 10h30</strong> pour débloquer les Rôles 5 (Security) et 4 (Data) qui attendent <code>vpc_id</code>, <code>vpc_cidr</code> et les IDs des subnets.</li>
 <li><strong>Réduire les coûts NAT via 2 VPC endpoints</strong> : un gateway endpoint S3 (gratuit) et un interface endpoint Secrets Manager (payant mais économise le trafic NAT).</li>
 <li><strong>Calculer les CIDRs avec <code>cidrsubnet()</code></strong> dans <code>locals.tf</code> pour éviter les valeurs codées en dur et rendre le module paramétrable.</li>
@@ -109,7 +109,7 @@ const PASTEL_COLORS={blue:{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'}, g
 <p>Un <strong>VPC endpoint</strong> permet à une instance privée d'atteindre un service AWS (S3, Secrets Manager, etc.) <strong>sans passer par Internet</strong> (ni NAT, ni IGW). Deux types :</p>
 <ul>
 <li><strong>Gateway endpoint</strong> (S3, DynamoDB) : <strong>gratuit</strong>, ajoute une route dans la route table concernée. Le trafic part directement vers le service.</li>
-<li><strong>Interface endpoint</strong> (Secrets Manager, KMS, SSM, ...) : <strong>payant</strong> (~0.01 USD/h + trafic), crée une ENI avec IP privée dans le VPC. Active <code>private_dns_enabled = true</code> pour que <code>secretsmanager.eu-west-1.amazonaws.com</code> résolve vers l'IP privée de l'endpoint.</li>
+<li><strong>Interface endpoint</strong> (Secrets Manager, KMS, SSM, ...) : <strong>payant</strong> (~0.01 USD/h + trafic), crée une ENI avec IP privée dans le VPC. Active <code>private_dns_enabled = true</code> pour que <code>secretsmanager.eu-west-3.amazonaws.com</code> résolve vers l'IP privée de l'endpoint.</li>
 </ul>
 <p>Bénéfices : <strong>réduction des coûts NAT</strong> (le trafic S3 et Secrets Manager ne passe plus par la NAT) + sécurité (pas de sortie Internet pour ces flux).</p>
 <hr />
@@ -142,7 +142,7 @@ const PASTEL_COLORS={blue:{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'}, g
 <span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;azs&quot;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Liste des Availability Zones a utiliser. 2 AZ minimum pour Multi-AZ RDS.&quot;</span>
 <span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
-<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eu-west-1a&quot;, &quot;eu-west-1b&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eu-west-3a&quot;, &quot;eu-west-3b&quot;</span><span class="p">]</span>
 
 <span class="w">  </span><span class="nb">validation</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="na">condition</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="nv">var.azs</span><span class="p">)</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="m">2</span>
@@ -383,7 +383,7 @@ cat<span class="w"> </span>&gt;<span class="w"> </span>versions.tf<span class="w
 <span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;azs&quot;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Liste des AZ. 2 AZ exactement pour ce TP.&quot;</span>
 <span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="kt">string</span><span class="p">)</span>
-<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eu-west-1a&quot;, &quot;eu-west-1b&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eu-west-3a&quot;, &quot;eu-west-3b&quot;</span><span class="p">]</span>
 
 <span class="w">  </span><span class="nb">validation</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="na">condition</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="nv">var.azs</span><span class="p">)</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="m">2</span>
@@ -428,10 +428,10 @@ cat<span class="w"> </span>&gt;<span class="w"> </span>versions.tf<span class="w
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><strong>Résultat attendu</strong> : avec <code>vpc_cidr = "10.30.0.0/16"</code> et <code>azs = ["eu-west-1a", "eu-west-1b"]</code>, les 3 maps contiennent :</p>
-<div class="highlight"><pre><span></span><code>public_subnets      = { eu-west-1a = &quot;10.30.1.0/24&quot;,  eu-west-1b = &quot;10.30.2.0/24&quot;  }
-private_app_subnets = { eu-west-1a = &quot;10.30.11.0/24&quot;, eu-west-1b = &quot;10.30.12.0/24&quot; }
-private_db_subnets  = { eu-west-1a = &quot;10.30.21.0/24&quot;, eu-west-1b = &quot;10.30.22.0/24&quot; }
+<p><strong>Résultat attendu</strong> : avec <code>vpc_cidr = "10.30.0.0/16"</code> et <code>azs = ["eu-west-3a", "eu-west-3b"]</code>, les 3 maps contiennent :</p>
+<div class="highlight"><pre><span></span><code>public_subnets      = { eu-west-3a = &quot;10.30.1.0/24&quot;,  eu-west-3b = &quot;10.30.2.0/24&quot;  }
+private_app_subnets = { eu-west-3a = &quot;10.30.11.0/24&quot;, eu-west-3b = &quot;10.30.12.0/24&quot; }
+private_db_subnets  = { eu-west-3a = &quot;10.30.21.0/24&quot;, eu-west-3b = &quot;10.30.22.0/24&quot; }
 </code></pre></div>
 <p><strong>À vous !</strong></p>
 <blockquote>
@@ -531,7 +531,7 @@ private_db_subnets  = { eu-west-1a = &quot;10.30.21.0/24&quot;, eu-west-1b = &qu
 </code></pre></div>
 <p><strong>À vous !</strong></p>
 <blockquote>
-<p>Vérifiez que <code>terraform plan</code> dans <code>envs/dev/</code> affiche <strong>exactement 6 <code>aws_subnet</code></strong> à créer : <code>aws_subnet.public["eu-west-1a"]</code>, <code>aws_subnet.public["eu-west-1b"]</code>, etc.</p>
+<p>Vérifiez que <code>terraform plan</code> dans <code>envs/dev/</code> affiche <strong>exactement 6 <code>aws_subnet</code></strong> à créer : <code>aws_subnet.public["eu-west-3a"]</code>, <code>aws_subnet.public["eu-west-3b"]</code>, etc.</p>
 </blockquote>
 <p>Indices :</p>
 <ul>
@@ -574,7 +574,7 @@ private_db_subnets  = { eu-west-1a = &quot;10.30.21.0/24&quot;, eu-west-1b = &qu
 <span class="p">}</span>
 </code></pre></div>
 <p>🟡 <strong>Piège courant</strong> : oublier <code>depends_on = [aws_internet_gateway.main]</code> sur l'EIP. Terraform essaie d'allouer l'EIP avant que l'IGW soit prêt → <code>InvalidAllocationID.NotFound</code> au plan suivant.</p>
-<p>🔷 <strong>Point clé à vérifier</strong> : après apply, <code>aws ec2 describe-nat-gateways --region eu-west-1</code> retourne <strong>1</strong> NAT en état <code>available</code>, dans l'AZ-a.</p>
+<p>🔷 <strong>Point clé à vérifier</strong> : après apply, <code>aws ec2 describe-nat-gateways --region eu-west-3</code> retourne <strong>1</strong> NAT en état <code>available</code>, dans l'AZ-a.</p>
 <hr />
 <h3 id="etape-7-route-tables-6-associations-15-min">Étape 7 : Route tables + 6 associations (15 min)</h3>
 <p><strong>Objectif</strong> : créer 2 route tables (publique vers IGW, privée vers NAT) et associer les 6 subnets.</p>
@@ -658,7 +658,7 @@ private_db_subnets  = { eu-west-1a = &quot;10.30.21.0/24&quot;, eu-west-1b = &qu
 <span class="c1"># =============================================================================</span>
 <span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc_endpoint&quot;</span><span class="w"> </span><span class="nv">&quot;s3&quot;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="na">vpc_id</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_vpc.main.id</span>
-<span class="w">  </span><span class="na">service_name</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;com.amazonaws.eu-west-1.s3&quot;</span>
+<span class="w">  </span><span class="na">service_name</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;com.amazonaws.eu-west-3.s3&quot;</span>
 <span class="w">  </span><span class="na">vpc_endpoint_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Gateway&quot;</span>
 
 <span class="c1">  # Injecter la route dans la RT privee</span>
@@ -670,12 +670,12 @@ private_db_subnets  = { eu-west-1a = &quot;10.30.21.0/24&quot;, eu-west-1b = &qu
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>🔷 <strong>Point clé à vérifier</strong> : dans la console VPC → Endpoints, l'endpoint <code>com.amazonaws.eu-west-1.s3</code> est en état <code>Available</code>, type <code>Gateway</code>, avec la route table privée associée.</p>
+<p>🔷 <strong>Point clé à vérifier</strong> : dans la console VPC → Endpoints, l'endpoint <code>com.amazonaws.eu-west-3.s3</code> est en état <code>Available</code>, type <code>Gateway</code>, avec la route table privée associée.</p>
 <hr />
 <h3 id="etape-9-vpc-endpoint-secrets-manager-interface-sg-15-min">Étape 9 : VPC Endpoint Secrets Manager (interface) + SG (15 min)</h3>
 <p><strong>Objectif</strong> : créer un interface endpoint pour Secrets Manager + un SG "endpoints" qui autorise 443 depuis le VPC CIDR.</p>
 <p>🔵 <strong>Rappel concept : Interface endpoint</strong></p>
-<p>Contrairement au gateway endpoint, un <strong>interface endpoint</strong> est <strong>payant</strong> (~0.01 USD/h + trafic) mais indispensable pour les services qui ne supportent pas le gateway (Secrets Manager, KMS, SSM, etc.). Il crée une <strong>ENI</strong> (interface réseau) avec une IP privée dans chaque subnet listé. Le <code>private_dns_enabled = true</code> fait que <code>secretsmanager.eu-west-1.amazonaws.com</code> résout vers l'IP privée de l'ENI — le code AWS SDK fonctionne sans modification.</p>
+<p>Contrairement au gateway endpoint, un <strong>interface endpoint</strong> est <strong>payant</strong> (~0.01 USD/h + trafic) mais indispensable pour les services qui ne supportent pas le gateway (Secrets Manager, KMS, SSM, etc.). Il crée une <strong>ENI</strong> (interface réseau) avec une IP privée dans chaque subnet listé. Le <code>private_dns_enabled = true</code> fait que <code>secretsmanager.eu-west-3.amazonaws.com</code> résout vers l'IP privée de l'ENI — le code AWS SDK fonctionne sans modification.</p>
 <p>Un SG dédié est attaché à l'ENI : il doit autoriser 443 depuis le VPC CIDR.</p>
 <p>🔷 <strong>Décision prise au kick-off</strong> : le SG "endpoints" est créé par le Rôle 2 (vous), pas par le Rôle 5. Ça évite un aller-retour : vous exposez <code>vpc_endpoints_security_group_id</code> en output, personne n'en a besoin côté Rôle 5.</p>
 <p><strong>Exemple</strong> :</p>
@@ -707,7 +707,7 @@ private_db_subnets  = { eu-west-1a = &quot;10.30.21.0/24&quot;, eu-west-1b = &qu
 <span class="c1"># =============================================================================</span>
 <span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;aws_vpc_endpoint&quot;</span><span class="w"> </span><span class="nv">&quot;secretsmanager&quot;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="na">vpc_id</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_vpc.main.id</span>
-<span class="w">  </span><span class="na">service_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;com.amazonaws.eu-west-1.secretsmanager&quot;</span>
+<span class="w">  </span><span class="na">service_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;com.amazonaws.eu-west-3.secretsmanager&quot;</span>
 <span class="w">  </span><span class="na">vpc_endpoint_type</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Interface&quot;</span>
 <span class="w">  </span><span class="na">private_dns_enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
 
@@ -732,7 +732,7 @@ private_db_subnets  = { eu-west-1a = &quot;10.30.21.0/24&quot;, eu-west-1b = &qu
 <li><code>service_name</code> pour Secrets Manager : <code>com.amazonaws.&lt;region&gt;.secretsmanager</code></li>
 <li><code>subnet_ids</code> attend une liste, pas une map → utiliser <code>[for s in aws_subnet.private_app : s.id]</code></li>
 </ul>
-<p>🔷 <strong>Point clé à vérifier</strong> : <code>aws ec2 describe-vpc-endpoints --region eu-west-1</code> retourne <strong>2 endpoints</strong> en <code>Available</code>. Test depuis l'EC2 (quand Rôle 3 sera livré) : <code>nslookup secretsmanager.eu-west-1.amazonaws.com</code> doit retourner une IP privée <code>10.30.x.y</code>.</p>
+<p>🔷 <strong>Point clé à vérifier</strong> : <code>aws ec2 describe-vpc-endpoints --region eu-west-3</code> retourne <strong>2 endpoints</strong> en <code>Available</code>. Test depuis l'EC2 (quand Rôle 3 sera livré) : <code>nslookup secretsmanager.eu-west-3.amazonaws.com</code> doit retourner une IP privée <code>10.30.x.y</code>.</p>
 <hr />
 <h3 id="etape-10-outputstf-readmemd-10-min">Étape 10 : <code>outputs.tf</code> + <code>README.md</code> (10 min)</h3>
 <p><strong>Objectif</strong> : exposer les outputs figés au kick-off, documenter le module.</p>
@@ -752,7 +752,7 @@ VPC 10.30.0.0/16 + 6 subnets sur 2 AZ + NAT single + 2 VPC endpoints.
 - project_name (string, required)
 - environment (string, required)
 - vpc_cidr (string, default &quot;10.30.0.0/16&quot;)
-- azs (list(string), default [&quot;eu-west-1a&quot;,&quot;eu-west-1b&quot;])
+- azs (list(string), default [&quot;eu-west-3a&quot;,&quot;eu-west-3b&quot;])
 
 ## Outputs
 
@@ -785,7 +785,7 @@ terraform-docs<span class="w"> </span>markdown<span class="w"> </span>table<span
 <span class="w">  </span><span class="na">project_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.project_name</span>
 <span class="w">  </span><span class="na">environment</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span>
 <span class="w">  </span><span class="na">vpc_cidr</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.30.0.0/16&quot;</span>
-<span class="w">  </span><span class="na">azs</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eu-west-1a&quot;, &quot;eu-west-1b&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="na">azs</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eu-west-3a&quot;, &quot;eu-west-3b&quot;</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="c1"># Le Role 5 (security) consomme :</span>
@@ -817,7 +817,7 @@ terraform-docs<span class="w"> </span>markdown<span class="w"> </span>table<span
 <li>Le Rôle 5 peut ensuite démarrer (il avait peut-être déjà commencé sur des specs papier).</li>
 <li>Dès que votre module est mergé, le Rôle 1 fait <code>terraform plan</code> dans <code>envs/dev/</code> pour confirmer que vos ~20 ressources apparaissent.</li>
 </ol>
-<p>🟡 <strong>Cas de cassure typique</strong> : vous exposez <code>private_db_subnet_ids</code> comme une <strong>liste</strong> au lieu d'une <strong>map</strong>. Le Rôle 4 écrit sa <code>aws_db_subnet_group</code> avec <code>subnet_ids = values(var.private_db_subnet_ids)</code> et ça casse. Respectez le type <code>map(string)</code> (format <code>{ "eu-west-1a" = "subnet-abc" }</code>).</p>
+<p>🟡 <strong>Cas de cassure typique</strong> : vous exposez <code>private_db_subnet_ids</code> comme une <strong>liste</strong> au lieu d'une <strong>map</strong>. Le Rôle 4 écrit sa <code>aws_db_subnet_group</code> avec <code>subnet_ids = values(var.private_db_subnet_ids)</code> et ça casse. Respectez le type <code>map(string)</code> (format <code>{ "eu-west-3a" = "subnet-abc" }</code>).</p>
 <hr />
 <h2 id="troubleshooting-specifique-a-votre-role">Troubleshooting spécifique à votre rôle</h2>
 <table>
@@ -847,7 +847,7 @@ terraform-docs<span class="w"> </span>markdown<span class="w"> </span>table<span
 <tr>
 <td><code>Error: creating VPC Endpoint: InvalidParameter: Value (...) is not a valid service name</code></td>
 <td>Mauvais nom de service</td>
-<td>Forme correcte : <code>com.amazonaws.&lt;region&gt;.&lt;service&gt;</code>. Pour Secrets Manager : <code>com.amazonaws.eu-west-1.secretsmanager</code></td>
+<td>Forme correcte : <code>com.amazonaws.&lt;region&gt;.&lt;service&gt;</code>. Pour Secrets Manager : <code>com.amazonaws.eu-west-3.secretsmanager</code></td>
 </tr>
 <tr>
 <td><code>Error: creating VPC Endpoint: (...) subnet must be in a different AZ</code></td>
@@ -860,7 +860,7 @@ terraform-docs<span class="w"> </span>markdown<span class="w"> </span>table<span
 <td>Rafraîchir le state : <code>terraform refresh</code>, ou importer l'association existante</td>
 </tr>
 <tr>
-<td><code>nslookup secretsmanager.eu-west-1.amazonaws.com</code> depuis EC2 retourne IP publique</td>
+<td><code>nslookup secretsmanager.eu-west-3.amazonaws.com</code> depuis EC2 retourne IP publique</td>
 <td><code>private_dns_enabled = true</code> oublié OU <code>enable_dns_hostnames</code> du VPC à <code>false</code></td>
 <td>Vérifier les deux ; réappliquer</td>
 </tr>

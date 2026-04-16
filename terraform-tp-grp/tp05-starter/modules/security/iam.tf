@@ -82,50 +82,7 @@ resource "aws_iam_role" "app" {
 
 
 #############################################
-# 3a. Policy S3 : Accès au stockage Nextcloud (Scope Object & Bucket)
-#############################################
-data "aws_iam_policy_document" "app_s3" {
-  # ... (Statement 1: Actions sur les OBJETS du bucket)
-  statement {
-    sid    = "NextcloudS3ObjectsAccess"
-    effect = "Allow"
-    actions = [
-      "s3:GetObject",
-      "s3:PutObject",
-      "s3:DeleteObject",
-      "s3:GetObjectVersion",
-      "s3:AbortMultipartUpload"
-    ]
-    # Correction ici : L'utilisation de la concaténation dans une liste est la clé.
-    resources = [
-      "${var.s3_primary_bucket_arn}/*"
-    ]
-  }
-
-  # ... (Statement 2: Actions sur le BUCKET lui-même)
-  statement {
-    sid    = "NextcloudS3BucketList"
-    effect = "Allow"
-    actions = [
-      "s3:ListBucket",
-      "s3:GetBucketLocation",
-      "s3:ListBucketMultipartUploads"
-    ]
-    # Ici, l'ARN du bucket entier est correct et ne devrait pas poser problème.
-    resources = [
-      var.s3_primary_bucket_arn
-    ]
-  }
-}
-
-resource "aws_iam_role_policy" "app_s3" {
-  name   = "${local.name_prefix}-app-s3"
-  role   = aws_iam_role.app.id
-  policy = data.aws_iam_policy_document.app_s3.json
-}
-
-#############################################
-# 3b. Policy Secrets Manager : Accès aux secrets (Scope Secret ARN)
+# 3a. Policy Secrets Manager : Accès aux secrets (Scope Secret ARN)
 #############################################
 data "aws_iam_policy_document" "app_secrets" {
   statement {
@@ -149,7 +106,7 @@ resource "aws_iam_role_policy" "app_secrets" {
 }
 
 #############################################
-# 3c. Policy KMS : Droit de déchiffrement (Scope CMK ARN)
+# 3b. Policy KMS : Droit de déchiffrement (Scope CMK ARN)
 #############################################
 data "aws_iam_policy_document" "app_kms" {
   statement {

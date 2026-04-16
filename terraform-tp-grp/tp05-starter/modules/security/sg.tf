@@ -35,7 +35,7 @@
 
 resource "aws_security_group" "alb" {
   name        = "${local.name_prefix}-alb"
-  description = "SG pour le Load Balancer Application (ALB). Accepte 80/443 depuis Internet."
+  description = "ALB security group. Allows HTTP and HTTPS from Internet."
   vpc_id      = var.vpc_id
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-alb"
@@ -76,7 +76,7 @@ resource "aws_vpc_security_group_egress_rule" "alb_all" {
 
 resource "aws_security_group" "app" {
   name        = "${local.name_prefix}-app"
-  description = "SG pour les serveurs d'applications (EC2/ECS). Ne doit accepter que le trafic de l'ALB."
+  description = "App security group for EC2 and ECS."
   vpc_id      = var.vpc_id
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-app"
@@ -108,7 +108,7 @@ resource "aws_vpc_security_group_egress_rule" "app_all" {
 
 resource "aws_security_group" "db" {
   name        = "${local.name_prefix}-db"
-  description = "SG pour la base de données PostgreSQL (RDS). Très restrictif."
+  description = "DB security group for PostgreSQL RDS."
   vpc_id      = var.vpc_id
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-db"

@@ -111,7 +111,7 @@ const PASTEL_COLORS={blue:{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'}, g
 <span class="w">  </span><span class="kr">backend</span><span class="w"> </span><span class="nv">&quot;s3&quot;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="na">bucket</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tf-state-kolab&quot;</span>
 <span class="w">    </span><span class="na">key</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;envs/dev/terraform.tfstate&quot;</span>
-<span class="w">    </span><span class="na">region</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="w">    </span><span class="na">region</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-3&quot;</span>
 <span class="w">    </span><span class="na">encrypt</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
 <span class="w">    </span><span class="na">use_lockfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
 <span class="w">  </span><span class="p">}</span>
@@ -140,9 +140,9 @@ const PASTEL_COLORS={blue:{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'}, g
 <span class="c1"># =============================================================================</span>
 
 <span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;aws_region&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Region AWS cible. eu-west-1 (Irlande) impose par le CdC RGPD.&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Region AWS cible. eu-west-3 (Irlande) impose par le CdC RGPD.&quot;</span>
 <span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
-<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-3&quot;</span>
 <span class="p">}</span>
 
 <span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;allowed_admin_cidr&quot;</span><span class="w"> </span><span class="p">{</span>
@@ -443,7 +443,7 @@ aws<span class="w"> </span>s3api<span class="w"> </span>put-bucket-policy<span c
 </code></pre></div>
 <p><strong>Résultat attendu</strong> :</p>
 <div class="highlight"><pre><span></span><code>=== 1. Creation KMS CMK pour chiffrer le state ===
-KMS CMK ARN : arn:aws:kms:eu-west-1:123456789012:key/a1b2c3d4-...
+KMS CMK ARN : arn:aws:kms:eu-west-3:123456789012:key/a1b2c3d4-...
 
 === 2. Creation bucket S3 state ===
 
@@ -485,7 +485,7 @@ KMS CMK ARN : arn:aws:kms:eu-west-1:123456789012:key/a1b2c3d4-...
 <span class="w">  </span><span class="kr">backend</span><span class="w"> </span><span class="nv">&quot;s3&quot;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="na">bucket</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tf-state-kolab-team1-kolab&quot;</span><span class="c1">  # &lt;- adapter au bucket cree</span>
 <span class="w">    </span><span class="na">key</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;envs/dev/terraform.tfstate&quot;</span>
-<span class="w">    </span><span class="na">region</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="w">    </span><span class="na">region</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-3&quot;</span>
 <span class="w">    </span><span class="na">encrypt</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
 <span class="w">    </span><span class="na">kms_key_id</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;alias/tf-state-kolab-team1&quot;</span><span class="c1">  # &lt;- adapter a votre alias</span>
 <span class="w">    </span><span class="na">use_lockfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="c1">                          # TF &gt;= 1.10 : locking natif</span>
@@ -539,13 +539,13 @@ KMS CMK ARN : arn:aws:kms:eu-west-1:123456789012:key/a1b2c3d4-...
 <span class="c1"># =============================================================================</span>
 
 <span class="kr">variable</span><span class="w"> </span><span class="nv">&quot;aws_region&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Region AWS (impose : eu-west-1 pour RGPD).&quot;</span>
+<span class="w">  </span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Region AWS (impose : eu-west-3 pour RGPD).&quot;</span>
 <span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span>
-<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="w">  </span><span class="na">default</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-3&quot;</span>
 
 <span class="w">  </span><span class="nb">validation</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="na">condition</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.aws_region</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
-<span class="w">    </span><span class="na">error_message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;La region doit etre eu-west-1 (exigence T1 du CdC).&quot;</span>
+<span class="w">    </span><span class="na">condition</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.aws_region</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s2">&quot;eu-west-3&quot;</span>
+<span class="w">    </span><span class="na">error_message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;La region doit etre eu-west-3 (exigence T1 du CdC).&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
@@ -604,7 +604,7 @@ allowed_admin_cidr = &quot;203.0.113.42/32&quot;
 <span class="w">  </span><span class="na">project_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.project_name</span>
 <span class="w">  </span><span class="na">environment</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">var.environment</span>
 <span class="w">  </span><span class="na">vpc_cidr</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.30.0.0/16&quot;</span>
-<span class="w">  </span><span class="na">azs</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eu-west-1a&quot;, &quot;eu-west-1b&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="na">azs</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eu-west-3a&quot;, &quot;eu-west-3b&quot;</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="c1"># -----------------------------------------------------------------------------</span>
@@ -887,7 +887,7 @@ terraform<span class="w"> </span>destroy
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aws-actions/configure-aws-credentials@v4</span>
 <span class="w">        </span><span class="nt">with</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">role-to-assume</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">arn:aws:iam::123456789012:role/kolab-github-actions-tf-plan</span>
-<span class="w">          </span><span class="nt">aws-region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eu-west-1</span>
+<span class="w">          </span><span class="nt">aws-region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eu-west-3</span>
 
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hashicorp/setup-terraform@v3</span>
 <span class="w">        </span><span class="nt">with</span><span class="p">:</span>
@@ -947,15 +947,15 @@ terraform<span class="w"> </span>apply<span class="w"> </span>tfplan
 
 <span class="c1"># Verifier les outputs</span>
 terraform<span class="w"> </span>output<span class="w"> </span>nextcloud_url
-<span class="c1"># =&gt; &quot;https://kolab-dev-alb-123456789.eu-west-1.elb.amazonaws.com&quot;</span>
+<span class="c1"># =&gt; &quot;https://kolab-dev-alb-123456789.eu-west-3.elb.amazonaws.com&quot;</span>
 </code></pre></div>
 <p><strong>Résultat attendu</strong> :</p>
 <div class="highlight"><pre><span></span><code>Apply complete! Resources: 78 added, 0 changed, 0 destroyed.
 
 Outputs:
 
-alb_dns_name = &quot;kolab-dev-alb-123456789.eu-west-1.elb.amazonaws.com&quot;
-nextcloud_url = &quot;https://kolab-dev-alb-123456789.eu-west-1.elb.amazonaws.com&quot;
+alb_dns_name = &quot;kolab-dev-alb-123456789.eu-west-3.elb.amazonaws.com&quot;
+nextcloud_url = &quot;https://kolab-dev-alb-123456789.eu-west-3.elb.amazonaws.com&quot;
 s3_primary_bucket_name = &quot;kolab-dev-nextcloud-primary-a1b2c3&quot;
 </code></pre></div>
 <p><strong>À vous !</strong></p>

@@ -51,7 +51,7 @@
 **En 5 lignes maximum**, décrivez l'infrastructure déployée (couches, AZ, interactions principales).
 
 > *Exemple attendu :*
-> *VPC 10.30.0.0/16 sur 2 AZ (eu-west-1a, eu-west-1b) avec 6 subnets (2 publics, 2 app, 2 db). ALB public HTTPS self-signed → ASG d'une EC2 t3.small privée qui exécute Nextcloud en container Docker. RDS PostgreSQL 16 Multi-AZ en subnet db. Stockage primaire S3 chiffré KMS, logs ALB sur second bucket S3. Secrets DB et admin dans Secrets Manager, lus par l'EC2 via IAM Instance Profile au boot.*
+> *VPC 10.30.0.0/16 sur 2 AZ (eu-west-3a, eu-west-3b) avec 6 subnets (2 publics, 2 app, 2 db). ALB public HTTPS self-signed → ASG d'une EC2 t3.small privée qui exécute Nextcloud en container Docker. RDS PostgreSQL 16 Multi-AZ en subnet db. Stockage primaire S3 chiffré KMS, logs ALB sur second bucket S3. Secrets DB et admin dans Secrets Manager, lus par l'EC2 via IAM Instance Profile au boot.*
 
 <!-- remplir ici -->
 
@@ -191,7 +191,7 @@ Les captures doivent être dans `docs/screenshots/` au format PNG. Cochez chaque
 
 ## Section 7 — Coût estimé
 
-Estimez le coût de l'infrastructure pour 24h de fonctionnement (dev). Utilisez Infracost si possible, sinon faites un calcul manuel à partir de la [page de tarification AWS eu-west-1](https://aws.amazon.com/ec2/pricing/on-demand/).
+Estimez le coût de l'infrastructure pour 24h de fonctionnement (dev). Utilisez Infracost si possible, sinon faites un calcul manuel à partir de la [page de tarification AWS eu-west-3](https://aws.amazon.com/ec2/pricing/on-demand/).
 
 | Ressource | Quantité | Prix unitaire (USD) | Sous-total 24h (USD) |
 |-----------|----------|---------------------|----------------------|

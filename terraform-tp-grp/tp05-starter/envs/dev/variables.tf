@@ -1,5 +1,5 @@
 variable "aws_region" {
-  description = "Region AWS cible. eu-west-1 (Irlande) imposee par le CdC RGPD."
+  description = "Region AWS cible. eu-west-3 (Irlande) imposee par le CdC RGPD."
   type        = string
   default     = "eu-west-3"
 

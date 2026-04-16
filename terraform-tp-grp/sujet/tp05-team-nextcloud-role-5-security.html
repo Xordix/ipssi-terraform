@@ -1184,7 +1184,7 @@ aws<span class="w"> </span>kms<span class="w"> </span>get-key-policy<span class=
 <p><strong>Symptôme</strong> : dans <code>/var/log/cloud-init-output.log</code> sur l'EC2 :</p>
 <div class="highlight"><pre><span></span><code>An error occurred (AccessDeniedException) when calling the GetSecretValue operation:
 User: arn:aws:sts::039497794217:assumed-role/kolab-dev-app/i-0abc... is not authorized to perform:
-secretsmanager:GetSecretValue on resource: arn:aws:secretsmanager:eu-west-1:039497794217:secret:kolab-dev/db/password-XXXXX
+secretsmanager:GetSecretValue on resource: arn:aws:secretsmanager:eu-west-3:039497794217:secret:kolab-dev/db/password-XXXXX
 </code></pre></div>
 <p><strong>Causes possibles</strong> :</p>
 <ol>
@@ -1283,7 +1283,7 @@ You can&#39;t create this secret because a secret with this name is already sche
 <div class="highlight"><pre><span></span><code>aws<span class="w"> </span>secretsmanager<span class="w"> </span>delete-secret<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--secret-id<span class="w"> </span>kolab-dev/db/password<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--force-delete-without-recovery<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--region<span class="w"> </span>eu-west-1
+<span class="w">  </span>--region<span class="w"> </span>eu-west-3
 </code></pre></div>
 <hr />
 <h3 id="erreur-n7-nextcloud-spinne-a-linfini-au-boot-kms-policy-incomplete">🟠 Erreur n°7 : Nextcloud spinne à l'infini au boot (KMS policy incomplète)</h3>

@@ -99,14 +99,14 @@ resource "aws_security_group" "endpoints" {
 
 resource "aws_vpc_endpoint" "s3" {
   vpc_id            = aws_vpc.main.id
-  service_name      = "com.amazonaws.eu-west-1.s3"
+  service_name      = "com.amazonaws.eu-west-3.s3"
   vpc_endpoint_type = "Gateway"
   route_table_ids   = [aws_route_table.private.id] # S3 utilise les tables de routage
 }
 
 resource "aws_vpc_endpoint" "secretsmanager" {
   vpc_id              = aws_vpc.main.id
-  service_name        = "com.amazonaws.eu-west-1.secretsmanager"
+  service_name        = "com.amazonaws.eu-west-3.secretsmanager"
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   subnet_ids          = [for s in aws_subnet.private_app : s.id]

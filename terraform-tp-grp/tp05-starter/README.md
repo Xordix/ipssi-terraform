@@ -26,7 +26,7 @@ git commit -m "chore: import starter kit TP05"
 
 ### 3. Adapter le nom de bucket state
 
-Ouvrez `envs/dev/backend.tf` et remplacez `TEAM` par un identifiant unique (ex: `equipe1`, `equipe2`, ...).
+Ouvrez `envs/dev/backend.tf` et remplacez `equipe3` par un identifiant unique (ex: `equipe1`, `equipe2`, ...).
 
 Le nom S3 doit être unique **au niveau mondial** (tous comptes AWS confondus) — d'où le suffixe.
 
@@ -34,13 +34,17 @@ Le nom S3 doit être unique **au niveau mondial** (tous comptes AWS confondus) �
 
 ```bash
 export AWS_PROFILE=formation
-export USERNAME=equipe1    # doit matcher le TEAM que vous avez mis dans backend.tf
+export USERNAME=equipe1    # doit matcher le suffixe configure dans backend.tf
 
 chmod +x bootstrap/create-state-bucket.sh
 ./bootstrap/create-state-bucket.sh
 ```
 
 Le script crée la KMS CMK + le bucket S3 qui stockera les `terraform.tfstate`.
+Par convention, il crée :
+
+- bucket `tf-state-kolab-<USERNAME>`
+- alias KMS `alias/tf-state-kolab-<USERNAME>`
 
 ### 5. Chacun prend son rôle
 

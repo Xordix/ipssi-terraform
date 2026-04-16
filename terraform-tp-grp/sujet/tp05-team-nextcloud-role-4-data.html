@@ -262,7 +262,7 @@ const PASTEL_COLORS={blue:{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'}, g
 <tr>
 <td><code>data.aws_elb_service_account.main</code></td>
 <td>1</td>
-<td>ARN du compte AWS canonique pour ALB logs (eu-west-1)</td>
+<td>ARN du compte AWS canonique pour ALB logs (eu-west-3)</td>
 </tr>
 <tr>
 <td><code>aws_db_subnet_group.nextcloud</code></td>
@@ -860,7 +860,7 @@ Plan: 3 to add, 0 to change, 0 to destroy.
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>🟤 <strong>Note sur le data source ELB service account</strong> : depuis 2022, AWS a introduit un service principal <code>logdelivery.elasticloadbalancing.amazonaws.com</code> dans certaines régions. <strong>En eu-west-1, le data source <code>aws_elb_service_account</code> marche toujours</strong> et c'est l'approche la plus lisible + compatible. Pour la prod en 2026+ sur nouvelles régions (ap-southeast-5, etc.), vérifier la doc AWS.</p>
+<p>🟤 <strong>Note sur le data source ELB service account</strong> : depuis 2022, AWS a introduit un service principal <code>logdelivery.elasticloadbalancing.amazonaws.com</code> dans certaines régions. <strong>En eu-west-3, le data source <code>aws_elb_service_account</code> marche toujours</strong> et c'est l'approche la plus lisible + compatible. Pour la prod en 2026+ sur nouvelles régions (ap-southeast-5, etc.), vérifier la doc AWS.</p>
 <p>🟡 <strong>Piège ARN du statement</strong> : le prefix doit être exactement <code>alb/AWSLogs/{account_id}/*</code>. Si vous mettez juste <code>${aws_s3_bucket.logs.arn}/*</code>, ça marche aussi, mais c'est moins précis. Le prefix <code>alb/</code> doit matcher le <code>prefix = "alb"</code> côté ALB (étape 4 Rôle 3).</p>
 <p>🔷 <strong>Point clé à vérifier</strong> : <code>terraform plan</code> affiche les 5 ressources du bucket logs (bucket + SSE + BPA + policy + lifecycle).</p>
 <hr />
@@ -1008,14 +1008,14 @@ terraform<span class="w"> </span>apply<span class="w"> </span>tfplan
 
 <span class="c1"># Verifier le endpoint RDS</span>
 terraform<span class="w"> </span>output<span class="w"> </span>-raw<span class="w"> </span>db_endpoint
-<span class="c1"># Exemple : kolab-dev-nextcloud.c1abc.eu-west-1.rds.amazonaws.com</span>
+<span class="c1"># Exemple : kolab-dev-nextcloud.c1abc.eu-west-3.rds.amazonaws.com</span>
 
 <span class="c1"># Verifier les buckets</span>
 terraform<span class="w"> </span>output<span class="w"> </span>s3_primary_bucket_name
 terraform<span class="w"> </span>output<span class="w"> </span>s3_logs_bucket_name
 
 <span class="c1"># Depuis une EC2 SSM de l ASG (Role 3), tester la co RDS :</span>
-psql<span class="w"> </span>-h<span class="w"> </span>kolab-dev-nextcloud.c1abc.eu-west-1.rds.amazonaws.com<span class="w"> </span><span class="se">\</span>
+psql<span class="w"> </span>-h<span class="w"> </span>kolab-dev-nextcloud.c1abc.eu-west-3.rds.amazonaws.com<span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>-U<span class="w"> </span>nextcloud<span class="w"> </span>-d<span class="w"> </span>nextcloud<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;\l&#39;</span>
 <span class="c1"># Password demande : celui du secret (le Role 5 vous le donne si besoin)</span>
 </code></pre></div>
@@ -1083,7 +1083,7 @@ psql<span class="w"> </span>-h<span class="w"> </span>kolab-dev-nextcloud.c1abc.
 </table>
 <h3 id="verifier-le-contenu-du-secret-debug-role-5">Vérifier le contenu du secret (debug Rôle 5)</h3>
 <div class="highlight"><pre><span></span><code>aws<span class="w"> </span>secretsmanager<span class="w"> </span>get-secret-value<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span>eu-west-3<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--secret-id<span class="w"> </span>kolab-dev-db-password<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--query<span class="w"> </span>SecretString<span class="w"> </span>--output<span class="w"> </span>text
 <span class="c1"># Si ca retourne une chaine alphanumerique OK, le secret est lisible</span>

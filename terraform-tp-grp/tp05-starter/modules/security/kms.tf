@@ -42,9 +42,9 @@
 #           StringEquals = {
 #             "kms:CallerAccount" = data.aws_caller_identity.current.account_id
 #             "kms:ViaService"    = [
-#               "s3.eu-west-1.amazonaws.com",
-#               "rds.eu-west-1.amazonaws.com",
-#               "secretsmanager.eu-west-1.amazonaws.com"
+#               "s3.eu-west-3.amazonaws.com",
+#               "rds.eu-west-3.amazonaws.com",
+#               "secretsmanager.eu-west-3.amazonaws.com"
 #             ]
 #           }
 #         }

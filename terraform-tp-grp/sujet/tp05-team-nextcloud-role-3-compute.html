@@ -507,7 +507,7 @@ touch<span class="w"> </span>templates/nextcloud-user-data.sh.tftpl
 <span class="w">  </span><span class="na">dns_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="s2">&quot;${local.name_prefix}.kolab.local&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;*.elb.amazonaws.com&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;*.eu-west-1.elb.amazonaws.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;*.eu-west-3.elb.amazonaws.com&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -782,7 +782,7 @@ docker<span class="w"> </span>ps
 <span class="w">    </span><span class="na">admin_password_secret_arn</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">var.admin_password_secret_arn</span>
 <span class="w">    </span><span class="na">s3_primary_bucket_name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.s3_primary_bucket_name</span>
 <span class="w">    </span><span class="na">alb_dns_name</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="nv">aws_lb.main.dns_name</span>
-<span class="w">    </span><span class="na">aws_region</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="w">    </span><span class="na">aws_region</span><span class="w">                 </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-3&quot;</span>
 <span class="w">  </span><span class="p">}))</span>
 
 <span class="c1">  # Tags propages aux instances creees par l ASG</span>
@@ -1042,7 +1042,7 @@ terraform<span class="w"> </span>apply<span class="w"> </span>tfplan
 
 <span class="c1"># Recuperer l URL Nextcloud</span>
 terraform<span class="w"> </span>output<span class="w"> </span>nextcloud_url
-<span class="c1"># Exemple : &quot;https://kolab-dev-alb-1234567890.eu-west-1.elb.amazonaws.com&quot;</span>
+<span class="c1"># Exemple : &quot;https://kolab-dev-alb-1234567890.eu-west-3.elb.amazonaws.com&quot;</span>
 
 <span class="c1"># Ouvrir dans le navigateur - accepter le warning self-signed</span>
 </code></pre></div>

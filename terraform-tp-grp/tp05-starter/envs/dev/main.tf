@@ -10,13 +10,12 @@ module "networking" {
 
 # module security
 module "security" {
-  source                = "../../modules/security"
-  s3_primary_bucket_arn = module.aws_s3_bucket.arn
-  project_name          = "kolab"
-  environment           = "dev"
-  vpc_id                = module.networking.vpc_id
-  vpc_cidr              = module.networking.vpc_cidr
-  allowed_admin_cidr    = var.allowed_admin_cidr
+  source             = "../../modules/security"
+  project_name       = "kolab"
+  environment        = "dev"
+  vpc_id             = module.networking.vpc_id
+  vpc_cidr           = module.networking.vpc_cidr
+  allowed_admin_cidr = var.allowed_admin_cidr
 }
 
 # module data

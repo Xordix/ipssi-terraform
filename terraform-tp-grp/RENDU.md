@@ -49,7 +49,7 @@
 **En 5 lignes maximum**, décrivez l'infrastructure déployée (couches, AZ, interactions principales).
 
 > *Exemple attendu :*
-> *VPC 10.30.0.0/16 sur 2 AZ (eu-west-1a, eu-west-1b) avec 6 subnets (2 publics, 2 app, 2 db). ALB public HTTPS self-signed → ASG d'une EC2 t3.small privée qui exécute Nextcloud en container Docker. RDS PostgreSQL 16 Multi-AZ en subnet db. Stockage primaire S3 chiffré KMS, logs ALB sur second bucket S3. Secrets DB et admin dans Secrets Manager, lus par l'EC2 via IAM Instance Profile au boot.*
+> *VPC 10.30.0.0/16 sur 2 AZ (eu-west-3a, eu-west-3b) avec 6 subnets (2 publics, 2 app, 2 db). ALB public HTTPS self-signed → ASG d'une EC2 t3.small privée qui exécute Nextcloud en container Docker. RDS PostgreSQL 16 Multi-AZ en subnet db. Stockage primaire S3 chiffré KMS, logs ALB sur second bucket S3. Secrets DB et admin dans Secrets Manager, lus par l'EC2 via IAM Instance Profile au boot.*
 
 <!-- remplir ici -->
 
@@ -192,7 +192,7 @@ Les captures doivent être dans `docs/screenshots/` au format PNG. Cochez chaque
 
 ## Section 7 — Coût estimé
 
-Estimez le coût de l'infrastructure pour 24h de fonctionnement (dev). Utilisez Infracost si possible, sinon faites un calcul manuel à partir de la [page de tarification AWS eu-west-1](https://aws.amazon.com/ec2/pricing/on-demand/).
+Estimez le coût de l'infrastructure pour 24h de fonctionnement (dev). Utilisez Infracost si possible, sinon faites un calcul manuel à partir de la [page de tarification AWS eu-west-3](https://aws.amazon.com/ec2/pricing/on-demand/).
 
 | Ressource | Quantité | Prix unitaire (USD) | Sous-total 24h (USD) |
 |---|---|---|---|
@@ -225,16 +225,16 @@ Le VPC avec les 2 IPv4 - NAT - et Load-Balancer représentent 80% du coût
 
 ### 🟢 3 choses qui ont bien marché
 
-1. `<!-- remplir -->`
-2. `<!-- remplir -->`
-3. `<!-- remplir -->`
+1. On a rempli tous les modules comme indiquer par les différents guides selon les roles.
+2. Les terraforms validate sont valide au sein de chaque modules
+3. On a créé une branche pour chaque roles et on a pu les merges au sein de la main.
 
 > *Exemple : "Le fait de figer les interfaces au kick-off nous a permis de travailler en parallèle sans se marcher dessus."*
 
 ### 🔴 3 choses qui ont bloqué
 
-1. `<!-- remplir -->`
-2. `<!-- remplir -->`
+1. On a eu du retard pour la maise en commun causé par des problèmes dans la gestion et l'utilisation de git
+2. 
 3. `<!-- remplir -->`
 
 > *Exemple : "Cycle de dépendance entre security et data — perdu 45 min avant de comprendre qu'il fallait passer les ARN en variable plutôt que `depends_on`."*

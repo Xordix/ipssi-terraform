@@ -23,8 +23,3 @@ variable "allowed_admin_cidr" {
   type        = string
   default     = "0.0.0.0/0"
 }
-
-variable "s3_primary_bucket_arn" {
-  description = "L'ARN du bucket S3 principal Nextcloud (ex: arn:aws:s3:::mon-projet-dev-data)."
-  type        = string
-}

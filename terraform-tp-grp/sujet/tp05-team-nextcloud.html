@@ -175,7 +175,7 @@ const PASTEL_COLORS={blue:{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'}, g
 <tbody>
 <tr>
 <td>T1</td>
-<td><strong>AWS région eu-west-1</strong> (Irlande), conforme RGPD</td>
+<td><strong>AWS région eu-west-3</strong> (Irlande), conforme RGPD</td>
 <td>🔴</td>
 </tr>
 <tr>
@@ -271,7 +271,7 @@ flowchart TB
         t_dns[DNS public ALB]
     end
 
-    subgraph t_vpc[VPC 10.30.0.0/16 eu-west-1]
+    subgraph t_vpc[VPC 10.30.0.0/16 eu-west-3]
         subgraph t_public[Subnets publics AZ-a AZ-b]
             t_alb[ALB HTTPS 443<br/>self-signed cert]
             t_nat[NAT Gateway]
@@ -638,7 +638,7 @@ flowchart LR
 <span class="w">  </span><span class="na">project_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;kolab&quot;</span>
 <span class="w">  </span><span class="na">environment</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span>
 <span class="w">  </span><span class="na">vpc_cidr</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.30.0.0/16&quot;</span>
-<span class="w">  </span><span class="na">azs</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eu-west-1a&quot;, &quot;eu-west-1b&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="na">azs</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eu-west-3a&quot;, &quot;eu-west-3b&quot;</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="kr">module</span><span class="w"> </span><span class="nv">&quot;security&quot;</span><span class="w"> </span><span class="p">{</span>
@@ -927,7 +927,7 @@ zip<span class="w"> </span>-r<span class="w"> </span>tp05-nextcloud-equipe&lt;N&
 <span class="w">  </span><span class="kr">backend</span><span class="w"> </span><span class="nv">&quot;s3&quot;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="na">bucket</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tf-state-kolab-formation&quot;</span>
 <span class="w">    </span><span class="na">key</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;envs/dev/terraform.tfstate&quot;</span>
-<span class="w">    </span><span class="na">region</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-1&quot;</span>
+<span class="w">    </span><span class="na">region</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eu-west-3&quot;</span>
 <span class="w">    </span><span class="na">encrypt</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="no">true</span>
 <span class="w">    </span><span class="na">use_lockfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="c1">  # TF &gt;= 1.10, plus besoin de DynamoDB</span>
 <span class="w">  </span><span class="p">}</span>
@@ -1116,10 +1116,10 @@ dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </s
 systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>docker
 
 <span class="c1"># 2. Recuperer les secrets via IAM instance profile</span>
-<span class="nv">DB_PASSWORD</span><span class="o">=</span><span class="k">$(</span>aws<span class="w"> </span>secretsmanager<span class="w"> </span>get-secret-value<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span><span class="se">\</span>
+<span class="nv">DB_PASSWORD</span><span class="o">=</span><span class="k">$(</span>aws<span class="w"> </span>secretsmanager<span class="w"> </span>get-secret-value<span class="w"> </span>--region<span class="w"> </span>eu-west-3<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--secret-id<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">db_password_secret_arn</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>SecretString<span class="w"> </span>--output<span class="w"> </span>text<span class="k">)</span>
 
-<span class="nv">ADMIN_PASSWORD</span><span class="o">=</span><span class="k">$(</span>aws<span class="w"> </span>secretsmanager<span class="w"> </span>get-secret-value<span class="w"> </span>--region<span class="w"> </span>eu-west-1<span class="w"> </span><span class="se">\</span>
+<span class="nv">ADMIN_PASSWORD</span><span class="o">=</span><span class="k">$(</span>aws<span class="w"> </span>secretsmanager<span class="w"> </span>get-secret-value<span class="w"> </span>--region<span class="w"> </span>eu-west-3<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--secret-id<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">admin_password_secret_arn</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>--query<span class="w"> </span>SecretString<span class="w"> </span>--output<span class="w"> </span>text<span class="k">)</span>
 
 <span class="c1"># 3. Lancer Nextcloud en Docker</span>
@@ -1133,7 +1133,7 @@ docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </sp
 <span class="w">  </span>-e<span class="w"> </span><span class="nv">NEXTCLOUD_ADMIN_USER</span><span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-e<span class="w"> </span><span class="nv">NEXTCLOUD_ADMIN_PASSWORD</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$ADMIN_PASSWORD</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_BUCKET</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">s3_primary_bucket_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_REGION</span><span class="o">=</span>eu-west-1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_REGION</span><span class="o">=</span>eu-west-3<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_USEPATH_STYLE</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_SSL</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-e<span class="w"> </span><span class="nv">OBJECTSTORE_S3_AUTOCREATE</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>

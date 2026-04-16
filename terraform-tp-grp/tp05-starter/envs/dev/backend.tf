@@ -9,12 +9,12 @@ terraform {
 
   backend "s3" {
     # 🟣 A ADAPTER : nom du bucket cree par bootstrap/create-state-bucket.sh
-    # Par defaut le script cree "tf-state-kolab-formation-<USERNAME>".
+    # Par defaut le script cree "tf-state-kolab-<USERNAME>".
     # Remplacez la valeur ci-dessous par le nom exact renvoye par le script.
-    bucket       = "tf-state-kolab-formation-equipe3"
+    bucket       = "tf-state-kolab-ysalai"
     key          = "envs/dev/terraform.tfstate"
     region       = "eu-west-3"
-    kms_key_id   = "alias/tf-state-kolab-equipe3"
+    kms_key_id   = "alias/tf-state-kolab-ysalai"
     use_lockfile = true
 
     # Chiffrement cote objet state via la CMK bootstrap (alias cree par le script)

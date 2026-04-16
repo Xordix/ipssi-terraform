@@ -6,7 +6,7 @@ Créé par le **Rôle 2 — Network Engineer** lors du TP05.
 
 ## Contenu attendu
 
-- VPC `10.30.0.0/16` (eu-west-1)
+- VPC `10.30.0.0/16` (eu-west-3)
 - 6 subnets : 2 publics / 2 privés app / 2 privés DB
 - Internet Gateway + NAT Gateway (single-AZ)
 - Route tables et associations

@@ -5,21 +5,21 @@
 # stockera les tfstate de tous les environnements.
 #
 # Cree deux ressources hors Terraform (probleme "chicken and egg") :
-#   1. KMS CMK symetrique + alias alias/tf-state-kolab (rotation annuelle)
+#   1. KMS CMK symetrique + alias alias/tf-state-kolab-<USERNAME> (rotation annuelle)
 #   2. Bucket S3 versione, chiffre SSE-KMS, BPA 4/4, policy deny non-TLS
 #
 # Usage :
 #   export AWS_PROFILE=adrien-semifir
-#   USERNAME=kolab-team1 REGION=eu-west-1 ./bootstrap/create-state-bucket.sh
+#   USERNAME=equipe1 REGION=eu-west-3 ./bootstrap/create-state-bucket.sh
 # -----------------------------------------------------------------------------
 
 set -euo pipefail
 
-USERNAME="${USERNAME:-tf-state-equipe3-kolab}"
+USERNAME="${USERNAME:-equipe3}"
 REGION="${REGION:-eu-west-3}"
 
-BUCKET="tf-state-${USERNAME}-kolab"
-KMS_ALIAS="alias/tf-state-${USERNAME}"
+BUCKET="tf-state-kolab-${USERNAME}"
+KMS_ALIAS="alias/tf-state-kolab-${USERNAME}"
 
 echo "==============================================="
 echo " Bootstrap state Terraform Kolab"
