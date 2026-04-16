@@ -54,3 +54,69 @@
 # =============================================================================
 
 # TODO(role-5) : aws_kms_key "main" + aws_kms_alias "main"
+# =============================================================================
+
+resource "aws_kms_key" "main" {
+  description             = "CMK principale ${local.name_prefix} - Chiffrement des données du projet."
+  deletion_window_in_days = 10
+  enable_key_rotation     = true
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "EnableRootAccountAccess"
+        Effect    = "Allow"
+        Principal = { AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root" }
+        Action    = "kms:*"
+        Resource  = "*"
+      },
+
+      {
+        Sid       = "AllowAppRoleUsage"
+        Effect    = "Allow"
+        Principal = { AWS = aws_iam_role.app.arn }
+        Action = [
+          "kms:Decrypt",
+          "kms:DescribeKey",
+          "kms:Encrypt",
+          "kms:GenerateDataKey*",
+          "kms:ReEncrypt*"
+        ]
+        Resource = "*"
+      },
+
+      {
+        Sid       = "AllowServicesViaIAMAndAccount"
+        Effect    = "Allow"
+        Principal = { AWS = "*" }
+        Action = [
+          "kms:Encrypt",
+          "kms:Decrypt",
+          "kms:ReEncrypt*",
+          "kms:GenerateDataKey*",
+          "kms:DescribeKey"
+        ]
+        Resource = "*"
+        Condition = {
+          StringEquals = {
+            "kms:CallerAccount" = data.aws_caller_identity.current.account_id
+            "kms:ViaService" = [
+              "s3.${data.aws_region.current.name}.amazonaws.com",
+              "rds.${data.aws_region.current.name}.amazonaws.com",
+              "secretsmanager.${data.aws_region.current.name}.amazonaws.com"
+            ]
+          }
+        }
+      }
+    ]
+  })
+
+  tags = merge(local.common_tags, {
+    Name = "${local.name_prefix}-main-kms"
+  })
+}
+
+resource "aws_kms_alias" "main" {
+  name          = "alias/${local.name_prefix}-main"
+  target_key_id = aws_kms_key.main.key_id
+}
