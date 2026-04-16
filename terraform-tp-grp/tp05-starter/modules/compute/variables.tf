@@ -1,22 +1,22 @@
-# variable "vpc_id" {
-#   description = "ID du VPC (output du module networking)."
-#   type        = string
-# }
+variable "vpc_id" {
+  description = "ID du VPC (output du module networking)."
+  type        = string
+}
 
-# variable "public_subnet_ids" {
-#   description = "Map AZ -> subnet_id public (pour l ALB)."
-#   type        = map(string)
-# }
+variable "public_subnet_ids" {
+  description = "Map AZ -> subnet_id public (pour l ALB)."
+  type        = map(string)
+}
 
 # variable "private_app_subnet_ids" {
 #   description = "Map AZ -> subnet_id prive (pour l ASG)."
 #   type        = map(string)
 # }
 
-# variable "alb_security_group_id" {
-#   description = "SG de l ALB (fourni par le module security)."
-#   type        = string
-# }
+variable "alb_security_group_id" {
+  description = "SG de l ALB (fourni par le module security)."
+  type        = string
+}
 
 # variable "app_security_group_id" {
 #   description = "SG des EC2 applicatives (fourni par le module security)."
@@ -58,10 +58,10 @@
 #   type        = string
 # }
 
-# variable "s3_logs_bucket_name" {
-#   description = "Nom du bucket S3 pour les access logs ALB."
-#   type        = string
-# }
+variable "s3_logs_bucket_name" {
+  description = "Nom du bucket S3 pour les access logs ALB."
+  type        = string
+}
 
 variable "project_name" {
   description = "Nom de projet."
