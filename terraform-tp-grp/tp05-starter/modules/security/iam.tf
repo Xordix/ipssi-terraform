@@ -52,3 +52,151 @@
 # TODO(role-5) : 2 aws_iam_role_policy_attachment (SSM + CloudWatch) — bonus
 
 # TODO(role-5) : aws_iam_instance_profile "app"
+
+data "aws_iam_policy_document" "app_assume_role" {
+  statement {
+    sid     = "AssumeEC2Service"
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"] # L'EC2 est le seul service autorisé à prendre ce rôle
+    }
+  }
+}
+
+#############################################
+# 2. Le Rôle IAM principal (The Role)
+#############################################
+
+resource "aws_iam_role" "app" {
+  name               = "${local.name_prefix}-app"
+  description        = "Rôle runtime pour l'instance Nextcloud EC2, limité aux actions métier."
+  assume_role_policy = data.aws_iam_policy_document.app_assume_role.json # Utilisation de la politique d'assumation
+
+  tags = merge(local.common_tags, {
+    Name = "${local.name_prefix}-app-role"
+  })
+}
+
+
+#############################################
+# 3a. Policy S3 : Accès au stockage Nextcloud (Scope Object & Bucket)
+#############################################
+data "aws_iam_policy_document" "app_s3" {
+  # ... (Statement 1: Actions sur les OBJETS du bucket)
+  statement {
+    sid    = "NextcloudS3ObjectsAccess"
+    effect = "Allow"
+    actions = [
+      "s3:GetObject",
+      "s3:PutObject",
+      "s3:DeleteObject",
+      "s3:GetObjectVersion",
+      "s3:AbortMultipartUpload"
+    ]
+    # Correction ici : L'utilisation de la concaténation dans une liste est la clé.
+    resources = [
+      "${var.s3_primary_bucket_arn}/*"
+    ]
+  }
+
+  # ... (Statement 2: Actions sur le BUCKET lui-même)
+  statement {
+    sid    = "NextcloudS3BucketList"
+    effect = "Allow"
+    actions = [
+      "s3:ListBucket",
+      "s3:GetBucketLocation",
+      "s3:ListBucketMultipartUploads"
+    ]
+    # Ici, l'ARN du bucket entier est correct et ne devrait pas poser problème.
+    resources = [
+      var.s3_primary_bucket_arn
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "app_s3" {
+  name   = "${local.name_prefix}-app-s3"
+  role   = aws_iam_role.app.id
+  policy = data.aws_iam_policy_document.app_s3.json
+}
+
+#############################################
+# 3b. Policy Secrets Manager : Accès aux secrets (Scope Secret ARN)
+#############################################
+data "aws_iam_policy_document" "app_secrets" {
+  statement {
+    sid    = "NextcloudSecretsRead"
+    effect = "Allow"
+    actions = [
+      "secretsmanager:GetSecretValue", # Action de lecture du secret
+      "secretsmanager:DescribeSecret"
+    ]
+    resources = [
+      aws_secretsmanager_secret.db_password.arn,   # SCOPE : ARN spécifique 1
+      aws_secretsmanager_secret.admin_password.arn # SCOPE : ARN spécifique 2
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "app_secrets" {
+  name   = "${local.name_prefix}-app-secrets"
+  role   = aws_iam_role.app.id
+  policy = data.aws_iam_policy_document.app_secrets.json
+}
+
+#############################################
+# 3c. Policy KMS : Droit de déchiffrement (Scope CMK ARN)
+#############################################
+data "aws_iam_policy_document" "app_kms" {
+  statement {
+    sid    = "NextcloudKmsDecryptAccess"
+    effect = "Allow"
+    actions = [
+      "kms:Decrypt",
+      "kms:DescribeKey" # Nécessaire pour valider l'existence de la clé
+    ]
+    resources = [
+      aws_kms_key.main.arn # SCOPE : L'ARN unique de la CMK
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "app_kms" {
+  name   = "${local.name_prefix}-app-kms"
+  role   = aws_iam_role.app.id
+  policy = data.aws_iam_policy_document.app_kms.json
+}
+
+
+#############################################
+# 4. Attachments de Policies AWS Managées (Bonus)
+#############################################
+
+# SSM Session Manager : Permet la connexion à distance sans SSH Key Pair, un standard DevSecOps.
+resource "aws_iam_role_policy_attachment" "app_ssm" {
+  role       = aws_iam_role.app.name # Attache le rôle au service de politique
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
+
+# CloudWatch Agent : Permet la centralisation des métriques et logs AWS (Monitoring).
+resource "aws_iam_role_policy_attachment" "app_cloudwatch" {
+  role       = aws_iam_role.app.name
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/CloudWatchAgentServerPolicy"
+}
+
+#############################################
+# 5. Instance Profile : Le lien final avec l'EC2
+#############################################
+
+resource "aws_iam_instance_profile" "app" {
+  name = "${local.name_prefix}-app-profile"
+  role = aws_iam_role.app.name # L'InstanceProfile est le conteneur du rôle pour les EC2.
+
+  tags = merge(local.common_tags, {
+    Name = "${local.name_prefix}-app-profile"
+  })
+}

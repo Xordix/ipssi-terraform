@@ -25,3 +25,17 @@
 #
 # Utilises pour construire les ARN dans les key policies (root account) et
 # les assume role policies.
+# =============================================================================
+
+data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {}
+
+locals {
+  name_prefix = "${var.project_name}-${var.environment}"
+  common_tags = {
+    Project     = var.project_name
+    Environment = var.environment
+    ManagedBy   = "Terraform"
+    Module      = "security"
+  }
+}
