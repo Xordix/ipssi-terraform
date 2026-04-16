@@ -31,12 +31,12 @@
 ### Membres
 
 | Prénom Nom | Rôle assigné | Email | Compte GitHub |
-|---|---|---|---|
-| `<!-- remplir -->` | Platform Lead (Rôle 1) | `prenom.nom@domaine.fr` | `@ghuser` |
-| `<!-- remplir -->` | Network Engineer (Rôle 2) | | |
-| `<!-- remplir -->` | Compute Engineer (Rôle 3) | | |
-| `<!-- remplir -->` | Data Engineer (Rôle 4) | | |
-| `<!-- remplir -->` | Security Engineer (Rôle 5) | | |
+|------------|--------------|-------|---------------|
+| Mylène RODRIGUES DOS SANTOS | Platform Lead (Rôle 1) | `prenom.nom@domaine.fr` | `@ghuser` |
+| Yassine BOUMRA | Network Engineer (Rôle 2) | | |
+| Ayoub BENTOUMIA | Compute Engineer (Rôle 3) | | |
+| Yann SALAÏ | Data Engineer (Rôle 4) | | |
+| Clément DUCROCQ | Security Engineer (Rôle 5) | clement.d80150@gmail.com | ClementD |
 
 > 🔷 Équipe à 4 personnes : indiquez qui a fusionné le rôle Security dans le rôle Platform.
 >
