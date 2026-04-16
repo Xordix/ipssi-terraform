@@ -63,7 +63,7 @@ resource "aws_lb" "main" {
   security_groups    = [var.alb_security_group_id]
   subnets            = values(var.public_subnet_ids)
 
-  drop_invalid_header_fields = true(securite)
+  drop_invalid_header_fields = true
   enable_deletion_protection = false
 
   enable_http2 = true
@@ -120,7 +120,7 @@ resource "aws_lb_listener" "https" {
   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.app.arn
+    target_group_arn = aws_lb_target_group.nextcloud.arn
   }
 
   tags = local.common_tags

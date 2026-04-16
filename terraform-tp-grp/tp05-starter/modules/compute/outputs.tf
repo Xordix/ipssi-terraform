@@ -9,7 +9,7 @@ output "alb_zone_id" {
 }
 
 output "asg_name" {
-  value       = aws_autoscaling_group.app.name
+  value       = aws_autoscaling_group.nextcloud.name
   description = "Nom de l ASG applicatif"
 }
 
@@ -19,11 +19,11 @@ output "nextcloud_url" {
 }
 
 output "launch_template_id" {
-  value       = aws_launch_template.app.id
+  value       = aws_launch_template.nextcloud.id
   description = "ID du Launch Template (utile pour debug ASG)"
 }
 
 output "target_group_arn" {
-  value       = aws_lb_target_group.app.arn
+  value       = aws_lb_target_group.nextcloud.arn
   description = "ARN du target group (utile pour attacher d autres services)"
 }

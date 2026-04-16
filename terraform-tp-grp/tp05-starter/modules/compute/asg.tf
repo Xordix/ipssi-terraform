@@ -84,7 +84,7 @@ data "aws_ami" "al2023" {
   }
 }
 # TODO(role-3) : aws_launch_template "app"
-resource "aws_launch_template" "app" {
+resource "aws_launch_template" "nextcloud" {
   name_prefix   = "${local.name_prefix}-nc-"
   image_id      = data.aws_ami.al2023.id
   instance_type = var.instance_type
@@ -123,8 +123,7 @@ resource "aws_launch_template" "app" {
     db_username               = var.db_username
     db_password_secret_arn    = var.db_password_secret_arn
     admin_password_secret_arn = var.admin_password_secret_arn
-    s3_primary_bucket_name    = var.s3_primary_bucket_name
-    alb_dns_name              = aws_lb.main.dns_name
+    s3_bucket                 = var.s3_primary_bucket_name
     aws_region                = data.aws_region.current.name
   }))
 
@@ -157,7 +156,7 @@ resource "aws_launch_template" "app" {
 }
 # TODO(role-3) : aws_autoscaling_group "app"
 
-resource "aws_autoscaling_group" "app" {
+resource "aws_autoscaling_group" "nextcloud" {
   name_prefix = "${local.name_prefix}-nc-"
 
   # Subnets prives (les EC2 ne sont JAMAIS exposees directement)
@@ -174,7 +173,7 @@ resource "aws_autoscaling_group" "app" {
 
   # Rattachement au Launch Template (toujours la derniere version)
   launch_template {
-    id      = aws_launch_template.app.id
+    id      = aws_launch_template.nextcloud.id
     version = "$Latest"
   }
 
@@ -217,6 +216,6 @@ resource "aws_autoscaling_group" "app" {
 # Rattachement ASG <-> Target Group (ressource separee en v5+)
 # -----------------------------------------------------------------------------
 resource "aws_autoscaling_attachment" "app_tg" {
-  autoscaling_group_name = aws_autoscaling_group.app.name
-  lb_target_group_arn    = aws_lb_target_group.app.arn
+  autoscaling_group_name = aws_autoscaling_group.nextcloud.name
+  lb_target_group_arn    = aws_lb_target_group.nextcloud.arn
 }
