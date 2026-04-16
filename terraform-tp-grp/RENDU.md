@@ -32,7 +32,7 @@
 
 | Prénom Nom | Rôle assigné | Email | Compte GitHub |
 |------------|--------------|-------|---------------|
-| Mylène RODRIGUES DOS SANTOS | Platform Lead (Rôle 1) | `prenom.nom@domaine.fr` | `@ghuser` |
+| Mylène RODRIGUES DOS SANTOS | Platform Lead (Rôle 1) | `m.rodrigues-dos-santos@ecole-ipssi.net` | `MyleneRDS` |
 | Yassine BOUMRA | Network Engineer (Rôle 2) | | |
 | Yann SALAÏ | Compute Engineer (Rôle 3) | | |
 | Ayoub Bentoumia | Data Engineer (Rôle 4) |bentoumia.ayoub13@gmail.com | Ben-Ayoub|
@@ -61,6 +61,7 @@ flowchart TB
     %% TODO : remplacer par votre schema d architecture final
     %% Incluez au minimum : VPC, subnets, ALB, ASG, RDS, S3, Secrets Manager, KMS
     t_user --> t_todo[TODO remplacer ce schema]
+    
 ```
 
 > 🔹 Astuce : copiez le schéma du fichier `ARCHITECTURE.md` que vous avez maintenu pendant la journée.
@@ -73,9 +74,11 @@ Listez **au minimum 3 arbitrages** que vous avez faits pendant le TP (choix stru
 
 ### Arbitrage 1
 
-- **Choix retenu** : `<!-- remplir -->`
-- **Alternative envisagée** : `<!-- remplir -->`
-- **Raison** : `<!-- remplir -->`
+Durée de vie du certificat TLS auto signé
+
+- **Choix retenu** : 2 ans
+- **Alternative envisagée** : 1 ans - 365j
+- **Raison** : Un certficat 
 - **Conséquence / limite** : `<!-- remplir -->`
 
 > *Exemple :*
@@ -84,39 +87,40 @@ Listez **au minimum 3 arbitrages** que vous avez faits pendant le TP (choix stru
 > - *Raison : Nextcloud sans Redis/cluster verrouille les fichiers au niveau disque — deux instances actives entraîneraient des erreurs de file locking sur le stockage S3 partagé.*
 > - *Conséquence : pas de haute disponibilité applicative sur ce TP, mais l'ASG redémarre automatiquement l'instance en cas de crash.*
 
-### Arbitrage 2
+### Arbitrage 2 : Haute Disponibilité Base de Données
 
-- **Choix retenu** : `<!-- remplir -->`
-- **Alternative envisagée** : `<!-- remplir -->`
-- **Raison** : `<!-- remplir -->`
-- **Conséquence / limite** : `<!-- remplir -->`
-
-> *Exemple : certificat self-signed via `tls_private_key` + `aws_acm_certificate` (import) au lieu d'ACM public, parce qu'on n'a pas de domaine validé par Route53 — conséquence : warning navigateur accepté volontairement pour la démo.*
+- Choix retenu : RDS PostgreSQL en mode Multi-AZ.
+- Alternative envisagée : RDS Single Instance (Single-AZ).
+- Raison : Conformité au cahier des charges "Production-grade". Le Multi-AZ permet une bascule automatique (failover) en cas de panne d'une zone de disponibilité, garantissant la continuité de service pour Nextcloud.
+- Conséquence / limite : Coût de l'instance doublé car AWS provisionne une instance standby, mais nécessaire pour la résilience des données.
 
 ### Arbitrage 3
 
-- **Choix retenu** : `<!-- remplir -->`
-- **Alternative envisagée** : `<!-- remplir -->`
-- **Raison** : `<!-- remplir -->`
-- **Conséquence / limite** : `<!-- remplir -->`
+- Protection des Données vs Facilité de TP
+- Choix retenu : deletion_protection = false et skip_final_snapshot = true
+- **Raison** : Activer la protection contre la suppression et forcer un snapshot final (Recommandé en prod).Simplification de la gestion du cycle de vie des ressources durant le TP. 
+Cela permet d'exécuter un terraform destroy complet sans blocage manuel ni accumulation de snapshots payants inutiles
+- **Conséquence / limite** : Risque de suppression accidentelle de la base de données. En environnement de production réel, ces paramètres doivent impérativement être inversés.
 
-> *Exemple : `single_nat_gateway = true` pour éviter le coût de 2 NAT Gateway sur la journée — conséquence : perte de la HA sortante, acceptable en `dev`.*
 
 ### Arbitrages supplémentaires *(optionnels)*
 
-- `<!-- ajouter si pertinent -->`
+- Arbitrage 4 (Si tu as besoin d'un autre) : Versioning S3
+-	Choix retenu : Versioning activé sur le bucket Primary uniquement.
+- Alternative envisagée : Activer le versioning partout.
+- Raison : Le bucket Primary stocke les fichiers utilisateurs de Nextcloud (besoin de récupération en cas d'erreur). 
+Le bucket Logs stocke des données temporaires qui sont automatiquement supprimées par une règle de Lifecycle après 90 jours.
+- Conséquence / limite : Pas de récupération possible pour les logs supprimés, mais économie substantielle sur le coût du stockage S3.
 
 ---
 
 ## Section 4 — Retour sur les interfaces inter-modules
 
-Les interfaces (variables + outputs) étaient figées au kick-off. Répondez aux questions suivantes.
-
 **Quelle interface a été la plus délicate à stabiliser ?**
 
-> *Exemple : l'interface `security` ↔ `data` à cause du cycle (security a besoin des ARN S3, data a besoin du KMS ARN). On a résolu en passant les ARN S3 en variable de `security` (late binding via `module.data.s3_primary_bucket_arn`).*
-
-<!-- remplir ici -->
+L'interface security ↔ data pour la gestion des clés KMS. La difficulté résidait dans le fait que le module data a un besoin critique de l'ARN de la clé KMS pour chiffrer le RDS et le bucket S3 Primary. 
+Tandis que le module security doit autoriser ces mêmes ressources dans sa Key Policy. 
+Stabiliser l'ordre de passage de cette variable a été le point le plus complexe pour éviter les cycles de dépendance.
 
 **Avez-vous dû modifier une interface en cours de route ? Si oui, laquelle et pourquoi ?**
 
@@ -192,27 +196,28 @@ Estimez le coût de l'infrastructure pour 24h de fonctionnement (dev). Utilisez 
 
 | Ressource | Quantité | Prix unitaire (USD) | Sous-total 24h (USD) |
 |---|---|---|---|
-| EC2 t3.small | `<!-- N -->` | `<!-- $/h -->` | `<!-- $ -->` |
+| EC2 t3.small | 2 | 14.31$/mois | `<!-- $ -->` |
 | ALB | 1 | `<!-- $/h -->` | `<!-- $ -->` |
-| NAT Gateway | `<!-- 1 ou 2 -->` | `<!-- $/h -->` | `<!-- $ -->` |
+| NAT Gateway | 2 | `<!-- $/h -->` | `<!-- $ -->` |
 | RDS db.t3.micro Multi-AZ | 1 | `<!-- $/h -->` | `<!-- $ -->` |
 | EBS RDS gp3 | `<!-- GB -->` | `<!-- $/GB-mois -->` | `<!-- $ -->` |
 | S3 primary + logs | `<!-- GB -->` | `<!-- $/GB-mois -->` | `<!-- $ -->` |
 | KMS CMK | 1 | `1.00 / mois` | `<!-- $ -->` |
 | Secrets Manager | 2 | `0.40 / secret / mois` | `<!-- $ -->` |
-| VPC Endpoints | `<!-- N -->` | `<!-- $/h -->` | `<!-- $ -->` |
+| VPC Endpoints | 2 | `<!-- $/h -->` | `<!-- $ -->` |
 | **Total 24h** | | | `<!-- $ -->` |
-| **Extrapolation 30 jours** | | | `<!-- $ -->` |
+| **Extrapolation 30 jours** | | | 281.40$/mois |
 
 > *Exemple : Total 24h ~= 6.10 USD, extrapolation 30 jours ~= 183 USD.*
 
-**Méthode utilisée** : `TODO` (Infracost / calculator AWS / estimation manuelle)
+**Méthode utilisée** : calculator AWS
+
 
 **Commentaire** :
 
 > *Exemple : le NAT Gateway seul représente ~35% du coût — on pourrait le supprimer après le boot initial de Nextcloud en `dev` puisque l'instance n'a plus besoin de sortir d'Internet.*
 
-<!-- remplir ici -->
+Le VPC avec les 2 IPv4 - NAT - et Load-Balancer représentent 80% du coût
 
 ---
 
@@ -254,12 +259,11 @@ Estimez le coût de l'infrastructure pour 24h de fonctionnement (dev). Utilisez 
 
 ### Rôle 1 — Platform Lead
 
-**Membre** : `<!-- Prénom Nom -->`
+**Membre** : `Mylène Rodrigues Dos Santos`
 
 **Ce que j'ai livré** :
-- `<!-- ex: bootstrap/create-state-bucket.sh -->`
-- `<!-- ex: global/iam-github-oidc/ (bonus) -->`
-- `<!-- ex: envs/dev/backend.tf, providers.tf, main.tf -->`
+- `bootstrap/create-state-bucket.sh`
+- `envs/dev/backend.tf, providers.tf, main.tf`
 - `<!-- ex: revue de toutes les PRs avec au moins 1 approval -->`
 - `<!-- ex: orchestration du terraform apply collectif à 14h30 -->`
 
@@ -330,7 +334,7 @@ Estimez le coût de l'infrastructure pour 24h de fonctionnement (dev). Utilisez 
 
 ### Rôle 4 — Data Engineer
 
-**Membre** : `<!-- Prénom Nom -->`
+**Membre** : `<!-- Ayoub Bentoumia -->`
 
 **Ce que j'ai livré** :
 - `<!-- ex: modules/data/rds.tf — RDS PG Multi-AZ, subnet group, parameter group -->`
@@ -354,26 +358,26 @@ Estimez le coût de l'infrastructure pour 24h de fonctionnement (dev). Utilisez 
 
 ### Rôle 5 — Security Engineer
 
-**Membre** : `<!-- Prénom Nom — ou "N/A équipe à 4, fusionné avec Rôle 1" -->`
+**Membre** : Clément DUCROCQ
 
 **Ce que j'ai livré** :
-- `<!-- ex: modules/security/sg.tf — 3 SG (alb, app, db) avec aws_vpc_security_group_ingress_rule v5 -->`
-- `<!-- ex: modules/security/kms.tf — CMK + alias + rotation activée -->`
-- `<!-- ex: modules/security/iam.tf — IAM role EC2 + instance profile + policies scoped S3/Secrets -->`
-- `<!-- ex: modules/security/secrets.tf — 2 secrets (db_password, admin_password) générés via random_password -->`
+
+- modules/security/sg.tf — 3 SG (alb, app, db) avec aws_vpc_security_group_ingress_rule v5
+- modules/security/kms.tf — CMK + alias + rotation activée
+- modules/security/iam.tf — IAM role EC2 + instance profile + policies scoped S3/Secrets
+- modules/security/secrets.tf — 2 secrets (db_password, admin_password) générés via random_password
 
 **Ce qui m'a surpris ou frustré** :
 
 > *Exemple : "La policy IAM avec `Resource` scoped au bucket ARN exact + `${arn}/*` pour les objets — tfsec flag tous les `Resource = *`."*
 
-<!-- remplir ici -->
+
 
 **Ce que j'ai appris** :
 
-<!-- remplir ici -->
+J'ai appris à faire des réfrences entre plusieurs fichiers terraform pour sécuriser au mieux l'infra
 
-**Hash du dernier commit significatif que j'ai fait** : `<!-- ex: a1b2c3d -->`
-
+**Hash du dernier commit significatif que j'ai fait** : 1b038ce
 ---
 
 ## Section 10 — Checklist finale avant remise
@@ -382,18 +386,18 @@ Estimez le coût de l'infrastructure pour 24h de fonctionnement (dev). Utilisez 
 
 - [ ] `terraform destroy` a été exécuté avec succès dans `envs/dev/` (screenshot `05-destroy-success.png` prouve `Destroy complete!`)
 - [ ] La console AWS a été re-vérifiée : aucune EC2, RDS, NAT Gateway, ELB, EIP, Secret Manager, bucket S3 (hors bucket state) ne reste avec les tags de l'équipe
-- [ ] Aucun fichier `*.tfstate` ou `*.tfstate.backup` n'est présent dans le zip
-- [ ] Aucun dossier `.terraform/` n'est présent dans le zip
-- [ ] Aucun fichier `*.tfvars` personnel n'est présent (seul `terraform.tfvars.example` est autorisé)
-- [ ] Aucun secret en clair (mot de passe DB, admin, access key, token GitHub) n'est dans le code
+- [X] Aucun fichier `*.tfstate` ou `*.tfstate.backup` n'est présent dans le zip
+- [X] Aucun dossier `.terraform/` n'est présent dans le zip
+- [X] Aucun fichier `*.tfvars` personnel n'est présent (seul `terraform.tfvars.example` est autorisé)
+- [X] Aucun secret en clair (mot de passe DB, admin, access key, token GitHub) n'est dans le code
 - [ ] La commande `grep -rE "(password|secret|AKIA)" --include="*.tf" . | grep -v example` retourne 0 ligne
 - [ ] Les 5 screenshots obligatoires sont dans `docs/screenshots/`
 - [ ] Le fichier `docs/RENDU.md` (ce fichier) est rempli à 100 % — plus aucun `<!-- remplir -->` ni `TODO` résiduel
 - [ ] Le fichier `ARCHITECTURE.md` contient un schéma Mermaid à jour
-- [ ] Chaque module dans `modules/` a son `README.md` (minimum : titre + description + inputs/outputs)
+- [X] Chaque module dans `modules/` a son `README.md` (minimum : titre + description + inputs/outputs)
 - [ ] Le fichier `.terraform.lock.hcl` est committé (mais pas `.terraform/`)
-- [ ] Les commits git sont tracés par auteur (pour la notation individuelle)
-- [ ] Le zip est nommé exactement `tp05-nextcloud-equipe<N>.zip`
+- [X] Les commits git sont tracés par auteur (pour la notation individuelle)
+- [X] Le zip est nommé exactement `tp05-nextcloud-equipe<N>.zip`
 
 ### Commande de packaging recommandée
 
